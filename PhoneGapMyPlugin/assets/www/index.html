@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-type" charset="euc-kr" name="viewport"
+	content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+<title>Communication</title>
+
+<link rel="stylesheet" href="index.css" />
+<script type="text/javascript" charset="euc-kr" src="phonegap-1.4.1.js"></script>
+<script type="text/javascript" charset="euc-kr" src="myPlugin.js"></script>
+<script type="text/javascript" charset="euc-kr">
+	var i=0;
+	document.addEventListener("deviceready",onDeviceReady,false);
+	
+	function onDeviceReady(){
+		
+		vocTempContents();
+	}
+	function errorReceive(err){
+		alert("Error :"+err);
+	}
+	function errorSend(err){
+		alert("Error :"+err);
+	}
+	function successReceive(result){
+		if(result==1){
+			
+		}
+		else
+		alert(result);
+	}
+	function successSend(result){
+		alert(result);
+	}
+	function vocTempContents()
+	{ 
+		i++;
+		if(i>1)
+		{
+	  window.plugins.myplugin.receiveData(successReceive,errorReceive,"");
+	  window.plugins.myplugin.sendData(successSend,errorSend,""); 
+		}
+	}
+	</script>
+</head>
+<body>
+	
+	<div id=title>
+		<img src="image/dengerous.gif" />
+		<img src="image/loading01.gif" />공사중..
+	</div>
+</head>
+<body >
+	<div class=input>
+		<div id=i_open>메세지보내기<input type="text"  size="20" ></input></div>
+		<div id=button><input type="button" align="rigtht" value="전송" onclick="vocTempContents()"></div>
+	</div>
+	<div id=body>
+	받는 부분은 
+	메세지 창으로 띄우겠습니다!<br>
+	<img src="image/constructing03.gif" /></div>
+	
+	
+</body>
+</html>
