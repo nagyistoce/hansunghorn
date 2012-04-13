@@ -13,6 +13,7 @@ import java.util.Enumeration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.webkit.WebSettings.PluginState;
 import android.widget.Toast;
@@ -77,8 +78,10 @@ public class myPlugin extends Plugin {
 	}
 
 	public PluginResult execute(String action, JSONArray arg1,
-			final String callbackId) {
+			String callbackId) {
+			
 		try{
+			String msg=arg1.getString(0);
 			if(flag==0)
 			{
 			flag++;
@@ -86,7 +89,11 @@ public class myPlugin extends Plugin {
 			}			
 		while (true) {
 				if (action.equals("sendData")) {
+					JSONObject rv  = new JSONObject();
+					if(msg.equals(""))
 					sendMessage(""+ i++);
+					else
+						sendMessage(msg);
 					return new PluginResult(PluginResult.Status.OK, val+"이 전송되었습니다.");
 				} else if (action.equals("receiveData")) {
 					getData();

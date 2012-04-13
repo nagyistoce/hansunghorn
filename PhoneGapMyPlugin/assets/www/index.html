@@ -34,11 +34,14 @@
 	}
 	function vocTempContents()
 	{ 
+		
+	    var tbox = document.getElementById("tbox_input");
+	    alert(tbox.value);
 		i++;
 		if(i>1)
 		{
 	  window.plugins.myplugin.receiveData(successReceive,errorReceive,"");
-	  window.plugins.myplugin.sendData(successSend,errorSend,""); 
+	  window.plugins.myplugin.sendData(successSend,errorSend,tbox.value); 
 		}
 	}
 	</script>
@@ -52,7 +55,7 @@
 </head>
 <body >
 	<div class=input>
-		<div id=i_open>메세지보내기<input type="text"  size="20" ></input></div>
+		<div id=i_open>메세지보내기<input id="tbox_input" type="text"  size="20" ></input></div>
 		<div id=button><input type="button" align="rigtht" value="전송" onclick="vocTempContents()"></div>
 	</div>
 	<div id=body>
