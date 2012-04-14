@@ -23,7 +23,7 @@ import com.phonegap.api.PluginResult;
 
 public class myPlugin extends Plugin {
 	static final int LocalPort = 30331;
-	static final String HostIP = "10.0.2.15";
+	static final String HostIP = "192.168.0.25";
 	private static String val;
 	private DatagramSocket conn,conn1;
 	private int flag = 0;
@@ -94,7 +94,7 @@ public class myPlugin extends Plugin {
 					sendMessage(""+ i++);
 					else
 						sendMessage(msg);
-					return new PluginResult(PluginResult.Status.OK, val+"이 전송되었습니다.");
+					return new PluginResult(PluginResult.Status.OK, val);
 				} else if (action.equals("receiveData")) {
 					getData();
 					return new PluginResult(PluginResult.Status.OK, val);
