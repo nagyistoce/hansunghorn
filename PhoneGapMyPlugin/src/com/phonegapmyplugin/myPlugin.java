@@ -98,7 +98,10 @@ public class myPlugin extends Plugin {
 				} else if (action.equals("receiveData")) {
 					getData();
 					return new PluginResult(PluginResult.Status.OK, val);
-				} else
+				} else if(action.equals("TvSerch")){
+					return	new PluginResult(PluginResult.Status.OK, "TV를 찾았습니다.");
+					}
+				else
 					return new PluginResult(PluginResult.Status.JSON_EXCEPTION);
 			} 
 		}catch(Exception e){
