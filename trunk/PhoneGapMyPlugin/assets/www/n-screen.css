@@ -1,0 +1,75 @@
+/****************/
+/* #은 id 값설정  */
+/****************/
+#container {
+ float      : inherit;
+ width      : 800px;
+ background : #bbb;
+ height     : 1000px;
+}
+/*
+#nav {
+    float      : left;
+    width      : 200px;
+    background : green;
+}
+ *//*
+#content {
+    float      : left;
+    width      : 550px;
+	 margin    : 0 0 0 25px;
+    background : blue;
+}*/
+/* 
+#extras {
+    float      : right;
+    width      : 200px;
+    background : red;
+}*/ 
+/*********************/
+/* .은 클레스 속성 설정  */
+/*********************/
+.feature-image
+{
+ 	width      : 1000px;
+    float      : right;
+    margin     : 0 0 10px 10px;
+    
+}
+ 
+/* 웹페이지가 width가 999px 이하의 크기에서 뜬다면 상기를 포함한 아래의 내용도 추가하여 보여준다 */
+/*@media screen and (max-width:999px)
+{
+ #container { width:800px; }
+ #extras
+ {
+  clear  : left;
+  float  : none;
+  margin : 0 0 0 255px;
+  width  : 550px;
+ }
+}
+ */
+/* 웹페이지가 width가 480px 이하의 크기에서 뜬다면 상기를 포함한 아래의 내용도 추가하여 보여준다 */
+@media screen and (max-width:480px)
+{
+    #container { width:400px; }
+    #content
+    {
+        float  : none;
+        width  : auto;
+  		margin : 0;
+    }
+    #nav
+    {
+        float  : none;
+        width  : auto;
+    }
+    #extras
+    {
+        float  : none;
+        width  : auto;
+        margin : 0;
+    }
+ .feature-image { display:none; }
+}

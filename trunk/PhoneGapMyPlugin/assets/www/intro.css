@@ -1,0 +1,96 @@
+/*@-webkit-keyframes ani{
+	0%{
+		background-color : black;
+		color : white;
+		
+	}
+	10%{
+		
+	}
+	20%{
+		
+	}
+	25%{
+		background-color: white;
+		color: black;
+	}
+	40%{
+		
+	}
+	50%{
+		background-color : black;
+		color : white;
+	}
+	60%{
+		
+	}
+	75%{
+		background-color: white;
+		color: black;
+	}
+	80%{
+		
+	}
+	90%{
+		background-color : black;
+		color : white;
+	}
+	100%{
+		background-color : black;
+		color : white;
+		
+	}
+}*/
+body{
+	background: #69F;
+	font-family: Helvetica Neue,Arial;
+	
+}
+div#main,#modal{
+	background: #DDDEEE;
+	border : #BBBBBB 2px double;
+	height : 87%;
+	padding: 10%;
+	width : 79%;
+	-webkit-border-radius: 8px;
+	-webkit-box-align: center;
+	
+}
+Button#ServiceView,#serchTV,#locationView{
+	-webkit-border-radius: 15px;
+	-webkit-box-shadow: #03c 4px 4px 3px;
+	text-align: center;
+	border : black 1px solid;
+	font-weight: bold;
+	padding : 3% 5%;
+	margin: 8% auto;
+	background-color: black;
+	color : white;
+	width:80%;
+	height: 20%;
+}
+h1#Banner{
+	-webkit-border-radius: 9px;
+	border : black 2px solid;
+	padding : 5%;
+	background-color: black;
+	color : white;
+	width: 90%;
+	-webkit-animation-name: ani;
+	-webkit-animation-duration: 10s;
+	-webkit-animation-direction: alternate;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-iteration-count: infinite;
+}
+#modal{
+	-webkit-transition-duration: 3s;
+	-webkit-transform: translate3d(0,600px,0);
+	background-color : rgba(0,0,0,0.8);
+	border-radius: 0;
+	color : white;
+	display: none;
+	font-family: Helvetica,sans-serif;
+	left : 0;
+	position: absolute;
+	top : 0;
+}

@@ -26,18 +26,6 @@ img.i_open {margin:0 1px 4px 1px;vertical-align:middle;size:130%;}
 img.button{
 	right: auto; 
 }
-img.report {margin:0 0 -1px 0;}
-.p8 {font-size:8px;} .p9 {font-size:9px;} .p10 {font-size:10px;} .p11 {font-size:11px;} .p12 {font-size:12px;}
-.fil1 {filter:alpha(opacity=10); opacity:0.1;}
-.fil2 {filter:alpha(opacity=20); opacity:0.2;}
-.fil3 {filter:alpha(opacity=30); opacity:0.3;}
-.fil4 {filter:alpha(opacity=40); opacity:0.4;}
-.fil5 {filter:alpha(opacity=50); opacity:0.5;}
-.fil6 {filter:alpha(opacity=60); opacity:0.6;}
-.fil7 {filter:alpha(opacity=70); opacity:0.7;}
-.fil8 {filter:alpha(opacity=80); opacity:0.8;}
-.fil9 {filter:alpha(opacity=90); opacity:0.9;}
-.hand {cursor:pointer;}
 #title {
 	background: #ffff;
 	font-size: 1.4em;

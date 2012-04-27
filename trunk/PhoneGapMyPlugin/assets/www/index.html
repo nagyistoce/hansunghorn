@@ -32,37 +32,19 @@
 	function successSend(result){
 		alert("메세지를 보냅니다 :"+result);
 	}
-	function vocTempContents()
-	{ 
-		
-	    var tbox = document.getElementById("tbox_input");
-	    
-		i++;
-		if(i>1)
-		{
-	  window.plugins.myplugin.receiveData(successReceive,errorReceive,"");
-	  window.plugins.myplugin.sendData(successSend,errorSend,tbox.value); 
-		}
-	}
+
 	</script>
 </head>
 <body>
-	
 	<div id=title>
-		<img src="image/dengerous.gif" />
+		<img src="image/dengerous.gif" /><br>
 		<img src="image/loading01.gif" />공사중..
 	</div>
 </head>
-<body >
-	<div class=input>
-		<div id=i_open>메세지보내기<input id="tbox_input" type="text"  size="20" ></input></div>
-		<div id=button><input type="button" align="rigtht" value="전송" onclick="vocTempContents()"></div>
-	</div>
+<body >                              
 	<div id=body>
-	받는 부분은 
-	메세지 창으로 띄우겠습니다!<br>
-	<img src="image/constructing03.gif" /></div>
-	
-	
+	받는 부분은  메세지 창으로 띄우겠습니다!<br>
+	<a href="IntroAandA.html"><img src="image/constructing03.gif" /></a>
+	</div>
 </body>
 </html>
