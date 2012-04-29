@@ -15,6 +15,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import SOD.Common.Packet;
+import SOD.Common.ReceiveHandler;
+import SOD.Common.Transceiver;
 import android.webkit.WebSettings.PluginState;
 import android.widget.Toast;
 
@@ -23,59 +26,62 @@ import com.phonegap.api.PluginResult;
 
 public class myPlugin extends Plugin {
 	static final int LocalPort = 30331;
-	static final String HostIP = "192.168.0.25";
+	static final String HostIP = "192.168.0.17";
 	private static String val;
 	private DatagramSocket conn,conn1;
 	private int flag = 0;
 	private DatagramPacket pkt,pkt1;
 	private int count;
 	private SocketAddress addr;
+	private Packet pac;
 	private int i=0;
-	private static String getLocalAddress() throws IOException { // 내 디바이스 IP
-																	// 받아오기
-		try {
-			for (Enumeration<NetworkInterface> en = NetworkInterface
-					.getNetworkInterfaces(); en.hasMoreElements();) {
-				NetworkInterface intf = en.nextElement();
-				for (Enumeration<InetAddress> enumIpAddr = intf
-						.getInetAddresses(); enumIpAddr.hasMoreElements();) {
-					InetAddress inetAddress = enumIpAddr.nextElement();
-					if (!inetAddress.isLoopbackAddress()) {
-						return inetAddress.getHostAddress().toString();
-					}
-				}
-			}
-		} catch (SocketException ex) {
-		}
-		return "";
-	}
+	private Transceiver t;
+//	private static String getLocalAddress() throws IOException { // 내 디바이스 IP
+//																	// 받아오기
+//		try {
+//			for (Enumeration<NetworkInterface> en = NetworkInterface
+//					.getNetworkInterfaces(); en.hasMoreElements();) {
+//				NetworkInterface intf = en.nextElement();
+//				for (Enumeration<InetAddress> enumIpAddr = intf
+//						.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+//					InetAddress inetAddress = enumIpAddr.nextElement();
+//					if (!inetAddress.isLoopbackAddress()) {
+//						return inetAddress.getHostAddress().toString();
+//					}
+//				}
+//			}
+//		} catch (SocketException ex) {
+//		}
+//		return "";
+//	}
 
 	public void Soketinitial() throws SocketException { // 소켓 초기화
-		conn = new DatagramSocket();
-		conn = new DatagramSocket(LocalPort);
-		conn1 = new DatagramSocket();
-		pkt = new DatagramPacket(new byte[0xFF], 0xFF);
+		final SocketAddress address = new InetSocketAddress(HostIP, LocalPort);
+		t= new Transceiver(address,LocalPort);
+		
 	}
 
 	public void getData() throws IOException {
-		byte[] buf = pkt.getData();
-		for (count = 0; count < 0xFF; ++count)
-			buf[count] = 0;
-		conn.receive(pkt);
-		val = new String(buf, "euc-kr");
-		this.val =val;
-		return;
+		pac=new Packet();
+		boolean check = t.receive(pac);
+		if(check){
+			for(int i=0;i<pac.getElementCount()+1;i++){
+				val+=pac.pop().toString();
+			}
+		}
+		pac=null;
+		return ;
 	}
 
-	public void sendMessage(String msg) throws IOException {
-		byte[] buf = msg.getBytes("euc-kr");
-		pkt1 = new DatagramPacket(buf, buf.length);
-		addr = new InetSocketAddress(HostIP, LocalPort);
-		pkt1.setSocketAddress(addr);
-		conn1.send(pkt1);
-		val=msg;
-		return;
-	}
+//	public void sendMessage(String msg) throws IOException {
+//		byte[] buf = msg.getBytes("euc-kr");
+//		pkt1 = new DatagramPacket(buf, buf.length);
+//		addr = new InetSocketAddress(HostIP, LocalPort);
+//		pkt1.setSocketAddress(addr);
+//		conn1.send(pkt1);
+//		val=msg;
+//		return;
+//	}
 
 	public PluginResult execute(String action, JSONArray arg1,
 			String callbackId) {
@@ -88,14 +94,15 @@ public class myPlugin extends Plugin {
 			Soketinitial();	
 			}			
 		while (true) {
-				if (action.equals("sendData")) {
-					JSONObject rv  = new JSONObject();
-					if(msg.equals(""))
-					sendMessage(""+ i++);
-					else
-						sendMessage(msg);
-					return new PluginResult(PluginResult.Status.OK, val);
-				} else if (action.equals("receiveData")) {
+//				if (action.equals("sendData")) {
+//					JSONObject rv  = new JSONObject();
+//					if(msg.equals(""))
+//					//sendMessage(""+ i++);
+//					else
+//					//	sendMessage(msg);
+//					return new PluginResult(PluginResult.Status.OK, getLocalAddress());
+//				} else 
+			if (action.equals("receiveData")) {
 					getData();
 					return new PluginResult(PluginResult.Status.OK, val);
 				} else if(action.equals("TvSerch")){

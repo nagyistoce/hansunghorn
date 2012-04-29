@@ -35,12 +35,12 @@
 	}
 }
 body{
-	background: #DDDEEE;
+	background: #000000;
 	font-family: Helvetica Neue,Arial;
 	
 }
 div#main,#modal{
-	background: #DDDEEE;
+	background: #000000;
 	height : 88%;
 	padding: 10%;
 	width : 79%;
@@ -50,11 +50,11 @@ div#main,#modal{
 }
 Button#ServiceView,#serchTV,#locationView{
 	-webkit-border-radius: 15px;
-	-webkit-box-shadow: #03c 4px 4px 3px;
+	-webkit-box-shadow: #DDDDDD 4px 4px 3px;
 	text-align: center;
 	font-size: 25px;
 	alignment-baseline :central;
-	border : black 1px solid;
+	border : #DDDDDD 2px solid;
 	font-weight: bold;
 	padding : 4% 4%;
 	margin: 3% auto;
@@ -67,8 +67,8 @@ Button#ServiceView,#serchTV,#locationView{
 	-webkit-animation-direction: alternate;
 	-webkit-animation-timing-function: ease-in-out;
 	-webkit-animation-iteration-count: infinite;
-}
-img#context{
+	}
+	img#context{
 	alignment-baseline : central;
 	margin: auto;
 	width:97%;

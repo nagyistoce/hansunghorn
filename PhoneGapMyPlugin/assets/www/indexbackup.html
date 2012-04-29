@@ -1,21 +1,1677 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="ko">
+
 <head>
-<meta charset=EUC-KR">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="n-screen.css" />
-<script type="text/javascript" charset="euc-kr" src="phonegap-1.4.1.js"></script>
-<script type="text/javascript" charset="euc-kr" src="myPlugin.js"></script>
-<script type="text/javascript" charset="euc-kr">
-document.addEventListener("DOMContentLoaded",function(){
-	var TvList =document.getElementById('TV');
-	  window.plugins.myplugin.TvSerch(successSerch,errorSerch,"");
+
+<meta http-equiv="content-type" content="text/html; charset=euc-kr">
+
+<title>부산광역시 엄궁농산물도매시장 설문조사</title>
+
+<meta name="title" content="부산광역시 엄궁농산물도매시장 설문조사">
+
+<meta name="author" content="부산광역시 엄궁농산물도매시장 설문조사">
+
+<meta name="keywords" content="부산광역시 엄궁농산물도매시장 설문조사">
+
+<meta name="description" content="부산광역시 엄궁농산물도매시장 설문조사">
+
+<link rel="stylesheet" type="text/css" href="ana/css/all.css">
+
+<link rel="stylesheet" type="text/css" href="ana//css/sub.css">
+
+<link rel="stylesheet" type="text/css" href="ana//css/board.css">
+
+<link rel="stylesheet" type="text/css" href="ana//css/content.css">
+
+
+
+<style type="text/css">
+
+img { border:0; vertical-align: middle; }
+
+#body_content { width: auto; height: auto; min-width: auto; min-height: auto; margin: 0 auto; padding: 0; border: 0; }
+
+
+
+html {overflow-x : hidden}
+
+
+
+</style>
+
+<script src="ana/js/loader.js" type="text/javascript"></script><noscript><p></p></noscript>
+
+<script type="text/javascript">
+
+<!--
+
+function doSbumit_this() {
+
+	with(document.frm) {
+
+		if ( !fieldCheck(name, "응답자명을 입력하여 주세요.", /[\s\S]/)) return false;
+
+		if ( !fieldCheck(phone, "연락처를 입력하여 주세요.", /[\s\S]/)) return false;
+
+		if ( !fieldCheck(post_code, "우편번호를 선택하여 주세요.", /[\s\S]/)) return false;
+
+		if ( !fieldCheck(address_detail, "상세주소를 입력하여 주세요.", /[\s\S]/)) return false;
+
+		//선택.
+
+		var ischecked = false;
+
+		
+
+			
+
+			ischecked = false;
+
+			for(var i=0; i < field_001.length; i++) {
+
+				ischecked = field_001[i].checked || ischecked;
+
+			}
+
+			if ( !ischecked ) {
+
+				alert("문항 \"구입하신 농산물의 가격 대비 품질에 만족하십니까?\"에 응답해 주세요");
+
+				field_001[0].focus();
+
+				return false;
+
+			}
+
+			
+
+		
+
+			
+
+			ischecked = false;
+
+			for(var i=0; i < field_002.length; i++) {
+
+				ischecked = field_002[i].checked || ischecked;
+
+			}
+
+			if ( !ischecked ) {
+
+				alert("문항 \"주차, 화장실 등 시장시설 이용이 편리합니까?\"에 응답해 주세요");
+
+				field_002[0].focus();
+
+				return false;
+
+			}
+
+			
+
+		
+
+			
+
+			ischecked = false;
+
+			for(var i=0; i < field_003.length; i++) {
+
+				ischecked = field_003[i].checked || ischecked;
+
+			}
+
+			if ( !ischecked ) {
+
+				alert("문항 \"쓰레기 처리, 청소상태 등 시장 환경은 쾌적합니까?\"에 응답해 주세요");
+
+				field_003[0].focus();
+
+				return false;
+
+			}
+
+			
+
+		
+
+			
+
+			ischecked = false;
+
+			for(var i=0; i < field_004.length; i++) {
+
+				ischecked = field_004[i].checked || ischecked;
+
+			}
+
+			if ( !ischecked ) {
+
+				alert("문항 \"농산물 구입 및 환불 시 판매자의 서비스에 만족하십니까?\"에 응답해 주세요");
+
+				field_004[0].focus();
+
+				return false;
+
+			}
+
+			
+
+		
+
+			
+
+			ischecked = false;
+
+			for(var i=0; i < field_005.length; i++) {
+
+				ischecked = field_005[i].checked || ischecked;
+
+			}
+
+			if ( !ischecked ) {
+
+				alert("문항 \"현금 영수증 및 신용카드 결제 요구 시 판매자의 태도는 ?\"에 응답해 주세요");
+
+				field_005[0].focus();
+
+				return false;
+
+			}
+
+			
+
+		
+
+			
+
+			ischecked = false;
+
+			for(var i=0; i < field_006.length; i++) {
+
+				ischecked = field_006[i].checked || ischecked;
+
+			}
+
+			if ( !ischecked ) {
+
+				alert("문항 \"시장 안내를 위한 표지판 표기는 적절합니까?\"에 응답해 주세요");
+
+				field_006[0].focus();
+
+				return false;
+
+			}
+
+			
+
+		
+
+			
+
+			ischecked = false;
+
+			for(var i=0; i < field_007.length; i++) {
+
+				ischecked = field_007[i].checked || ischecked;
+
+			}
+
+			if ( !ischecked ) {
+
+				alert("문항 \"우리 시장을 이용한 기간은 어느 정도 되었습니까?\"에 응답해 주세요");
+
+				field_007[0].focus();
+
+				return false;
+
+			}
+
+			
+
+		
+
+			
+
+			ischecked = false;
+
+			for(var i=0; i < field_008.length; i++) {
+
+				ischecked = field_008[i].checked || ischecked;
+
+			}
+
+			if ( !ischecked ) {
+
+				alert("문항 \"우리 시장을 얼마나 자주 이용하십니까?\"에 응답해 주세요");
+
+				field_008[0].focus();
+
+				return false;
+
+			}
+
+			
+
+		
+
+			
+
+			ischecked = false;
+
+			for(var i=0; i < field_009.length; i++) {
+
+				ischecked = field_009[i].checked || ischecked;
+
+			}
+
+			if ( !ischecked ) {
+
+				alert("문항 \"우리 시장을 자주 이용한다면 이유는?\"에 응답해 주세요");
+
+				field_009[0].focus();
+
+				return false;
+
+			}
+
+			
+
+		
+
+			
+
+			ischecked = false;
+
+			for(var i=0; i < field_010.length; i++) {
+
+				ischecked = field_010[i].checked || ischecked;
+
+			}
+
+			if ( !ischecked ) {
+
+				alert("문항 \"우리 시장 이용 시 가장 불만인 점은?\"에 응답해 주세요");
+
+				field_010[0].focus();
+
+				return false;
+
+			}
+
+			
+
+		
+
+			
+
+			ischecked = false;
+
+			for(var i=0; i < field_011.length; i++) {
+
+				ischecked = field_011[i].checked || ischecked;
+
+			}
+
+			if ( !ischecked ) {
+
+				alert("문항 \"우리 시장을 아용하게 된 계기는 무엇입니까?\"에 응답해 주세요");
+
+				field_011[0].focus();
+
+				return false;
+
+			}
+
+			
+
+		
+
+			
+
+				
+
+			
+
+		
+
+			
+
+			ischecked = false;
+
+			for(var i=0; i < field_013.length; i++) {
+
+				ischecked = field_013[i].checked || ischecked;
+
+			}
+
+			if ( !ischecked ) {
+
+				alert("문항 \"(13번~15번은 통계처리용) 우리 시장을 이용하는 목적은 무엇입니까?\"에 응답해 주세요");
+
+				field_013[0].focus();
+
+				return false;
+
+			}
+
+			
+
+		
+
+			
+
+			ischecked = false;
+
+			for(var i=0; i < field_014.length; i++) {
+
+				ischecked = field_014[i].checked || ischecked;
+
+			}
+
+			if ( !ischecked ) {
+
+				alert("문항 \"귀하의 성별은\"에 응답해 주세요");
+
+				field_014[0].focus();
+
+				return false;
+
+			}
+
+			
+
+		
+
+			
+
+			ischecked = false;
+
+			for(var i=0; i < field_015.length; i++) {
+
+				ischecked = field_015[i].checked || ischecked;
+
+			}
+
+			if ( !ischecked ) {
+
+				alert("문항 \"귀하의 연세는?\"에 응답해 주세요");
+
+				field_015[0].focus();
+
+				return false;
+
+			}
+
+			
+
+		
+
 	}
+
+}
+
+//-->
+
 </script>
+
 </head>
+
 <body>
-<table id="TV">
-</table>
+
+
+
+<!-- #body_content -->
+
+<div id="body_content">
+
+
+
+<div id="pollpop">
+
+
+
+<div class="logo"><img src="/img/inc/logo.gif" width="110" height="56" alt="부산시 로고" /><img src="/img/main/pop/logo.gif" width="142" height="51" alt="엄궁농산물도매시장 설문조사" /></div>
+
+
+
+<div class="close"><a href="#n" onclick="window.close();" onkeypress=""><img src="/img/main/pop/popclose.gif" alt="창닫기" width="69" height="21" /></a></div>
+
+
+
+<div class="pop_view">
+
+<div class="pop_view_box">
+
+
+
+<div class="box">
+
+
+
+<p class="crrb">※ 이 설문 내용 및 개인정보는 고객만족도 조사 이외의 다른 어떤 용도로도 사용되지 않습니다.</p>
+
+
+
+<div id="contenttabmenu">
+
+<ul>
+
+<li id="ctabm1" ><a href="?survey_no=00029&site_gubun=EGMARKET">소비자 설문조사</a></li>
+
+<li id="ctabm2"  ><a href="?survey_no=00030&site_gubun=EGMARKET">출하자 설문조사</a></li>
+
+</ul>
+
+</div>
+
+
+
+<h2>설문조사 기간 : <span>2011-11-07 ~ 2011-12-07</span></h2>
+
+<!-- board -->
+
+<div class="board">
+
+
+
+
+
+<!-- 쓰기 -->
+
+<div class="write">
+
+<div class="wrap">
+
+
+
+
+
+<!-- infomenu -->
+
+<div class="infomenu">
+
+<div class="left">
+
+<span class="required">*</span> 로 표시된 항목은 필수 항목입니다.
+
+</div>
+
+</div>
+
+<!-- //infomenu -->
+
+
+
+
+
+
+
+<!-- 쓰기폼 -->
+
+<form action="/program/global/survey/SurveyResultAction.jsp" method="post" name="frm" id="frm" onSubmit="return doSbumit_this(); ">
+
+<input type="hidden" name="amode" value="insert" >
+
+<!-- // -->
+
+<input type="hidden" name="close" value="true">
+
+<!-- // -->
+
+<input type="hidden" name="survey_no" value="00027">
+
+<input type="hidden" name="site_gubun" value="EGMARKET">
+
+
+
+<div class="fieldset">
+
+<div class="item first">
+
+<label class="head" for="name">작성자 <span class="required" title="필수항목">*</span></label>
+
+<input type="text" name="name" id="name" value="" class="text" />
+
+</div>
+
+<div class="item">
+
+<label class="head" for="phone">연락처 <span class="required" title="필수항목">*</span></label>
+
+<input type="text" name="phone" id="phone" value="" class="text w40" />
+
+<span class="explain">* 055-0000-0000 형식으로 입력하세요.</span>
+
+</div>
+
+<div class="item">
+
+<label class="head" for="post_code">우편번호 <span class="required" title="필수항목">*</span></label>
+
+<input type="text" name="post_code" id="post_code" value="" size="7" class="text" title="우편번호 앞자리를 입력하세요"  readonly="readonly"/>
+
+<a tabindex="0" href="#n" onclick="findZipcode('frm.post_code', 'frm.address');" onkeypress="" ><img src="/img/board/bt_zipcode.gif" width="62" height="19" alt="우편번호" class="image" /></a>
+
+</div>
+
+<div class="item">
+
+<label class="head" for="address">주소</label>
+
+<input type="text" name="address" id="address" value="" class="text w100"   readonly="readonly" /> 
+
+<input type="text" name="address_detail" id="address_detail" value="" class="text w100" /> 
+
+</div>
+
+</div>
+
+
+
+<ol class="num">
+
+
+
+
+
+
+
+<li class="n01"><p><strong>구입하신 농산물의 가격 대비 품질에 만족하십니까?</strong><br />
+
+
+
+
+
+	
+
+	
+
+	<input type="radio" name="field_001" id="lblfield_001_1" value="1" class="radio">
+
+	<label for="lblfield_001_1">매우만족</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_001" id="lblfield_001_2" value="2" class="radio">
+
+	<label for="lblfield_001_2">다소만족</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_001" id="lblfield_001_3" value="3" class="radio">
+
+	<label for="lblfield_001_3">보통</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_001" id="lblfield_001_4" value="4" class="radio">
+
+	<label for="lblfield_001_4">다소불만</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_001" id="lblfield_001_5" value="5" class="radio">
+
+	<label for="lblfield_001_5">매우불만</label>
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+<li class="n02"><p><strong>주차, 화장실 등 시장시설 이용이 편리합니까?</strong><br />
+
+
+
+
+
+	
+
+	
+
+	<input type="radio" name="field_002" id="lblfield_002_1" value="1" class="radio">
+
+	<label for="lblfield_002_1">매우편리</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_002" id="lblfield_002_2" value="2" class="radio">
+
+	<label for="lblfield_002_2">다소편리</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_002" id="lblfield_002_3" value="3" class="radio">
+
+	<label for="lblfield_002_3">보통</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_002" id="lblfield_002_4" value="4" class="radio">
+
+	<label for="lblfield_002_4">다소불편</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_002" id="lblfield_002_5" value="5" class="radio">
+
+	<label for="lblfield_002_5">매우불편 </label>
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+<li class="n03"><p><strong>쓰레기 처리, 청소상태 등 시장 환경은 쾌적합니까?</strong><br />
+
+
+
+
+
+	
+
+	
+
+	<input type="radio" name="field_003" id="lblfield_003_1" value="1" class="radio">
+
+	<label for="lblfield_003_1">매우만족</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_003" id="lblfield_003_2" value="2" class="radio">
+
+	<label for="lblfield_003_2">다소만족</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_003" id="lblfield_003_3" value="3" class="radio">
+
+	<label for="lblfield_003_3">보통</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_003" id="lblfield_003_4" value="4" class="radio">
+
+	<label for="lblfield_003_4">다소불편</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_003" id="lblfield_003_5" value="5" class="radio">
+
+	<label for="lblfield_003_5">매우불편</label>
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+<li class="n04"><p><strong>농산물 구입 및 환불 시 판매자의 서비스에 만족하십니까?</strong><br />
+
+
+
+
+
+	
+
+	
+
+	<input type="radio" name="field_004" id="lblfield_004_1" value="1" class="radio">
+
+	<label for="lblfield_004_1">매우만족</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_004" id="lblfield_004_2" value="2" class="radio">
+
+	<label for="lblfield_004_2">다소만족</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_004" id="lblfield_004_3" value="3" class="radio">
+
+	<label for="lblfield_004_3">보통</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_004" id="lblfield_004_4" value="4" class="radio">
+
+	<label for="lblfield_004_4">다소불만</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_004" id="lblfield_004_5" value="5" class="radio">
+
+	<label for="lblfield_004_5">매우불만</label>
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+<li class="n05"><p><strong>현금 영수증 및 신용카드 결제 요구 시 판매자의 태도는 ?</strong><br />
+
+
+
+
+
+	
+
+	
+
+	<input type="radio" name="field_005" id="lblfield_005_1" value="1" class="radio">
+
+	<label for="lblfield_005_1">매우만족</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_005" id="lblfield_005_2" value="2" class="radio">
+
+	<label for="lblfield_005_2">다소만족</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_005" id="lblfield_005_3" value="3" class="radio">
+
+	<label for="lblfield_005_3">보통</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_005" id="lblfield_005_4" value="4" class="radio">
+
+	<label for="lblfield_005_4">다소불만</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_005" id="lblfield_005_5" value="5" class="radio">
+
+	<label for="lblfield_005_5">매우불만 </label>
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+<li class="n06"><p><strong>시장 안내를 위한 표지판 표기는 적절합니까?</strong><br />
+
+
+
+
+
+	
+
+	
+
+	<input type="radio" name="field_006" id="lblfield_006_1" value="1" class="radio">
+
+	<label for="lblfield_006_1">매우적절</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_006" id="lblfield_006_2" value="2" class="radio">
+
+	<label for="lblfield_006_2">다소적절</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_006" id="lblfield_006_3" value="3" class="radio">
+
+	<label for="lblfield_006_3">보통</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_006" id="lblfield_006_4" value="4" class="radio">
+
+	<label for="lblfield_006_4">다소부적절</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_006" id="lblfield_006_5" value="5" class="radio">
+
+	<label for="lblfield_006_5">매우부적절 </label>
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+<li class="n07"><p><strong>우리 시장을 이용한 기간은 어느 정도 되었습니까?</strong><br />
+
+
+
+
+
+	
+
+	
+
+	<input type="radio" name="field_007" id="lblfield_007_1" value="1" class="radio">
+
+	<label for="lblfield_007_1">7년 이상</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_007" id="lblfield_007_2" value="2" class="radio">
+
+	<label for="lblfield_007_2">4~6년</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_007" id="lblfield_007_3" value="3" class="radio">
+
+	<label for="lblfield_007_3">1년~3년</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_007" id="lblfield_007_4" value="4" class="radio">
+
+	<label for="lblfield_007_4">1년 미만</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_007" id="lblfield_007_5" value="5" class="radio">
+
+	<label for="lblfield_007_5">첫 방문</label>
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+<li class="n08"><p><strong>우리 시장을 얼마나 자주 이용하십니까?</strong><br />
+
+
+
+
+
+	
+
+	
+
+	<input type="radio" name="field_008" id="lblfield_008_1" value="1" class="radio">
+
+	<label for="lblfield_008_1">매일</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_008" id="lblfield_008_2" value="2" class="radio">
+
+	<label for="lblfield_008_2">주1~2회</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_008" id="lblfield_008_3" value="3" class="radio">
+
+	<label for="lblfield_008_3">월1회</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_008" id="lblfield_008_4" value="4" class="radio">
+
+	<label for="lblfield_008_4">분기1회</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_008" id="lblfield_008_5" value="5" class="radio">
+
+	<label for="lblfield_008_5">재방문 계획없음 </label>
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+<li class="n09"><p><strong>우리 시장을 자주 이용한다면 이유는?</strong><br />
+
+
+
+
+
+	
+
+	
+
+	<input type="radio" name="field_009" id="lblfield_009_1" value="1" class="radio">
+
+	<label for="lblfield_009_1">백화점, 마트보다 신선하고 저렴</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_009" id="lblfield_009_2" value="2" class="radio">
+
+	<label for="lblfield_009_2">주차 등 시설 이용이 편리</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_009" id="lblfield_009_3" value="3" class="radio">
+
+	<label for="lblfield_009_3">교환 및 환불 용이</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_009" id="lblfield_009_4" value="4" class="radio">
+
+	<label for="lblfield_009_4">한꺼번에 다량 구매 가능</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_009" id="lblfield_009_5" value="5" class="radio">
+
+	<label for="lblfield_009_5">기타</label>
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+<li class="n10"><p><strong>우리 시장 이용 시 가장 불만인 점은?</strong><br />
+
+
+
+
+
+	
+
+	
+
+	<input type="radio" name="field_010" id="lblfield_010_1" value="1" class="radio">
+
+	<label for="lblfield_010_1">가격 및 품질</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_010" id="lblfield_010_2" value="2" class="radio">
+
+	<label for="lblfield_010_2">교통편</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_010" id="lblfield_010_3" value="3" class="radio">
+
+	<label for="lblfield_010_3">시설 이용 불편</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_010" id="lblfield_010_4" value="4" class="radio">
+
+	<label for="lblfield_010_4">불친절한 서비스</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_010" id="lblfield_010_5" value="5" class="radio">
+
+	<label for="lblfield_010_5">기타</label>
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+<li class="n11"><p><strong>우리 시장을 아용하게 된 계기는 무엇입니까?</strong><br />
+
+
+
+
+
+	
+
+	
+
+	<input type="radio" name="field_011" id="lblfield_011_1" value="1" class="radio">
+
+	<label for="lblfield_011_1">홈페이지 방문 후</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_011" id="lblfield_011_2" value="2" class="radio">
+
+	<label for="lblfield_011_2">홍보탑을 보고</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_011" id="lblfield_011_3" value="3" class="radio">
+
+	<label for="lblfield_011_3">지인 소개</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_011" id="lblfield_011_4" value="4" class="radio">
+
+	<label for="lblfield_011_4">부근 거주 </label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_011" id="lblfield_011_5" value="5" class="radio">
+
+	<label for="lblfield_011_5">기타</label>
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+<li class="n12"><p><strong>기타 우리 시장 발전에 도움이 될만한 말씀 한마디(개선해야 할 사항 등)</strong><br />
+
+
+
+
+
+
+
+	
+
+	<textarea name="field_012" class="textarea" id="lblfield_012" style="width:100%;"></textarea>
+
+	
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+<li class="n13"><p><strong>(13번~15번은 통계처리용) 우리 시장을 이용하는 목적은 무엇입니까?</strong><br />
+
+
+
+
+
+	
+
+	
+
+	<input type="radio" name="field_013" id="lblfield_013_1" value="1" class="radio">
+
+	<label for="lblfield_013_1">농산물 소매업</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_013" id="lblfield_013_2" value="2" class="radio">
+
+	<label for="lblfield_013_2">음식점 운영</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_013" id="lblfield_013_3" value="3" class="radio">
+
+	<label for="lblfield_013_3">자가소비</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_013" id="lblfield_013_4" value="4" class="radio">
+
+	<label for="lblfield_013_4">농산물 가공업 </label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_013" id="lblfield_013_5" value="5" class="radio">
+
+	<label for="lblfield_013_5">선물 등 기타</label>
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+<li class="n14"><p><strong>귀하의 성별은</strong><br />
+
+
+
+
+
+	
+
+	
+
+	<input type="radio" name="field_014" id="lblfield_014_1" value="1" class="radio">
+
+	<label for="lblfield_014_1">남성</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_014" id="lblfield_014_2" value="2" class="radio">
+
+	<label for="lblfield_014_2">여성</label>
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+<li class="n15"><p><strong>귀하의 연세는?</strong><br />
+
+
+
+
+
+	
+
+	
+
+	<input type="radio" name="field_015" id="lblfield_015_1" value="1" class="radio">
+
+	<label for="lblfield_015_1">20대이하</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_015" id="lblfield_015_2" value="2" class="radio">
+
+	<label for="lblfield_015_2">30대</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_015" id="lblfield_015_3" value="3" class="radio">
+
+	<label for="lblfield_015_3">40대</label>
+
+	
+
+	
+
+	
+
+	<input type="radio" name="field_015" id="lblfield_015_4" value="4" class="radio">
+
+	<label for="lblfield_015_4">50대이상</label>
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+</li>
+
+
+
+
+
+
+
+<!-- //쓰기폼 -->
+
+
+
+
+
+<div class="center">
+
+<input type="image" src="/img/board/btn_confirm.gif" width="45" height="21" alt="확인" />
+
+<a tabindex="0" href="#n" onclick="window.close();" onkeypress=""><img src="/img/board/btn_cancel.gif" width="45" height="21" alt="취소" /></a>
+
+</div>
+
+
+
+
+
+</form>
+
+
+
+
+
+
+
+
+
+</div>
+
+</div>
+
+<!-- //쓰기 -->
+
+
+
+
+
+</div>
+
+<!--//board -->
+
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="foot">Copyright(C) Busan Metropolitan city all rights reserved.</div>
+
+
+
+</div>
+
+
+
+</div>
+
+<!-- //#body_content -->
+
+
+
 </body>
 
-</html> 
+</html>
