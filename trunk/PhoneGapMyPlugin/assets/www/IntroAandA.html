@@ -16,7 +16,6 @@
 	document.addEventListener("deviceready",onDeviceReady,false);
 	
 	function onDeviceReady(){
-		
 	vocTempContents();
 	}
 	function errorReceive(err){
@@ -46,7 +45,7 @@
 	{ 
 	    var tbox = document.getElementById("tbox_input");
 		i++;
-		if(i>1)
+		if(i>=1)
 		{
 	  window.plugins.myplugin.receiveData(successReceive,errorReceive,"");
 	  window.plugins.myplugin.sendData(successSend,errorSend,tbox.value); 
@@ -61,6 +60,7 @@
 	}
 	function clean()
 	{
+		window.plugins.myplugin.sendData(successSend,errorSend,"3"); 
 		x$("#modal").css({"-webkit-transform":"translate3d(0,600,0)","-webkit-transition-timing-function":"ease-out"});	
 	}
 	</script>
@@ -71,7 +71,6 @@
 	<div id="main">
 		
 	<form name="AandA" action="indexbackup.html" method="get">
-		                             
 		<img id="context" src="image/Net.png"></img><br> 
 		<Button id="serchTV" onclick="taken(0);">주변       스마트 TV 탐색</button><br>
 		<Button id="locationView" onclick="taken(1);">서비스 이용가능지역 보기</button><br>
