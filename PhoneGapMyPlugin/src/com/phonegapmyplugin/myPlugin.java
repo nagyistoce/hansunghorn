@@ -16,7 +16,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import SOD.Common.Packet;
-import SOD.Common.ReceiveHandler;
 import SOD.Common.Transceiver;
 import android.webkit.WebSettings.PluginState;
 import android.widget.Toast;

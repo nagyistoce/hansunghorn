@@ -9,9 +9,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import SOD.Common.*;
 import SOD.Deprecated.*;
-import SOD.Deprecated.Phone.*;
-import SOD.Deprecated.TV.*;
-import SOD.SmartPhone.*;
 import SOD.SmartTV.*;
 
 public class mypluginActivity extends DroidGap {
