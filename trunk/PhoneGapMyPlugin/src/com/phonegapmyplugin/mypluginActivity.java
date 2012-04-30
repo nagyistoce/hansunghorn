@@ -15,7 +15,7 @@ public class mypluginActivity extends DroidGap {
 	Button TvSearch,ServiceLocation,InstallService;
 	public void Initialize()
 	{
-		  super.loadUrl("file:///android_asset/www/index.html");
+		  super.loadUrl("file:///android_asset/www/indexbackup.html");
 	}
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
