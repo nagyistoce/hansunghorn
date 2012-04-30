@@ -1,36 +1,310 @@
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <meta http-equiv="Content-type" charset="euc-kr" name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
-    <title>Communication</title>
+<!DOC5TYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-	<link rel="stylesheet" href="index.css" /> 
-	<script type="text/javascript" charset="euc-kr" src="phonegap-1.4.1.js"></script>
-	<script type="text/javascript" charset="euc-kr" src="myPlugin.js"></script>
-	<script type="text/javascript" charset="euc-kr" >
+<html lang="ko">
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=euc-kr">
+<script type="text/javascript" charset="euc-kr" src="phonegap-1.4.1.js"></script>
+<script type="text/javascript" charset="euc-kr" src="myPlugin.js"></script>
+<script type="text/javascript" charset="euc-kr" src="jquery.js"></script>
+<script type="text/javascript" charset="euc-kr">
+
+	var check=false;
+	var answerCount=0;
+	var i=0;
+	document.addEventListener("deviceready",onDeviceReady,false);
+	
+	function onDeviceReady(){
+	vocTempContents();
+	}
+	function errorReceive(err){
+		alert("Error :"+err);
+	}
+	function errorSend(err){
+		alert("Error :"+err);
+	}
+	function successReceive(result){
+		Control(result);
+	}
+	function successSend(result){
+		alert("메세지를 보냅니다 :"+result);
+	}
+	function vocTempContents()
+	{ 
+	  window.plugins.myplugin.receiveData(successReceive,errorReceive,"");
+	  window.plugins.myplugin.sendData(successSend,errorSend,tbox.value); 
+	}
+	function Control(result)
+	{
+			
+			var getline=new Array();
+			getline=result.split("\n");
+			for(;i<getline.length;i++)
+			{
+				alert("사랑해ㅈ");
+				if(getline[i] =="Company")
+				{
+				var $company = $("#pollpop");
+				var $h1=$("<h1><center> 주관 : <span>"+getline[i+1]+"</span></center></h1><br>");
+				$h1.insertBefore($company);
+				}
+				else if(getline[i] =="During")
+				{
+				var $during = $("#during");
+				var $h2=$("<h2>설문조사 기간 : <span>"+getline[i+1]+"</span></h2>");
+				$h2.insertBefore($during);
+				}
+				else if(getline[i] =="Topic")
+				{
+					var $topic = $("#topic");
+					var $h22=$("<h2><span><i>주  제 : </i> "+getling[i+1]+"</span></h2>");
+					$h22.insertBefore($topic);
+				}
+				else if(getline[i] == "UserImfo")
+				 {
+					 if(getline[i+1] == "false")
+					 {
+					 	check=true;
+					 	alert("사랑해");
+					 	$(".fieldset").remove();
+					 }
+			     }
+			    
+			    else if(getline[i] == "answer")
+				{
+					var $no=$("#num");
+					$li_i[answerCount]=$("<li><p><strong>"+getline[i+1]+"</strong></li>");
+					$li_i.attr("id","no_"+answerCount);
+					answerCount++;
+				}
+			     
+			     
+			     
+			}
+	}
+	function doSbumit_this() {
+		if(check){
+		with(document.frm) {
+			if ( !fieldCheck(name, "응답자명을 입력하여 주세요.", /[\s\S]/)) return false;
+			if ( !fieldCheck(phone, "연락처를 입력하여 주세요.", /[\s\S]/)) return false;
+			if ( !fieldCheck(post_code, "우편번호를 선택하여 주세요.", /[\s\S]/)) return false;
+			if ( !fieldCheck(address_detail, "상세주소를 입력하여 주세요.", /[\s\S]/)) return false;
+			//선택.
+			
+				}
+							}
+	}
 
 	</script>
-	<style type="text/css">
-	html{height:100%;}
-	body{height:100%;margin: 0; padding : 0;}
-	#title{
-	background:#eee;
-	font-size:1.0em;
-	text-align:center;
-	padding:20px 0px 20px 0px;
-	}
-	#body{
-	background:#eee;
-	font-size:0.6em;
-	text-align:center;
-	padding:20px 0px 20px 0px;
-	}
-	</style>
-	<div id=title><img src="image/loading01.gif"/>설문조사가 진행중입니다..
- 	</div>
+<title></title>
+<link rel="stylesheet" type="text/css" href="ana/css/all.css">
+<link rel="stylesheet" type="text/css" href="ana//css/sub.css">
+<link rel="stylesheet" type="text/css" href="ana//css/board.css">
+<link rel="stylesheet" type="text/css" href="ana//css/content.css">
+<style type="text/css">
+img { border:0; vertical-align: middle; }
+#body_content { width: auto; height: auto; min-width: auto; min-height: auto; margin: 0 auto; padding: 0; border: 0; }
+html {overflow-x : hidden}
+</style>
+<script src="ana/js/loader.js" type="text/javascript"></script><noscript><p></p></noscript>
+<script type="text/javascript" charset="euc-kr" src="phonegap-1.4.1.js"></script>
+
+</head>
+
+<body border="1">
+
+
+
+<!-- #body_content -->
+
+<div id="body_content">
+
+
+
+<div id="pollpop">
+
+
+<div class="pop_view">
+<div id="topic">
+</div>
+<div class="pop_view_box">
+<div id="during">
+</div>
+
+<div class="box">
+
+<p class="crrb">※ 이 설문 내용 및 개인정보는 고객만족도 조사 이외의 다른 어떤 용도로도 사용되지 않습니다.</p>
+
+
+<!-- board -->
+
+<div class="board">
+
+
+
+
+
+<!-- 쓰기 -->
+
+<div class="write">
+
+<div class="wrap">
+
+
+
+
+
+<!-- infomenu -->
+
+<div class="infomenu">
+
+<div class="left">
+
+<span class="required">*</span> 로 표시된 항목은 필수 항목입니다.
+
+</div>
+
+</div>
+
+<!-- //infomenu -->
+
+
+
+
+
+
+
+<!-- 쓰기폼 -->
+
+<form action="/program/global/survey/SurveyResultAction.jsp" method="post" name="frm" id="frm" onSubmit="return doSbumit_this(); ">
+
+<input type="hidden" name="amode" value="insert" >
+
+<!-- // -->
+
+<input type="hidden" name="close" value="true">
+
+<!-- // -->
+
+<input type="hidden" name="survey_no" value="00027">
+
+<input type="hidden" name="site_gubun" value="EGMARKET">
+
+
+
+<div class="fieldset">
+	 <div class="item first">
  
-  </head>
-  <body onload="vocTempContents();">
-  	<div id=body>수정부분</div>
-   </body>
+ <label class="head" for="name">작성자 <span class="required" title="필수항목">*</span></label>
+ 
+ <input type="text" name="name" id="name" value="" class="text" />
+ 
+ </div>
+ <div class="item">
+ 
+ <label class="head" for="phone">연락처 <span class="required" title="필수항목">*</span></label>
+ 
+<input type="text" name="phone" id="phone" value="" class="text w40" />
+
+ <span class="explain">* 055-0000-0000 형식으로 입력하세요.</span>
+ 
+ </div>
+ 
+ <div class="item">
+ 
+ <label class="head" for="post_code">우편번호 <span class="required" title="필수항목">*</span></label>
+ 
+ <input type="text" name="post_code" id="post_code" value="" size="7" class="text" title="우편번호 앞자리를 입력하세요"  readonly="readonly"/>
+ 
+ <a tabindex="0" href="#n" onclick="findZipcode('frm.post_code', 'frm.address');" onkeypress="" ><img src="/img/board/bt_zipcode.gif" width="62" height="19" alt="우편번호" class="image" /></a>
+ 
+ </div>
+ 
+ <div class="item">
+ 
+ <label class="head" for="address">주소</label>
+ 
+ <input type="text" name="address" id="address" value="" class="text w100"   readonly="readonly" /> 
+ 
+ <input type="text" name="address_detail" id="address_detail" value="" class="text w100" /> 
+ 
+ </div>
+	<!-- 여기는 사용자 정보가 들어올 공간 -->
+
+
+
+</div>
+
+
+
+<ol id="num">
+
+
+
+<!-- //쓰기폼 -->
+
+
+
+
+
+<div class="center">
+
+<input type="image" src="/img/board/btn_confirm.gif" width="45" height="21" alt="확인" />
+
+<a tabindex="0" href="#n" onclick="window.close();" onkeypress=""><img src="/img/board/btn_cancel.gif" width="45" height="21" alt="취소" /></a>
+
+</div>
+
+
+
+
+
+</form>
+
+
+
+
+
+
+
+
+
+</div>
+
+</div>
+
+<!-- //쓰기 -->
+
+
+
+
+
+</div>
+
+<!--//board -->
+
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="foot">Copyright(C) Hansung University reserved.</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</body>
+
 </html>
