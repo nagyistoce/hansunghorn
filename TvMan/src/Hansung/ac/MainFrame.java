@@ -62,14 +62,14 @@ public class MainFrame extends Activity {
 		answerAdd.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				DataStructure.vec.add("@Topic@"+topic.getText()+"@Answer@"+answer.getText());
+				DataStructure.vec.add("\nTopic\n"+topic.getText()+"\nAnswer\n"+answer.getText());
 				topic.setEnabled(false);
 			}
 		});
 		complete.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				DataStructure.vec.add("@Topic@"+topic.getText()+"@Answer@"+answer.getText());
-				DataStructure.vec.add("xxxxx");
+				DataStructure.vec.add("\nTopic\n"+topic.getText()+"\nAnswer\n"+answer.getText());
+				DataStructure.vec.add("\nxxxxx\n");
 				pac=new Packet();
 				
 				for(int i=0;i<DataStructure.vec.size();i++)

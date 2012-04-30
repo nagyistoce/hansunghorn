@@ -37,7 +37,7 @@ public class TvSetting extends Activity {
 	{
 	next.setOnClickListener(new OnClickListener() {
 		public void onClick(View v) {
-			DataStructure.vec.add("@Company@"+Company.getText()+"@During@"+during.getText()+"@UserImfo@"+userTip);
+			DataStructure.vec.add("\nCompany\n"+Company.getText()+"\nDuring\n"+during.getText()+"\nUserImfo\n"+userTip);
 			 Intent intent = new Intent(TvSetting.this,MainFrame.class);
 	         startActivity(intent);
 		}

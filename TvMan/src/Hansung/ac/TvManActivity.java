@@ -18,7 +18,7 @@ public class TvManActivity extends Activity {
         setContentView(R.layout.main);
         
         Handler x = new Handler();
-        x.postDelayed(new splashhandler(), 3000); //1.5占십뒤울옙 占쌕몌옙 占쏙옙티占쏙옙티占쏙옙...
+        x.postDelayed(new splashhandler(), 300); //1.5占십뒤울옙 占쌕몌옙 占쏙옙티占쏙옙티占쏙옙...
     }
 
     //占쏙옙占시뤄옙占쏙옙 
