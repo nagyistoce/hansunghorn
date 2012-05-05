@@ -140,8 +140,8 @@ public class Serializer {
 			Object obj;			
 			if(type.equals(Packet.DataType_Int))
 				obj = Integer.parseInt(content);
-			else if(type.equals(Packet.DataType_Long))
-				obj = Long.parseLong(content);
+//			else if(type.equals(Packet.DataType_Long))
+//				obj = Long.parseLong(content);
 			else if(type.equals(Packet.DataType_Float))
 				obj = Float.parseFloat(content);
 			else if(type.equals(Packet.DataType_Double))

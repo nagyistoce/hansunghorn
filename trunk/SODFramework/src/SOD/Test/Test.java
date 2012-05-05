@@ -61,7 +61,7 @@ public class Test {
 
 			pkt.signiture = -1;
 			pkt.push(100);
-			pkt.push(200L);
+			//pkt.push(200L);
 			pkt.push(1.0f);
 			pkt.push(2.0);
 			pkt.push("hello");
