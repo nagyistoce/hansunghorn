@@ -8,34 +8,33 @@ import java.net.SocketAddress;
 
 import SOD.Common.Packet;
 import SOD.Common.Serializer;
+import SOD.Common.ThreadEx;
 import SOD.Common.Transceiver;
 
 public class Test {
 	final static String ServerIP = "113.198.80.209";
-	final static int ServerPort = 4200; 
+	final static int ServerPort = 4207; 
 	
 	static Logable log;
 	static{
 		log = new ConsoleLog();
 	}
 	
-	public static void testTransceiver(){
-		final SocketAddress endpoint = new InetSocketAddress(ServerIP, ServerPort);
-		
+	public static void testTransceiver(){		
 		ThreadEx.invoke(null, new ActionEx() {			
 			@Override
 			public void work(Object arg) {
 				log.write("thread invoked\n");
-				Transceiver t = new Transceiver(endpoint, ServerPort);
+				Transceiver t = new Transceiver(new InetSocketAddress(ServerIP, 0), ServerPort);
 				Packet p = new Packet();
-				boolean check = t.receive(p);
-				log.write(Boolean.toString(check) + "\n");
+				InetSocketAddress sender = t.receive(p);
+				log.write(sender.getAddress().toString() + ":" + Integer.toString(sender.getPort()) + "\n");
 				log.write(p.pop());
 			}
 		});
 		
 		ThreadEx.sleep(1000);
-		Transceiver t = new Transceiver(endpoint, 0);
+		Transceiver t = new Transceiver(new InetSocketAddress(ServerIP, ServerPort));
 		Packet p = new Packet();
 		p.push("trasceiver test...\n");
 		boolean check = t.send(p);
