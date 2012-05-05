@@ -15,6 +15,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 
@@ -25,6 +27,11 @@ import org.w3c.dom.NodeList;
  * Write & read object via stream
  */
 public class Serializer {
+	final static String Tag_Packet 		= "Packet";
+	final static String Tag_Item 		= "Item";
+	final static String Name_Signiture 	= "signiture";
+	final static String Name_Type 	= "type";
+
 	byte[] readbuf;
 	
 	protected String toBase64(byte[] src){
@@ -55,14 +62,16 @@ public class Serializer {
 			throw new IllegalArgumentException();
 		
 		Document doc = XmlBuilder.createDoc();
-		Element root = doc.createElement("Packet");
+		Element root = doc.createElement(Tag_Packet);
 		Element item;
+		
+		root.setAttribute(Name_Signiture, Integer.toString(pkt.signiture));
 		
 		while(pkt.getElementCount() > 0)
 		{
 			String type = pkt.getLastElementType();
-			item = doc.createElement("Item");
-			item.setAttribute("type", type);
+			item = doc.createElement(Tag_Item);
+			item.setAttribute(Name_Type, type);
 			
 			Object data = pkt.pop();
 			if(type != Packet.DataType_ByteArray)
@@ -113,13 +122,19 @@ public class Serializer {
 //			ex.printStackTrace();
 //		}
 		Document doc = XmlBuilder.parse(src);
-		NodeList nodes = doc.getElementsByTagName("Item");
+		
+		Element root = (Element)doc.getElementsByTagName(Tag_Packet).item(0);		
+		NamedNodeMap attrs = root.getAttributes();
+		Node sign = attrs.getNamedItem(Name_Signiture);
+		pkt.signiture = Integer.parseInt(sign.getTextContent());
+		
+		NodeList nodes = doc.getElementsByTagName(Tag_Item);
 		
 		int count = nodes.getLength();
 		for(int u = 0; u < count; ++u)
 		{
 			Element el = (Element)nodes.item(u);
-			String type = el.getAttribute("type");
+			String type = el.getAttribute(Name_Type);
 			String content = el.getTextContent();
 			
 			Object obj;			

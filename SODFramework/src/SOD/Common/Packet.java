@@ -53,7 +53,7 @@ public class Packet {
 	 * 개발자가 지정한 시그니쳐로 구분하여 패킷의 용도가 결정된다. 0xff000000~0xff000004는 시스템에서 할당한
 	 * 시그니쳐이므로 개발자는 사용하면 안된다.
 	 */
-	protected int signiture = 0;
+	public int signiture = 0;
 	
 	public Packet(){
 		dataset = new LinkedList<Object>();

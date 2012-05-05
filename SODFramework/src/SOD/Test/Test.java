@@ -60,6 +60,7 @@ public class Test {
 		try {
 			int u;
 
+			pkt.signiture = -1;
 			pkt.push(100);
 			pkt.push(200L);
 			pkt.push(1.0f);
@@ -77,10 +78,14 @@ public class Test {
 
 			Serializer se = new Serializer();
 			se.serialize(output, pkt);
+			log.write("\n");
 
 			input = new ByteArrayInputStream(output.toByteArray());
 			se.deserialize(input, pkt2);
 
+			log.write(pkt.signiture);
+			log.write("\n");
+			
 			while (pkt2.getElementCount() > 0) {
 				if (!pkt2.getLastElementType()
 						.equals(Packet.DataType_ByteArray))
@@ -94,7 +99,6 @@ public class Test {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
