@@ -13,7 +13,7 @@ import javax.activation.UnsupportedDataTypeException;
 public class Packet {
 	
 	public static final String DataType_Int = "int";
-	public static final String DataType_Long = "long";
+//	public static final String DataType_Long = "long";
 	public static final String DataType_Float = "float";
 	public static final String DataType_Double = "double";
 	public static final String DataType_String = "string";
@@ -80,8 +80,8 @@ public class Packet {
 		
 		if(o instanceof Integer)
 			return DataType_Int;
-		if(o instanceof Long)
-			return DataType_Long;
+//		if(o instanceof Long)
+//			return DataType_Long;
 		if(o instanceof Float)
 			return DataType_Float;
 		if(o instanceof Double)
@@ -106,7 +106,7 @@ public class Packet {
 	public boolean push(Object obj) {
 		if(obj == null) return false;
 		if(obj instanceof Integer ||
-		   obj instanceof Long ||
+//		   obj instanceof Long ||
 		   obj instanceof Float ||
 		   obj instanceof Double ||
 		   obj instanceof String ||
