@@ -73,7 +73,7 @@ public class Packet {
 		return dataset.size();
 	}
 	
-	public String getLastElementType(){
+	public String getTopElementType(){
 		if(dataset.size() == 0)
 			return null;
 		Object o = dataset.peek();

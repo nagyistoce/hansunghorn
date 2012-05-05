@@ -69,7 +69,7 @@ public class Serializer {
 		
 		while(pkt.getElementCount() > 0)
 		{
-			String type = pkt.getLastElementType();
+			String type = pkt.getTopElementType();
 			item = doc.createElement(Tag_Item);
 			item.setAttribute(Name_Type, type);
 			

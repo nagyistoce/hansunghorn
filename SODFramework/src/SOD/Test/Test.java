@@ -86,7 +86,7 @@ public class Test {
 			log.write("\n");
 			
 			while (pkt2.getElementCount() > 0) {
-				if (!pkt2.getLastElementType()
+				if (!pkt2.getTopElementType()
 						.equals(Packet.DataType_ByteArray))
 					log.write(pkt2.pop() + "\n");
 				else {
