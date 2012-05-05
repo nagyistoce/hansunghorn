@@ -1,6 +1,8 @@
-package SOD.Test;
+package SOD.Common;
 
 import java.util.Date;
+
+import SOD.Test.ActionEx;
 
 public class ThreadEx extends Thread {
 	protected Object arg;

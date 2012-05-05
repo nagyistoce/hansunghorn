@@ -23,4 +23,9 @@ public class ServerConfig {
 	 * 서비스 이름을 지정한다.
 	 */
 	public String serviceName;
+	
+	/**
+	 * 서비스 포트를 지정한다.
+	 */
+	public int Port;
 }
