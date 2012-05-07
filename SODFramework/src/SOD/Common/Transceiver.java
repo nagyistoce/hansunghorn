@@ -14,19 +14,19 @@ import java.net.SocketException;
  * @author MB
  * Make a connection between remote point
  */
-public class Transceiver {
+public class Transceiver implements Disposable {
 	
 	public final static int TransferUnit = 0x10000;//64kb
 	
 	byte[] recvbuf;
 	Serializer serializer;
 	SocketAddress dest;
-	DatagramSocket conn;
+	DatagramSocket conn = null;
 	
 	/**
+	 * 포트를 자동할당하여 Transceiver객체 생성
 	 * dest는 null이 될 수 있음(수신 전용 Transceiver의 경우)
 	 * @param dest 목적지 주소
-	 * @param recvport 수신하는 포트 (자동 할당하려면 0 지정)
 	 */
 	public Transceiver(SocketAddress dest){
 		try {
@@ -57,9 +57,15 @@ public class Transceiver {
 		}
 	}
 	
+	public void dispose(){
+		conn.close();
+		conn = null;
+	}
+	
 	@Override
 	protected void finalize() throws Throwable {
-		conn.close();
+		if(conn != null)
+			dispose();
 	};
 	
 	/**

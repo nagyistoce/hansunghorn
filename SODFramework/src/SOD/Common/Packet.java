@@ -24,6 +24,21 @@ public class Packet {
 	*/
 	public static final int REQUEST_ACCEPT = 0xFF000010;
 	
+	/*
+	 * 서버에서 접속을 승인했음을 알려주는 패킷 시그니쳐
+	*/
+	public static final int RESPONSE_ACCEPT = 0xFF000011;
+	
+	/*
+	 * 서버가 존재하는지 알기 위해 클라이언트에서 보내는 패킷 시그니쳐
+	*/
+	public static final int REQUEST_PING = 0xFF000020;
+	
+	/*
+	 * 클라이언트에서 요청한 핑에 응답하는 패킷 시그니쳐
+	*/
+	public static final int RESPONSE_PING = 0xFF000021;
+	
 	/**
 	 * 스마트TV에서 스마트폰과 접속이 완료되고난 뒤에 스마트폰에 서비스를 실행하기위한 파일이 있는지를 확인한다. 이 때, 파일이 있는지를
 	 * 확인하기 위해 서비스의 명칭을 보내기 위한 패킷의 시그니쳐
@@ -131,6 +146,14 @@ public class Packet {
 		return dataset.poll();
 	}
 
+	/**
+	 * 패킷 객체를 재사용하기 위해 모든 내용을 제거
+	 */
+	public void clear(){
+		signiture = 0;
+		while(dataset.size() > 0)
+			dataset.poll();
+	}
 }
 
 
