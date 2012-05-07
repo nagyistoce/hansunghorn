@@ -170,21 +170,30 @@ public class AccessManagerServer {
 			@Override
 			public void work(Object arg) {
 				Packet p = new Packet();
+				Packet p2 = new Packet();
 				InetSocketAddress sender = null;
 				Tuple<Transceiver, Long> t = null;
-				while(isRunning){					
-					sender = listener.receive(p);
-					
+				Transceiver sender_t = null;
+				while(isRunning){
+					p.clear();
+					sender = listener.receive(p);					
 					switch(p.signiture){
 					case Packet.REQUEST_ACCEPT:
 						t = new Tuple<Transceiver, Long>();
 						t.item1 = new Transceiver(sender);
 						t.item2 = ThreadEx.getCurrentTime();
 						connset.put(sender.hashCode(), t);
+						sendServiceName(config.serviceName, sender.hashCode());
 						break;
 					case Packet.RESPONSE_CLIENT_ALIVE:
 						t = connset.get(sender.hashCode());
 						t.item2 = ThreadEx.getCurrentTime();
+						break;
+					case Packet.REQUEST_PING:
+						sender_t = new Transceiver(sender);
+						p2.clear();
+						p2.signiture = Packet.RESPONSE_PING;
+						sender_t.send(p2);
 						break;
 					case Packet.REQUEST_SERVICE_DATA:
 						//need to implement

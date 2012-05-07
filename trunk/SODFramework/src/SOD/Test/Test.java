@@ -10,14 +10,56 @@ import SOD.Common.Packet;
 import SOD.Common.Serializer;
 import SOD.Common.ThreadEx;
 import SOD.Common.Transceiver;
+import SOD.SmartPhone.AccessManager;
+import SOD.SmartTV.AccessManagerServer;
+import SOD.SmartTV.ConnectHandler;
+import SOD.SmartTV.ServerConfig;
+import SOD.SmartTV.ServerReceiveHandler;
 
 public class Test {
-	final static String ServerIP = "113.198.80.209";
+	final static String ServerIP = "127.0.0.1";
 	final static int ServerPort = 4207; 
 	
 	static Logable log;
+	static AccessManagerServer server; 
+	static AccessManager client;
 	static{
 		log = new ConsoleLog();
+	}
+	
+	public static void testAccessManager(){
+		
+		AccessManagerServer server = new AccessManagerServer();
+		ServerConfig conf = new ServerConfig();
+		conf.Timeout = 30000;
+		conf.Port = ServerPort;
+		conf.CheckPeriod = 4000;
+		conf.serviceName = "TestService";
+		server.setConnectHandler(new ConnectHandler() {
+			
+			@Override
+			public void onConnect(int connid) {
+				//need to implement
+				
+			}
+		});
+		server.setReceiveHandler(new ServerReceiveHandler() {
+			
+			@Override
+			public void onReceive(Packet pkt, int connid) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
+		
+		server.start(conf);
+		
+		
+		//implement of client
+		
+		
 	}
 	
 	public static void testTransceiver(){		
@@ -30,6 +72,8 @@ public class Test {
 				InetSocketAddress sender = t.receive(p);
 				log.write(sender.getAddress().toString() + ":" + Integer.toString(sender.getPort()) + "\n");
 				log.write(p.pop());
+				
+				t.dispose();
 			}
 		});
 		
@@ -40,6 +84,8 @@ public class Test {
 		boolean check = t.send(p);
 		log.write(Boolean.toString(check)+"\n");
 		log.write("sent msg...\n");
+		
+		t.dispose();
 		
 		try {
 			System.in.read();
