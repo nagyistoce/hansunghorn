@@ -22,6 +22,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -34,6 +36,9 @@ public class TVLocationManagerActivity extends MapActivity {
 	MapView map;
 	
 	TVLocationManager tvLocationManager;
+	TVLocation tvLocation;
+	
+	GeoPoint currentGp;
 	
 	class MapOverlay extends com.google.android.maps.Overlay{
 
@@ -61,9 +66,25 @@ public class TVLocationManagerActivity extends MapActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
-             
         
-        /////////  MapView  Setting...............
+        ///////// TVLocationManager init.../////////////////////////////////////////////////////////
+        tvLocationManager = new TVLocationManager();
+        
+        
+        
+        
+        //////// end TVLcationManager Setting/////////////////////////////////////////////////////
+        
+        
+        
+        ///////// TVLocation init.../////////////////////////////////////////////////////////////////
+        tvLocation = new TVLocation();
+        
+        ////////end TVLocation Setting///////////////////////////////////////////////////////////////
+        
+        
+        
+        /////////  MapView  Setting////////////////////////////////////////////////////////////////////
         map = (MapView)findViewById(R.id.map);
         map.setBuiltInZoomControls(true);
         MapController mc = map.getController();
@@ -101,23 +122,43 @@ public class TVLocationManagerActivity extends MapActivity {
         	longitude = 126.980667;
         }
         
-        GeoPoint currentGp = new GeoPoint( (int)(latitude*1E6), (int)(longitude*1E6));
+        currentGp = new GeoPoint( (int)(latitude*1E6), (int)(longitude*1E6));
         mc.animateTo(currentGp);
+        /////end... MapView Setting////////////////////////////////////////////////////////////////////////
         
-        /////end... MapView Setting
+        //////   sendGeoPointButton Setting...//////////////////////////////////////////////////////////
         
-        //////   sendGeoPointButton Setting...//////
+        Button sendGeoPointButton = (Button)findViewById(R.id.sendGeoPointButton);
+        
+        sendGeoPointButton.setOnClickListener(sendGeoPointButtonListener);
         
         
-        
+        ///// end.. sendGeoPointButton Setting//////////////////////////////////////////
         
     }
+	
+	
 
 	@Override
 	protected boolean isRouteDisplayed() {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	protected OnClickListener sendGeoPointButtonListener = new OnClickListener(){
+
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			
+			tvLocation.setLatitude(currentGp.getLatitudeE6() / 1E6 );
+			tvLocation.setLogitude(currentGp.getLongitudeE6() / 1E6);
+			
+			tvLocationManager.setTVLocation(tvLocation);
+			
+		}
+		 
+
+	};
     
     
 }
