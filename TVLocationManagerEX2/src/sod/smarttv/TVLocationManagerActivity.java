@@ -22,13 +22,18 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class TVLocationManagerActivity extends MapActivity {
     /** Called when the activity is first created. */
 	List<Overlay> listOfOverlays;
 	PinOverlay pinOverlay;
+	
+	Button sendGeoPointButton;
 	MapView map;
+	
+	TVLocationManager tvLocationManager;
 	
 	class MapOverlay extends com.google.android.maps.Overlay{
 
@@ -56,7 +61,9 @@ public class TVLocationManagerActivity extends MapActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
+             
         
+        /////////  MapView  Setting...............
         map = (MapView)findViewById(R.id.map);
         map.setBuiltInZoomControls(true);
         MapController mc = map.getController();
@@ -67,6 +74,7 @@ public class TVLocationManagerActivity extends MapActivity {
         Drawable drawable = getResources().getDrawable(R.drawable.ic_launcher);
         pinOverlay = new PinOverlay(drawable, this);
         
+        //pin.. init..
         OverlayItem overlayItem=
         		new OverlayItem(new GeoPoint(37566535, 126977969),
         				"서울시청", "서울시청입니다");
@@ -93,8 +101,14 @@ public class TVLocationManagerActivity extends MapActivity {
         	longitude = 126.980667;
         }
         
-        GeoPoint p = new GeoPoint( (int)(latitude*1E6), (int)(longitude*1E6));
-        mc.animateTo(p);
+        GeoPoint currentGp = new GeoPoint( (int)(latitude*1E6), (int)(longitude*1E6));
+        mc.animateTo(currentGp);
+        
+        /////end... MapView Setting
+        
+        //////   sendGeoPointButton Setting...//////
+        
+        
         
         
     }
