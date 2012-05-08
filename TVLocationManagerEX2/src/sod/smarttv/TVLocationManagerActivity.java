@@ -87,8 +87,8 @@ public class TVLocationManagerActivity extends MapActivity {
         /////////  MapView  Setting////////////////////////////////////////////////////////////////////
         map = (MapView)findViewById(R.id.map);
         map.setBuiltInZoomControls(true);
-        MapController mc = map.getController();
-        mc.setZoom(10);
+        MapController mapController = map.getController();
+        mapController.setZoom(10);
         
         listOfOverlays = map.getOverlays();
         
@@ -123,7 +123,7 @@ public class TVLocationManagerActivity extends MapActivity {
         }
         
         currentGp = new GeoPoint( (int)(latitude*1E6), (int)(longitude*1E6));
-        mc.animateTo(currentGp);
+        mapController.animateTo(currentGp);
         /////end... MapView Setting////////////////////////////////////////////////////////////////////////
         
         //////   sendGeoPointButton Setting...//////////////////////////////////////////////////////////
