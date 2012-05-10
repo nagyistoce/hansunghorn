@@ -259,7 +259,7 @@ public class Storage {
 		
 		//이미존재하면 IOException을 던진다.
 		if( file.exists() )
-			new IOException();
+			throw new IOException();
 		
 		StorageFile returnStorageFile = new StorageFile(file);
 	
