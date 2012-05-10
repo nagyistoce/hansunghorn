@@ -12,10 +12,6 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
 import sod.test.smarttv.R;
-import sod.test.smarttv.R.drawable;
-import sod.test.smarttv.R.id;
-import sod.test.smarttv.R.layout;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
