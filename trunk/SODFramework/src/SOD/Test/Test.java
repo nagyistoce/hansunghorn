@@ -5,20 +5,24 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
+import java.net.SocketException;
 
 import SOD.Common.Packet;
+import SOD.Common.ReceiveHandler;
 import SOD.Common.Serializer;
 import SOD.Common.ThreadEx;
 import SOD.Common.Transceiver;
 import SOD.SmartPhone.AccessManager;
+import SOD.SmartPhone.ServerInfo;
 import SOD.SmartTV.AccessManagerServer;
 import SOD.SmartTV.ConnectHandler;
+import SOD.SmartTV.DisconnectHandler;
 import SOD.SmartTV.ServerConfig;
 import SOD.SmartTV.ServerReceiveHandler;
 
 public class Test {
 	final static String ServerIP = "127.0.0.1";
-	final static int ServerPort = 4207; 
+	final static int ServerPort = 3201; 
 	
 	static Logable log;
 	static AccessManagerServer server; 
@@ -29,37 +33,66 @@ public class Test {
 	
 	public static void testAccessManager(){
 		
-		AccessManagerServer server = new AccessManagerServer();
+		//server side
+		server = new AccessManagerServer();
 		ServerConfig conf = new ServerConfig();
 		conf.Timeout = 30000;
 		conf.Port = ServerPort;
 		conf.CheckPeriod = 4000;
 		conf.serviceName = "TestService";
-		server.setConnectHandler(new ConnectHandler() {
-			
+		server.setConnectHandler(new ConnectHandler() {			
 			@Override
 			public void onConnect(int connid) {
-				//need to implement
-				
+				log.write("(server): new connection is accepted - " + connid + "\n");				
 			}
 		});
-		server.setReceiveHandler(new ServerReceiveHandler() {
+		server.setDisconnectHandler(new DisconnectHandler() {
 			
 			@Override
-			public void onReceive(Packet pkt, int connid) {
-				// TODO Auto-generated method stub
-				
+			public void onDisconnect(int connid) {
+				log.write("(server): client is disconnected - " + connid + "\n");				
 			}
 		});
-		
-		
-		
+		server.setReceiveHandler(new ServerReceiveHandler() {			
+			@Override
+			public void onReceive(Packet pkt, int connid) {
+				log.write("(server): a packet from client - " + connid + "\n");
+				server.send(pkt, connid);
+			}
+		});
 		server.start(conf);
 		
+		//client side
+		client = new AccessManager();
+		ServerInfo svinfo = new ServerInfo();
+		svinfo.EndPoint = new InetSocketAddress(ServerIP, ServerPort);
+		client.setReceiveHandler(new ReceiveHandler() {			
+			@Override
+			public void onReceive(Packet pkt) {
+				log.write("(client): a packet from server" + (String)pkt.pop() + "\n");
+			}
+		});
+
+		client.connect(svinfo);
 		
-		//implement of client
+		Packet pkt = new Packet();
+		pkt.signiture = 1;
+		pkt.push("a string on packet");
+		client.send(pkt);
 		
+		//end of test		
+		ThreadEx.sleep(1000);
+		log.write("press any key...\n");
+		try {
+			System.in.read();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
+		client.dispose();
+		server.shutdown();
+		
+		log.write("finishing test...\n");
 	}
 	
 	public static void testTransceiver(){		
