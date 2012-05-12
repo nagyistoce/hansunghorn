@@ -71,6 +71,7 @@ public class AccessManagerServer {
 		
 		isRunning = false;
 		connset.clear();
+		listener.dispose();
 	}
 
 	/**
@@ -169,7 +170,8 @@ public class AccessManagerServer {
 				
 				while(isRunning){
 					p.clear();
-					sender = listener.receive(p);	
+					sender = listener.receive(p);
+					if(sender == null) continue;
 					
 					switch(p.signiture){
 					case Packet.REQUEST_ACCEPT:

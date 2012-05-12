@@ -22,7 +22,7 @@ import SOD.SmartTV.ServerReceiveHandler;
 
 public class Test {
 	final static String ServerIP = "127.0.0.1";
-	final static int ServerPort = 3201; 
+	final static int ServerPort = 3202; 
 	
 	static Logable log;
 	static AccessManagerServer server; 
@@ -69,7 +69,7 @@ public class Test {
 		client.setReceiveHandler(new ReceiveHandler() {			
 			@Override
 			public void onReceive(Packet pkt) {
-				log.write("(client): a packet from server" + (String)pkt.pop() + "\n");
+				log.write("(client): a packet from server - " + (String)pkt.pop() + "\n");
 			}
 		});
 

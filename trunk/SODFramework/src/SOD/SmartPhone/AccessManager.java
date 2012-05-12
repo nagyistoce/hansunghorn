@@ -58,6 +58,7 @@ public class AccessManager implements Disposable {
 	 */
 	public void dispose(){
 		isRunning = false;
+		conn.dispose();
 	}
 
 	/**
@@ -91,13 +92,15 @@ public class AccessManager implements Disposable {
 			
 			@Override
 			public void work(Object arg) {
+				InetSocketAddress sender = null;
 				Packet p = new Packet();
 				Packet p_check = new Packet();
 				p_check.signiture = Packet.RESPONSE_CLIENT_ALIVE;
 
 				while(isRunning){
 					p.clear();
-					conn.receive(p);
+					sender = conn.receive(p);
+					if(sender == null) continue;
 					
 					switch(p.signiture){
 					case Packet.RESPONSE_ACCEPT:
