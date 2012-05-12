@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		64078B3B155E86AB002FAA13 /* SODSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 64078B36155E86AB002FAA13 /* SODSerializer.m */; };
+		64078B3C155E86AB002FAA13 /* SODXmlToPacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 64078B38155E86AB002FAA13 /* SODXmlToPacketParser.m */; };
+		64078B3D155E86AB002FAA13 /* SODPacketToXmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 64078B3A155E86AB002FAA13 /* SODPacketToXmlParser.m */; };
+		64078B40155E86BE002FAA13 /* SODPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 64078B3F155E86BE002FAA13 /* SODPacket.m */; };
+		644215AC1547A68B007D912A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 644215AB1547A68B007D912A /* UIKit.framework */; };
+		644215AE1547A68B007D912A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 644215AD1547A68B007D912A /* Foundation.framework */; };
+		644215B01547A68B007D912A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 644215AF1547A68B007D912A /* CoreGraphics.framework */; };
+		644215B61547A68B007D912A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 644215B41547A68B007D912A /* InfoPlist.strings */; };
+		644215B81547A68B007D912A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 644215B71547A68B007D912A /* main.m */; };
+		644215BC1547A68B007D912A /* SODAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 644215BB1547A68B007D912A /* SODAppDelegate.m */; };
+		644215BF1547A68B007D912A /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 644215BD1547A68B007D912A /* MainStoryboard_iPhone.storyboard */; };
+		644215C21547A68B007D912A /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 644215C01547A68B007D912A /* MainStoryboard_iPad.storyboard */; };
+		644215C51547A68B007D912A /* SODViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 644215C41547A68B007D912A /* SODViewController.m */; };
+		644215CD1547A68B007D912A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 644215CC1547A68B007D912A /* SenTestingKit.framework */; };
+		644215CE1547A68B007D912A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 644215AB1547A68B007D912A /* UIKit.framework */; };
+		644215CF1547A68B007D912A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 644215AD1547A68B007D912A /* Foundation.framework */; };
+		644215D71547A68B007D912A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 644215D51547A68B007D912A /* InfoPlist.strings */; };
+		644215DA1547A68B007D912A /* SOD_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 644215D91547A68B007D912A /* SOD_iOSTests.m */; };
+		644215E81547B096007D912A /* SOD_ICON.png in Resources */ = {isa = PBXBuildFile; fileRef = 644215E71547B096007D912A /* SOD_ICON.png */; };
+		64A46C711553C15100F8463F /* SODTransceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 64A46C701553C15100F8463F /* SODTransceiver.m */; };
+		64ADC1281550EC2B004BE51F /* SODAccessManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 64ADC1271550EC2B004BE51F /* SODAccessManager.m */; };
+		64ADC12C1550ED16004BE51F /* SODServerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 64ADC12B1550ED16004BE51F /* SODServerInfo.m */; };
+		64ADC13A15526AEA004BE51F /* SODTVListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64ADC13915526AEA004BE51F /* SODTVListViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		644215D01547A68B007D912A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6442159E1547A68B007D912A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 644215A61547A68B007D912A;
+			remoteInfo = SOD.iOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		64078B35155E86AB002FAA13 /* SODSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODSerializer.h; sourceTree = "<group>"; };
+		64078B36155E86AB002FAA13 /* SODSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODSerializer.m; sourceTree = "<group>"; };
+		64078B37155E86AB002FAA13 /* SODXmlToPacketParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODXmlToPacketParser.h; sourceTree = "<group>"; };
+		64078B38155E86AB002FAA13 /* SODXmlToPacketParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODXmlToPacketParser.m; sourceTree = "<group>"; };
+		64078B39155E86AB002FAA13 /* SODPacketToXmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODPacketToXmlParser.h; sourceTree = "<group>"; };
+		64078B3A155E86AB002FAA13 /* SODPacketToXmlParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODPacketToXmlParser.m; sourceTree = "<group>"; };
+		64078B3E155E86BE002FAA13 /* SODPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODPacket.h; sourceTree = "<group>"; };
+		64078B3F155E86BE002FAA13 /* SODPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODPacket.m; sourceTree = "<group>"; };
+		644215A71547A68B007D912A /* SOD.iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SOD.iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		644215AB1547A68B007D912A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		644215AD1547A68B007D912A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		644215AF1547A68B007D912A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		644215B31547A68B007D912A /* SOD.iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SOD.iOS-Info.plist"; sourceTree = "<group>"; };
+		644215B51547A68B007D912A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		644215B71547A68B007D912A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		644215B91547A68B007D912A /* SOD.iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SOD.iOS-Prefix.pch"; sourceTree = "<group>"; };
+		644215BA1547A68B007D912A /* SODAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SODAppDelegate.h; sourceTree = "<group>"; };
+		644215BB1547A68B007D912A /* SODAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SODAppDelegate.m; sourceTree = "<group>"; };
+		644215BE1547A68B007D912A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		644215C11547A68B007D912A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		644215C31547A68B007D912A /* SODViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SODViewController.h; sourceTree = "<group>"; };
+		644215C41547A68B007D912A /* SODViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SODViewController.m; sourceTree = "<group>"; };
+		644215CB1547A68B007D912A /* SOD.iOSTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SOD.iOSTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		644215CC1547A68B007D912A /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		644215D41547A68B007D912A /* SOD.iOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SOD.iOSTests-Info.plist"; sourceTree = "<group>"; };
+		644215D61547A68B007D912A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		644215D81547A68B007D912A /* SOD_iOSTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOD_iOSTests.h; sourceTree = "<group>"; };
+		644215D91547A68B007D912A /* SOD_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOD_iOSTests.m; sourceTree = "<group>"; };
+		644215E71547B096007D912A /* SOD_ICON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SOD_ICON.png; path = ../SOD_ICON.png; sourceTree = "<group>"; };
+		64A46C6F1553C15100F8463F /* SODTransceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODTransceiver.h; sourceTree = "<group>"; };
+		64A46C701553C15100F8463F /* SODTransceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODTransceiver.m; sourceTree = "<group>"; };
+		64ADC1261550EC2B004BE51F /* SODAccessManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODAccessManager.h; sourceTree = "<group>"; };
+		64ADC1271550EC2B004BE51F /* SODAccessManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODAccessManager.m; sourceTree = "<group>"; };
+		64ADC12A1550ED16004BE51F /* SODServerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODServerInfo.h; sourceTree = "<group>"; };
+		64ADC12B1550ED16004BE51F /* SODServerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODServerInfo.m; sourceTree = "<group>"; };
+		64ADC13815526AEA004BE51F /* SODTVListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODTVListViewController.h; sourceTree = "<group>"; };
+		64ADC13915526AEA004BE51F /* SODTVListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODTVListViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		644215A41547A68B007D912A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				644215AC1547A68B007D912A /* UIKit.framework in Frameworks */,
+				644215AE1547A68B007D912A /* Foundation.framework in Frameworks */,
+				644215B01547A68B007D912A /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		644215C71547A68B007D912A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				644215CD1547A68B007D912A /* SenTestingKit.framework in Frameworks */,
+				644215CE1547A68B007D912A /* UIKit.framework in Frameworks */,
+				644215CF1547A68B007D912A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6442159C1547A68B007D912A = {
+			isa = PBXGroup;
+			children = (
+				644215B11547A68B007D912A /* SOD.iOS */,
+				644215D21547A68B007D912A /* SOD.iOSTests */,
+				644215AA1547A68B007D912A /* Frameworks */,
+				644215A81547A68B007D912A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		644215A81547A68B007D912A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				644215A71547A68B007D912A /* SOD.iOS.app */,
+				644215CB1547A68B007D912A /* SOD.iOSTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		644215AA1547A68B007D912A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				644215AB1547A68B007D912A /* UIKit.framework */,
+				644215AD1547A68B007D912A /* Foundation.framework */,
+				644215AF1547A68B007D912A /* CoreGraphics.framework */,
+				644215CC1547A68B007D912A /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		644215B11547A68B007D912A /* SOD.iOS */ = {
+			isa = PBXGroup;
+			children = (
+				64A46C5D1553902900F8463F /* ViewController */,
+				644215EB1547B0B4007D912A /* PHONE */,
+				644215EA1547B0A6007D912A /* COMMON */,
+				644215EC1547B0BF007D912A /* IMANGE */,
+				644215BA1547A68B007D912A /* SODAppDelegate.h */,
+				644215BB1547A68B007D912A /* SODAppDelegate.m */,
+				644215BD1547A68B007D912A /* MainStoryboard_iPhone.storyboard */,
+				644215C01547A68B007D912A /* MainStoryboard_iPad.storyboard */,
+				644215B21547A68B007D912A /* Supporting Files */,
+			);
+			path = SOD.iOS;
+			sourceTree = "<group>";
+		};
+		644215B21547A68B007D912A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				644215B31547A68B007D912A /* SOD.iOS-Info.plist */,
+				644215B41547A68B007D912A /* InfoPlist.strings */,
+				644215B71547A68B007D912A /* main.m */,
+				644215B91547A68B007D912A /* SOD.iOS-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		644215D21547A68B007D912A /* SOD.iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				644215D81547A68B007D912A /* SOD_iOSTests.h */,
+				644215D91547A68B007D912A /* SOD_iOSTests.m */,
+				644215D31547A68B007D912A /* Supporting Files */,
+			);
+			path = SOD.iOSTests;
+			sourceTree = "<group>";
+		};
+		644215D31547A68B007D912A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				644215D41547A68B007D912A /* SOD.iOSTests-Info.plist */,
+				644215D51547A68B007D912A /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		644215EA1547B0A6007D912A /* COMMON */ = {
+			isa = PBXGroup;
+			children = (
+				644215EF1547B3BB007D912A /* Controller */,
+				644215ED1547B39B007D912A /* Model */,
+			);
+			name = COMMON;
+			sourceTree = "<group>";
+		};
+		644215EB1547B0B4007D912A /* PHONE */ = {
+			isa = PBXGroup;
+			children = (
+				644215F01547B3C5007D912A /* Controller */,
+				644215EE1547B3B3007D912A /* Model */,
+			);
+			name = PHONE;
+			sourceTree = "<group>";
+		};
+		644215EC1547B0BF007D912A /* IMANGE */ = {
+			isa = PBXGroup;
+			children = (
+				644215E71547B096007D912A /* SOD_ICON.png */,
+			);
+			name = IMANGE;
+			sourceTree = "<group>";
+		};
+		644215ED1547B39B007D912A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				64078B3E155E86BE002FAA13 /* SODPacket.h */,
+				64078B3F155E86BE002FAA13 /* SODPacket.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		644215EE1547B3B3007D912A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				64ADC12A1550ED16004BE51F /* SODServerInfo.h */,
+				64ADC12B1550ED16004BE51F /* SODServerInfo.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		644215EF1547B3BB007D912A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				64E7DB981555280000F15753 /* SODSerializer */,
+				64A46C6F1553C15100F8463F /* SODTransceiver.h */,
+				64A46C701553C15100F8463F /* SODTransceiver.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		644215F01547B3C5007D912A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				64ADC1261550EC2B004BE51F /* SODAccessManager.h */,
+				64ADC1271550EC2B004BE51F /* SODAccessManager.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		64A46C5D1553902900F8463F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				644215C31547A68B007D912A /* SODViewController.h */,
+				644215C41547A68B007D912A /* SODViewController.m */,
+				64ADC13815526AEA004BE51F /* SODTVListViewController.h */,
+				64ADC13915526AEA004BE51F /* SODTVListViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		64E7DB981555280000F15753 /* SODSerializer */ = {
+			isa = PBXGroup;
+			children = (
+				64078B35155E86AB002FAA13 /* SODSerializer.h */,
+				64078B36155E86AB002FAA13 /* SODSerializer.m */,
+				64078B37155E86AB002FAA13 /* SODXmlToPacketParser.h */,
+				64078B38155E86AB002FAA13 /* SODXmlToPacketParser.m */,
+				64078B39155E86AB002FAA13 /* SODPacketToXmlParser.h */,
+				64078B3A155E86AB002FAA13 /* SODPacketToXmlParser.m */,
+			);
+			name = SODSerializer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		644215A61547A68B007D912A /* SOD.iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 644215DD1547A68B007D912A /* Build configuration list for PBXNativeTarget "SOD.iOS" */;
+			buildPhases = (
+				644215A31547A68B007D912A /* Sources */,
+				644215A41547A68B007D912A /* Frameworks */,
+				644215A51547A68B007D912A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SOD.iOS;
+			productName = SOD.iOS;
+			productReference = 644215A71547A68B007D912A /* SOD.iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		644215CA1547A68B007D912A /* SOD.iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 644215E01547A68B007D912A /* Build configuration list for PBXNativeTarget "SOD.iOSTests" */;
+			buildPhases = (
+				644215C61547A68B007D912A /* Sources */,
+				644215C71547A68B007D912A /* Frameworks */,
+				644215C81547A68B007D912A /* Resources */,
+				644215C91547A68B007D912A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				644215D11547A68B007D912A /* PBXTargetDependency */,
+			);
+			name = SOD.iOSTests;
+			productName = SOD.iOSTests;
+			productReference = 644215CB1547A68B007D912A /* SOD.iOSTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6442159E1547A68B007D912A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SOD;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 644215A11547A68B007D912A /* Build configuration list for PBXProject "SOD.iOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6442159C1547A68B007D912A;
+			productRefGroup = 644215A81547A68B007D912A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				644215A61547A68B007D912A /* SOD.iOS */,
+				644215CA1547A68B007D912A /* SOD.iOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		644215A51547A68B007D912A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				644215B61547A68B007D912A /* InfoPlist.strings in Resources */,
+				644215BF1547A68B007D912A /* MainStoryboard_iPhone.storyboard in Resources */,
+				644215C21547A68B007D912A /* MainStoryboard_iPad.storyboard in Resources */,
+				644215E81547B096007D912A /* SOD_ICON.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		644215C81547A68B007D912A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				644215D71547A68B007D912A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		644215C91547A68B007D912A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		644215A31547A68B007D912A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				644215B81547A68B007D912A /* main.m in Sources */,
+				644215BC1547A68B007D912A /* SODAppDelegate.m in Sources */,
+				644215C51547A68B007D912A /* SODViewController.m in Sources */,
+				64ADC1281550EC2B004BE51F /* SODAccessManager.m in Sources */,
+				64ADC12C1550ED16004BE51F /* SODServerInfo.m in Sources */,
+				64ADC13A15526AEA004BE51F /* SODTVListViewController.m in Sources */,
+				64A46C711553C15100F8463F /* SODTransceiver.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		644215C61547A68B007D912A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				644215DA1547A68B007D912A /* SOD_iOSTests.m in Sources */,
+				64078B3B155E86AB002FAA13 /* SODSerializer.m in Sources */,
+				64078B3C155E86AB002FAA13 /* SODXmlToPacketParser.m in Sources */,
+				64078B3D155E86AB002FAA13 /* SODPacketToXmlParser.m in Sources */,
+				64078B40155E86BE002FAA13 /* SODPacket.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		644215D11547A68B007D912A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 644215A61547A68B007D912A /* SOD.iOS */;
+			targetProxy = 644215D01547A68B007D912A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		644215B41547A68B007D912A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				644215B51547A68B007D912A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		644215BD1547A68B007D912A /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				644215BE1547A68B007D912A /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		644215C01547A68B007D912A /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				644215C11547A68B007D912A /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		644215D51547A68B007D912A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				644215D61547A68B007D912A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		644215DB1547A68B007D912A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		644215DC1547A68B007D912A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		644215DE1547A68B007D912A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SOD.iOS/SOD.iOS-Prefix.pch";
+				INFOPLIST_FILE = "SOD.iOS/SOD.iOS-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		644215DF1547A68B007D912A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SOD.iOS/SOD.iOS-Prefix.pch";
+				INFOPLIST_FILE = "SOD.iOS/SOD.iOS-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		644215E11547A68B007D912A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SOD.iOS.app/SOD.iOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SOD.iOS/SOD.iOS-Prefix.pch";
+				INFOPLIST_FILE = "SOD.iOSTests/SOD.iOSTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		644215E21547A68B007D912A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SOD.iOS.app/SOD.iOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SOD.iOS/SOD.iOS-Prefix.pch";
+				INFOPLIST_FILE = "SOD.iOSTests/SOD.iOSTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		644215A11547A68B007D912A /* Build configuration list for PBXProject "SOD.iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				644215DB1547A68B007D912A /* Debug */,
+				644215DC1547A68B007D912A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		644215DD1547A68B007D912A /* Build configuration list for PBXNativeTarget "SOD.iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				644215DE1547A68B007D912A /* Debug */,
+				644215DF1547A68B007D912A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		644215E01547A68B007D912A /* Build configuration list for PBXNativeTarget "SOD.iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				644215E11547A68B007D912A /* Debug */,
+				644215E21547A68B007D912A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6442159E1547A68B007D912A /* Project object */;
+}
