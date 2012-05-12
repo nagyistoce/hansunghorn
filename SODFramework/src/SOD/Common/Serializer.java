@@ -121,7 +121,16 @@ public class Serializer {
 //			// TODO Auto-generated catch block
 //			ex.printStackTrace();
 //		}
-		Document doc = XmlBuilder.parse(src);
+		
+		Document doc;
+		try {
+			doc = XmlBuilder.parse(src);
+		} catch (Exception ex) {
+			return;
+		}
+		if (doc == null)
+			return;
+		
 		
 		Element root = (Element)doc.getElementsByTagName(Tag_Packet).item(0);		
 		NamedNodeMap attrs = root.getAttributes();

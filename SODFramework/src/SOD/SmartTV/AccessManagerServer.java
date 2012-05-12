@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.jws.Oneway;
+
 import SOD.Common.Packet;
 import SOD.Common.ReceiveHandler;
 import SOD.Common.ThreadEx;
@@ -54,7 +56,8 @@ public class AccessManagerServer {
 		listener = new Transceiver(null, conf.Port);
 		
 		beginListening();
-		beginCheckingConnection();		
+		//beginCheckingConnection();
+		isRunning = true;
 	}
 
 	/**
@@ -125,25 +128,14 @@ public class AccessManagerServer {
 	 * 데이터를 담은 패킷
 	 * @param connid
 	 * Transceiver 객체를 가르키는 id
-	 * @throws IllegalArgumentException
-	 * pkt이 null이거나 connid가 유효하지 않은 경우 발생
-	 * @throws IllegalStateException
-	 * start()를 호출하기 전에 호출되었을 경우 발생
-	 * @throws SocketException
-	 * 내부 Transceiver 객체 에서 예외가 발생시 전달
 	 */
-	public void send(Packet pkt, int connid) throws IllegalArgumentException, IllegalStateException, SocketException{
-		if(!isRunning) throw new IllegalStateException("server is not running.");
-		
-		if(pkt == null) 
-			throw new IllegalArgumentException("argument pkt should not be null.");
-		if(!connset.containsKey(connid))
-			throw new IllegalArgumentException("connid is not valid.");
+	public boolean send(Packet pkt, int connid){
+		if(!isRunning) return false;		
+		if(pkt == null) return false;
+		if(!connset.containsKey(connid)) return false;
 		
 		Transceiver t = connset.get(connid).item1;
-		boolean result = t.send(pkt);
-		if(result == false)
-			 throw new SocketException();
+		return t.send(pkt);
 	}
 
 	/**
@@ -174,9 +166,11 @@ public class AccessManagerServer {
 				InetSocketAddress sender = null;
 				Tuple<Transceiver, Long> t = null;
 				Transceiver sender_t = null;
+				
 				while(isRunning){
 					p.clear();
-					sender = listener.receive(p);					
+					sender = listener.receive(p);	
+					
 					switch(p.signiture){
 					case Packet.REQUEST_ACCEPT:
 						t = new Tuple<Transceiver, Long>();
@@ -184,6 +178,7 @@ public class AccessManagerServer {
 						t.item2 = ThreadEx.getCurrentTime();
 						connset.put(sender.hashCode(), t);
 						sendServiceName(config.serviceName, sender.hashCode());
+						cb_conn.onConnect(sender.hashCode());
 						break;
 					case Packet.RESPONSE_CLIENT_ALIVE:
 						t = connset.get(sender.hashCode());

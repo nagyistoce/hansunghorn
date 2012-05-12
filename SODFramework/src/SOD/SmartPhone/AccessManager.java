@@ -74,8 +74,9 @@ public class AccessManager implements Disposable {
 	 * @param pkt
 	 * 보낼 데이터를 담은 패킷
 	 */
-	public void send(Packet pkt){
-		conn.send(pkt);
+	public boolean send(Packet pkt){
+		if(pkt == null) return false;
+		return conn.send(pkt);
 	}
 	
 	public boolean isConnected(){
@@ -93,9 +94,11 @@ public class AccessManager implements Disposable {
 				Packet p = new Packet();
 				Packet p_check = new Packet();
 				p_check.signiture = Packet.RESPONSE_CLIENT_ALIVE;
-				
-				while(isRunning){					
-					conn.receive(p);					
+
+				while(isRunning){
+					p.clear();
+					conn.receive(p);
+					
 					switch(p.signiture){
 					case Packet.RESPONSE_ACCEPT:
 						isConnected = true;
