@@ -1,6 +1,9 @@
 package SOD.SmartPhone;
 
 import java.net.InetSocketAddress;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import SOD.Common.Disposable;
 import SOD.Common.Packet;
@@ -44,12 +47,60 @@ public class AccessManager implements Disposable {
 
 	/**
 	 * 같은 와이파이에 있는 서버를 찾아 목록을 반환
-	 * @return
-	 * 발견된 서버 목록
-	 */
-	public ServerInfo[] searchServer(){
-		//아직 미구현
-		return null;
+	 * 콜백으로 넘겨주는 인자가 null이면 탐색의 마지막에 도달함을 의미함.
+	 * (아직 구현 완성이 아님. 콜백 raise부분과 서버측 응답 처리 미완성)
+	 */	
+	
+	public static void searchServer(SearchCallBack cb){
+		
+		ThreadEx.invoke(cb, new ActionEx() {			
+			@Override
+			public void work(Object arg) {
+				SearchCallBack _cb = (SearchCallBack)arg;
+				Queue<Transceiver> list = new LinkedList<Transceiver>();
+				
+				Packet p = new Packet();
+				p.signiture = Packet.REQUEST_PING;
+				for(int u = 0; u < 0xFF; ++u){
+					Transceiver t = new Transceiver(null);
+					t.send(p);
+					list.offer(t);
+					
+					ThreadEx.invoke(new Object[]{t, _cb}, new ActionEx() {
+						@Override
+						public void work(Object arg) {
+							Object[] args = (Object[])arg;
+							Transceiver _t = (Transceiver)args[0];
+							SearchCallBack __cb = (SearchCallBack)args[1];
+							
+							Packet _p = new Packet();
+							Object result = _t.receive(_p);
+
+							if(result != null)
+							{
+								//not implemented yet
+								//need to raise cb;
+							}
+						}
+					});
+					
+					ThreadEx.sleep(100);
+				}
+				
+				//turn-around limit time
+				ThreadEx.sleep(4000);
+				
+				while(list.size() > 0){
+					Transceiver t = list.poll();
+					t.dispose();
+					ThreadEx.sleep(100);
+				}				
+				
+				//end of search
+				_cb.onSearch(null);
+			}
+		});
+		
 	}
 
 	/**
@@ -124,3 +175,4 @@ public class AccessManager implements Disposable {
 	}
 
 }
+

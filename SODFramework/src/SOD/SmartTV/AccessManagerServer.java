@@ -190,6 +190,8 @@ public class AccessManagerServer {
 						sender_t = new Transceiver(sender);
 						p2.clear();
 						p2.signiture = Packet.RESPONSE_PING;
+						//put additional information of this server.
+						//
 						sender_t.send(p2);
 						break;
 					case Packet.REQUEST_SERVICE_DATA:
