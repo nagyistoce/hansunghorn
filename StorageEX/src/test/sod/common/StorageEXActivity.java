@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import sod.common.Storage;
+import sod.common.StorageFile;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -35,13 +36,23 @@ public class StorageEXActivity extends Activity {
 			
 			editText3.setText(str);
 			*/
+			
+			StorageFile storageFile = storage.openFile("ex.txt"); //
+			
+			String str1 = "MyLifeForIu";
+			storageFile.write(str1.getBytes());
+			storageFile.close();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			editText.setText("IOException");
 		} catch(IllegalArgumentException e){
-			editText.setText("IllegalArgumentException");
+			editText.setText("IllegalArgumentException");;
+		}catch(NullPointerException e){
+			editText3.setText("NullPointerException");;
 		}
         
+        /*
         try {
 			storage.renameFile("b.txt", "iu.txt");
 		} catch (FileNotFoundException e) {
@@ -51,6 +62,8 @@ public class StorageEXActivity extends Activity {
 			// TODO Auto-generated catch block
 			editText3.setText("NullPointerException");
 		}
+        
+        */
         
         /*
         if(storage.checkIsFileExists("a.txt"))

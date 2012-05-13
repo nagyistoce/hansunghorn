@@ -228,15 +228,17 @@ public class Storage {
 	 * 열고자하는 파일이 없을 때, FileNotFoundException을 던진다.
 	 * @throws NullPointerException
 	 * fileName이 null이래서 파일객체 자체 생성에 실패하면 NullPointerException을 던진다.
+	 * @throw IOException
+	 * StorageFile 객체 생성에 실패하면 IOException을 던진다.
 	 */
-	public StorageFile openFile(String filePath) throws FileNotFoundException, NullPointerException{
+	public StorageFile openFile(String filePath) throws FileNotFoundException, NullPointerException, IOException{
 		File file = new File(directory, filePath);
 		
 		//존재하지 않으면 FileNotFoundException을 던진다.
 		if( !file.exists() )
 			throw new FileNotFoundException();
 		
-		StorageFile returnStorageFile = new StorageFile(file);
+		StorageFile returnStorageFile = StorageFile.getStorageFile(file);
 	
 		return returnStorageFile;
 	}
@@ -249,7 +251,7 @@ public class Storage {
 	 * @return
 	 * 새로 생성된 파일
 	 * @throws IOException
-	 * 이미 동명의 파일이 존재하거나 파일을 만드는데 실패 했을 경우에 IOException을 날린다.
+	 * 이미 동명의 파일이 존재하거나 파일을 만드는데 실패(StrageFile 객체 생성 실패) 했을 경우에 IOException을 날린다. 
 	 * @throws NullPointerException
 	 * fileName이 null이래서 파일객체 자체 생성에 실패하면 NullPointerException을 던진다.
 	 */
@@ -261,11 +263,9 @@ public class Storage {
 		if( file.exists() )
 			throw new IOException();
 		
-		StorageFile returnStorageFile = new StorageFile(file);
+		StorageFile returnStorageFile = StorageFile.createStorageFile(file);
 	
 		return returnStorageFile;
-		
-		
 	}
 	
 	/**
