@@ -16,16 +16,16 @@ public class TVManagerLoGo extends Activity {
       
         requestWindowFeature(Window.FEATURE_NO_TITLE);
        
-        setContentView(R.layout.main);
+        setContentView(R.layout.logo);
         
         Handler x = new Handler();
         x.postDelayed(new splashhandler(), 300); 
     } 
 
-    
+     
     class splashhandler implements Runnable {
         public void run() {
-            Intent intent = new Intent(TVManagerLoGo.this,QuestionnaireSetting.class);
+            Intent intent = new Intent(TVManagerLoGo.this,AnA_BootMode.class);
             startActivity(intent);
             finish();
         }        

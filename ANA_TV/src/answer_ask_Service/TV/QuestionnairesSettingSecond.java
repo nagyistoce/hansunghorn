@@ -8,7 +8,9 @@ import java.net.SocketException;
 
 import SOD.Common.Packet;
 import SOD.Common.Transceiver;
+
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +19,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-public class QuestionnairesMain extends Activity implements DataSturct {
+public class QuestionnairesSettingSecond extends Activity implements DataSturct {
 
 	private static final int LOCAL_PORT = 30331;
 	private static final String PHONE_IP = "192.168.0.10";
@@ -25,10 +27,16 @@ public class QuestionnairesMain extends Activity implements DataSturct {
 	private EditText topic, question;
 	private Button Fileadd, questionAdd, complete;
 	private RadioButton long_answer, short_answer;
-
 	private Packet packet = null;
 	private Transceiver transceiver;
+	ProgressDialog dialog;
+	//final String[] 
+	private void DialogProgress(){
+	
+	      // 창을 내린다.
+	      
 
+	}
 	public void ButtonEvent() {
 		questionAdd.setOnClickListener(new OnClickListener() {
 
@@ -37,10 +45,14 @@ public class QuestionnairesMain extends Activity implements DataSturct {
 						+ topic.getText() + SEPARATOR + "Answer" + SEPARATOR
 						+ question.getText());
 				topic.setEnabled(false);
+				question.setText("");
+				question.setFocusable(true);
 			}
 		});
 		complete.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
+				//dialog  = ProgressDialog.show(QuestionnairesSettingSecond.this, "","잠시만 기다려 주세요 ...", true);
+				
 				vector.add(SEPARATOR + "Topic" + SEPARATOR
 						+ topic.getText() + SEPARATOR + "Answer" + SEPARATOR
 						+ question.getText());
@@ -52,10 +64,13 @@ public class QuestionnairesMain extends Activity implements DataSturct {
 
 				}
 				transceiver.send(packet);
-
+				//try{Thread.sleep(1000);dialog.dismiss();}catch(Exception e){}
+				
+				//Toast.makeText(QuestionnairesSettingSecond.this, "등록완료", Toast.LENGTH_SHORT);
+				 
 				packet = null; // 패킷 소멸
 				vector.removeAllElements(); // 벡터 내용 지우기
-
+				
 			}
 
 		});
@@ -83,7 +98,7 @@ public class QuestionnairesMain extends Activity implements DataSturct {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.tv_manager_service);
+		setContentView(R.layout.questionnaire2);
 		try {
 			Soketinitial();
 			InterfaceInital();

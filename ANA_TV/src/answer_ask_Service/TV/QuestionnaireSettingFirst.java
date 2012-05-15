@@ -1,6 +1,7 @@
 package answer_ask_Service.TV;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 
-public class QuestionnaireSetting extends Activity implements DataSturct {
+public class QuestionnaireSettingFirst extends Activity implements DataSturct {
 	private EditText Company, During;
 	private CheckBox UserImfo;
 	private Button FileAdd, Next;
@@ -28,6 +29,8 @@ public class QuestionnaireSetting extends Activity implements DataSturct {
 
 	}
 
+
+
 	public void ButtonEvent() {
 		Next.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -35,8 +38,8 @@ public class QuestionnaireSetting extends Activity implements DataSturct {
 						+ Company.getText() + SEPARATOR + "During" + SEPARATOR
 						+ During.getText() + SEPARATOR + "UserImfo" + SEPARATOR
 						+ UserFlag);
-				Intent intent = new Intent(QuestionnaireSetting.this,
-						QuestionnairesMain.class);
+				Intent intent = new Intent(QuestionnaireSettingFirst.this,
+						QuestionnairesSettingSecond.class);
 				startActivity(intent);
 			}
 
@@ -54,7 +57,7 @@ public class QuestionnaireSetting extends Activity implements DataSturct {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.tvsetting);
+		setContentView(R.layout.questionnaire1);
 		Interfaceinital();
 		ButtonEvent();
 	}

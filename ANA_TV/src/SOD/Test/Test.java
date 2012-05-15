@@ -10,6 +10,7 @@ import SOD.Common.Packet;
 import SOD.Common.Serializer;
 import SOD.Common.Transceiver;
 
+
 public class Test {
 	final static String ServerIP = "127.0.0.1";
 	final static int ServerPort = 4200; 
