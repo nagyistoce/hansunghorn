@@ -25,7 +25,7 @@ public class AnAService extends DroidGap {
 
 		TvSearch.setOnClickListener(new OnClickListener() {
 
-			public void onClick(View v) {
+			public void onClick(View v) { 
 				// new AccessManager().searchServer(); // TV 서버 찾기
 			}
 		});

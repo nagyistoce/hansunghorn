@@ -11,9 +11,7 @@
 		<script src="ana/js/loader.js" type="text/javascript"></script>
 		<script type="text/javascript" charset="euc-kr">
             document.addEventListener("deviceready", onDeviceReady, false);
-
             function onDeviceReady() {
-
                 vocTempContents();
             }
 
@@ -35,12 +33,16 @@
             }
 
             function vocTempContents() {
+
                 window.plugins.AnAServicePlugin.receiveData(successReceive, errorReceive, "");
                 window.plugins.AnAServicePlugin.sendData(successSend, errorSend, tbox.value);
             }
 
             function Control(result) {
-
+ 				
+ 				var $check = $("#downHTML");
+ 				$check.css("display","none");
+ 				alert("사랑해");
                 var getline = new Array();
                 var i = 0;
                 var answerCount = 0;
@@ -83,6 +85,19 @@
                         answerCount++;
                     }
                 }
+                var $fieldset = $(".fieldset");
+                var $crrb = $(".crrb");
+                var $board = $(".board");
+                $crrb.css("color","#f30");
+                $fieldset.css("clear", "both");
+                $fieldset.css("width", "auto");
+                $fieldset.css("margin", "1 1 6px 1px");
+                $fieldset.css("padding", "5px");
+                $fieldset.css("border-top", "3px solid #348AE1");
+                $fieldset.css("border-bottom", "1px solid #c8c8c8");
+                $fieldset.css("text-align", "left");
+                $board.css("border-bottom", "1px solid #c8c8c8");
+				$check.css("display","");
             }
 
             function doSbumit_this() {
@@ -99,6 +114,11 @@
                         //선택.
                     }
                 }
+            }
+
+            function a() { PluginResult
+                cr = plugin.execute(xxx);
+                return cr.getJSONString();
             }
 
 		</script>
@@ -129,114 +149,115 @@
 	<body border="1">
 
 		<!-- #body_content -->
+		<div id="downHTML">
+			<div id="body_content" >
 
-		<div id="body_content" >
+				<div id="pollpop">
 
-			<div id="pollpop">
-
-				<div class="pop_view">
-					<div id="topic"></div>
-				</div>
-				<div class="pop_view_box">
-					<div id="during"></div>
-				</div>
-				<div class="box"></div>
-				<p class="crrb">
-					※ 이 설문 내용 및 개인정보는 고객만족도 조사 이외의 다른 어떤 용도로도 사용되지 않습니다.
-				</p>
-				<!-- board -->
-				<div class="board" >
-					<!-- 쓰기 -->
-					<div class="write">
-						<div class="wrap">
-							<!-- infomenu -->
-							<div class="infomenu">
-								<div class="left">
-									<span class="required">*</span> 로 표시된 항목은 필수 항목입니다.
+					<div class="pop_view">
+						<div id="topic"></div>
+					</div>
+					<div class="pop_view_box">
+						<div id="during"></div>
+					</div>
+					<div class="box"></div>
+					<p class="crrb">
+						※ 이 설문 내용 및 개인정보는 고객만족도 조사 이외의 다른 어떤 용도로도 사용되지 않습니다.
+					</p>
+					<!-- board -->
+					<div class="board" >
+						<!-- 쓰기 -->
+						<div class="write">
+							<div class="wrap">
+								<!-- infomenu -->
+								<div class="infomenu">
+									<div class="left">
+										<span class="required">*</span> 로 표시된 항목은 필수 항목입니다.
+									</div>
 								</div>
+
+								<!-- //infomenu -->
+
+								<!-- 쓰기폼 -->
+
+								<form action="/program/global/survey/SurveyResultAction.html" method="post" name="frm" id="frm" onSubmit="return doSbumit_this(); ">
+
+									<input type="hidden" name="amode" value="insert" >
+
+									<!-- // -->
+
+									<input type="hidden" name="close" value="true">
+
+									<!-- // -->
+
+									<input type="hidden" name="survey_no" value="00027">
+
+									<input type="hidden" name="site_gubun" value="EGMARKET">
+
+									<div class="fieldset">
+										<div class="item first">
+
+											<label class="head" for="name">작성자 <span class="required" title="필수항목">*</span></label>
+
+											<input type="text" name="name" id="name" value="" class="text" />
+
+										</div>
+										<div class="item">
+
+											<label class="head" for="phone">연락처 <span class="required" title="필수항목">*</span></label>
+
+											<input type="text" name="phone" id="phone" value="" class="text w40" />
+
+											<span class="explain">*예) 055-0000-0000 입력</span>
+
+										</div>
+
+										<div class="item">
+
+											<label class="head" for="post_code">우편번호 <span class="required" title="필수항목">*</span></label>
+
+											<input type="text" name="post_code" id="post_code" value="" size="7" class="text" title="우편번호 앞자리를 입력하세요"  readonly="readonly"/>
+
+											<a tabindex="0" href="#n" onclick="findZipcode('frm.post_code', 'frm.address');" onkeypress="" ><img src="/img/board/bt_zipcode.gif" width="62" height="19" alt="우편번호" class="image" /></a>
+
+										</div>
+
+										<div class="item" >
+
+											<label class="head" for="address">주소</label>
+
+											<input type="text" name="address" id="address"  value="" class="text w100"   readonly="readonly" />
+
+											<input type="text" name="address_detail" id="address_detail" value="" class="text w100" />
+
+										</div>
+										<!-- 여기는 사용자 정보가 들어올 공간 -->
+									</div>
+									<ol id="num">
+
+										<!-- //쓰기폼 -->
+
+								</form>
+
 							</div>
-
-							<!-- //infomenu -->
-
-							<!-- 쓰기폼 -->
-
-							<form action="/program/global/survey/SurveyResultAction.html" method="post" name="frm" id="frm" onSubmit="return doSbumit_this(); ">
-
-								<input type="hidden" name="amode" value="insert" >
-
-								<!-- // -->
-
-								<input type="hidden" name="close" value="true">
-
-								<!-- // -->
-
-								<input type="hidden" name="survey_no" value="00027">
-
-								<input type="hidden" name="site_gubun" value="EGMARKET">
-
-								<div class="fieldset">
-									<div class="item first">
-
-										<label class="head" for="name">작성자 <span class="required" title="필수항목">*</span></label>
-
-										<input type="text" name="name" id="name" value="" class="text" />
-
-									</div>
-									<div class="item">
-
-										<label class="head" for="phone">연락처 <span class="required" title="필수항목">*</span></label>
-
-										<input type="text" name="phone" id="phone" value="" class="text w40" />
-
-										<span class="explain">*예) 055-0000-0000 입력</span>
-
-									</div>
-
-									<div class="item">
-
-										<label class="head" for="post_code">우편번호 <span class="required" title="필수항목">*</span></label>
-
-										<input type="text" name="post_code" id="post_code" value="" size="7" class="text" title="우편번호 앞자리를 입력하세요"  readonly="readonly"/>
-
-										<a tabindex="0" href="#n" onclick="findZipcode('frm.post_code', 'frm.address');" onkeypress="" ><img src="/img/board/bt_zipcode.gif" width="62" height="19" alt="우편번호" class="image" /></a>
-
-									</div>
-
-									<div class="item" >
-
-										<label class="head" for="address">주소</label>
-
-										<input type="text" name="address" id="address"  value="" class="text w100"   readonly="readonly" />
-
-										<input type="text" name="address_detail" id="address_detail" value="" class="text w100" />
-
-									</div>
-									<!-- 여기는 사용자 정보가 들어올 공간 -->
-								</div>
-								<ol id="num">
-
-									<!-- //쓰기폼 -->
-
-							</form>
 
 						</div>
 
+						<!-- //쓰기 -->
+
 					</div>
 
-					<!-- //쓰기 -->
+					<!--//board -->
 
+					<div class="center" align=center>
+						<input type="image" align="center" src="image/btn_confirm.gif" width="45" height="21" alt="확인" />
+						<input type="image" align="center" src="image/btn_cancel.gif" width="45" height="21" alt="취소" />
+					</div>
 				</div>
-
-				<!--//board -->
-
-				<div class="center" align=center>
-					<input type="image" align="center" src="image/btn_confirm.gif" width="45" height="21" alt="확인" />
-					<input type="image" align="center" src="image/btn_cancel.gif" width="45" height="21" alt="취소" />
+				<p></p>
+				<div class="foot">
+					Copyright(C) Hansung University reserved.
 				</div>
-			</div>
-
-			<div class="foot">
-				Copyright(C) Hansung University reserved.
 			</div>
 		</div>
 	</body>
