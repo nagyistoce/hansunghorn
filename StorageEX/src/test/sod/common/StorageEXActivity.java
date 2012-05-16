@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import sod.common.Storage;
 import sod.common.StorageFile;
+import sod.common.StorageFileR;
+import sod.common.StorageFileW;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -19,6 +21,7 @@ public class StorageEXActivity extends Activity {
         EditText editText = (EditText)findViewById(R.id.editText);
         EditText editText2 = (EditText)findViewById(R.id.editText2);
         EditText editText3 = (EditText)findViewById(R.id.editText3);
+        EditText editText4 = (EditText)findViewById(R.id.editText4);
         
         Storage storage = null;
         String [] list = null;
@@ -37,11 +40,24 @@ public class StorageEXActivity extends Activity {
 			editText3.setText(str);
 			*/
 			
-			StorageFile storageFile = storage.openFile("ex.txt"); //
 			
-			String str1 = "MyLifeForIu";
-			storageFile.write(str1.getBytes());
-			storageFile.close();
+			//파일에 쓰기 테스트
+			StorageFileW storageFileW = (StorageFileW)storage.openFile("ex.txt", Storage.WRITE);
+			str = "MyLifeForIU";
+			storageFileW.write(str.getBytes());
+			storageFileW.close();
+			
+			
+			
+			// 파일 내용 불러오기 테스트
+			
+			StorageFileR storageFileR = (StorageFileR) storage.openFile("ex.txt", Storage.READ); //
+			byte [] buf = new byte[storageFileR.getLength()];
+			storageFileR.read(buf);
+			editText4.setText(new String(buf));
+			storageFileR.close();
+			
+			
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
