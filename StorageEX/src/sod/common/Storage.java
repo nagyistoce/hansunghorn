@@ -14,6 +14,8 @@ import android.os.Environment;
 public class Storage {
 	
 	final static String SOD = "/sod/";
+	public final static int READ = 0;
+	public final static int WRITE = 1;
 	
 	String sdPath;
 	String sodRootPath;
@@ -230,15 +232,28 @@ public class Storage {
 	 * fileName이 null이래서 파일객체 자체 생성에 실패하면 NullPointerException을 던진다.
 	 * @throw IOException
 	 * StorageFile 객체 생성에 실패하면 IOException을 던진다.
+	 * @throw IllegalArgumentException
+	 * mode에 READ(0)와 WRITE(1)제외한 값이 발생하면 IllegalArgumentException 을 던진다.
 	 */
-	public StorageFile openFile(String filePath) throws FileNotFoundException, NullPointerException, IOException{
+	public StorageFile openFile(String filePath, int mode) throws FileNotFoundException, NullPointerException, IOException, IllegalArgumentException{
 		File file = new File(directory, filePath);
 		
 		//존재하지 않으면 FileNotFoundException을 던진다.
 		if( !file.exists() )
 			throw new FileNotFoundException();
 		
-		StorageFile returnStorageFile = StorageFile.getStorageFile(file);
+		StorageFile returnStorageFile = null;
+		switch(mode){
+		case READ:
+			returnStorageFile = StorageFileR.getStorageFile(file);
+			break;
+			
+		case WRITE:
+			returnStorageFile = StorageFileW.getStorageFile(file);
+			break;
+		default:
+			throw new IllegalArgumentException();
+		}
 	
 		return returnStorageFile;
 	}
@@ -263,7 +278,7 @@ public class Storage {
 		if( file.exists() )
 			throw new IOException();
 		
-		StorageFile returnStorageFile = StorageFile.createStorageFile(file);
+		StorageFile returnStorageFile = StorageFileW.createStorageFile(file);
 	
 		return returnStorageFile;
 	}
