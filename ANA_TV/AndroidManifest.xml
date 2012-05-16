@@ -43,8 +43,9 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".AnA_Graph"
+            android:name=".PieChartBuild"
             android:screenOrientation="portrait" >
         </activity>
+
     </application>
 </manifest>

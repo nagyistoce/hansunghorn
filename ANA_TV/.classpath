@@ -13,10 +13,6 @@
 	<classpathentry kind="lib" path="C:/Program Files/Java/jre6/lib/plugin.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/jre6/lib/resources.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/jre6/lib/rt.jar"/>
-	<classpathentry kind="lib" path="C:/Users/user/Downloads/achartengine-0.7.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/user/Downloads/jfreechart-1.0.14/jfreechart-1.0.14/lib/jcommon-1.0.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/user/Downloads/jfreechart-1.0.14/jfreechart-1.0.14/lib/jfreechart-1.0.14.jar"/>
-	<classpathentry kind="lib" path="C:/Users/user/Downloads/jfreechart-1.0.14/jfreechart-1.0.14/lib/jfreechart-1.0.14-experimental.jar"/>
-	<classpathentry kind="lib" path="C:/Users/user/Downloads/jfreechart-1.0.14/jfreechart-1.0.14/lib/jfreechart-1.0.14-swt.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

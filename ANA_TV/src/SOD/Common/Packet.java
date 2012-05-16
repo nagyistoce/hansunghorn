@@ -13,37 +13,57 @@ import javax.activation.UnsupportedDataTypeException;
 public class Packet {
 	
 	public static final String DataType_Int = "int";
-	public static final String DataType_Long = "long";
+//	public static final String DataType_Long = "long";
 	public static final String DataType_Float = "float";
 	public static final String DataType_Double = "double";
 	public static final String DataType_String = "string";
 	public static final String DataType_ByteArray = "bytearray";
 	
+	/*
+	 * 클라이언트에서 접속을 요청하는 패킷 시그니쳐
+	*/
+	public static final int REQUEST_ACCEPT = 0xFF000010;
+	
+	/*
+	 * 서버에서 접속을 승인했음을 알려주는 패킷 시그니쳐
+	*/
+	public static final int RESPONSE_ACCEPT = 0xFF000011;
+	
+	/*
+	 * 서버가 존재하는지 알기 위해 클라이언트에서 보내는 패킷 시그니쳐
+	*/
+	public static final int REQUEST_PING = 0xFF000020;
+	
+	/*
+	 * 클라이언트에서 요청한 핑에 응답하는 패킷 시그니쳐
+	*/
+	public static final int RESPONSE_PING = 0xFF000021;
+	
 	/**
 	 * 스마트TV에서 스마트폰과 접속이 완료되고난 뒤에 스마트폰에 서비스를 실행하기위한 파일이 있는지를 확인한다. 이 때, 파일이 있는지를
 	 * 확인하기 위해 서비스의 명칭을 보내기 위한 패킷의 시그니쳐
 	 */
-	public final int RESPONSE_SERVICE_NAME = 0xFF000000;
+	public static final int RESPONSE_SERVICE_NAME = 0xFF000000;
 
 	/**
 	 * 스마트TV에서 스마트폰의 접속상태가 유효한지를 체크하기위해 보내는 패킷의 시그니쳐
 	 */
-	public final int REQUEST_CLIENT_ALIVE = 0xFF000001;
+	public static final int REQUEST_CLIENT_ALIVE = 0xFF000001;
 
 	/**
 	 * 스마트TV로부터 접속상태 확인 패킷을 받은 후, 접속상태가 양호하다는 응답 패킷의 시그니쳐
 	 */
-	public final int RESPONSE_CLIENT_ALIVE = 0xFF000002;
+	public static final int RESPONSE_CLIENT_ALIVE = 0xFF000002;
 
 	/**
 	 * 스마트TV로부터 서비스명칭을 받은 후, 서비스를 실행시키기위한 파일이 있는지를 확인하고 파일이 없을때 보내는 패킷의 시그니쳐
 	 */
-	public final int REQUEST_SERVICE_DATA = 0xFF000003;
+	public static final int REQUEST_SERVICE_DATA = 0xFF000003;
 
 	/**
 	 * 스마트폰으로부터 서비스가 없다는 패킷을 받은 후, 서비스 실행과 관련된 파일을 보내주는 패킷의 시그니쳐
 	 */
-	public final int RESPONSE_SERVICE_DATA = 0xFF000004;
+	public static final int RESPONSE_SERVICE_DATA = 0xFF000004;
 	
 
 
@@ -53,7 +73,7 @@ public class Packet {
 	 * 개발자가 지정한 시그니쳐로 구분하여 패킷의 용도가 결정된다. 0xff000000~0xff000004는 시스템에서 할당한
 	 * 시그니쳐이므로 개발자는 사용하면 안된다.
 	 */
-	protected int signiture = 0;
+	public int signiture = 0;
 	
 	public Packet(){
 		dataset = new LinkedList<Object>();
@@ -68,15 +88,15 @@ public class Packet {
 		return dataset.size();
 	}
 	
-	public String getLastElementType(){
+	public String getTopElementType(){
 		if(dataset.size() == 0)
 			return null;
 		Object o = dataset.peek();
 		
 		if(o instanceof Integer)
 			return DataType_Int;
-		if(o instanceof Long)
-			return DataType_Long;
+//		if(o instanceof Long)
+//			return DataType_Long;
 		if(o instanceof Float)
 			return DataType_Float;
 		if(o instanceof Double)
@@ -101,7 +121,7 @@ public class Packet {
 	public boolean push(Object obj) {
 		if(obj == null) return false;
 		if(obj instanceof Integer ||
-		   obj instanceof Long ||
+//		   obj instanceof Long ||
 		   obj instanceof Float ||
 		   obj instanceof Double ||
 		   obj instanceof String ||
@@ -126,6 +146,14 @@ public class Packet {
 		return dataset.poll();
 	}
 
+	/**
+	 * 패킷 객체를 재사용하기 위해 모든 내용을 제거
+	 */
+	public void clear(){
+		signiture = 0;
+		while(dataset.size() > 0)
+			dataset.poll();
+	}
 }
 
 

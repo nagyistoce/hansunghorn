@@ -105,7 +105,6 @@ public class StorageFile {
 	public void write(byte[] buf, int index, int length) throws IOException{
 		
 		out.write(buf, index, length);
-		
 	}
 	
 	public void read(byte[] buf) throws IOException,  EOFException{
@@ -133,14 +132,12 @@ public class StorageFile {
 		int returnInt;
 		returnInt = in.read(buf, index, length);
 		
-		
 		if(returnInt == -1)
 			throw new EOFException();
 	}
 	
 	/**
 	 * 파일내에 파일 포인터가 가르치는 곳을 offset만큼 이동한다.
-	 * (아직 미구현)
 	 * @param offset
 	 * 파일포인터를 이동하고자 하는 위치
 	 * @param seekorigin
@@ -154,7 +151,6 @@ public class StorageFile {
 	
 	/**
 	 * 현재의 파일포인터의 위치를 얻는다.
-	 * (아직 미구현)
 	 */
 	public void getPosition(){
 		
@@ -188,7 +184,7 @@ public class StorageFile {
 	}
 	
 	/**
-	 * 파일을 닫고 저장한다.
+	 * 파일을 닫는다.
 	 * @throws IOException 
 	 * 이미 닫혀있으면 IOException 을 던진다.
 	 */

@@ -4,16 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/chart"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-
-        <ImageView
-            android:id="@+id/staticsGraph"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:src="@drawable/nogoods_m" />
-
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" />
 
 </LinearLayout>
