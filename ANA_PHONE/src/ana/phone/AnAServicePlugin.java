@@ -4,6 +4,9 @@ package ana.phone;
 import org.json.JSONArray;
 
 
+import ana.phoneBean.ConnectionBean;
+import ana.phoneBean.DownLoad;
+
 import com.phonegap.api.PluginResult;
 
 public class AnAServicePlugin extends AnAServiceNet {
@@ -27,23 +30,23 @@ public class AnAServicePlugin extends AnAServiceNet {
 //	 }
 
 	public PluginResult execute(String action, JSONArray arg1, String callbackId) {
-		try {
-			if (flag == 0) {
-				flag++;
-				Soketinitial();
-			}
+	
 			while (true) {
 				if (action.equals("receiveData")) {
-					getData();
-					return new PluginResult(PluginResult.Status.OK, Message);
+					try{
+					//DownLoad.Message="";	
+					getHTMLData();
+					//getHTMLData();
+					}catch(Exception e)
+					{
+					return new PluginResult(PluginResult.Status.OK,""+e);
+					}
+					return new PluginResult(PluginResult.Status.OK, DownLoad.Message);
 				} else if (action.equals("TvSerch")) {
 					return new PluginResult(PluginResult.Status.OK,
 							"TV를 찾았습니다.");
 				} else
 					return new PluginResult(PluginResult.Status.JSON_EXCEPTION);
 			}
-		} catch (Exception e) {
-			return new PluginResult(PluginResult.Status.OK, "" + e);
-		}
+		} 
 	}
-}

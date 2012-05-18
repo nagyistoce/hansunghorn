@@ -2,6 +2,7 @@ package SOD.Common;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.Semaphore;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -34,7 +35,7 @@ public class XmlBuilder {
             
             tf.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
             tf.setOutputProperty(OutputKeys.INDENT, "yes");
-            tf.setOutputProperty(OutputKeys.ENCODING, "euc-kr");
+            tf.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -42,21 +43,23 @@ public class XmlBuilder {
 		}		
 	}
 	
-	public static DocumentBuilder getDocumentBuilder(){
-		return db;
-	}
-	
 	public static Document parse(InputStream in){
-		try {
-			return db.parse(in);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return null;
+		synchronized(db){
+			try {
+				return db.parse(in);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				return null;
+			}
 		}
 	}
 	
 	public static Document createDoc(){
-		return db.newDocument();
+		Document doc;
+		synchronized(db){
+			doc = db.newDocument();
+		}
+		return doc;
 	}
 	
 	public static Transformer getTransformer(){
