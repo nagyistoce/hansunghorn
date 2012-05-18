@@ -38,6 +38,7 @@ public class TVLocationManagerActivity extends MapActivity {
 	
 	class MapOverlay extends com.google.android.maps.Overlay{
 
+		//맵에서 터치를 했을 때...
 		@Override
 		public boolean onTouchEvent(MotionEvent e, MapView mapView) {
 			// TODO Auto-generated method stub
@@ -45,9 +46,10 @@ public class TVLocationManagerActivity extends MapActivity {
 				GeoPoint selectedGp = 
 						mapView.getProjection().fromPixels((int)e.getX(), (int)e.getY());
 				
+				//찍혀진 장소를 표시
 				Toast.makeText(getBaseContext(), selectedGp.getLatitudeE6() / 1E6 + "," + selectedGp.getLongitudeE6() , Toast.LENGTH_SHORT).show();
 				
-				OverlayItem overlayItem = new OverlayItem(selectedGp, "서울시청", "서울시청입니다.");
+				OverlayItem overlayItem = new OverlayItem(selectedGp, "선택된 장소", "선택된 장소입니다.");
 				
 				pinOverlay.clearOverlay();
 				pinOverlay.addOverlay(overlayItem);
@@ -84,25 +86,28 @@ public class TVLocationManagerActivity extends MapActivity {
         map = (MapView)findViewById(R.id.map);
         map.setBuiltInZoomControls(true);
         MapController mapController = map.getController();
-        mapController.setZoom(10);
+        mapController.setZoom(20);
         
         listOfOverlays = map.getOverlays();
         
-        Drawable drawable = getResources().getDrawable(R.drawable.ic_launcher);
+        Drawable drawable = getResources().getDrawable(R.drawable.pin);
         pinOverlay = new PinOverlay(drawable, this);
         
-        //pin.. init..
+        //pin.. init.. 한성대학교로 고쳐야함
+        /*
         OverlayItem overlayItem=
-        		new OverlayItem(new GeoPoint(37566535, 126977969),
-        				"서울시청", "서울시청입니다");
+        		new OverlayItem(new GeoPoint(37582694, 127010823),
+        				"한성대학교", "한성대학교입니다.");
         pinOverlay.addOverlay(overlayItem);
+        */
         
+        /*
         MapOverlay mapOverlay = new MapOverlay();
         
         listOfOverlays.add(mapOverlay);
         map.postInvalidate();
         listOfOverlays.add(pinOverlay);
-        
+        */
         LocationManager locationManager = 
         		(LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location location =
@@ -113,13 +118,25 @@ public class TVLocationManagerActivity extends MapActivity {
         if(location != null){
         	latitude = location.getLatitude();
         	longitude = location.getLongitude();
-        }else{
-        	latitude = 37.565263;
-        	longitude = 126.980667;
+        }else{//디폴트 위치, 한성대학교
+        	latitude = 37.582694;
+        	longitude = 127.010823;
         }
         
         currentGp = new GeoPoint( (int)(latitude*1E6), (int)(longitude*1E6));
         mapController.animateTo(currentGp);
+        
+        
+        MapOverlay mapOverlay = new MapOverlay();
+        
+        OverlayItem overlayItem=
+        		new OverlayItem(new GeoPoint((int)(latitude * 1E6), (int)(longitude * 1E6)),
+        				"한성대학교", "한성대학교입니다.");
+        pinOverlay.addOverlay(overlayItem);
+        
+        listOfOverlays.add(mapOverlay);
+        map.postInvalidate();
+        listOfOverlays.add(pinOverlay);
         /////end... MapView Setting////////////////////////////////////////////////////////////////////////
         
         //////   sendGeoPointButton Setting...//////////////////////////////////////////////////////////
