@@ -11,32 +11,31 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import answer_ask_BeanTV.LayoutComponentBean;
 
 public class QuestionnaireSettingFirst extends Activity implements DataSturct {
-	private EditText Company, During;
-	private CheckBox UserImfo;
-	private Button FileAdd, Next;
+
 	private Boolean UserFlag;
 	final static String SEPARATOR = "|";
 
 	public void Interfaceinital() {
 		UserFlag = false;
-		Company = (EditText) findViewById(R.id.CompanyNameEditText);
-		During = (EditText) findViewById(R.id.DuringEditText);
-		FileAdd = (Button) findViewById(R.id.FileAddButton);
-		UserImfo = (CheckBox) findViewById(R.id.UserInfoCheckBox);
-		Next = (Button) findViewById(R.id.NextButton);
+		LayoutComponentBean.Company = (EditText) findViewById(R.id.CompanyNameEditText);
+		LayoutComponentBean.During = (EditText) findViewById(R.id.DuringEditText);
+		LayoutComponentBean.FileAdd = (Button) findViewById(R.id.FileAddButton);
+		LayoutComponentBean.UserImfo = (CheckBox) findViewById(R.id.UserInfoCheckBox);
+		LayoutComponentBean.Next = (Button) findViewById(R.id.NextButton);
 
 	}
 
 
 
 	public void ButtonEvent() {
-		Next.setOnClickListener(new OnClickListener() {
+		LayoutComponentBean.Next.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				vector.add(SEPARATOR + "Company" + SEPARATOR
-						+ Company.getText() + SEPARATOR + "During" + SEPARATOR
-						+ During.getText() + SEPARATOR + "UserImfo" + SEPARATOR
+						+ LayoutComponentBean.Company.getText() + SEPARATOR + "During" + SEPARATOR
+						+ LayoutComponentBean.During.getText() + SEPARATOR + "UserImfo" + SEPARATOR
 						+ UserFlag);
 				Intent intent = new Intent(QuestionnaireSettingFirst.this,
 						QuestionnairesSettingSecond.class);
@@ -44,7 +43,7 @@ public class QuestionnaireSettingFirst extends Activity implements DataSturct {
 			}
 
 		});
-		UserImfo.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		LayoutComponentBean.UserImfo.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {

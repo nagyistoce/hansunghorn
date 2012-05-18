@@ -60,7 +60,7 @@ public class Test {
 			}
 		});
 		server.start(conf);
-		
+		System.out.println(client.isConnected());
 		//client side
 		client = new AccessManager();
 		ServerInfo svinfo = new ServerInfo();
