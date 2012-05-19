@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="sod.smarttv.TVLocationManagerActivity"
+            android:name="sod.activity.TVLocationManagerActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
