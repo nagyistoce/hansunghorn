@@ -75,7 +75,7 @@ public class StorageFileW extends StorageFile{
 	public void write(byte[] buf, int index, int length) throws IOException{
 		
 		out.write(buf, index, length);
-		
+
 	}
 	
 	/**

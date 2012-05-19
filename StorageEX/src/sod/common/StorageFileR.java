@@ -13,7 +13,6 @@ public class StorageFileR extends StorageFile {
 	BufferedInputStream in;
 	
 	/**
-	 * 
 	 * @param mFile
 	 * @throws IOException
 	 * 파일 생성에 실패하면 IOException을 던진다.

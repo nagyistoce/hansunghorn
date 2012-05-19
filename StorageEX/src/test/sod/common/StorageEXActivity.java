@@ -27,7 +27,8 @@ public class StorageEXActivity extends Activity {
         String [] list = null;
         String str = new String();
         try {
-			storage = Storage.getStorage("ana");;
+ //			storage = Storage.crate("ana");
+			storage = Storage.getStorage("ana");
 			editText2.setText(storage.getSODStoragePath());
 			
 			/*//getFileListTest
@@ -42,6 +43,7 @@ public class StorageEXActivity extends Activity {
 			
 			
 			//파일에 쓰기 테스트
+//			StorageFileW storageFileW = (StorageFileW)storage.create("ex.txt", Storage.WRITE);
 			StorageFileW storageFileW = (StorageFileW)storage.openFile("ex.txt", Storage.WRITE);
 			str = "MyLifeForIU";
 			storageFileW.write(str.getBytes());
