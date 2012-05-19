@@ -32,125 +32,139 @@ import android.widget.Toast;
 
 public class PieChartBuild extends Activity {
 
-  private static int[] COLORS = new int[] { Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN ,Color.RED};
+	private static int[] COLORS = new int[] { Color.GREEN, Color.BLUE,
+			Color.MAGENTA, Color.CYAN, Color.RED ,Color.YELLOW,Color.rgb(99,184,255)};
 
-  private CategorySeries mSeries = new CategorySeries("");
+	private CategorySeries mSeries = new CategorySeries("");
 
-  private DefaultRenderer mRenderer = new DefaultRenderer();
-  int i;
-  private String mDateFormat;
+	private DefaultRenderer mRenderer = new DefaultRenderer();
+	int i;
+	private String mDateFormat;
 
-//  private Button mAdd;
+	// private Button mAdd;
 
-//  private EditText mX;
+	// private EditText mX;
 
-  private GraphicalView mChartView;
+	private GraphicalView mChartView;
 
-  @Override
-  protected void onRestoreInstanceState(Bundle savedState) {
-    super.onRestoreInstanceState(savedState);
-    mSeries = (CategorySeries) savedState.getSerializable("current_series");
-    mRenderer = (DefaultRenderer) savedState.getSerializable("current_renderer");
-    mDateFormat = savedState.getString("date_format");
-  }
+	@Override
+	protected void onRestoreInstanceState(Bundle savedState) {
+		super.onRestoreInstanceState(savedState);
+		mSeries = (CategorySeries) savedState.getSerializable("current_series");
+		mRenderer = (DefaultRenderer) savedState
+				.getSerializable("current_renderer");
+		mDateFormat = savedState.getString("date_format");
+	}
 
-  @Override
-  protected void onSaveInstanceState(Bundle outState) {
-    super.onSaveInstanceState(outState);
-    outState.putSerializable("current_series", mSeries);
-    outState.putSerializable("current_renderer", mRenderer);
-    outState.putString("date_format", mDateFormat);
-  }
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.statics_graph);
-    mRenderer.setApplyBackgroundColor(true);
-    mRenderer.setBackgroundColor(Color.argb(100, 50, 50, 50));
-    mRenderer.setChartTitleTextSize(20);
-    mRenderer.setLabelsTextSize(15);
-    mRenderer.setLegendTextSize(15);
-    mRenderer.setMargins(new int[] { 20, 30, 15, 0 });
-    mRenderer.setZoomButtonsVisible(true);
-    mRenderer.setStartAngle(90);
-    i=50;
-//    mAdd.setEnabled(true);
-//    mX.setEnabled(true);
-    while(i !=100){
-//    mAdd.setOnClickListener(new View.OnClickListener() {
-//      public void onClick(View v) {
-        double x = 0;
-//        try {
-          x = Double.parseDouble(""+i);
-//        } catch (NumberFormatException e) {
-//          // TODO
-//          mX.requestFocus();
-//          return;
-//        }
-        mSeries.add("Series " + (mSeries.getItemCount() + 1), x);		// 문항
-        SimpleSeriesRenderer renderer = new SimpleSeriesRenderer();
-     
-        renderer.setColor(COLORS[(mSeries.getItemCount() - 1) % COLORS.length]);
-        mRenderer.setChartTitle("아오");
-        mRenderer.setChartTitleTextSize(60);
-        mRenderer.addSeriesRenderer(renderer);
-//        mX.setText("");
-//        mX.requestFocus();
-        if (mChartView != null) {
-          mChartView.repaint();
-        }
-        i++;
-    }
-//      }
-//    });
-  }
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putSerializable("current_series", mSeries);
+		outState.putSerializable("current_renderer", mRenderer);
+		outState.putString("date_format", mDateFormat);
+	}
 
-  @Override
-  protected void onResume() {
-    super.onResume();
-    if (mChartView == null) {
-      LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
-      mChartView = ChartFactory.getPieChartView(this, mSeries, mRenderer);
-      mRenderer.setClickEnabled(true);
-      mRenderer.setSelectableBuffer(10);
-      mChartView.setOnClickListener(new View.OnClickListener() {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.statics_graph);
+		mRenderer.setApplyBackgroundColor(true);
+		mRenderer.setBackgroundColor(Color.argb(100, 50, 50, 0));
+		mRenderer.setChartTitleTextSize(20);
+		mRenderer.setLabelsTextSize(15);
+		mRenderer.setLegendTextSize(15);
+		mRenderer.setMargins(new int[] { 20, 30, 15, 0 });
+		mRenderer.setZoomButtonsVisible(true);
+		mRenderer.setStartAngle(90);
+		i = 50;
+		// mAdd.setEnabled(true);
+		// mX.setEnabled(true);
+		while (i != 100) {
+			// mAdd.setOnClickListener(new View.OnClickListener() {
+			// public void onClick(View v) {
+			double x = 0;
+			// try {
+			x = Double.parseDouble("" + i);
+			// } catch (NumberFormatException e) {
+			// // TODO
+			// mX.requestFocus();
+			// return;
+			// }
+			mSeries.add("Series " + (mSeries.getItemCount() + 1), x); // 문항
+			SimpleSeriesRenderer renderer = new SimpleSeriesRenderer();
 
-        public void onClick(View v) {
-          SeriesSelection seriesSelection = mChartView.getCurrentSeriesAndPoint();
-          if (seriesSelection == null) {
-            Toast
-                .makeText(PieChartBuild.this, "No chart element was clicked", Toast.LENGTH_SHORT)
-                .show();
-          } else {
-            Toast.makeText(
-                PieChartBuild.this,
-                "Chart element data point index " + seriesSelection.getPointIndex()
-                    + " was clicked" + " point value=" + seriesSelection.getValue(),
-                Toast.LENGTH_SHORT).show();
-          }
-        }
-      });
-      mChartView.setOnLongClickListener(new View.OnLongClickListener() {
-  
-        public boolean onLongClick(View v) {
-          SeriesSelection seriesSelection = mChartView.getCurrentSeriesAndPoint();
-          if (seriesSelection == null) {
-            Toast.makeText(PieChartBuild.this, "No chart element was long pressed",
-                Toast.LENGTH_SHORT);
-            return false; // no chart element was long pressed, so let something
-            // else handle the event
-          } else {
-            Toast.makeText(PieChartBuild.this, "Chart element data point index "
-                + seriesSelection.getPointIndex() + " was long pressed", Toast.LENGTH_SHORT);
-            return true; // the element was long pressed - the event has been
-            // handled
-          }
-        }
-      });
-      layout.addView(mChartView, new LayoutParams(LayoutParams.FILL_PARENT,
-          LayoutParams.FILL_PARENT));
-    } else {
-      mChartView.repaint();
-    }
-  }
+			renderer.setColor(COLORS[(mSeries.getItemCount() - 1)
+					% COLORS.length]);
+			mRenderer.setChartTitle("");
+			mRenderer.setChartTitleTextSize(60);
+			mRenderer.addSeriesRenderer(renderer);
+			// mX.setText("");
+			// mX.requestFocus();
+			if (mChartView != null) {
+				mChartView.repaint();
+			}
+			i++;
+		}
+		// }
+		// });
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (mChartView == null) {
+			LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
+			mChartView = ChartFactory.getPieChartView(this, mSeries, mRenderer);
+			mRenderer.setClickEnabled(true);
+			mRenderer.setSelectableBuffer(10);
+			mChartView.setOnClickListener(new View.OnClickListener() {
+
+				public void onClick(View v) {
+					SeriesSelection seriesSelection = mChartView
+							.getCurrentSeriesAndPoint();
+					if (seriesSelection == null) {
+						Toast.makeText(PieChartBuild.this,
+								"No chart element was clicked",
+								Toast.LENGTH_SHORT).show();
+					} else {
+						Toast.makeText(
+								PieChartBuild.this,
+								"Chart element data point index "
+										+ seriesSelection.getPointIndex()
+										+ " was clicked" + " point value="
+										+ seriesSelection.getValue(),
+								Toast.LENGTH_SHORT).show();
+					}
+				}
+			});
+			mChartView.setOnLongClickListener(new View.OnLongClickListener() {
+
+				public boolean onLongClick(View v) {
+					SeriesSelection seriesSelection = mChartView
+							.getCurrentSeriesAndPoint();
+					if (seriesSelection == null) {
+						Toast.makeText(PieChartBuild.this,
+								"No chart element was long pressed",
+								Toast.LENGTH_SHORT);
+						return false; // no chart element was long pressed, so
+										// let something
+						// else handle the event
+					} else {
+						Toast.makeText(PieChartBuild.this,
+								"Chart element data point index "
+										+ seriesSelection.getPointIndex()
+										+ " was long pressed",
+								Toast.LENGTH_SHORT);
+						return true; // the element was long pressed - the event
+										// has been
+						// handled
+					}
+				}
+			});
+			layout.addView(mChartView, new LayoutParams(
+					LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+		} else {
+			mChartView.repaint();
+		}
+	}
 }

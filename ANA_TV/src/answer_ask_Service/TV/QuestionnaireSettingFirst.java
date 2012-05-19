@@ -28,29 +28,30 @@ public class QuestionnaireSettingFirst extends Activity implements DataSturct {
 
 	}
 
-
-
 	public void ButtonEvent() {
 		LayoutComponentBean.Next.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				vector.add(SEPARATOR + "Company" + SEPARATOR
-						+ LayoutComponentBean.Company.getText() + SEPARATOR + "During" + SEPARATOR
-						+ LayoutComponentBean.During.getText() + SEPARATOR + "UserImfo" + SEPARATOR
-						+ UserFlag);
+						+ LayoutComponentBean.Company.getText() + SEPARATOR
+						+ "During" + SEPARATOR
+						+ LayoutComponentBean.During.getText() + SEPARATOR
+						+ "UserImfo" + SEPARATOR + UserFlag);
 				Intent intent = new Intent(QuestionnaireSettingFirst.this,
 						QuestionnairesSettingSecond.class);
 				startActivity(intent);
+				finish();
 			}
 
 		});
-		LayoutComponentBean.UserImfo.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		LayoutComponentBean.UserImfo
+				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				// TODO Auto-generated method stub
-				UserFlag = isChecked;
-			}
-		});
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						// TODO Auto-generated method stub
+						UserFlag = isChecked;
+					}
+				});
 	}
 
 	@Override

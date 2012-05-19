@@ -25,50 +25,51 @@ import answer_ask_BeanTV.LayoutComponentBean;
 import answer_ask_Service.TV.TVManagerLoGo.splashhandler;
 
 public class AnA_BootMode extends Activity {
-	
+
 	void LayoutInitial() {
-		
+
 		LayoutComponentBean.statisticsGraph_btn = (Button) findViewById(R.id.statisticsGraph);
 		LayoutComponentBean.QuestionnaireInitial_btn = (Button) findViewById(R.id.QuestionnaireInitialSettinig);
 		LayoutComponentBean.QuestionnaireImfo_btn = (Button) findViewById(R.id.QuestionnaireSettingImfomation);
-		if(LayoutComponentBean.ScreenCount==0)
-		{
-		LayoutComponentBean.statisticsGraph_btn.setEnabled(false);
-		LayoutComponentBean.QuestionnaireImfo_btn.setEnabled(false);
+		if (LayoutComponentBean.ScreenCount == 0) {
+			LayoutComponentBean.statisticsGraph_btn.setEnabled(false);
+			LayoutComponentBean.QuestionnaireImfo_btn.setEnabled(false);
 		}
-		
+
 	}
 
-	
-
 	public void ButtonEvent() {
-		LayoutComponentBean.statisticsGraph_btn.setOnClickListener(new OnClickListener() {
+		LayoutComponentBean.statisticsGraph_btn
+				.setOnClickListener(new OnClickListener() {
 
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(AnA_BootMode.this,
-						PieChartBuild.class);
-				startActivity(intent);
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent(AnA_BootMode.this,
+								PieChartBuild.class);
+						startActivity(intent);
 
-			}
-		});
-		LayoutComponentBean.QuestionnaireInitial_btn.setOnClickListener(new OnClickListener() {
+					}
+				});
+		LayoutComponentBean.QuestionnaireInitial_btn
+				.setOnClickListener(new OnClickListener() {
 
-			public void onClick(View v) {
-				if(LayoutComponentBean.ScreenCount!=0)DataSturct.vector.clear();
-				Intent intent = new Intent(AnA_BootMode.this,
-						QuestionnaireSettingFirst.class);
-				startActivity(intent);
+					public void onClick(View v) {
+						if (LayoutComponentBean.ScreenCount != 0)
+							DataSturct.vector.clear();
+						Intent intent = new Intent(AnA_BootMode.this,
+								QuestionnaireSettingFirst.class);
+						startActivity(intent);
 
-			}
-		});
-		LayoutComponentBean.QuestionnaireImfo_btn.setOnClickListener(new OnClickListener() {
+					}
+				});
+		LayoutComponentBean.QuestionnaireImfo_btn
+				.setOnClickListener(new OnClickListener() {
 
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
 
-			}
-		});
+					}
+				});
 	}
 
 	public void onCreate(Bundle savedInstanceState) {

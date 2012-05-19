@@ -23,7 +23,7 @@
             android:textColor="#000000"
             android:textSize="15dp" />
 
-        <EditText 
+        <EditText
             android:id="@+id/topic"
             android:layout_width="250dp"
             android:layout_height="40dp"
@@ -65,11 +65,10 @@
             android:background="@drawable/editstyle"
             android:ems="10"
             android:gravity="left"
-             android:singleLine="true"
+            android:singleLine="true"
             android:textColor="#000000"
             android:textSize="15dp" />
     </RelativeLayout>
-
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -78,13 +77,12 @@
         android:layout_weight="0.23"
         android:background="#FFFFFF" >
 
-        <ImageView
-            android:id="@+id/answerlist"
+        <ListView
+            android:id="@+id/listview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/nogoods_m" />
+            android:scrollingCache="true" >
+        </ListView>
     </RelativeLayout>
 
     <RelativeLayout
@@ -99,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="첨부" />
- -
+ -
 
         <RadioGroup
             android:id="@+id/radioGroup1"
@@ -127,7 +125,7 @@
                 android:textSize="10dp" />
         </RadioGroup>
     </RelativeLayout>
- 
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="50dp"
