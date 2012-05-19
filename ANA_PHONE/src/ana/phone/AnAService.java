@@ -25,25 +25,36 @@ import ana.phonecontroller.Client_Initalize;
 
 public class AnAService extends DroidGap {
 	Button TvSearch, ServiceLocation, InstallService;
-	
+
 	AnAServiceNet net;
+
 	public void Initialize() {
 		super.loadUrl("file:///android_asset/www/AnA.html");
 	}
+
 	public void Client_Initalize() {
-		
+
 		ConnectionBean.client = new AccessManager();
 		ConnectionBean.ServerInfomation = new ServerInfo();
 		ConnectionBean.ServerInfomation.EndPoint = new InetSocketAddress(
 				ConnectionBean.SERVERIP, ConnectionBean.SERVERPORT);
 		StrictMode.enableDefaults();
+		ConnectionBean.client.setReceiveHandler(new ReceiveHandler() {
+
+			public void onReceive(Packet pkt) {
+				if (pkt != null) {
+					while(pkt.getElementCount() > 0)
+					{
+						Object item = pkt.pop();
+						DownLoad.Message += item.toString();
+					}
+					DownLoad.waithandle.release();
+				}
+			}
+		});
 		ConnectionBean.client.connect(ConnectionBean.ServerInfomation);
 	}
-	public void Client_Data()
-	{
-		
-	
-	}
+
 	public void Layout_Initalize() {
 		TvSearch = (Button) findViewById(R.id.TvSearch);
 		ServiceLocation = (Button) findViewById(R.id.ServiceLocation);
@@ -65,12 +76,13 @@ public class AnAService extends DroidGap {
 			public void onClick(View v) {
 				// 促款肺靛 何盒积帆
 				// TV 立加UI 积帆
-			
+
 				Client_Initalize();
 				Initialize();
 			}
 		});
 	}
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);

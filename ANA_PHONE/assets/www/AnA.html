@@ -75,12 +75,138 @@
                         var $li_i = $("<li><p><strong>" + getline[i + 1] + "</strong></li>");
                         $li_i.attr("id", "no_" + answerCount);
                         var $textField = $("<input></input>");
+                        var $radiobtn1 = $("<input></input>");
+                        var $radiobtn2 = $("<input></input>");
+                        var $radiobtn3 = $("<input></input>");
+                        var $radiobtn4 = $("<input></input>");
+                        var $radiobtn5 = $("<input></input>");
+                        if(getline[i+3]=="-1")
+                        {
                         $textField.attr("id", "text_" + answerCount);
                         $textField.attr("type", "text");
                         $textField.attr("size", "40");
                         $textField.attr("placeholder", "" + getline[i + 1] + "해당 답을 입력해주세요.");
                         $no.append($li_i);
                         $no.append($textField);
+                        }else if(getline[i+3]=="0")
+                        {
+                        var $value1 = $("<b>Yes</b>");
+                        var $value2 = $("<b>No</b>");
+                        $radiobtn1.attr("name", "text_" + answerCount);
+                        $radiobtn1.attr("type", "radio");
+                        $radiobtn1.attr("value", "Yes");
+                        
+                        $radiobtn2.attr("name", "text_" + answerCount);
+                        $radiobtn2.attr("type", "radio");
+                        $radiobtn2.attr("value", "No");
+                        $no.append($li_i);
+                        $no.append($radiobtn1);
+                       	$no.append($value1);
+                        $no.append($radiobtn2);
+                   		$no.append($value2);
+                        }
+                        else if(getline[i+3]=="1")
+                        {
+                        	var $value1 = $("<b>좋아요</b>");
+                        	var $value2 = $("<b>보  통</b>");
+                        	var $value3 = $("<b>나빠요</b>");
+                        	
+                        $radiobtn1.attr("name", "text_" + answerCount);
+                        $radiobtn1.attr("type", "radio");
+                        $radiobtn1.attr("value", "good");
+                        
+                        $radiobtn2.attr("name", "text_" + answerCount);
+                        $radiobtn2.attr("type", "radio");
+                        $radiobtn2.attr("value", "nomal");
+                        
+                        $radiobtn3.attr("name", "text_" + answerCount);
+                        $radiobtn3.attr("type", "radio");
+                        $radiobtn3.attr("value", "bad");
+                        
+                        $no.append($li_i);
+                        $no.append($radiobtn1);
+                       	$no.append($value1);
+                        $no.append($radiobtn2);
+                   		$no.append($value2);
+                        $no.append($radiobtn3);
+                   		$no.append($value3);
+                        }
+                        else if(getline[i+3]=="2")
+                        {
+                        var $value1 = $("<b>아주좋아요</b>");
+                        var $value2 = $("<b>좋아요</b>");
+                        var $value3 = $("<b>나빠요</b>");
+                        var $value4 = $("<b>아주나빠요</b>");
+                        	
+                        $radiobtn1.attr("name", "text_" + answerCount);
+                        $radiobtn1.attr("type", "radio");
+                        $radiobtn1.attr("value", "very good");
+                        
+                        $radiobtn2.attr("name", "text_" + answerCount);
+                        $radiobtn2.attr("type", "radio");
+                        $radiobtn2.attr("value", "good");
+                        
+                        
+                        $radiobtn3.attr("name", "text_" + answerCount);
+                        $radiobtn3.attr("type", "radio");
+                        $radiobtn3.attr("value", "bad");
+                        
+                        $radiobtn4.attr("name", "text_" + answerCount);
+                        $radiobtn4.attr("type", "radio");
+                        $radiobtn4.attr("value", "very bad");
+                        
+                        $no.append($li_i);
+                        $no.append($radiobtn1);
+                       	$no.append($value1);
+                        $no.append($radiobtn2);
+                   		$no.append($value2);
+                        $no.append($radiobtn3);
+                   		$no.append($value3);
+                        $no.append($radiobtn4);
+                   		$no.append($value4);
+                   		}
+                   		else if(getline[i+3]=="3")
+                        {
+                        	var $value1 = $("<b>아주좋아요</b>");
+                        	var $value2 = $("<b>좋아요</b>");
+                        	var $value3 = $("<b>보통</b>");
+                        	var $value4 = $("<b>나빠요</b>");
+                        	var $value5 = $("<b>아주나빠요</b>");
+                        	
+                        $radiobtn1.attr("name", "text_" + answerCount);
+                        $radiobtn1.attr("type", "radio");
+                        $radiobtn1.attr("value", "very good");
+                        
+                        $radiobtn2.attr("name", "text_" + answerCount);
+                        $radiobtn2.attr("type", "radio");
+                        $radiobtn2.attr("value", "good");
+                        
+                        
+                        $radiobtn3.attr("name", "text_" + answerCount);
+                        $radiobtn3.attr("type", "radio");
+                        $radiobtn3.attr("value", "nomal");
+                        
+                        $radiobtn4.attr("name", "text_" + answerCount);
+                        $radiobtn4.attr("type", "radio");
+                        $radiobtn4.attr("value", "bad");
+                        
+                        
+                        $radiobtn5.attr("name", "text_" + answerCount);
+                        $radiobtn5.attr("type", "radio");
+                        $radiobtn5.attr("value", "very bad");
+                        
+                        $no.append($li_i);
+                        $no.append($radiobtn1);
+                       	$no.append($value1);
+                        $no.append($radiobtn2);
+                   		$no.append($value2);
+                        $no.append($radiobtn3);
+                   		$no.append($value3);
+                        $no.append($radiobtn4);
+                   		$no.append($value4);
+                        $no.append($radiobtn5);
+                   		$no.append($value5);
+                   		}
                         answerCount++;
                     }
                 }

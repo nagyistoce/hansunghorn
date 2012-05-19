@@ -10,6 +10,7 @@ import ana.phoneBean.DownLoad;
 import com.phonegap.api.PluginResult;
 
 public class AnAServicePlugin extends AnAServiceNet {
+	
 //	 private static String getLocalAddress() throws IOException { // 내 디바이스 IP
 //	 // 받아오기
 //	 try {
@@ -34,14 +35,15 @@ public class AnAServicePlugin extends AnAServiceNet {
 			while (true) {
 				if (action.equals("receiveData")) {
 					try{
-					//DownLoad.Message="";	
-					getHTMLData();
-					//getHTMLData();
+					getReceiveData();
+					DownLoad.waithandle.acquire();
 					}catch(Exception e)
 					{
 					return new PluginResult(PluginResult.Status.OK,""+e);
 					}
-					return new PluginResult(PluginResult.Status.OK, DownLoad.Message);
+					DownLoad.TempMessage=DownLoad.Message;
+					DownLoad.Message="";
+					return new PluginResult(PluginResult.Status.OK,DownLoad.TempMessage);
 				} else if (action.equals("TvSerch")) {
 					return new PluginResult(PluginResult.Status.OK,
 							"TV를 찾았습니다.");

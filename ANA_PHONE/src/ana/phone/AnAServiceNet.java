@@ -19,21 +19,10 @@ public abstract class AnAServiceNet extends Plugin {
 	public AnAServiceNet() {
 		super();
 	}
-	public void getHTMLData() throws IOException {
+	public void getReceiveData() throws IOException {
 		packet = new Packet();
 		packet.push(DownLoad.DOWNLOADHTML);
 		ConnectionBean.client.send(packet);
-		ConnectionBean.client.setReceiveHandler(new ReceiveHandler() {
-
-			public void onReceive(Packet pkt) {
-				if (pkt != null) {
-					for (int i = 0; i < pkt.getElementCount(); i++) {
-						DownLoad.Message += pkt.pop().toString();
-					}
-				}
-			}
-		});
-		return;
 	}
 
 }
