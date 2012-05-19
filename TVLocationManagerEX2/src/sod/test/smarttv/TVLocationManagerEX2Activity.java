@@ -24,7 +24,7 @@ public class TVLocationManagerEX2Activity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				Intent intent = new Intent(TVLocationManagerEX2Activity.this, sod.smarttv.TVLocationManagerActivity.class);
+				Intent intent = new Intent(TVLocationManagerEX2Activity.this, sod.activity.TVLocationManagerActivity.class);
 				
 				startActivity(intent);;
 
