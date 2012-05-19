@@ -22,7 +22,7 @@ public class TVLocationManager {
 	 *             두 번 이상 메서드가 호출될때 발생
 	 */
 	
-	TVLocationManager(){
+	public TVLocationManager(){
 		/*
 		 To
 		 

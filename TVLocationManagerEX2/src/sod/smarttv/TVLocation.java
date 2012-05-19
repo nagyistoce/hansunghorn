@@ -17,16 +17,16 @@ public class TVLocation {
 	 */
 	double longitude;
 	
-	TVLocation(){
+	public TVLocation(){
 		latitude = 0;
 		longitude = 0;
 	}
 	
-	void setLatitude(double inLatitude){
+	public void setLatitude(double inLatitude){
 		latitude = inLatitude;
 	}
 	
-	void setLogitude(double inLongitude){
+	public void setLogitude(double inLongitude){
 		longitude = inLongitude;
 	}
 	
