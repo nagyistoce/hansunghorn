@@ -29,15 +29,16 @@ public class StorageEXActivity extends Activity {
 			storage = Storage.getStorage("ana");
 			editText2.setText(storage.getSODStoragePath());
 			
-			/*//getFileListTest
-			list = storage.getFileList("*");;
+			//getFileListTest  파일검색
+			list = storage.getFileList(".docx");;
 			
 			for(int i =0; i < list.length ; i++){
 				str+= list[i];
+				str+="\n";
 			}
 			
 			editText3.setText(str);
-			*/
+			
 			
 			
 			//파일에 쓰기 테스트

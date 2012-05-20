@@ -210,7 +210,9 @@ public class Storage {
 	
 	/**
 	 * 넘겨준 filter를 포함한 파일의 목록을 만들어서 반환한다.
+	 * "*"을 입력하면 모든 파일의 목록을 반환한다.
 	 * ".txt"라고 하면 txt가 확장자인 파일의 목록을 반환한다.
+	 * "ew"라고 하면 ew라는 키워드가 포함된 파일의 목록을 반환한다.
 	 * @param filter
 	 * 얻기를 원하는 파일의 확장자
 	 * @return
@@ -319,7 +321,7 @@ public class Storage {
 	}
 	
 	/**
-	 * 해당 경로의 파일이 존재하는지 확인한다. 경로는 /sod/StorageID 밑으로만 검색이 가능하다.
+	 * 해당 경로의 파일이 존재하는지 확인한다. 경로는 /StorageName/StorageID 밑으로만 검색이 가능하다.
 	 * @param filePath
 	 * 존재하는지 확인하려고 하는 파일의 경로
 	 * @return 
