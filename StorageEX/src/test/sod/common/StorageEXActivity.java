@@ -25,7 +25,7 @@ public class StorageEXActivity extends Activity {
         String [] list = null;
         String str = new String();
         try {
- //			storage = Storage.crate("ana");
+ //			storage = Storage.crateStorage("ana");
 			storage = Storage.getStorage("ana");
 			editText2.setText(storage.getSODStoragePath());
 			
@@ -54,8 +54,6 @@ public class StorageEXActivity extends Activity {
 			StorageFile storageFile2 = storage.openFile("ex.txt", Storage.READ); //
 			byte [] buf = new byte[storageFile2.getLength()];
 			// 0
-	
-			
 			storageFile2.read(buf);
 			editText4.setText(new String(buf));
 			storageFile2.close();

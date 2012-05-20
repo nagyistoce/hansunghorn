@@ -3,6 +3,7 @@ package sod.common;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import android.os.Environment;
 
@@ -69,20 +70,23 @@ public class Storage {
 	 * @throws IOException
 	 * 저장소의 ID로 만들어진 저장소가 이미 존재거나 저장소를 생성하는 데 실패했을 경우, IOException을 던진다.
 	 */
-	public static Storage create(String storageID) throws IOException, IllegalArgumentException{
+	public static Storage createStorage(String storageID) throws IOException, IllegalArgumentException{
 		
 		if(storageID == null)
 			throw new IllegalArgumentException();
 		
+		//getExternalStorageState()는 SD카드가 마운트 되있는지 여부를 반환합니다.
 		String ext = Environment.getExternalStorageState();
 		String mSdPath;
 		
         if(ext.equals(Environment.MEDIA_MOUNTED)){
+        	//getExternalStorageDirectory()는 SD카드가 마운트된 경로를 반환합니다
         	mSdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
         }else{
         	mSdPath = Environment.MEDIA_UNMOUNTED;
         }
         
+        //받은 SD카드의 경로와, StroageID로 Storage를 생성한다.
         Storage storage = new Storage(mSdPath, storageID);
         
         //해당 storageID에 해당하는 디렉토리(저장소)가 이미 '존재하면' 예외를 던진다..
@@ -144,11 +148,13 @@ public class Storage {
 		if(fileNames == null)
 			throw new IOException();
 		
+		//저장소 하위에 있는 모든 파일들을 삭제한다.
 		for(int i=0 ; i<fileNames.length; i++){
 			File storageFile = new File(storage.getDirectory(), fileNames[i]);
 			storageFile.delete();
 		}
 		
+		//저장소에 대응하는 디렉토리도 삭제한다.
 		storage.getDirectory().delete();
 
 	}
@@ -203,21 +209,39 @@ public class Storage {
 	}
 	
 	/**
-	 * 넘겨준 filter의 화장자를 가진 파일의 목록을 만들어서 반환한다.
+	 * 넘겨준 filter를 포함한 파일의 목록을 만들어서 반환한다.
+	 * ".txt"라고 하면 txt가 확장자인 파일의 목록을 반환한다.
 	 * @param filter
 	 * 얻기를 원하는 파일의 확장자
 	 * @return
-	 *  넘겨준 filter의 확장자를 가진 파일의 리스트 
+	 *  넘겨준 filter를 포함한 파일의 리스트 
 	 */
 	public String [] getFileList(String filter) throws IllegalArgumentException{
 		
-		String [] returnStringList = null;
+		String [] returnFileList = null;
 		
 		if(filter.equals("*"))
-			returnStringList = directory.list();
+			returnFileList = directory.list();
+		else{
+			String [] fileList = directory.list();
+			ArrayList<String> filteringFileList = new ArrayList<String>();
+			
+			for(int i = 0 ; i<fileList.length  ; i++){
+				if( fileList[i].indexOf(filter) != -1 )
+					filteringFileList.add(fileList[i]);
+			}
+			
+			returnFileList = new String[filteringFileList.size()];
+			
+			for(int i = 0; i<returnFileList.length ; i++){
+				returnFileList[i] = filteringFileList.get(i);
+			}
+			
+			
+		}
 		//else ToDo...
 		
-		return returnStringList;
+		return returnFileList;
 	}
 
 	/**
