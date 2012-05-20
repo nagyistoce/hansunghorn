@@ -243,17 +243,9 @@ public class Storage {
 			throw new FileNotFoundException();
 		
 		StorageFile returnStorageFile = null;
-		switch(mode){
-		case READ:
-			returnStorageFile = StorageFileR.getStorageFile(file);
-			break;
-			
-		case WRITE:
-			returnStorageFile = StorageFileW.getStorageFile(file);
-			break;
-		default:
-			throw new IllegalArgumentException();
-		}
+		
+		returnStorageFile = StorageFile.getStorageFile(file, mode);
+		
 	
 		return returnStorageFile;
 	}
@@ -278,7 +270,7 @@ public class Storage {
 		if( file.exists() )
 			throw new IOException();
 		
-		StorageFile returnStorageFile = StorageFileW.createStorageFile(file);
+		StorageFile returnStorageFile = StorageFile.createStorageFile(file);
 	
 		return returnStorageFile;
 	}
