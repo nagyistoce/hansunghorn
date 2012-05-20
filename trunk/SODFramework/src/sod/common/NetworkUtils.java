@@ -2,6 +2,8 @@ package sod.common;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.MulticastSocket;
+import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -56,4 +58,23 @@ public class NetworkUtils {
 		return null;
 	}
 	
+	public static MulticastSocket createMutlicastSocket(String ip, int port){
+		try {
+			InetAddress group = InetAddress.getByName(ip);
+			MulticastSocket s = new MulticastSocket(port);
+			s.joinGroup(group);
+			return s;
+		} catch (Exception ex) {
+			return null;
+		}
+	}
+	
+	public static InetAddress getMulticastAddr(){
+		try {
+			return InetAddress.getByName(Constants.Multicast_IP);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

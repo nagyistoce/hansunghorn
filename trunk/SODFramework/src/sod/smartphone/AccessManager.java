@@ -1,16 +1,23 @@
 package sod.smartphone;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream.GetField;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.MulticastSocket;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
-import sod.test.ActionEx;
 
+import sod.common.ActionEx;
 import sod.common.Constants;
 import sod.common.Disposable;
 import sod.common.NetworkUtils;
 import sod.common.Packet;
 import sod.common.ReceiveHandler;
+import sod.common.Serializer;
 import sod.common.ThreadEx;
 import sod.common.Transceiver;
 
@@ -31,9 +38,6 @@ public class AccessManager implements Disposable {
 	//서버로부터 인증을 받았는지 여부
 	boolean isConnected = false;
 	
-	//서버 탐색중을 표시하는 플래그
-	static boolean isSearching = false;
-	
 	/**
 	 * 서버와 연결을 시도한다.
 	 * @param info
@@ -51,83 +55,67 @@ public class AccessManager implements Disposable {
 	}
 	
 	/**
-	 * 서버 탐색을 중지하고 결과를 리턴(서버 탐색도중이면 true)
-	 * @return
-	 */
-	public static boolean stopSearch(){
-		boolean rv = isSearching;
-		isSearching = false;
-		return rv;
-	}
-	
-	static void trySearch(Packet pkt, String ip, int port, SearchCallBack cb){
-		
-		final int TurnAroundLimitTime = 1000;
-		
-		Transceiver t = new Transceiver(new InetSocketAddress(ip, port));
-		t.send(pkt);
-		
-		if(Constants.isDebug)
-			Constants.logger.log("(debug:client) pinged to " + ip + "\n");
-			
-		ThreadEx.invoke(new Object[]{t, cb}, new ActionEx() {
-			@Override
-			public void work(Object arg) {
-				Object[] args = (Object[])arg;
-				Transceiver _t = (Transceiver)args[0];
-				SearchCallBack _cb = (SearchCallBack)args[1];
-				
-				Packet _p = new Packet();
-				InetSocketAddress result = _t.receive(_p);
-
-				if(result != null)
-				{
-					ServerInfo rv = new ServerInfo();
-					rv.EndPoint = result;
-					rv.ServiceName = (String) _p.pop();
-					_cb.onSearch(rv);
-				}
-			}
-		});
-		
-		ThreadEx.sleep(TurnAroundLimitTime);
-		t.dispose();
-	}
-
-	/**
 	 * 같은 와이파이에 있는 서버를 찾아 목록을 반환
 	 * 콜백으로 넘겨주는 인자가 null이면 탐색의 마지막에 도달함을 의미함.
 	 */		
-	public static void searchServer(String baseIP, int port, SearchCallBack cb){
+	public static void searchServer(String baseIP, int port, SearchCallBack cb){		
+		final int TurnAroundWaitTime = 4000;
 		
-		final int DevideCount = 4;
-		
-		isSearching = true;		
-		ThreadEx.invoke(new Object[] {baseIP, port, cb}, new ActionEx() {			
-			@Override
-			public void work(Object arg) {
-				Object[] args = (Object[])arg;
-				String base = (String) args[0];
-				Integer port = (Integer) args[1];
-				SearchCallBack _cb = (SearchCallBack) args[2];
-				Iterator<String> ipset = NetworkUtils.getIPSet(base);
-				
-				Packet p = new Packet();
-				p.signiture = Packet.REQUEST_PING;
-				
-				while(ipset.hasNext() && isSearching){
-					String ip = ipset.next();
-					trySearch(p, ip, port, _cb);
+		MulticastSocket s = NetworkUtils.createMutlicastSocket(Constants.Multicast_IP, Constants.Multicast_Port);
+		Transceiver t = null;
+		try {
+			Serializer se = new Serializer();
+			ByteArrayOutputStream output = new ByteArrayOutputStream();
+			Packet p = new Packet();
+			p.signiture = Packet.REQUEST_PING;
+			p.push(NetworkUtils.getLocalIP());
+			p.push(Constants.Multicast_Port_Response);
+
+			se.serialize(output, p);
+			byte[] buf = output.toByteArray();
+			DatagramPacket rawp = new DatagramPacket(buf, buf.length,
+					NetworkUtils.getMulticastAddr(),
+					Constants.Multicast_Port);
+			s.send(rawp);
+			s.close();
+			t = new Transceiver(null, Constants.Multicast_Port_Response);
+			
+			ThreadEx.invoke(new Object[]{cb, t}, new ActionEx() {				
+				@Override
+				public void work(Object arg) {
+					Object[] args = (Object[])arg;
+					SearchCallBack _cb = (SearchCallBack)args[0];
+					Transceiver _t = (Transceiver)args[1];
+					
+					while(true){
+						try {				
+							Packet p = new Packet();
+							Object rv = _t.receive(p);
+							if(rv == null) return;							
+							
+							ServerInfo info = new ServerInfo();
+							String _ip = (String)p.pop();
+							int _port = (Integer)p.pop();
+							String _service = (String)p.pop();
+							info.EndPoint = new InetSocketAddress(_ip, _port);
+							info.ServiceName = _service;
+							_cb.onSearch(info);
+						} catch (Exception ex) {
+							ex.printStackTrace();
+							return;
+						}
+					}
 				}
-				
-				//end of search
-				if(Constants.isDebug)
-					Constants.logger.log("(debug:client) search is finished\n");
-				
-				_cb.onSearch(null);
-			}
-		});
-		
+			});
+			ThreadEx.sleep(TurnAroundWaitTime);
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if(t != null)
+				t.dispose();
+			cb.onSearch(null);
+		}
 	}
 
 	/**

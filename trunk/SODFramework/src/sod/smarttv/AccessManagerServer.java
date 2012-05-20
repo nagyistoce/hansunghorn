@@ -1,6 +1,12 @@
 package sod.smarttv;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.MulticastSocket;
 import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,12 +17,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.jws.Oneway;
 
-import sod.test.ActionEx;
 
+import sod.common.ActionEx;
 import sod.common.ConsoleLogger;
 import sod.common.Constants;
+import sod.common.NetworkUtils;
 import sod.common.Packet;
 import sod.common.ReceiveHandler;
+import sod.common.Serializer;
 import sod.common.ThreadEx;
 import sod.common.Transceiver;
 import sod.common.Tuple;
@@ -31,6 +39,7 @@ public class AccessManagerServer {
 	protected DisconnectHandler cb_disc;
 	protected ServerReceiveHandler cb_recv;
 	
+	protected MulticastSocket listener_multi;
 	protected Transceiver listener;
 	protected ServerConfig config;
 	protected boolean isRunning = false;
@@ -55,10 +64,11 @@ public class AccessManagerServer {
 		
 		this.config = conf;
 		listener = new Transceiver(null, conf.Port);
+		isRunning = true;
 		
 		beginListening();
+		beginListeningMulti();
 		beginCheckingConnection();
-		isRunning = true;
 	}
 
 	/**
@@ -74,6 +84,8 @@ public class AccessManagerServer {
 		connset.clear();
 		listener.dispose();
 		listener = null;
+		listener_multi.close();
+		listener_multi = null;
 	}
 
 	/**
@@ -254,6 +266,50 @@ public class AccessManagerServer {
 			
 		});
 		
+	}
+	
+	//Ping 응답 서비스 스레드 시작.
+	protected void beginListeningMulti(){
+		final int bufsize = 0x1000;
+
+		listener_multi = NetworkUtils.createMutlicastSocket(Constants.Multicast_IP, Constants.Multicast_Port);
+		
+		ThreadEx.invoke(null, new ActionEx() {			
+			@Override
+			public void work(Object arg) {	
+				byte[] buf = new byte[bufsize];
+				Serializer se = new Serializer();				
+				Packet pkt = new Packet();
+				
+				while(isRunning){
+					DatagramPacket rawp;
+					try {
+						rawp = new DatagramPacket(buf, buf.length);
+						listener_multi.receive(rawp);
+					} catch (Exception ex) {
+						continue;
+					}
+					
+					int len = rawp.getLength();
+					//Constants.logger.log("packet size" + len);
+						
+					ByteArrayInputStream in = new ByteArrayInputStream(buf, 0, len);
+					pkt.clear();
+					se.deserialize(in, pkt);
+					String ip = (String)pkt.pop();
+					int port = (Integer)pkt.pop();
+					
+					Transceiver t = new Transceiver(new InetSocketAddress(ip, port));
+					pkt.clear();
+					pkt.push(NetworkUtils.getLocalIP());
+					pkt.push(config.Port);
+					pkt.push(config.serviceName);
+					t.send(pkt);
+					t.dispose();
+				}	
+				
+			}
+		});
 	}
 	
 	/**
