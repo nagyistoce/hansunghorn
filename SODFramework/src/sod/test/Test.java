@@ -73,7 +73,6 @@ public class Test {
 		waitfor();
 		
 		server.shutdown();
-		AccessManager.stopSearch();
 	}
 	
 	public static void testAccessManager(){

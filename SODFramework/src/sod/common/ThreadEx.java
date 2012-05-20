@@ -2,7 +2,6 @@ package sod.common;
 
 import java.util.Date;
 
-import sod.test.ActionEx;
 
 
 public class ThreadEx extends Thread {
