@@ -45,7 +45,7 @@ public class StorageEXActivity extends Activity {
 			//파일에 쓰기 테스트
 //			StorageFileW storageFileW = (StorageFileW)storage.create("ex.txt", Storage.WRITE);
 			StorageFileW storageFileW = (StorageFileW)storage.openFile("ex.txt", Storage.WRITE);
-			str = "MyLifeForIU";
+			str = "MyLifeForIU\nHelloWord...";
 			storageFileW.write(str.getBytes());
 			storageFileW.close();
 			
@@ -55,6 +55,7 @@ public class StorageEXActivity extends Activity {
 			
 			StorageFileR storageFileR = (StorageFileR) storage.openFile("ex.txt", Storage.READ); //
 			byte [] buf = new byte[storageFileR.getLength()];
+			// 0
 			storageFileR.read(buf);
 			editText4.setText(new String(buf));
 			storageFileR.close();

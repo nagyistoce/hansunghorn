@@ -67,17 +67,13 @@ public abstract class StorageFile {
 	 * @throws EOFException
 	 * 파일 포인터를 이동하다가 파일의 끝에 도달하면 EOFException을 던진다.
 	 */
-	public void seek(int offset, SeekOrigin seekorigin) throws EOFException{
-		
-	}
+	abstract public void seek(int offset, SeekOrigin seekorigin) throws EOFException;
 	
 	/**
 	 * 현재의 파일포인터의 위치를 얻는다.
 	 * (아직 미구현)
 	 */
-	public void getPosition(){
-		
-	}
+	abstract public void getPosition();
 	
 	/**
 	 * 파일의 길이를 가져온다.

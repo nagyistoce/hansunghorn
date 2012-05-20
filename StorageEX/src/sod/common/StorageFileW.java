@@ -2,6 +2,7 @@ package sod.common;
 
 
 import java.io.BufferedOutputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -78,6 +79,24 @@ public class StorageFileW extends StorageFile{
 
 	}
 	
+	/**
+	 * 미구현
+	 */
+	@Override
+	public void getPosition() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * 미구현
+	 */
+	@Override
+	public void seek(int offset, SeekOrigin seekorigin) throws EOFException {
+		// TODO Auto-generated method stub
+		
+	}
+
 	/**
 	 * 파일의 내용을 저장소 상에 기록한다.
 	 * @throws IOException 

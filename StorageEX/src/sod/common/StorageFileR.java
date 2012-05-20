@@ -60,7 +60,13 @@ public class StorageFileR extends StorageFile {
 		return storageFileR;
 	}
 	
-	
+	/**
+	 * byte배열에 파일에 있는 모든 데이터를 담아온다.
+	 * 
+	 * @param buf
+	 * @throws IOException
+	 * @throws EOFException
+	 */
 	public void read(byte[] buf) throws IOException,  EOFException{
 		while(in.read(buf) != -1) {;}
 		
@@ -80,8 +86,14 @@ public class StorageFileR extends StorageFile {
 	 * 파일을 읽다가 파일의 끝에 도달하면 EOFException을 던진다.
 	 */
 	public void read(byte[] buf, int index, int length) throws IOException, EOFException{
-		int returnInt;
-		returnInt = in.read(buf, index, length);
+		
+		for(int i = 0 ; i<index ; i++){
+			if (in.read() == -1)
+				break;
+		}
+		
+		int returnInt;	
+		returnInt = in.read(buf, 0, length);
 		
 		
 		if(returnInt == -1)
@@ -89,6 +101,24 @@ public class StorageFileR extends StorageFile {
 	}
 	
 	
+	/**
+	 * 미구현
+	 */
+	@Override
+	public void getPosition() {
+		// TODO Auto-generated method stub
+	}
+
+
+	/**
+	 * 미구현
+	 */
+	@Override
+	public void seek(int offset, SeekOrigin seekorigin) throws EOFException {
+		// TODO Auto-generated method stub
+		
+	}
+
 	/**
 	 * 파일의 내용을 저장소 상에 기록한다.
 	 * @throws IOException 
