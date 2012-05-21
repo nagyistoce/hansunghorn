@@ -38,11 +38,15 @@ public class TVLocationListOverlay extends ItemizedOverlay<OverlayItem> {
 		// TODO Auto-generated method stub
 		SODOverlayItem item = (SODOverlayItem)mOverlays.get(index);
 		
+		//Activity 의 context를 취한후 Intent를 선언한다.
 		Intent intent = new Intent(mContext, sod.activity.TVinformationActivity.class);
 		
+		//선택된 마크(오버레이아이템의 객체)를 가져온다.
 		SODOverlayItem sodOverlayItem = (SODOverlayItem) mOverlays.get(index);
+		//액티비티간 객체 전달을 위해 Parcelable를 이용한다.
 		ParcelableTVLocation parcelableTVLocation = new ParcelableTVLocation(sodOverlayItem.getTVLocation());
 		intent.putExtra("tvlocation", parcelableTVLocation);
+		//액티비티 호출
 		mContext.startActivity(intent);
 //		Toast.makeText(mContext, item.getSnippet(), Toast.LENGTH_SHORT).show();
 		
