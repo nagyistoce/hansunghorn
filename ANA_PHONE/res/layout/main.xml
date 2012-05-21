@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        <Button
+            android:id="@+id/TvSearch"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="220px"
+            android:layout_marginRight="20px"
+            android:layout_marginBottom="40px"
+            android:text="주변 스마트 TV 탐색" />
+        <Button
+            android:id="@+id/ServiceLocation"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginBottom="40px"
+            android:text="서비스 이용가능지역 보기" />
+        <Button
+            android:id="@+id/InstallService"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginBottom="40px"
+            android:text="설치 된 서비스 보기" />
+    </LinearLayout>
+
+</LinearLayout>
+
