@@ -69,6 +69,8 @@ public class Storage {
 	 * 생성된 저장소를 넘겨준다.
 	 * @throws IOException
 	 * 저장소의 ID로 만들어진 저장소가 이미 존재거나 저장소를 생성하는 데 실패했을 경우, IOException을 던진다.
+	 * @throws IllegalArgumentException
+	 * stroageID가 null이면 IllegalArgumentException을 던진다.
 	 */
 	public static Storage createStorage(String storageID) throws IOException, IllegalArgumentException{
 		
@@ -110,8 +112,13 @@ public class Storage {
 	 * 가져올 저장소의 ID를 이용하여 가져온 저장소
 	 * @throws  IOException
 	 * 가져오고자하는 저장소가 없을 때,  IOException을 던진다.
+	 *  @throws IllegalArgumentException
+	 * stroageID가 null이면 IllegalArgumentException을 던진다.
 	 */
-	static public Storage getStorage(String storageID) throws IOException{
+	static public Storage getStorage(String storageID) throws IOException, IllegalArgumentException{
+		
+		if(storageID == null)
+			throw new IllegalArgumentException();
 		
 		String ext = Environment.getExternalStorageState();
 		String mSdPath;
@@ -133,13 +140,57 @@ public class Storage {
 	}
 	
 	/**
+	 * 해당 storageID의 저장소가 있는지 확인한다.
+	 * @param storageID
+	 * 있는지 없는지 확인할 저장소의 ID
+	 * @return
+	 * 저장소가 있으면 true 없으면  false
+	 * @throws IllegalArgumentException
+	 * stroageID가 null이면 IllegalArgumentException을 던진다.
+	 */
+	static public boolean checkIsStorageExists(String storageID) throws IllegalArgumentException{
+		
+		if(storageID == null)
+			throw new IllegalArgumentException();
+		
+		//getExternalStorageState()는 SD카드가 마운트 되있는지 여부를 반환합니다.
+		String ext = Environment.getExternalStorageState();
+		String mSdPath;
+		
+        if(ext.equals(Environment.MEDIA_MOUNTED)){
+        	//getExternalStorageDirectory()는 SD카드가 마운트된 경로를 반환합니다
+        	mSdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        }else{
+        	mSdPath = Environment.MEDIA_UNMOUNTED;
+        }
+        
+        //받은 SD카드의 경로와, StroageID로 Storage를 생성한다.
+        Storage storage = new Storage(mSdPath, storageID);
+        
+        //해당 storageID에 해당하는 디렉토리(저장소)가 이미 존재하면 true
+        boolean returnBoolean;
+        if(storage.isExist())
+        	returnBoolean = true;
+        else{//존재하지 않으면 false;
+        	returnBoolean = false;
+        }
+        
+        return returnBoolean;
+		
+	}
+	
+	/**
 	 * 이미 생성된 저장소를 파괴할 때 사용하는 메소드이다. 저장소 내에 파일이 존재하는 경우에는 저장소 안의 파일을 삭제하고 해당 저장소를 파괴한다.
 	 * @param storageID 
 	 * 파괴하고자 하는 저장소의 ID이다.  저장소 ID는 String 객체여야 한다.
 	 * @throws IOException
 	 * 저장소의 ID가 없을 때는 삭제할 수 없으므로 IOException을 던진다.
+	 * @throws IllegalArgumentException
+	 * stroageID가 null이면 IllegalArgumentException을 던진다.
 	 */
-	static public void destroy(String storageID) throws IOException{
+	static public void destroy(String storageID) throws IOException, IllegalArgumentException{
+		if(storageID == null)
+			throw new IllegalArgumentException();
 		
 		Storage storage = getStorage(storageID);
 		
@@ -167,8 +218,12 @@ public class Storage {
 	 * 용량을 알기위한 저장소의 ID이다.  저장소 ID는 String 객체여야 한다.
 	 * @return
 	 * 용량을 Byte 단위로 계산하여 정수형으로 반환한다.
+	 * @throws IllegalArgumentException
+	 * stroageID가 null이면 IllegalArgumentException을 던진다.
 	 */
-	static public int getStorageSize(String storageID) throws IOException{
+	static public int getStorageSize(String storageID) throws IOException, IllegalArgumentException{
+		if(storageID == null)
+			throw new IllegalArgumentException();
 		
 		Storage storage = getStorage(storageID);
 		
@@ -191,9 +246,14 @@ public class Storage {
 	 * 넘겨준 저장소 ID에 해당하는 저장소 안의 파일들을 모두 제거한다.
 	 * @param storageID
 	 * 비우고자 하는 저장소의 ID이다.  저장소 ID는 String 객체여야 한다.
-	 * 
+	 * @throws IOException
+	 * FileList를 받아오지 못하면 IOException을 던진다.
+	 * @throws IllegalArgumentException
+	 * stroageID가 null이면 IllegalArgumentException을 던진다.
 	 */
 	static public void clear(String storageID) throws IOException{
+		if(storageID == null)
+			throw new IllegalArgumentException();
 		
 		Storage storage = getStorage(storageID);
 		String [] fileNames = storage.getFileList();
