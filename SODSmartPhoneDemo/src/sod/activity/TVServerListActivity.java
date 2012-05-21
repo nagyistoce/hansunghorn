@@ -15,6 +15,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class TVServerListActivity extends ListActivity {
 
@@ -45,7 +46,7 @@ public class TVServerListActivity extends ListActivity {
 				super.handleMessage(msg);
 				
 				ServerInfo info = (ServerInfo)msg.obj;
-				list.add(info.EndPoint.getAddress().getHostAddress() + info.ServiceName);
+				list.add(info.EndPoint.getAddress().getHostAddress() +","+ info.ServiceName);
 				adapter.notifyDataSetChanged();
 			}
 			
@@ -68,14 +69,21 @@ public class TVServerListActivity extends ListActivity {
 				}
 			}
 		});
-		
-		
+		/*
+		list.add("dasfdsf");
+		adapter.notifyDataSetChanged();
+		*/
 	}
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
+		
+		String []strs = adapter.getItem(position).split(",");
+		String ip = strs[0];
+		
+		Toast.makeText(this, ip, Toast.LENGTH_SHORT).show();
 	}
 
 }
