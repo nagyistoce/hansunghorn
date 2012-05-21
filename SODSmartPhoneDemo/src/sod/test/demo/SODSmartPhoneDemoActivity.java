@@ -34,6 +34,7 @@ public class SODSmartPhoneDemoActivity extends Activity {
 				intent = new Intent(SODSmartPhoneDemoActivity.this, sod.activity.TVLocationViewerActivity.class);
 				break;
 			case R.id.seachSmartTVButton:
+				intent = new Intent(SODSmartPhoneDemoActivity.this, sod.activity.TVServerListActivity.class);
 				break;
 			case R.id.serviceListButton:
 				break;
