@@ -20,6 +20,7 @@ public final class R {
         public static final int mapviewer=0x7f050003;
         public static final int phoneNumberTextView=0x7f050006;
         public static final int seachSmartTVButton=0x7f050001;
+        public static final int searchButton=0x7f050008;
         public static final int serviceListButton=0x7f050002;
         public static final int serviceNameTextView=0x7f050007;
         public static final int tvNameTextView=0x7f050004;
@@ -28,6 +29,7 @@ public final class R {
         public static final int main=0x7f030000;
         public static final int mapviewer=0x7f030001;
         public static final int tvinformation=0x7f030002;
+        public static final int tvserverlist=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f040001;
