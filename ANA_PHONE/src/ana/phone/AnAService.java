@@ -3,17 +3,18 @@ package ana.phone;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
+import sod.common.Packet;
+import sod.common.ReceiveHandler;
+
 import com.phonegap.*;
 
-import SOD.Common.Packet;
-import SOD.Common.ReceiveHandler;
-import SOD.SmartPhone.AccessManager;
-import SOD.SmartPhone.ServerInfo;
-import SOD.SmartTV.AccessManagerServer;
-import SOD.SmartTV.ConnectHandler;
-import SOD.SmartTV.DisconnectHandler;
-import SOD.SmartTV.ServerConfig;
-import SOD.SmartTV.ServerReceiveHandler;
+import sod.smartphone.AccessManager;
+import sod.smartphone.ServerInfo;
+import sod.smarttv.AccessManagerServer;
+import sod.smarttv.ConnectHandler;
+import sod.smarttv.DisconnectHandler;
+import sod.smarttv.ServerConfig;
+import sod.smarttv.ServerReceiveHandler;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -21,7 +22,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import ana.phoneBean.ConnectionBean;
 import ana.phoneBean.DownLoad;
-import ana.phonecontroller.Client_Initalize;
 
 public class AnAService extends DroidGap {
 	Button TvSearch, ServiceLocation, InstallService;
@@ -33,12 +33,11 @@ public class AnAService extends DroidGap {
 	}
 
 	public void Client_Initalize() {
-
 		ConnectionBean.client = new AccessManager();
 		ConnectionBean.ServerInfomation = new ServerInfo();
 		ConnectionBean.ServerInfomation.EndPoint = new InetSocketAddress(
 				ConnectionBean.SERVERIP, ConnectionBean.SERVERPORT);
-		StrictMode.enableDefaults();
+		
 		ConnectionBean.client.setReceiveHandler(new ReceiveHandler() {
 
 			public void onReceive(Packet pkt) {
@@ -52,6 +51,7 @@ public class AnAService extends DroidGap {
 				}
 			}
 		});
+		StrictMode.enableDefaults();
 		ConnectionBean.client.connect(ConnectionBean.ServerInfomation);
 	}
 

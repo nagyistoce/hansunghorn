@@ -5,9 +5,10 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.SocketException;
 
-import SOD.Common.Packet;
-import SOD.Common.ReceiveHandler;
-import SOD.Common.Transceiver;
+import sod.common.Packet;
+import sod.common.ReceiveHandler;
+import sod.common.Transceiver;
+
 
 import ana.phoneBean.ConnectionBean;
 import ana.phoneBean.DownLoad;
@@ -16,12 +17,19 @@ import com.phonegap.api.Plugin;
 
 public abstract class AnAServiceNet extends Plugin {
 	Packet packet;
+	private final String ANSWERDATA="answerData";
 	public AnAServiceNet() {
 		super();
 	}
-	public void getReceiveData() throws IOException {
+	public void ReceiveData() throws IOException {
 		packet = new Packet();
 		packet.push(DownLoad.DOWNLOADHTML);
+		ConnectionBean.client.send(packet);
+	}
+	public void SendData(String data) throws IOException {
+		packet = new Packet();
+	//	packet.push(answerData);
+		packet.push(data);		
 		ConnectionBean.client.send(packet);
 	}
 

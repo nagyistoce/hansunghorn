@@ -656,7 +656,40 @@ button.button {
 
 .image { vertical-align: top; }
 
+#pollpop { width: 100%; overflow:hidden; margin: 0; padding:0; }
+#pollpop .logo { position: relative; width: 300px; height: 58px; margin: 0 0 0 14px; }
+#pollpop .pop_view { position: relative; width: 100%; overflow:hidden; background: url(../../../image/fbg.gif) no-repeat 0 0; margin:0 14px 20px 14px; padding: 10px 0 0 0; }
+#pollpop .pop_view_box { display: table; table-layout: fixed; width: 100%; background: url(../../../image/bbg.gif) no-repeat 0 100%; margin:0; padding: 0 0 30px 0; }
+#pollpop .box { width:510px; overflow:hidden; margin: 0; padding: 0 20px; }
+#pollpop .foot { clear:both; position: relative; width: 100%; margin: 20px 0 10px 14px; }
+#pollpop .close { position:absolute; left: 495px; top: 30px; width:69px; padding:3px 0 3px 0; margin:0; line-height:1.25; }
+.ccc { width: 98%; background-color: #f7f7f7; border: 1px solid #c8c8c8; }
 
+.minic { background: #fff; padding: 10px; border: 2px solid #ddd; width: 470px; height: 380px;  }
+.minic .boxs { width: 470px; height: 380px; list-style: none; overflow: auto; }
+.minic .boxs table.t3 { border-collapse: collapse; width: 95%; margin: .5em 0px; border-top: 2px solid #3A8AE1; border-right-style: hidden; *border-right: 1px solid #fff; background: url(/img/05/board_name_bg.gif) no-repeat 0 0; }
+.minic .boxs table.t3 tr {  } /* colgroup 으로 td 스타일제어하려면 tr에 정의  */
+.minic .boxs table.t3 th, .minic .boxs table.t3 td { border: 1px solid #c8c8c8; border-width: 1px 1px 1px 1px; padding: 6px 6px 4px 6px; }
+.minic .boxs table.t3 thead, .minic .boxs table.t3 tfoot { background: #f4f4f4; font-weight: normal; }
+.minic .boxs table.t3 thead th, .minic .boxs table.t3 tbody th, .minic .boxs table.t3 tfoot th { background: #f4f4f4; color: #666; font-weight: bold; text-align: center; vertical-align: middle; }
+.minic .boxs table.t3 thead.alt th, .minic .boxs table.t3 tfootl.alt th { font-weight: normal; }
+.minic .boxs table.t3 th { background: #fcfcfc; font-weight: normal; text-align: inherit; }
+.minic .boxs table.t3 tr.alt th { background: #f8f7f3; }
+.minic .boxs table.t3 tr.alt td { background: #f8f7f3; }
+.minic .boxs table.t3 th.alt { background: #fff; }
+
+.minic { background: #fff; padding: 10px; border: 2px solid #ddd; width: 470px; height: 380px;  }
+.minic .boxs { width: 470px; height: 380px; list-style: none; overflow: auto; }
+.minic .boxs table.t3_1 { border-collapse: collapse; width: 95%; margin: .5em 0px; border-top: 2px solid #3A8AE1; background: url(/img/05/board_name_bg2.gif) no-repeat 0 0; }
+.minic .boxs table.t3_1 tr {  } /* colgroup 으로 td 스타일제어하려면 tr에 정의  */
+.minic .boxs table.t3_1 th, .minic .boxs table.t3_1 td { border: 1px solid #c8c8c8; padding: 6px 6px 4px 6px; }
+.minic .boxs table.t3_1 thead, .minic .boxs table.t3_1 tfoot { /* background: #f4f4f4; */font-weight: normal; }
+.minic .boxs table.t3_1 thead th, .minic .boxs table.t3_1 tbody th, .minic .boxs table.t3 tfoot th { /* background: #f4f4f4; */color: #666; font-weight: bold; text-align: center; vertical-align: middle; }
+.minic .boxs table.t3_1 thead.alt th, .minic .boxs table.t3_1 tfootl.alt th { font-weight: normal; }
+.minic .boxs table.t3_1 th { /* background: #fcfcfc;*/ font-weight: normal; text-align: inherit; }
+.minic .boxs table.t3_1 tr.alt th { background: #f8f7f3; }
+.minic .boxs table.t3_1 tr.alt td { background: #f8f7f3; }
+.minic .boxs table.t3_1 th.alt { background: #fff; }
 /* 링크-다운로드 */
 a.download { width: 48px; height: 19px; padding: 0 0 0 1.1em; border-bottom: 1px dashed #999; 
 background: transparent url(/img/all/file2.gif) no-repeat; color: #333; vertical-align: middle; white-space: nowrap; }

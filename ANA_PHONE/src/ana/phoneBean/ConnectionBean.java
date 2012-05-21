@@ -1,7 +1,7 @@
 package ana.phoneBean;
 
-import SOD.SmartPhone.AccessManager;
-import SOD.SmartPhone.ServerInfo;
+import sod.smartphone.AccessManager;
+import sod.smartphone.ServerInfo;
 
 public class ConnectionBean {
 	public static final int SERVERPORT = 30331;
