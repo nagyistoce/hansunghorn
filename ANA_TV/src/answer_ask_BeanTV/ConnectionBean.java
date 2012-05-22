@@ -1,8 +1,5 @@
 package answer_ask_BeanTV;
 
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import sod.smarttv.AccessManagerServer;
 import sod.smarttv.ServerConfig;
 

@@ -69,22 +69,24 @@ public class PieChartBuild extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.statics_graph);
 		mRenderer.setApplyBackgroundColor(true);
-		mRenderer.setBackgroundColor(Color.argb(100, 50, 50, 0));
+		//mRenderer.setBackgroundColor(Color.argb(100, 50, 50, 0));
 		mRenderer.setChartTitleTextSize(20);
+		mRenderer.setLabelsColor(Color.BLACK);
 		mRenderer.setLabelsTextSize(15);
 		mRenderer.setLegendTextSize(15);
-		mRenderer.setMargins(new int[] { 20, 30, 15, 0 });
+		mRenderer.setMargins(new int[] { 20, 30, 15,0 });
 		mRenderer.setZoomButtonsVisible(true);
 		mRenderer.setStartAngle(90);
 		
 		// mAdd.setEnabled(true);
 		// mX.setEnabled(true);
-		while (DataSturct.dataVector.isEmpty()) {
+		int i=10;
+		while (i != 0) {
 			// mAdd.setOnClickListener(new View.OnClickListener() {
 			// public void onClick(View v) {
 			double x = 0;
 			// try {
-			x = Double.parseDouble(""  );
+			x = Double.parseDouble(""+i );
 			// } catch (NumberFormatException e) {
 			// // TODO
 			// mX.requestFocus();
@@ -95,15 +97,15 @@ public class PieChartBuild extends Activity {
 
 			renderer.setColor(COLORS[(mSeries.getItemCount() - 1)
 					% COLORS.length]);
-			mRenderer.setChartTitle("");
-			mRenderer.setChartTitleTextSize(60);
+			mRenderer.setChartTitle("한성대남녀설문조사");
+			mRenderer.setChartTitleTextSize(40);
 			mRenderer.addSeriesRenderer(renderer);
 			// mX.setText("");
 			// mX.requestFocus();
 			if (mChartView != null) {
 				mChartView.repaint();
 			}
-			//i++;
+			--i;
 		}
 		// }
 		// });
@@ -119,6 +121,7 @@ public class PieChartBuild extends Activity {
 			mRenderer.setSelectableBuffer(10);
 			mChartView.setOnClickListener(new View.OnClickListener() {
 
+				@Override
 				public void onClick(View v) {
 					SeriesSelection seriesSelection = mChartView
 							.getCurrentSeriesAndPoint();
@@ -139,6 +142,7 @@ public class PieChartBuild extends Activity {
 			});
 			mChartView.setOnLongClickListener(new View.OnLongClickListener() {
 
+				@Override
 				public boolean onLongClick(View v) {
 					SeriesSelection seriesSelection = mChartView
 							.getCurrentSeriesAndPoint();

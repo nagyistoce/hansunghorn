@@ -4,10 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.SocketAddress;
-import java.net.SocketException;
-import java.util.Iterator;
-
 import sod.smartphone.AccessManager;
 import sod.smartphone.SearchCallBack;
 import sod.smartphone.ServerInfo;

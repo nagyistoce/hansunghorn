@@ -4,15 +4,7 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre6/lib/charsets.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre6/lib/deploy.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre6/lib/javaws.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre6/lib/jce.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre6/lib/jsse.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre6/lib/management-agent.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre6/lib/plugin.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre6/lib/resources.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre6/lib/rt.jar"/>
-	<classpathentry kind="lib" path="C:/Users/user/Downloads/jfreechart-1.0.14/jfreechart-1.0.14/lib/jcommon-1.0.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/alumina/android-sdks/add-ons/addon-google_apis-google-12/libs/maps.jar"/>
+	<classpathentry kind="lib" path="C:/Users/alumina/android-sdks/add-ons/addon-google_apis-google-12/libs/usb.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

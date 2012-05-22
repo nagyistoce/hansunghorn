@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <!-- android:apiKey="0HRKYjKYJe_W4T_Os9HT9y5V_QSunrqwHfcgW0Q"  JaeYeong Com.. -->
+    <!-- android:apiKey="0HRKYjKYJe_UUDHrj5zwquEE2GRJExdnMS1RRKA"  Kook do Com.. -->
+    <com.google.android.maps.MapView
+        android:id="@+id/map"
+        android:layout_width="fill_parent"
+        android:layout_height="600px"
+        android:apiKey="0HRKYjKYJe_UUDHrj5zwquEE2GRJExdnMS1RRKA"
+        android:clickable="true"
+        android:enabled="true" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/sendGeoPointButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="위치 전송하기" />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="뒤로" />
+    </LinearLayout>
+
+</LinearLayout>

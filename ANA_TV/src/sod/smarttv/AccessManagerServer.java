@@ -1,29 +1,19 @@
 package sod.smarttv;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.net.DatagramPacket;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
-import java.net.SocketException;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.jws.Oneway;
-
-
 import sod.common.ActionEx;
-import sod.common.ConsoleLogger;
 import sod.common.Constants;
 import sod.common.NetworkUtils;
 import sod.common.Packet;
-import sod.common.ReceiveHandler;
 import sod.common.Serializer;
 import sod.common.ThreadEx;
 import sod.common.Transceiver;

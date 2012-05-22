@@ -1,23 +1,15 @@
 package answer_ask_Service.TV;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.NetworkInterface;
-import java.net.SocketAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
-import javax.swing.LookAndFeel;
-
 import sod.common.Packet;
 import sod.common.Storage;
 import sod.common.StorageFile;
-import sod.common.Transceiver;
 import sod.smarttv.AccessManagerServer;
 import sod.smarttv.ConnectHandler;
 import sod.smarttv.DisconnectHandler;
@@ -27,25 +19,18 @@ import sod.smarttv.ServerReceiveHandler;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View.*;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.RadioGroup;
-import android.widget.CompoundButton.*;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup.*;
 import android.widget.Toast;
 import answer_ask_BeanTV.ConnectionBean;
 import answer_ask_BeanTV.DataBean;
@@ -89,6 +74,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 
 		ConnectionBean.server.setConnectHandler(new ConnectHandler() {
 
+			@Override
 			public void onConnect(int connid) {
 
 				// TODO Auto-generated method stub
@@ -98,6 +84,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 		});
 		ConnectionBean.server.setDisconnectHandler(new DisconnectHandler() {
 
+			@Override
 			public void onDisconnect(int connid) {
 				// TODO Auto-generated method stub
 				// Toast.makeText(QuestionnairesSettingSecond.this, "접속 끈김",
@@ -107,6 +94,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 		});
 		ConnectionBean.server.setReceiveHandler(new ServerReceiveHandler() {
 
+			@Override
 			public void onReceive(Packet pkt, int connid) {
 				ConnectionBean.ClientId = connid;
 				Packet packet;
@@ -181,6 +169,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 		LayoutComponentBean.radiogroup
 				.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
+					@Override
 					public void onCheckedChanged(RadioGroup group, int checkedId) {
 						// TODO Auto-generated method stub
 						if (checkedId != -1) {
@@ -200,6 +189,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 												-1,
 												new DialogInterface.OnClickListener() {
 
+													@Override
 													public void onClick(
 															DialogInterface dialog,
 															int which) {
@@ -219,6 +209,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 		LayoutComponentBean.questionAdd
 				.setOnClickListener(new OnClickListener() {
 
+					@Override
 					public void onClick(View v) {
 						vector.add(LayoutComponentBean.SEPARATOR + "Topic"
 								+ LayoutComponentBean.SEPARATOR
@@ -245,6 +236,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 		LayoutComponentBean.listview
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
 						String str = "문항  = " + list.get(position);
@@ -255,6 +247,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 				});
 
 		LayoutComponentBean.complete.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				vector.add(LayoutComponentBean.SEPARATOR + "Topic"
 						+ LayoutComponentBean.SEPARATOR
@@ -276,8 +269,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 
 				LayoutComponentBean.statisticsGraph_btn.setEnabled(true);
 				LayoutComponentBean.QuestionnaireImfo_btn.setEnabled(true);
-				LayoutComponentBean.QuestionnaireInitial_btn
-						.setText("설문지 재 설정");
+				LayoutComponentBean.QuestionnaireInitial_btn.setText("설문지 재 설정");
 				Intent intent = new Intent(QuestionnairesSettingSecond.this,
 						AnA_BootMode.class);
 				startActivity(intent);

@@ -1,7 +1,6 @@
 package answer_ask_Service.TV;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +29,7 @@ public class QuestionnaireSettingFirst extends Activity implements DataSturct {
 
 	public void ButtonEvent() {
 		LayoutComponentBean.Next.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				vector.add(SEPARATOR + "Company" + SEPARATOR
 						+ LayoutComponentBean.Company.getText() + SEPARATOR
@@ -46,6 +46,7 @@ public class QuestionnaireSettingFirst extends Activity implements DataSturct {
 		LayoutComponentBean.UserImfo
 				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
+					@Override
 					public void onCheckedChanged(CompoundButton buttonView,
 							boolean isChecked) {
 						// TODO Auto-generated method stub

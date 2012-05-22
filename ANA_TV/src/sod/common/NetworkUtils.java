@@ -1,11 +1,8 @@
 package sod.common;
 
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
-import java.net.UnknownHostException;
 import java.util.Iterator;
-import java.util.List;
 
 public class NetworkUtils {
 	final static NetworkUtils Instance;

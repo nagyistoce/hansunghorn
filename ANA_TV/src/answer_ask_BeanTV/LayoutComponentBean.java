@@ -7,7 +7,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import answer_ask_Service.TV.AnA_BootMode;
 
 public class LayoutComponentBean {
 	public final static String SEPARATOR = "|";

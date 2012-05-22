@@ -1,16 +1,9 @@
 package sod.smartphone;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream.GetField;
 import java.net.DatagramPacket;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
-
 import sod.common.ActionEx;
 import sod.common.Constants;
 import sod.common.Disposable;
@@ -122,6 +115,7 @@ public class AccessManager implements Disposable {
 	 * 수신하는 작업 스레드를 종료하고 할당된 모든 리소스를 반환한다. (접속은 자동으로 종료됨)
 	 * terminate listening thread and release resources.
 	 */
+	@Override
 	public void dispose(){
 		isRunning = false;
 		conn.dispose();
