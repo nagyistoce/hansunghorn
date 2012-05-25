@@ -35,6 +35,7 @@ public  class StorageFile {
 	
 	final static int READ = 0;
 	final static int WRITE = 1;
+	public final static int WRITE_PLUS = 2;
 	
 	int mode = 0;
 	
@@ -93,6 +94,23 @@ public  class StorageFile {
 			
 			storageFile.out = new BufferedOutputStream(storageFile.fileOutputStream);
 			storageFile.mode = WRITE;
+			break;
+		case WRITE_PLUS:
+			storageFile.fileInputStream = new FileInputStream(storageFile.file);
+			storageFile.in = new BufferedInputStream(storageFile.fileInputStream);
+			storageFile.mode = WRITE_PLUS;
+			
+			byte [] buf = new byte[storageFile.getLength()];
+			while(storageFile.in.read(buf) != -1) {;}
+			String sBuf = new String(buf);
+			storageFile.in.close();
+			storageFile.fileInputStream.close();
+			
+			storageFile.fileOutputStream = new FileOutputStream(storageFile.file);
+			storageFile.out = new BufferedOutputStream(storageFile.fileOutputStream);
+			storageFile.write(sBuf.getBytes());
+			storageFile.flush();
+			
 			break;
 		}
 		return storageFile;
@@ -163,7 +181,7 @@ public  class StorageFile {
 	 */
 	public void write(byte [] buf) throws IOException{
 		
-		if(mode != WRITE)
+		if(mode == READ)
 			DebugUtils.throwException();
 		
 		out.write(buf);
@@ -238,6 +256,7 @@ public  class StorageFile {
 			break;
 			
 		case WRITE:
+		case WRITE_PLUS:
 			out.flush();
 			fileOutputStream.flush();
 			break;
@@ -257,6 +276,7 @@ public  class StorageFile {
 			break;
 			
 		case WRITE:
+		case WRITE_PLUS:
 			out.close();
 			fileOutputStream.close();
 			break;

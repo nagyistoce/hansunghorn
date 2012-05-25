@@ -60,6 +60,12 @@ public class StorageEXActivity extends Activity {
 			storageFile2.close();
 			
 			
+			//파일내용 불러와서 이어쓰기 테스트
+			StorageFile storageFile3 = storage.openFile("ex.txt", Storage.WRITE_PLUS);
+			String str2 = new String("AddString");
+			storageFile3.write(str2.getBytes());
+			storageFile3.close();
+			
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
