@@ -45,6 +45,7 @@ public class SeverCon extends DroidGap{
 
 	
 	
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);

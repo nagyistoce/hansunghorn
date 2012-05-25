@@ -1,22 +1,12 @@
 package ana.phone;
 
-import java.net.InetSocketAddress;
-
-import sod.common.Packet;
-import sod.common.ReceiveHandler;
-
 import com.phonegap.*;
 
-import sod.smartphone.AccessManager;
-import sod.smartphone.ServerInfo;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import ana.phoneBean.ConnectionBean;
-import ana.phoneBean.DownLoad;
 
 public class AnAService  extends DroidGap {
 	Button TvSearch, ServiceLocation, InstallService;

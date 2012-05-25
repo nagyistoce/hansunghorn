@@ -1,9 +1,9 @@
 package ana.phone;
 
-import sod.smartphone.TVLocation;
-
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.OverlayItem;
+
+import sod.smartphone.TVLocation;
 
 public class SODOverlayItem extends OverlayItem {
 	

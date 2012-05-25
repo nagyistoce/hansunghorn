@@ -2,11 +2,12 @@ package ana.phone;
 
 import java.util.ArrayList;
 
+import com.google.android.maps.ItemizedOverlay;
+import com.google.android.maps.OverlayItem;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import com.google.android.maps.ItemizedOverlay;
-import com.google.android.maps.OverlayItem;
 
 public class TVLocationListOverlay extends ItemizedOverlay<OverlayItem> {
 

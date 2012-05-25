@@ -3,8 +3,6 @@ package sod.common;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import javax.activation.UnsupportedDataTypeException;
-
 /**
  * 
  * @author MB a unit of transferring

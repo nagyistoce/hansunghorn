@@ -2,8 +2,6 @@ package ana.phone;
 
 import java.util.ArrayList;
 
-import com.phonegap.DroidGap;
-
 import sod.common.NetworkUtils;
 import sod.smartphone.AccessManager;
 import sod.smartphone.SearchCallBack;
