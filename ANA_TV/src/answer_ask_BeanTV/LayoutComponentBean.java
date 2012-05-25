@@ -24,5 +24,5 @@ public class LayoutComponentBean {
 	public static Button FileAdd, Next;
 	public static int ScreenCount=0;
 	public static RadioGroup radiogroup;
-	public static int choice = -1;
+	public static int choice = -1; 
 }

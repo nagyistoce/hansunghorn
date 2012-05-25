@@ -24,7 +24,12 @@ public class QuestionnaireSettingFirst extends Activity implements DataSturct {
 		LayoutComponentBean.FileAdd = (Button) findViewById(R.id.FileAddButton);
 		LayoutComponentBean.UserImfo = (CheckBox) findViewById(R.id.UserInfoCheckBox);
 		LayoutComponentBean.Next = (Button) findViewById(R.id.NextButton);
-
+		
+		// 이부분 데모 때문에 넣은 부분/////////////////////////////
+		LayoutComponentBean.Company.setText("Hansung University");
+		LayoutComponentBean.During.setText("2012.01.01~2012.05.23");
+		LayoutComponentBean.UserImfo.setChecked(true);
+		/////////////////////////////////////////////////////////
 	}
 
 	public void ButtonEvent() {

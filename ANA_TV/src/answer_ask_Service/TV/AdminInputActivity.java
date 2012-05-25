@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 public class AdminInputActivity extends Activity {
 	EditText TvName,PhoneNumber,ServiceName,e_Mail;
 	Button admininputButton;
@@ -25,8 +24,10 @@ public class AdminInputActivity extends Activity {
 		 e_Mail=(EditText)findViewById(R.id.eMailEditText);
 		 PhoneNumber=(EditText)findViewById(R.id.phoneNumberEditText);
 		 ServiceName=(EditText)findViewById(R.id.serviceNameEditText);
-		
-		
+		TvName.setText("HansungTV");
+		e_Mail.setText("karima@hansung.ac.kr");
+		PhoneNumber.setText("010-4282-3753");
+		ServiceName.setText("AnA");
 		admininputButton.setOnClickListener(new OnClickListener() {
 			
 			@Override

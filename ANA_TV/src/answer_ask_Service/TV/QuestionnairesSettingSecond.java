@@ -44,6 +44,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 	private int a = 0;
 	private Storage storage;
 	private StorageFile storageFile;
+	int count=0;
 	// final String[]
 	private static String getLocalAddress() throws IOException { // 내 디바이스 IP
 		// 받아오기
@@ -211,6 +212,24 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 
 					@Override
 					public void onClick(View v) {
+						switch(count)
+						{
+						case 0:
+							LayoutComponentBean.question.setText("밥은 제때 먹구 합니까?");
+							break;
+						case 1:
+							LayoutComponentBean.question.setText("교수님께서 잘 지도 해주셨습니까?");
+							break;
+						case 2:
+							LayoutComponentBean.question.setText("생각 했던 결과와 어느 정도 일치 합니까?");
+							break;
+						case 3:
+							LayoutComponentBean.question.setText("설계 하는 동안 여자친구를 만들지는 않았습니까?");
+							break;
+						default:
+							LayoutComponentBean.question.setText("설계를 하는동안 배운점이 많습니까??");
+							break;
+						}
 						vector.add(LayoutComponentBean.SEPARATOR + "Topic"
 								+ LayoutComponentBean.SEPARATOR
 								+ LayoutComponentBean.topic.getText()
@@ -220,7 +239,8 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 								+ LayoutComponentBean.SEPARATOR + "Choice"
 								+ LayoutComponentBean.SEPARATOR
 								+ LayoutComponentBean.choice);
-
+						
+						count++;
 						list.add(""
 								+ ++a
 								+ ". "
@@ -289,6 +309,11 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 		LayoutComponentBean.long_answer = (RadioButton) findViewById(R.id.first);
 		LayoutComponentBean.short_answer = (RadioButton) findViewById(R.id.second);
 		LayoutComponentBean.listview = (ListView) findViewById(R.id.listview);
+		
+		
+		/////////////데모 ////////////////////////
+		LayoutComponentBean.topic.setText("설계");
+		/////////////////////////////////////////
 		list = new ArrayList<String>();
 		adapter = new ArrayAdapter<String>(QuestionnairesSettingSecond.this,
 				R.layout.textstyle, list);
