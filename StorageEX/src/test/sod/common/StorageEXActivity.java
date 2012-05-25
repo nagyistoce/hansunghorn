@@ -42,8 +42,8 @@ public class StorageEXActivity extends Activity {
 			
 			
 			//파일에 쓰기 테스트
-//			StorageFile storageFile = storage.createFile("ex.txt");
-			StorageFile storageFile = storage.openFile("ex.txt", Storage.WRITE);
+			StorageFile storageFile = storage.createFile("ex.txt");
+//			StorageFile storageFile = storage.openFile("ex.txt", Storage.WRITE);
 			str = "MyLifeForIU\nHelloWord...";
 			storageFile.write(str.getBytes());
 			storageFile.close();

@@ -60,6 +60,7 @@ public  class StorageFile {
 	 
 		StorageFile storageFile = new StorageFile();
 	 
+		storageFile.file = mFile;	
 		storageFile.fileOutputStream = new FileOutputStream(storageFile.file);
 		
 		storageFile.out = new BufferedOutputStream(storageFile.fileOutputStream);
