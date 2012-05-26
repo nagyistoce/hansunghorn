@@ -1,0 +1,46 @@
+//
+//  SODAccessManager.h
+//  SOD.iOS
+//
+//  Created by Project BJ on 12. 5. 2..
+//  Copyright (c) 2012년 __MyCompanyName__. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "SODTransceiver.h"
+#import "SODSerializer.h"
+#include <ifaddrs.h>
+#include <arpa/inet.h>
+
+@protocol TestViewDeligate <NSObject>
+-(void)callBack:(SODPacket *)msg;
+@end
+
+@interface SODAccessManager : NSObject 
+{
+    @public
+    NSThread *receiveThread;
+    NSThread *searchThread;
+    SODServerInfo *serverInfo;
+    SODTransceiver *conn;
+    SODSerializer *serializer;
+    SODConstants *constants;
+    BOOL isRunning;
+    
+    NSMutableArray *serverList;
+    
+    id <TestViewDeligate> delegate;  
+}
+
+@property (nonatomic, assign) id <TestViewDeligate> delegate; 
+
+-(NSArray *)searchServer;
+//-(void)connectToServer:(NSString *)msg;
+
+-(BOOL)connectToServer:(NSString *) ipAddr withPort:(int) portNum;
+-(void)sendToServer:(SODPacket *)message;
+-(void)receiveFromServer:(SODPacket *)arg;
+-(void)makeServerList:(id) sender;
+-(NSString *)getIPAddress;
+-(void)disconnect;
+@end
