@@ -58,7 +58,7 @@ public class AccessManager implements Disposable {
 	 * 같은 와이파이에 있는 서버를 찾아 목록을 반환
 	 * 콜백으로 넘겨주는 인자가 null이면 탐색의 마지막에 도달함을 의미함.
 	 */		
-	public static void searchServer(String baseIP, int port, SearchCallBack cb){		
+	public static void searchServer(String baseIP, SearchCallBack cb){		
 		final int TurnAroundWaitTime = 4000;
 		
 		MulticastSocket s = NetworkUtils.createMutlicastSocket(Constants.Multicast_IP, Constants.Multicast_Port);

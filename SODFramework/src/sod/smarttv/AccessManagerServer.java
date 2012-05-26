@@ -202,16 +202,10 @@ public class AccessManagerServer {
 						t = connset.get(sender.hashCode());
 						t.item2 = ThreadEx.getCurrentTime();
 						break;
-					case Packet.REQUEST_PING:
-						sender_t = new Transceiver(sender);
-						p2.clear();
-						p2.signiture = Packet.RESPONSE_PING;
-						p2.push(config.serviceName);
-						sender_t.send(p2);
-						sender_t.dispose();
-						break;
 					case Packet.REQUEST_SERVICE_DATA:
 						//need to implement
+						break;
+					case Packet.REQUEST_PING:
 						break;
 					default:
 						cb_recv.onReceive(p, sender.hashCode());
@@ -301,11 +295,15 @@ public class AccessManagerServer {
 					
 					Transceiver t = new Transceiver(new InetSocketAddress(ip, port));
 					pkt.clear();
+					pkt.signiture = Packet.RESPONSE_PING;
 					pkt.push(NetworkUtils.getLocalIP());
 					pkt.push(config.Port);
 					pkt.push(config.serviceName);
 					t.send(pkt);
 					t.dispose();
+					
+					if(Constants.isDebug)
+						Constants.logger.log("(debug:server) ping responsed to " + ip + " : " + port + ".\n");
 				}	
 				
 			}
