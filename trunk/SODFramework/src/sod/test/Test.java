@@ -21,7 +21,7 @@ import sod.common.*;
 
 public class Test {
 	final static String ServerIP = "127.0.0.1";
-	final static int ServerPort = 3221; 
+	final static int ServerPort = 6789; 
 	
 	static Logable logger;
 	static AccessManagerServer server; 
@@ -47,28 +47,28 @@ public class Test {
 		server.start(conf);		
 		
 		//now we are looking for server.
-		String localip = NetworkUtils.getLocalIP();
-		logger.log("localip = " + localip + "\n");		
-		
-		AccessManager.searchServer(localip, ServerPort, new SearchCallBack() {			
-			@Override
-			public void onSearch(ServerInfo info) {
-				if(info == null)
-				{
-					//end of search
-					logger.log("end of search.\n");
-				}
-				else
-				{
-					logger.log("found server: "
-							+ info.EndPoint.getAddress().getHostAddress()
-							+ ", "
-							+ info.ServiceName
-							+ "\n");
-				}
-			}
-		}); 
-
+//		String localip = NetworkUtils.getLocalIP();
+//		logger.log("localip = " + localip + "\n");		
+//		
+//		AccessManager.searchServer(localip, new SearchCallBack() {			
+//			@Override
+//			public void onSearch(ServerInfo info) {
+//				if(info == null)
+//				{
+//					//end of search
+//					logger.log("end of search.\n");
+//				}
+//				else
+//				{
+//					logger.log("found server: "
+//							+ info.EndPoint.getAddress().getHostAddress()
+//							+ ", "
+//							+ info.ServiceName
+//							+ "\n");
+//				}
+//			}
+//		}); 
+//
 		logger.log("press enter to finish.\n");
 		waitfor();
 		
