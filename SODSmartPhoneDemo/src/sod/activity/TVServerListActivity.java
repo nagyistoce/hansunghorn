@@ -1,17 +1,26 @@
 package sod.activity;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
+import sod.common.ActionEx;
 import sod.common.NetworkUtils;
+import sod.common.ThreadEx;
 import sod.smartphone.AccessManager;
 import sod.smartphone.SearchCallBack;
 import sod.smartphone.ServerInfo;
+import sod.smarttv.AccessManagerServer;
+import sod.smarttv.ServerConfig;
 import sod.test.demo.R;
 
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,7 +31,7 @@ import android.widget.Toast;
 
 public class TVServerListActivity extends ListActivity {
 
-	final static int port = 30331;
+	final static int port = 3221;
 	
 	private ArrayList<String> list;
 	private ArrayAdapter<String> adapter;
@@ -41,48 +50,53 @@ public class TVServerListActivity extends ListActivity {
 		setListAdapter(adapter);
 		
 		Log.i("jaeyeong","jaeyeong start");
+	
+		////////////
 		/*
-		handler = new Handler(){
-
-			@Override
-			public void handleMessage(Message msg) {
-				// TODO Auto-generated method stub
-				super.handleMessage(msg);
-				
-				ServerInfo info = (ServerInfo)msg.obj;
-				Log.i("jaeyeong", "jaeyeong"+info.EndPoint.getAddress().getHostAddress() +","+ info.ServiceName);
-				list.add(info.EndPoint.getAddress().getHostAddress() +","+ info.ServiceName);
-				adapter.notifyDataSetChanged();
-			}
-			
-		};
+		AccessManagerServer server = new AccessManagerServer();
+		final int ServerPort = 3221; 
+		ServerConfig conf = new ServerConfig();
+		conf.Port = ServerPort;
+		conf.serviceName = "TestService";
+		server.start(conf);		
+	
 		*/
+		////////////
+
+//		String localip = "192.168.0.24";
 		
-		
-		String localip = NetworkUtils.getLocalIP();
-		AccessManager.searchServer(localip, port, new SearchCallBack() {
+		ThreadEx.invoke(null, new ActionEx() {
 			
 			@Override
-			public void onSearch(ServerInfo info) {
+			public void work(Object arg) {
 				// TODO Auto-generated method stub
-				if(info == null){
+				String localip = getLocalIpAddress();
+				AccessManager.searchServer(localip, new SearchCallBack() {
 					
-				}else{
-					//핸들러 이용해서 보내야하나??
-					Log.i("jaeyeong", "jaeyeong"+"OnSearch");
-					
-					list.add(info.EndPoint.getAddress().getHostAddress() +","+ info.ServiceName);
-					adapter.notifyDataSetChanged();
-					/*
-					Message msg = Message.obtain();
-					msg.obj = (Object)info;
-					handler.sendMessage(msg);
-					*/
-				}
+					@Override
+					public void onSearch(ServerInfo info) {
+						// TODO Auto-generated method stub
+						if(info == null){
+							
+						}else{
+							//핸들러 이용해서 보내야하나??
+							Log.i("jaeyeong", "jaeyeong"+"OnSearch");
+							Log.i("jaeyeong",info.EndPoint.getAddress().getHostAddress());
+							
+	/*						//핸들러 이용해서 보내자
+							list.add(info.EndPoint.getAddress().getHostAddress() +","+ info.ServiceName);
+							adapter.notifyDataSetChanged();
+	*/
+							
+						}
+					}
+				});
 			}
 		});
+		
+
 		//stub code..../////////////////////////////////
-		list.add("192.168.0.5,A&A");
+//		list.add("192.168.0.5,A&A");
 		adapter.notifyDataSetChanged();
 		///////////////////////////////////////////////////////////
 		
@@ -94,7 +108,8 @@ public class TVServerListActivity extends ListActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				String localip = NetworkUtils.getLocalIP();
-				AccessManager.searchServer(localip, port, new SearchCallBack() {
+				Toast.makeText(v.getContext(), localip, Toast.LENGTH_LONG);
+				AccessManager.searchServer(localip, new SearchCallBack() {
 					
 					@Override
 					public void onSearch(ServerInfo info) {
@@ -115,8 +130,26 @@ public class TVServerListActivity extends ListActivity {
 			}
 		});
 		*/
+		
 	}
+	public String getLocalIpAddress() {
+	    try {
+	        for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+	            NetworkInterface intf =(NetworkInterface)en.nextElement();
+	            for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+	            
+	                InetAddress inetAddress =(InetAddress) enumIpAddr.nextElement();
 
+	                if (!inetAddress.isLoopbackAddress()) {
+	                    return inetAddress.getHostAddress().toString();
+	                }
+	            }
+	        }
+	    } catch (SocketException ex) {
+	        Log.e("jaeyeong", ex.toString());
+	    }
+	    return null;
+	}
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
