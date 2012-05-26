@@ -1,5 +1,7 @@
 package sod.test.demo;
 
+import sod.smarttv.AccessManagerServer;
+import sod.smarttv.ServerConfig;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +23,14 @@ public class SODSmartPhoneDemoActivity extends Activity {
         mapViewerButton.setOnClickListener(buttonListener);
         seachSmartTVButton.setOnClickListener(buttonListener);
         serviceListButton.setOnClickListener(buttonListener);
+        /*
+        AccessManagerServer server = new AccessManagerServer();
+		final int ServerPort = 3221; 
+		ServerConfig conf = new ServerConfig();
+		conf.Port = ServerPort;
+		conf.serviceName = "TestService";
+		server.start(conf);
+		*/	
     }
     
     OnClickListener buttonListener = new OnClickListener() {
