@@ -68,7 +68,7 @@ public class AccessManager implements Disposable {
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			Packet p = new Packet();
 			p.signiture = Packet.REQUEST_PING;
-			p.push(NetworkUtils.getLocalIP());
+			p.push(baseIP);
 			p.push(Constants.Multicast_Port_Response);
 
 			se.serialize(output, p);

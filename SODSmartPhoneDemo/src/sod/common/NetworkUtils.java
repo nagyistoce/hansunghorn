@@ -48,8 +48,7 @@ public class NetworkUtils {
 	}
 	
 	public static String getLocalIP(){
-		return "192.168.0.24";
-		/*
+		
 		try{
 			InetAddress addr = InetAddress.getLocalHost();
 			return addr.getHostAddress();
@@ -58,7 +57,8 @@ public class NetworkUtils {
 			ex.printStackTrace();
 		}
 		return null;
-		*/
+		
+	//	return "192.168.0.24";
 	}
 	
 	public static MulticastSocket createMutlicastSocket(String ip, int port){

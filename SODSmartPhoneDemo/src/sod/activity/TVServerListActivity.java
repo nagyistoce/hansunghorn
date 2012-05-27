@@ -1,10 +1,6 @@
 package sod.activity;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
 import sod.common.ActionEx;
 import sod.common.NetworkUtils;
@@ -12,11 +8,11 @@ import sod.common.ThreadEx;
 import sod.smartphone.AccessManager;
 import sod.smartphone.SearchCallBack;
 import sod.smartphone.ServerInfo;
-import sod.smarttv.AccessManagerServer;
-import sod.smarttv.ServerConfig;
 import sod.test.demo.R;
 
 import android.app.ListActivity;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -51,28 +47,31 @@ public class TVServerListActivity extends ListActivity {
 		
 		Log.i("jaeyeong","jaeyeong start");
 	
-		////////////
-		/*
-		AccessManagerServer server = new AccessManagerServer();
-		final int ServerPort = 3221; 
-		ServerConfig conf = new ServerConfig();
-		conf.Port = ServerPort;
-		conf.serviceName = "TestService";
-		server.start(conf);		
-	
-		*/
-		////////////
+		
+		handler = new Handler(){
 
-//		String localip = "192.168.0.24";
+			@Override
+			public void handleMessage(Message msg) {
+				// TODO Auto-generated method stub
+				ServerInfo info = (ServerInfo) msg.obj;
+				list.add(info.EndPoint.getAddress().getHostAddress() +","+ info.ServiceName);
+				adapter.notifyDataSetChanged();
+				
+			}
+			
+		};
+		
 		
 		ThreadEx.invoke(null, new ActionEx() {
 			
 			@Override
 			public void work(Object arg) {
 				// TODO Auto-generated method stub
+//				String localip = NetworkUtils.getLocalIP();
 				String localip = getLocalIpAddress();
+				Log.i("jaeyeong", localip);
 				AccessManager.searchServer(localip, new SearchCallBack() {
-					
+						
 					@Override
 					public void onSearch(ServerInfo info) {
 						// TODO Auto-generated method stub
@@ -81,7 +80,11 @@ public class TVServerListActivity extends ListActivity {
 						}else{
 							//핸들러 이용해서 보내야하나??
 							Log.i("jaeyeong", "jaeyeong"+"OnSearch");
-							Log.i("jaeyeong",info.EndPoint.getAddress().getHostAddress());
+							Log.i("jaeyeong",info.EndPoint.getAddress().getHostAddress()) ;
+							
+							Message msg = handler.obtainMessage();
+							msg.obj = info;
+							handler.sendMessage(msg);
 							
 	/*						//핸들러 이용해서 보내자
 							list.add(info.EndPoint.getAddress().getHostAddress() +","+ info.ServiceName);
@@ -132,24 +135,38 @@ public class TVServerListActivity extends ListActivity {
 		*/
 		
 	}
+	
+	////////////////////////////////////////////////////////////////////////////////////////
 	public String getLocalIpAddress() {
-	    try {
-	        for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
-	            NetworkInterface intf =(NetworkInterface)en.nextElement();
-	            for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
-	            
-	                InetAddress inetAddress =(InetAddress) enumIpAddr.nextElement();
+    	// need to
+    	//<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    	WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+    	WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+    	int ipAddress = wifiInfo.getIpAddress();
+    	
+    	byte [] bytes = int2byte(ipAddress);
+    	int [] values = new int[4];
+    	
+    	for(int i = 0 ; i<4 ; i++)
+    		values[i] = bytes[i] & 0xFF;
 
-	                if (!inetAddress.isLoopbackAddress()) {
-	                    return inetAddress.getHostAddress().toString();
-	                }
-	            }
-	        }
-	    } catch (SocketException ex) {
-	        Log.e("jaeyeong", ex.toString());
-	    }
-	    return null;
+    	String ipStr = String.format("%d.%d.%d.%d", 
+    			values[3], values[2], values[1], values[0] );
+
+		return ipStr;
+	 
 	}
+    
+    final byte [] int2byte(int i){
+    	byte[] dest = new byte[4];
+    	dest[3] = (byte)(i & 0xff);
+    	dest[2] = (byte)(i >> 8 & 0xff);
+    	dest[1] = (byte)(i >> 16& 0xff);
+    	dest[0] = (byte)(i >> 24& 0xff);
+    	
+    	return dest;
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
