@@ -189,8 +189,8 @@ public class AccessManagerServer {
 						cb_conn.onConnect(sender.hashCode());
 						break;
 					case Packet.RESPONSE_CLIENT_ALIVE:
-						t = connset.get(sender.hashCode());
-						t.item2 = ThreadEx.getCurrentTime();
+//						t = connset.get(sender.hashCode());
+//						t.item2 = ThreadEx.getCurrentTime();
 						break;
 					case Packet.REQUEST_PING:
 						sender_t = new Transceiver(sender);

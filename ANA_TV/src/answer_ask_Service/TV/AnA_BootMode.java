@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import answer_ask_BeanTV.DataSturct;
 import answer_ask_BeanTV.LayoutComponentBean;
 
 public class AnA_BootMode extends Activity {

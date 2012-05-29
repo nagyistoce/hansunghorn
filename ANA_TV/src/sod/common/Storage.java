@@ -17,6 +17,7 @@ public class Storage {
 	final static String SOD = "/sod/";
 	public final static int READ = 0;
 	public final static int WRITE = 1;
+	public final static int WRITE_PLUS = 2;
 	
 	String sdPath;
 	String sodRootPath;

@@ -15,6 +15,13 @@
  */
 package answer_ask_Service.TV;
 
+import java.sql.Struct;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.Vector;
+
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.model.CategorySeries;
@@ -23,24 +30,41 @@ import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import answer_ask_BeanTV.DataBean;
+import answer_ask_BeanTV.DataSturct;
+import answer_ask_BeanTV.FileBean;
+import answer_ask_BeanTV.GraphBean;
+import answer_ask_BeanTV.LayoutComponentBean;
+import answer_ask_Service.TV.TVManagerLoGo.splashhandler;
 
 public class PieChartBuild extends Activity {
-
+	HashMap<String, Integer> value0 = null;
+	Integer value1 = 0;
+	String key0 = "";
+	String key1;
+	int GET_CODE = 0;
+	Set keylist1 = null;
+	Set keylist2 = null;
+	String title = "";
+	Vector<GraphBean> vec;
 	private static int[] COLORS = new int[] { Color.GREEN, Color.BLUE,
-			Color.MAGENTA, Color.CYAN, Color.RED ,Color.YELLOW,Color.rgb(99,184,255)};
+			Color.MAGENTA, Color.CYAN, Color.RED, Color.YELLOW,
+			Color.rgb(99, 184, 255) };
 
-	private CategorySeries mSeries = new CategorySeries("");
+	private CategorySeries mSeries = new CategorySeries(DataBean.Topic);
 
 	private DefaultRenderer mRenderer = new DefaultRenderer();
-	
-	private String mDateFormat;
 
+	private String mDateFormat;
+	double x = 0;
 	// private Button mAdd;
 
 	// private EditText mX;
@@ -63,52 +87,154 @@ public class PieChartBuild extends Activity {
 		outState.putSerializable("current_renderer", mRenderer);
 		outState.putString("date_format", mDateFormat);
 	}
-	
+
+	public void SortingHashmap() {
+
+		boolean flag = false;
+		
+		keylist1 = FileBean.hashmap.keySet();
+		int i = 0;
+		for (Iterator iterator1 = keylist1.iterator(); iterator1.hasNext(); i++) {
+			key0 = (String) iterator1.next();
+			value0 = FileBean.hashmap.get(key0);
+			keylist2 = value0.keySet();
+			for (Iterator iterator2 = keylist2.iterator(); iterator2.hasNext();) {
+				GraphBean graphbean = new GraphBean();
+				key1 = (String) iterator2.next();
+				value1 = value0.get(key1);
+				graphbean.setPage(i);
+				graphbean.setAnswer(key0);
+				graphbean.setResponse(key1);
+				graphbean.setCount(value1);
+				if (DataBean.data_index == 0) {
+
+					for (int j = 0; j < DataSturct.dataVector.size(); j++) {
+						if (DataSturct.dataVector.get(j).getAnswer()
+								.equals(key0)
+								&& DataSturct.dataVector.get(j).getResponse()
+										.equals(key1)) {
+							DataSturct.dataVector.remove(j);
+							flag = true;
+						}
+					}
+					// if(flag=false)
+					// {
+					DataSturct.dataVector.add(graphbean);
+					// }
+				}
+				// }
+
+			}
+			// FileBean.hashmap.clear();
+			
+		}
+	}
+
+	public Vector<GraphBean> CountVector() {
+
+		Vector<GraphBean> vector = new Vector<GraphBean>();
+		for (int i = 0; i < DataSturct.dataVector.size(); i++) {
+			if (DataBean.ChartPage == DataSturct.dataVector.get(i).getPage()) {
+				GraphBean graphbean = new GraphBean();
+				graphbean.setResponse(DataSturct.dataVector.get(i)
+						.getResponse());
+				graphbean.setAnswer(DataSturct.dataVector.get(i).getAnswer());
+				graphbean.setCount(DataSturct.dataVector.get(i).getCount());
+				vector.add(graphbean);
+			}
+		}
+		System.out.println("왜 안넘어가 여기서? ");
+		// if(DataBean.data_index!=0)
+		// {
+		// DataSturct.dataVector.removeAllElements();
+		// }
+		return vector;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.statics_graph);
+		DataBean.MaxPage =FileBean.hashmap.size()-1;
+		if (DataBean.ChartPage == DataBean.MaxPage) {
+			DataBean.ChartPage = 0;
+		} else{
+			++DataBean.ChartPage;
+		}
 		mRenderer.setApplyBackgroundColor(true);
-		//mRenderer.setBackgroundColor(Color.argb(100, 50, 50, 0));
+		// mRenderer.setBackgroundColor(Color.argb(100, 50, 50, 0));
 		mRenderer.setChartTitleTextSize(20);
 		mRenderer.setLabelsColor(Color.BLACK);
 		mRenderer.setLabelsTextSize(15);
 		mRenderer.setLegendTextSize(15);
-		mRenderer.setMargins(new int[] { 20, 30, 15,0 });
+		mRenderer.setMargins(new int[] { 20, 30, 15, 0 });
 		mRenderer.setZoomButtonsVisible(true);
 		mRenderer.setStartAngle(90);
-		
 		// mAdd.setEnabled(true);
 		// mX.setEnabled(true);
-		int i=10;
-		while (i != 0) {
-			// mAdd.setOnClickListener(new View.OnClickListener() {
-			// public void onClick(View v) {
-			double x = 0;
-			// try {
-			x = Double.parseDouble(""+i );
-			// } catch (NumberFormatException e) {
-			// // TODO
-			// mX.requestFocus();
-			// return;
-			// }
-			mSeries.add("Series " + (mSeries.getItemCount() + 1), x); // 문항
-			SimpleSeriesRenderer renderer = new SimpleSeriesRenderer();
+		// vec = new Vector<GraphBean>();
+		SortingHashmap();
+		vec = CountVector();
+		DataBean.data_index = -1;
+		// Iterator iterator2=keylist2.iterator();iterator.hasNext();
+		if (!vec.isEmpty()) {
+			for (int i = 0; i < vec.size(); i++) {
+				// mAdd.setOnClickListener(new View.OnClickListener() {
+				// public void onClick(View v) {
 
-			renderer.setColor(COLORS[(mSeries.getItemCount() - 1)
-					% COLORS.length]);
-			mRenderer.setChartTitle("한성대남녀설문조사");
-			mRenderer.setChartTitleTextSize(40);
-			mRenderer.addSeriesRenderer(renderer);
-			// mX.setText("");
-			// mX.requestFocus();
-			if (mChartView != null) {
-				mChartView.repaint();
+				// try {
+				x = Double.parseDouble("" + vec.get(i).getCount());
+				// } catch (NumberFormatException e) {
+				// // TODO
+				// mX.requestFocus();
+				// return;
+				// }
+				mSeries.add(vec.get(i).getResponse(), x); // 문항
+				SimpleSeriesRenderer renderer = new SimpleSeriesRenderer();
+
+				renderer.setColor(COLORS[(mSeries.getItemCount() - 1)
+						% COLORS.length]);
+				if (vec.get(i).getAnswer().length() > 15) {
+					title = vec.get(i).getAnswer().substring(0, 15)
+							.concat("...");
+
+					// title+=vec.get(i).getAnswer().substring(12,vec.get(i).getAnswer().length());
+				} else {
+					title = vec.get(i).getAnswer();
+				}
+				mRenderer.setChartTitle(""+DataBean.ChartPage+". " + title);
+				mRenderer.setChartTitleTextSize(30);
+				mRenderer.addSeriesRenderer(renderer);
+				// mX.setText("");
+				// mX.requestFocus();
+				if (mChartView != null) {
+					mChartView.repaint();
+				}
+				if (GET_CODE == 0) {
+					Handler x = new Handler();
+					x.postDelayed(new splashhandler(), 3000);
+				}
 			}
-			--i;
 		}
+		// vec=null;
+		// mSeries=null;
+		// mRenderer=null;
+		// mChartView=null;
 		// }
 		// });
+		// mChartView.repaint();
+	}
+
+	class splashhandler implements Runnable {
+		@Override
+		public void run() {
+			Intent intent = new Intent(PieChartBuild.this, PieChartBuild.class);
+			
+			startActivity(intent);
+			finish();
+			// startActivityForResult(intent, GET_CODE);
+
+		}
 	}
 
 	@Override

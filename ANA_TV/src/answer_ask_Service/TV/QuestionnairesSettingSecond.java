@@ -1,11 +1,14 @@
 package answer_ask_Service.TV;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.StringTokenizer;
 
 import sod.common.Packet;
 import sod.common.Storage;
@@ -16,7 +19,7 @@ import sod.smarttv.DisconnectHandler;
 import sod.smarttv.ServerConfig;
 import sod.smarttv.ServerReceiveHandler;
 
-
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -27,6 +30,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.MultiAutoCompleteTextView.Tokenizer;
 import android.widget.RadioGroup;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -34,6 +38,8 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 import answer_ask_BeanTV.ConnectionBean;
 import answer_ask_BeanTV.DataBean;
+import answer_ask_BeanTV.DataSturct;
+import answer_ask_BeanTV.FileBean;
 import answer_ask_BeanTV.LayoutComponentBean;
 
 public class QuestionnairesSettingSecond extends Activity implements DataSturct {
@@ -44,7 +50,8 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 	private int a = 0;
 	private Storage storage;
 	private StorageFile storageFile;
-	int count=0;
+	int count = 0;
+
 	// final String[]
 	private static String getLocalAddress() throws IOException { // 내 디바이스 IP
 		// 받아오기
@@ -114,58 +121,106 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 						}
 						// else if(ConnectionBean.Message.equals("answerData"))
 						// {
-						else {
+						else if (ConnectionBean.Message.equals("Questionnaire")) {
+							ConnectionBean.Message = pkt.pop().toString();
 							DataBean.Message += ConnectionBean.Message;
+							try {
+								DataBean.Message=DataBean.Message.substring(2);
+								ReArrange();
+
+							} catch (Exception e) {
+							}
+
 						}
 						// }
 
 					}
-					try{
-						rearrange();
-							
-					}catch(Exception e){}// packet=null;
 				}
-				
+
 			}
 		});
 
 	}
-	public void Store() throws Exception
-	{
-			if(Storage.checkIsStorageExists("ana"))
-				{
-				storage=Storage.getStorage("ana");
-				}
-			else
-			storage=Storage.createStorage("ana");
+
+	public void Store() throws Exception {
+		if (Storage.checkIsStorageExists("ana")) {
+			storage = Storage.getStorage("ana");
+		} else
+			storage = Storage.createStorage("ana");
 
 	}
-	public void rearrange() throws Exception {
-		Store();
-		StorageFile storageFile = storage.openFile("data.txt", Storage.WRITE);
-		String str="";
-		for (int i = 0; i < DataSturct.vector.size(); i++) {
-			String Temp1 = DataSturct.vector.get(i);
-			String Temp2[] = Temp1.split(LayoutComponentBean.SEPARATOR);
-			String Temp3[] = DataBean.Message
-					.split(LayoutComponentBean.SEPARATOR);
-			for (int j = 0, k = 0; j < Temp2.length; j++) {
-				if (Temp2[j].equals("Answer")) {
-					str=LayoutComponentBean.SEPARATOR+Temp2[j + 1]+LayoutComponentBean.SEPARATOR+Temp3[k + 1];
-					storageFile.write(str.getBytes());
-					storageFile.close();
-					k++;
-				} else if (Temp2[j].equals("Choice")) {
-					str=Temp2[j+1];
-					storageFile.write(str.getBytes());
-					storageFile.close();
-				}
 
+	public void ReArrange() throws Exception {
+		String key="",value="";
+		Store();
+		if (!storage.checkIsFileExists("data.txt")) {
+			storageFile = storage.createFile("data.txt");
+		} else {
+			storageFile = storage.openFile("data.txt", Storage.WRITE);
+		}
+		String str = "";
+		for (int i = 0; i < DataSturct.vector.size(); i++) {
+			str += DataSturct.vector.get(i);
+		}
+		StringTokenizer tokenizer1 = new StringTokenizer(str,
+				LayoutComponentBean.SEPARATOR);
+		StringTokenizer tokenizer2 = new StringTokenizer(DataBean.Message,
+				LayoutComponentBean.SEPARATOR);
+		
+		
+		storageFile.write("<Topic>".getBytes());
+		storageFile.write(FileBean.Topic.getBytes());
+		storageFile.write("</Topic>".getBytes());
+		storageFile.write("\n".getBytes());
+		while (tokenizer1.hasMoreElements()) {
+			if(tokenizer1.nextToken().equals("Answer"))
+			{
+				DataBean.AnswerCount++;
+				storageFile.write("  ".getBytes());	
+				storageFile.write("<Answer>".getBytes());
+				key=tokenizer1.nextToken();
+				storageFile.write(key.getBytes());
+				storageFile.write("</Answer>".getBytes());
+				storageFile.write("\n".getBytes());
+				storageFile.write("    ".getBytes());			
+				storageFile.write("<".getBytes());
+				value=tokenizer2.nextToken();
+				String count=(ValueCount(key,value));
+				storageFile.write(value.getBytes());
+				storageFile.write(">".getBytes());
+				storageFile.write(count.getBytes());
+				storageFile.write("</".getBytes());
+				storageFile.write(value.getBytes());
+				storageFile.write(">".getBytes());
+				storageFile.write("\n".getBytes());
 			}
 		}
-
+		DataBean.Message="";
+		storageFile.close();
 	}
-
+	
+	public String ValueCount(String key,String value) throws Exception
+	{
+		int  In_value=0;
+		HashMap<String, Integer> hash=new HashMap<String, Integer>();
+		DataBean.data_index=0;
+		if(FileBean.hashmap.isEmpty() || !((FileBean.hashmap.containsKey(key)&&(FileBean.hashmap.get(key).containsKey(value)))))
+		{
+			In_value=1;
+		    hash.put(value,(Integer)In_value); 
+			FileBean.hashmap.put(key,hash);
+		}
+		else 
+		{
+			In_value=FileBean.hashmap.get(key).get(value);
+			In_value++;
+		    hash.put(value,In_value); 
+			FileBean.hashmap.put(key,hash);
+			
+		}
+		
+		return ""+In_value;
+	}
 	public void ButtonEvent() {
 		LayoutComponentBean.radiogroup
 				.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -212,24 +267,33 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 
 					@Override
 					public void onClick(View v) {
-						switch(count)
-						{
+					///////////////////////////// 데모용 //////////////////////////
+						switch (count) {
 						case 0:
-							LayoutComponentBean.question.setText("밥은 제때 먹구 합니까?");
+							LayoutComponentBean.question
+									.setText("밥은 제때 먹구 합니까?");
 							break;
 						case 1:
-							LayoutComponentBean.question.setText("교수님께서 잘 지도 해주셨습니까?");
+							LayoutComponentBean.question
+									.setText("교수님께서 잘 지도 해주셨습니까?");
 							break;
 						case 2:
-							LayoutComponentBean.question.setText("생각 했던 결과와 어느 정도 일치 합니까?");
+							LayoutComponentBean.question
+									.setText("생각 했던 결과와 어느 정도 일치 합니까?");
 							break;
 						case 3:
-							LayoutComponentBean.question.setText("설계 하는 동안 여자친구를 만들지는 않았습니까?");
+							LayoutComponentBean.question
+									.setText("설계 하는 동안 여자친구를 만들지는 않았습니까?");
 							break;
 						default:
-							LayoutComponentBean.question.setText("설계를 하는동안 배운점이 많습니까??");
+							try{
+							LayoutComponentBean.question
+									.setText(""+getLocalAddress());
+							
+							}catch(Exception e){}
 							break;
 						}
+						///////////////////////////// //////////////////////////
 						vector.add(LayoutComponentBean.SEPARATOR + "Topic"
 								+ LayoutComponentBean.SEPARATOR
 								+ LayoutComponentBean.topic.getText()
@@ -239,7 +303,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 								+ LayoutComponentBean.SEPARATOR + "Choice"
 								+ LayoutComponentBean.SEPARATOR
 								+ LayoutComponentBean.choice);
-						
+
 						count++;
 						list.add(""
 								+ ++a
@@ -269,6 +333,8 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 		LayoutComponentBean.complete.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				FileBean.Topic=""+LayoutComponentBean.topic.getText();
+				if(!LayoutComponentBean.question.getText().equals("")){
 				vector.add(LayoutComponentBean.SEPARATOR + "Topic"
 						+ LayoutComponentBean.SEPARATOR
 						+ LayoutComponentBean.topic.getText()
@@ -280,7 +346,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 						+ LayoutComponentBean.choice);
 				vector.add(LayoutComponentBean.SEPARATOR + "xxxxx"
 						+ LayoutComponentBean.SEPARATOR);
-
+				}
 				if (LayoutComponentBean.ScreenCount == 0) {
 					TVServerIni();
 					ConnectionBean.server.start(ConnectionBean.ServerConfig);
@@ -289,7 +355,8 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 
 				LayoutComponentBean.statisticsGraph_btn.setEnabled(true);
 				LayoutComponentBean.QuestionnaireImfo_btn.setEnabled(true);
-				LayoutComponentBean.QuestionnaireInitial_btn.setText("설문지 재 설정");
+				LayoutComponentBean.QuestionnaireInitial_btn
+						.setText("설문지 재 설정");
 				Intent intent = new Intent(QuestionnairesSettingSecond.this,
 						AnA_BootMode.class);
 				startActivity(intent);
@@ -309,11 +376,10 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 		LayoutComponentBean.long_answer = (RadioButton) findViewById(R.id.first);
 		LayoutComponentBean.short_answer = (RadioButton) findViewById(R.id.second);
 		LayoutComponentBean.listview = (ListView) findViewById(R.id.listview);
-		
-		
-		/////////////데모 ////////////////////////
+
+		// ///////////데모 ////////////////////////
 		LayoutComponentBean.topic.setText("설계");
-		/////////////////////////////////////////
+		// ///////////////////////////////////////
 		list = new ArrayList<String>();
 		adapter = new ArrayAdapter<String>(QuestionnairesSettingSecond.this,
 				R.layout.textstyle, list);

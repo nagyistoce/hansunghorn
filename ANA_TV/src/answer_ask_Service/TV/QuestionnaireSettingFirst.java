@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import answer_ask_BeanTV.DataSturct;
 import answer_ask_BeanTV.LayoutComponentBean;
 
 public class QuestionnaireSettingFirst extends Activity implements DataSturct {

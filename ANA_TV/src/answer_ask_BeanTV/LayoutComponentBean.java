@@ -10,7 +10,6 @@ import android.widget.RadioGroup;
 
 public class LayoutComponentBean {
 	public final static String SEPARATOR = "|";
-	
 	public static Button statisticsGraph_btn;
 	public static Button  QuestionnaireInitial_btn;
 	public static Button QuestionnaireImfo_btn;
