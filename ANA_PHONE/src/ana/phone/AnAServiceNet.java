@@ -20,7 +20,7 @@ public abstract class AnAServiceNet extends Plugin {
 	}
 	public void SendData(String data) throws IOException {
 		packet = new Packet();
-	//	packet.push(answerData);
+		packet.push(DownLoad.QUSTION);
 		packet.push(data);		
 		ConnectionBean.client.send(packet);
 	}

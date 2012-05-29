@@ -25,6 +25,7 @@ public class ParcelableTVLocation implements Parcelable{
 		return 0;
 	}
 
+
 	@Override
 	public void writeToParcel(Parcel arg0, int arg1) {
 		// TODO Auto-generated method stub

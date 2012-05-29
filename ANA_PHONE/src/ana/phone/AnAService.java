@@ -2,17 +2,18 @@ package ana.phone;
 
 import com.phonegap.*;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class AnAService  extends DroidGap {
+public class AnAService extends DroidGap {
 	Button TvSearch, ServiceLocation, InstallService;
 
 	AnAServiceNet net;
-	
+	private ProgressDialog dialog;
 
 	public void Layout_Initalize() {
 		TvSearch = (Button) findViewById(R.id.TvSearch);
@@ -25,8 +26,10 @@ public class AnAService  extends DroidGap {
 				// new AccessManager().searchServer(); // TV 서버 찾기
 				Intent intent = new Intent(AnAService.this, TVServerListActivity.class);
 				startActivity(intent);
+
+				}
 			}
-		});
+		);
 		ServiceLocation.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -45,9 +48,7 @@ public class AnAService  extends DroidGap {
 			//	InitHTML();
 			}
 		}); 
-	} 
-
-	@Override
+	}	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
@@ -55,13 +56,3 @@ public class AnAService  extends DroidGap {
 
 	}
 }
-
-
-
-
-
-
-
-
-
-
