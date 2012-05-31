@@ -25,7 +25,8 @@ public class StorageEXActivity extends Activity {
         String [] list = null;
         String str = new String();
         try {
- //			storage = Storage.crateStorage("ana");
+        	storage = Storage.createStorage("ana/a/b");
+        	/*
 			storage = Storage.getStorage("ana");
 			editText2.setText(storage.getSODStoragePath());
 			
@@ -57,6 +58,7 @@ public class StorageEXActivity extends Activity {
 			// 0
 			storageFile2.read(buf);
 			editText4.setText(new String(buf));
+			editText3.setText(storageFile2.getName());
 			storageFile2.close();
 			
 			
@@ -65,7 +67,7 @@ public class StorageEXActivity extends Activity {
 			String str2 = new String("AddString");
 			storageFile3.write(str2.getBytes());
 			storageFile3.close();
-			
+			*/
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -147,5 +149,7 @@ public class StorageEXActivity extends Activity {
 			editText3.setText("IOException");
 		}
         */
+        	
+        	
     }
 }

@@ -331,7 +331,7 @@ public class Storage {
 		
 		StorageFile returnStorageFile = null;
 		
-		returnStorageFile = StorageFile.getStorageFile(file, mode);
+		returnStorageFile = StorageFile.getStorageFile(file, mode, filePath);
 		
 	
 		return returnStorageFile;
@@ -357,7 +357,7 @@ public class Storage {
 		if( file.exists() )
 			throw new IOException();
 		
-		StorageFile returnStorageFile = StorageFile.createStorageFile(file);
+		StorageFile returnStorageFile = StorageFile.createStorageFile(file, filePath);
 	
 		return returnStorageFile;
 	}
