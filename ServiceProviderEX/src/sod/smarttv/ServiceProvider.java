@@ -64,9 +64,8 @@ public class ServiceProvider {
 			
 			
 			for(int i = 0 ; i<fileList.length ; i++ ){
-				String subPath = "";
 				if( isDirectory(fileList[i])){//디렉토리일때는 하위 파일의 목록을 다시 가져와서 패킷 생성
-					getServicePacketSubDirectory(serviceFilePath, subPath + fileList[i] ,fileList[i], serviceFilePackets);
+					getServicePacketSubDirectory(serviceFilePath, fileList[i] ,fileList[i], serviceFilePackets);
 				}
 				else{//파일일때...패킷생성
 					
