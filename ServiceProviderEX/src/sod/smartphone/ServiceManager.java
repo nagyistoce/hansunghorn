@@ -106,7 +106,6 @@ public class ServiceManager {
 			e.printStackTrace();
 		}
 
-		
 	}
 
 	/**
@@ -190,24 +189,13 @@ public class ServiceManager {
 		
 	}
 
-	/**
-	 * 서비스가 없을시 다운로드 요청
-	 * 서비스 데이터를 요청하는 패킷 만들어서 전송
-	 * @param acc
-	 * 데이터를 다운로드하기 위해 사용되는 서버에 연결된 AccessManager 객체
-	 * @throws IllegalArgumentException
-	 * 매개변수가 null이거나 send를 호출 할 수 없는 상태인 경우 발생.
-	 * @throws SocketException
-	 * 넘겨준 AccessManager 객체 에서 예외가 발생시 전달
-	 */
-	public void requestService(AccessManager acc) throws IllegalArgumentException, SocketException{
-		Packet packet = new Packet();
+	
+	
+	public boolean isExistService(String serviceName){
 		
-		packet.signiture = Packet.RESPONSE_SERVICE_DATA;
-		
-		acc.send(packet);
-		
+		return Storage.checkIsStorageExists(serviceName);
 	}
+	
 	
 	protected boolean isText(String fileName){
 		if( (fileName.indexOf(".js") != -1 ) && (fileName.indexOf(".html") != -1) && (fileName.indexOf(".css") != -1)   )
@@ -215,5 +203,7 @@ public class ServiceManager {
 		else
 			return true;
 	}
+	
+	
 	
 }

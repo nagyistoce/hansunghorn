@@ -8,6 +8,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -27,6 +28,7 @@ import sod.common.Serializer;
 import sod.common.ThreadEx;
 import sod.common.Transceiver;
 import sod.common.Tuple;
+import sod.smarttv.ServiceProvider;
 
 /**
  * 
@@ -43,6 +45,8 @@ public class AccessManagerServer {
 	protected ServerConfig config;
 	protected boolean isRunning = false;
 	protected Map<Integer, Tuple<Transceiver, Long>> connset;
+	
+	protected ServiceProvider serviceProvider;
 	
 	public AccessManagerServer(){
 		connset = new ConcurrentHashMap<Integer, Tuple<Transceiver,Long>>();
@@ -68,6 +72,8 @@ public class AccessManagerServer {
 		beginListening();
 		beginListeningMulti();
 		beginCheckingConnection();
+		
+		serviceProvider = new ServiceProvider(conf.serviceName);
 	}
 
 	/**
@@ -194,8 +200,13 @@ public class AccessManagerServer {
 						t.item1 = new Transceiver(sender);
 						t.item2 = ThreadEx.getCurrentTime();
 						connset.put(sender.hashCode(), t);
-						sendServiceName(config.serviceName, sender.hashCode());
 						cb_conn.onConnect(sender.hashCode());
+						
+						//1. tv가 스마트폰에게 서비스가 있는지 요청
+						p2.clear();
+						p2.signiture= Packet.REQUEST_SERVICE_DATA;
+						t.item1.send(p2);
+
 						break;
 					case Packet.RESPONSE_CLIENT_ALIVE:
 						t = connset.get(sender.hashCode());
@@ -203,6 +214,17 @@ public class AccessManagerServer {
 						break;
 					case Packet.REQUEST_SERVICE_DATA:
 						//need to implement
+						sender_t = new Transceiver(sender);
+						ArrayList<Packet> servicePackets ;
+						servicePackets = serviceProvider.getServicePacket();
+						
+						for(Packet pac : servicePackets){
+							sender_t.send(pac);
+						}
+						p2.clear();
+						p2.signiture = Packet.RESPONSE_SERVICE_DATA_END;
+						sender_t.send(p2);
+						
 						break;
 					case Packet.REQUEST_PING:
 						break;
@@ -309,27 +331,5 @@ public class AccessManagerServer {
 		});
 	}
 	
-	/**
-	 * 특정 Transceiver에게 이 서비스의 이름을 전송한다.
-	 * @param name
-	 * 서비스의 이름
-	 * @param connid
-	 * Transceiver 객체를 가르키는 id
-	 * @throws IllegalArgumentException
-	 * String NULL이거나 ,connid가 유효하지 않은 경우 발생
-	 */
-	protected void sendServiceName(String name, int connid) throws IllegalArgumentException{
-		if(name == null) 
-			throw new IllegalArgumentException("argument name should not be null.");
-		if(!connset.containsKey(connid))
-			throw new IllegalArgumentException("connid is not valid.");
-		
-		Packet p = new Packet();
-		p.signiture = Packet.RESPONSE_SERVICE_NAME;
-		p.push(name);
-		
-		Tuple<Transceiver, Long> t = connset.get(connid);
-		t.item1.send(p);
-	}
 
 }

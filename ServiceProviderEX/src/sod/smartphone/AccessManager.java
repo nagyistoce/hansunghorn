@@ -32,6 +32,10 @@ public class AccessManager implements Disposable {
 	Transceiver conn;
 	ReceiveHandler cb;
 	
+	ServiceManager serviceManager;
+	
+	ActionEx startServiceDelegate;
+	
 	//listening loop 제어용
 	boolean isRunning = false;
 	
@@ -52,6 +56,8 @@ public class AccessManager implements Disposable {
 		conn.send(p);
 		isRunning = true;
 		beginListening();
+		
+		serviceManager = new ServiceManager();
 	}
 	
 	/**
@@ -135,6 +141,15 @@ public class AccessManager implements Disposable {
 	public void setReceiveHandler(ReceiveHandler handler){
 		cb = handler;
 	}
+	
+	/**
+	 * Packet이 수신됐을때 호출될 콜백함수를 등록
+	 * @param handler
+	 * 콜백함수를 구현한 객체
+	 */
+	public void setStartServiceDelegate(ActionEx startAction){
+		this.startServiceDelegate = startAction;
+	}
 
 	/**
 	 * 패킷을 서버로 보낸다.
@@ -171,13 +186,27 @@ public class AccessManager implements Disposable {
 					switch(p.signiture){
 					case Packet.RESPONSE_ACCEPT:
 						isConnected = true;
+						
+						//서비스가 있는지 없는지 확인한다.
+						if(isExistService()){
+
+							startService();
+						}
+						else{
+							p_check.signiture= Packet.REQUEST_SERVICE_DATA;
+							conn.send(p_check);
+						}
 						break;
 					case Packet.REQUEST_CLIENT_ALIVE:
 						conn.send(p_check);
 						break;
 					case Packet.RESPONSE_SERVICE_DATA:
-					case Packet.RESPONSE_SERVICE_NAME:
-						//need to implement
+						
+						serviceManager.installService(p);
+						break;
+						
+					case Packet.RESPONSE_SERVICE_DATA_END:
+						startService();
 						break;
 					default:
 						cb.onReceive(p);
@@ -187,6 +216,16 @@ public class AccessManager implements Disposable {
 			}
 			
 		});		
+	}
+	
+	protected boolean isExistService(){
+		//stub code..
+		return serviceManager.isExistService(svinfo.ServiceName);
+	}
+	
+	protected void startService(){
+		startServiceDelegate.work(svinfo.ServiceName);
+		//stub code..
 	}
 
 }

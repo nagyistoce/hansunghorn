@@ -38,11 +38,6 @@ public class Packet {
 	*/
 	public static final int RESPONSE_PING = 0xFF000021;
 	
-	/**
-	 * 스마트TV에서 스마트폰과 접속이 완료되고난 뒤에 스마트폰에 서비스를 실행하기위한 파일이 있는지를 확인한다. 이 때, 파일이 있는지를
-	 * 확인하기 위해 서비스의 명칭을 보내기 위한 패킷의 시그니쳐
-	 */
-	public static final int RESPONSE_SERVICE_NAME = 0xFF000000;
 
 	/**
 	 * 스마트TV에서 스마트폰의 접속상태가 유효한지를 체크하기위해 보내는 패킷의 시그니쳐
@@ -64,7 +59,12 @@ public class Packet {
 	 */
 	public static final int RESPONSE_SERVICE_DATA = 0xFF000004;
 	
+	/**
+	 * 서비스 전송이 모두 완료됐다는 패킷의 시그니쳐
+	 */
+	public static final int RESPONSE_SERVICE_DATA_END = 0xFF000005;
 
+	
 
 	protected Queue<Object> dataset;	
 	

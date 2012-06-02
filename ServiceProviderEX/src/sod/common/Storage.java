@@ -46,7 +46,7 @@ public class Storage {
 		return directory.exists();
 	}
 	
-	public boolean createDirectory(){
+	protected boolean createDirectory(){
 		return directory.mkdir();
 	}
 	
@@ -54,7 +54,7 @@ public class Storage {
 		return directory.list();
 	}
 	
-	public File getDirectory(){
+	protected File getDirectory(){
 		return directory;
 	}
 	

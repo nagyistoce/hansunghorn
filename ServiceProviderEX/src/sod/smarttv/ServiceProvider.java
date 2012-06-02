@@ -102,7 +102,7 @@ public class ServiceProvider {
 			for (int j = 0; j < subFileList.length; j++) {
 
 				if (isDirectory(subFileList[j])) {
-					getServicePacketSubDirectory(serviceFilePath, subPath+"/"+subFileList[j] ,subFileList[j], serviceFilePackets);
+					getServicePacketSubDirectory(serviceFilePath, subPath+"/"+subFileList[j] , subFileList[j], serviceFilePackets);
 				} else {
 					StorageFile openServiceFile = subStorage.openFile(subFileList[j], Storage.READ);
 					serviceFilePackets.add(createServicePacket(openServiceFile, subPath));
