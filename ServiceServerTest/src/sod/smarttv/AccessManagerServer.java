@@ -262,7 +262,7 @@ public class AccessManagerServer {
 						break;
 					
 					if(Constants.isDebug)
-						Log.i("수신대기", "(debug:server) checking connection.\n");
+						Constants.logger.log("(debug:server) checking connection.\n");
 					
 					Iterator<Integer> h = connset.keySet().iterator();
 					while(h.hasNext()){
@@ -318,7 +318,7 @@ public class AccessManagerServer {
 					String ip = (String)pkt.pop();
 					int port = (Integer)pkt.pop();
 					
-					Log.i("수신확인", "신호 들어옴");
+					Constants.logger.log( "신호 들어옴");
 					
 					Transceiver t = new Transceiver(new InetSocketAddress(ip, port));
 					pkt.clear();
