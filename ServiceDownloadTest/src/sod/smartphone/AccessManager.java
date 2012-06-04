@@ -187,21 +187,23 @@ public class AccessManager implements Disposable {
 					case Packet.RESPONSE_ACCEPT:
 						isConnected = true;
 						
+						Constants.logger.log("(debug:client) RESPONSE_ACCEPT.\n");
 						//1. 서비스가 있는지 없는지 확인한다.
-						if(isExistService()){
-
-							startService();
-						}
-						else{
+//						if(isExistService()){
+//							Constants.logger.log("(debug:client) START SERVICE.\n");
+//							startService();
+//						}
+//						else{
+							Constants.logger.log("(debug:client) REQUEST_SERVICE_DATA.\n");
 							p_check.signiture= Packet.REQUEST_SERVICE_DATA;
 							conn.send(p_check);
-						}
+//						}
 						break;
 					case Packet.REQUEST_CLIENT_ALIVE:
 						conn.send(p_check);
 						break;
 					case Packet.RESPONSE_SERVICE_DATA:
-						
+						Constants.logger.log("(debug:client) installService");
 						serviceManager.installService(p);
 						break;
 						

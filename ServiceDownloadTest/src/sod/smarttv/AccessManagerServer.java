@@ -75,7 +75,7 @@ public class AccessManagerServer {
 		
 		//하드코딩////////////////////////////////////////////////////////////////////////////
 //		serviceProvider = new ServiceProvider(conf.serviceName);
-		serviceProvider = new ServiceProvider("testService");
+		serviceProvider = new ServiceProvider("ana");
 	}
 
 	/**
@@ -205,11 +205,11 @@ public class AccessManagerServer {
 						cb_conn.onConnect(sender.hashCode());
 						
 						//
-						/*
+						
 						p2.clear();
-						p2.signiture= Packet.REQUEST_SERVICE_DATA;
+						p2.signiture= Packet.RESPONSE_ACCEPT;
 						t.item1.send(p2);
-						*/
+						
 						break;
 					case Packet.RESPONSE_CLIENT_ALIVE:
 						t = connset.get(sender.hashCode());

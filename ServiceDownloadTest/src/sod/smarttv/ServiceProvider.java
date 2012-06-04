@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import sod.common.Constants;
 import sod.common.Packet;
 import sod.common.Storage;
 import sod.common.StorageFile;
@@ -78,13 +79,15 @@ public class ServiceProvider {
 			
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
+			Constants.logger.log("(debug:server)IllegalArgumentException\n");
 			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			Constants.logger.log("(debug:server)IOException .\n");
 			return null;
 		}
 		
-		
+		Constants.logger.log("(debug:server)getServicePacket() Success");
 		return serviceFilePackets;
 	}
 

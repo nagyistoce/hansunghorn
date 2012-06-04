@@ -73,6 +73,7 @@ public class ServiceDownloadTestActivity extends Activity {
 			public void onConnect(int connid) {
 				logger.log("(server): new connection is accepted - " + connid
 						+ "\n");
+			
 			}
 		});
 		server.setDisconnectHandler(new DisconnectHandler() {
@@ -134,7 +135,7 @@ public class ServiceDownloadTestActivity extends Activity {
 				
 				client = new AccessManager();
 				ServerInfo svinfo = new ServerInfo();
-				svinfo.EndPoint = new InetSocketAddress("192.168.0.53", ServerPort);
+				svinfo.EndPoint = new InetSocketAddress(localip, ServerPort);
 				//svinfo.EndPoint = new InetSocketAddress(ServerIP, ServerPort);
 				client.setReceiveHandler(new ReceiveHandler() {
 					@Override

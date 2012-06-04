@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 
+import sod.common.Constants;
 import sod.common.Packet;
 import sod.common.Storage;
 import sod.common.StorageFile;
@@ -122,11 +123,12 @@ public class ServiceManager {
 	public void installService(Packet packet){
 		String serviceName = (String)packet.pop(); // 1. 패킷에서 첫번째로 나오는 것은 serviceName (String)
 		String serviceFilePath = serviceName + "/service";
+		Constants.logger.log("(debug:client) serviceName :"+serviceName);
 		
 		String relativePath = (String) packet.pop();// 2. 두번째로 나오는 것은 상대 path
 													// (String)
 		String[] relativePathList = relativePath.split("/");
-
+		
 		try {
 			if (!Storage.checkIsStorageExists(serviceName))
 				Storage.createStorage(serviceName);
@@ -155,7 +157,6 @@ public class ServiceManager {
 			
 			
 			
-			
 			if(fileType == ServiceManager.TEXT_TYPE){
 				StorageFile serviceFile = serviceStorage.createFile(fileName); // 파일 생성
 				byte [] buf = (byte [])packet.pop(); //5. 다섯번째로 나오는 것은 데이터
@@ -180,10 +181,10 @@ public class ServiceManager {
 				
 		} catch (IllegalArgumentException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			Constants.logger.log("(debug:client)IllegalArgumentException" );
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			Constants.logger.log("(debug:client) IOException :");
 		}
 
 		
