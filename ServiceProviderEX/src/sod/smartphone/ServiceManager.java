@@ -173,6 +173,7 @@ public class ServiceManager {
 				
 				StorageFile serviceFile = serviceStorage.createFile(fileName);
 				serviceFile.writeImage(serviceImg);
+				serviceFile.close();
 			}
 			
 			
