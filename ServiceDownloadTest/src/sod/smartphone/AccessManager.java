@@ -42,6 +42,9 @@ public class AccessManager implements Disposable {
 	//서버로부터 인증을 받았는지 여부
 	boolean isConnected = false;
 	
+	public AccessManager(){
+		serviceManager = new ServiceManager();
+	}
 	/**
 	 * 서버와 연결을 시도한다.
 	 * @param info
@@ -57,7 +60,6 @@ public class AccessManager implements Disposable {
 		isRunning = true;
 		beginListening();
 		
-		serviceManager = new ServiceManager();
 	}
 	
 	/**
@@ -189,24 +191,27 @@ public class AccessManager implements Disposable {
 						
 						Constants.logger.log("(debug:client) RESPONSE_ACCEPT.\n");
 						//1. 서비스가 있는지 없는지 확인한다.
-//						if(isExistService()){
-//							Constants.logger.log("(debug:client) START SERVICE.\n");
-//							startService();
-//						}
-//						else{
+						if(isExistService()){
+							Constants.logger.log("(debug:client) START SERVICE.\n");
+							startService();
+						}
+						else{
 							Constants.logger.log("(debug:client) REQUEST_SERVICE_DATA.\n");
 							p_check.signiture= Packet.REQUEST_SERVICE_DATA;
 							conn.send(p_check);
-//						}
+						}
 						break;
 					case Packet.REQUEST_CLIENT_ALIVE:
 						conn.send(p_check);
 						break;
 					case Packet.RESPONSE_SERVICE_DATA:
 						Constants.logger.log("(debug:client) installService");
+
+				
 						serviceManager.installService(p);
+
 						break;
-						
+
 					case Packet.RESPONSE_SERVICE_DATA_END:
 						startService();
 						break;
@@ -221,7 +226,9 @@ public class AccessManager implements Disposable {
 	}
 	
 	protected boolean isExistService(){
-		return serviceManager.isExistService(svinfo.ServiceName);
+//		return serviceManager.isExistService(svinfo.ServiceName);
+		/////////////////////////하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///
+		return serviceManager.isExistService("ana");
 	}
 	
 	protected void startService(){

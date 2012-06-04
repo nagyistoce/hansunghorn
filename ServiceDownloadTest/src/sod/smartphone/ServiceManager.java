@@ -123,39 +123,33 @@ public class ServiceManager {
 	public void installService(Packet packet){
 		String serviceName = (String)packet.pop(); // 1. 패킷에서 첫번째로 나오는 것은 serviceName (String)
 		String serviceFilePath = serviceName + "/service";
-		Constants.logger.log("(debug:client) serviceName :"+serviceName);
 		
 		String relativePath = (String) packet.pop();// 2. 두번째로 나오는 것은 상대 path
 													// (String)
-		String[] relativePathList = relativePath.split("/");
-		
-		try {
-			if (!Storage.checkIsStorageExists(serviceName))
-				Storage.createStorage(serviceName);
 
-			if (!Storage.checkIsStorageExists(serviceFilePath))
-				Storage.createStorage(serviceFilePath);
+		try {
 
 			Storage serviceStorage = null;
 			if (relativePath.equals("/")) {
-				serviceStorage = Storage.getStorage(serviceFilePath);
+
+				if (!Storage.checkIsStorageExists(serviceFilePath))
+					serviceStorage = Storage.createStorage(serviceFilePath);
+				else
+					serviceStorage = Storage.getStorage(serviceFilePath);
 			} 
 			else {// 상대패스가 있으면 serviceFilePath를 업데이트 한다.
 
-				for (int i = 0; i < relativePathList.length; i++) {
-					serviceFilePath = serviceFilePath + "/" + relativePathList[i];
+				serviceFilePath = serviceFilePath + "/" + relativePath;
 
-					if (!Storage.checkIsStorageExists(serviceFilePath))
-						serviceStorage = Storage.createStorage(serviceFilePath);
-					else
-						serviceStorage = Storage.getStorage(serviceFilePath);
-				}
+				if (!Storage.checkIsStorageExists(serviceFilePath))
+					serviceStorage = Storage.createStorage(serviceFilePath);
+				else
+					serviceStorage = Storage.getStorage(serviceFilePath);
+
 			}
 
 			String fileName = (String)packet.pop();//3. 세번째로 나오는 것은 fileName
 			Integer fileType = (Integer)packet.pop();//4. 네번째로 나오는 것은 파일타입
-			
-			
 			
 			if(fileType == ServiceManager.TEXT_TYPE){
 				StorageFile serviceFile = serviceStorage.createFile(fileName); // 파일 생성
@@ -174,6 +168,7 @@ public class ServiceManager {
 				
 				StorageFile serviceFile = serviceStorage.createFile(fileName);
 				serviceFile.writeImage(serviceImg);
+				serviceFile.close();
 			}
 			
 			
@@ -181,10 +176,10 @@ public class ServiceManager {
 				
 		} catch (IllegalArgumentException e1) {
 			// TODO Auto-generated catch block
-			Constants.logger.log("(debug:client)IllegalArgumentException" );
+//			Constants.logger.log("IllegalArgumentException - installService");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			Constants.logger.log("(debug:client) IOException :");
+//			Constants.logger.log("IOException - installService");
 		}
 
 		
@@ -194,7 +189,6 @@ public class ServiceManager {
 	
 	public boolean isExistService(String serviceName){
 		
-
 		return Storage.checkIsStorageExists(serviceName);
 	}
 	
