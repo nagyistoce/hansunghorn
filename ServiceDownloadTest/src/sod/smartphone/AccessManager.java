@@ -213,6 +213,7 @@ public class AccessManager implements Disposable {
 						break;
 
 					case Packet.RESPONSE_SERVICE_DATA_END:
+						Constants.logger.log("(debug:client) Service Install complete");
 						startService();
 						break;
 					default:

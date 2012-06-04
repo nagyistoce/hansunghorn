@@ -32,7 +32,7 @@ import android.widget.Toast;
 public class ServiceDownloadTestActivity extends Activity {
 	/** Called when the activity is first created. */
 
-	final static String ServerIP = "127.0.0.1";
+	final static String ServerIP = "192.168.0.5";
 	final static int ServerPort = 6789;
 
 	static Logable logger;
@@ -57,11 +57,11 @@ public class ServiceDownloadTestActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		context = this;
+		context = this;;
 
 		NetworkUtils.setLocalIp(getLocalIpAddress());
 		// server side
-		
+		/*
 		server = new AccessManagerServer();
 		ServerConfig conf = new ServerConfig();
 		conf.Timeout = 10000;
@@ -92,7 +92,7 @@ public class ServiceDownloadTestActivity extends Activity {
 			}
 		});
 		server.start(conf);
-		
+		*/
 //////////////////////////////////
 		
 		startServiceHandler = new Handler() {
@@ -102,7 +102,7 @@ public class ServiceDownloadTestActivity extends Activity {
 			}
 
 		};
-		
+	
 		// /////////////// client side
 		
 		
@@ -135,8 +135,8 @@ public class ServiceDownloadTestActivity extends Activity {
 				
 				client = new AccessManager();
 				ServerInfo svinfo = new ServerInfo();
-				svinfo.EndPoint = new InetSocketAddress(localip, ServerPort);
-				//svinfo.EndPoint = new InetSocketAddress(ServerIP, ServerPort);
+//				svinfo.EndPoint = new InetSocketAddress(localip, ServerPort);
+				svinfo.EndPoint = new InetSocketAddress(ServerIP, ServerPort);
 				client.setReceiveHandler(new ReceiveHandler() {
 					@Override
 					public void onReceive(Packet pkt) {
