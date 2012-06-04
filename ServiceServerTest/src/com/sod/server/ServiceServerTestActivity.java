@@ -11,10 +11,14 @@ import sod.smarttv.DisconnectHandler;
 import sod.smarttv.ServerConfig;
 import sod.smarttv.ServerReceiveHandler;
 import android.app.Activity;
+import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 public class ServiceServerTestActivity extends Activity {
 	/** Called when the activity is first created. */
@@ -25,14 +29,19 @@ public class ServiceServerTestActivity extends Activity {
 	static AccessManagerServer server;
 
 	static {
-		logger = new Logable() {
+		logger = new Logable() {			
 			@Override
 			public void log(Object arg) {
 				Log.d("logger", arg.toString());
-
+				
 			}
 		};
 	}
+	
+	static Context context;
+
+	Handler startServiceHandler;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -40,46 +49,50 @@ public class ServiceServerTestActivity extends Activity {
 		setContentView(R.layout.main);
 
 		NetworkUtils.setLocalIp(getLocalIpAddress());
+		context = this;
 		
-		ThreadEx.invoke(null, new ActionEx() {
+		// server side
+		
+		server = new AccessManagerServer();
+		ServerConfig conf = new ServerConfig();
+		conf.Timeout = 10000;
+		conf.Port = ServerPort;
+		conf.CheckingPeriod = 2000;
+		conf.serviceName = "TestService";
+		server.setConnectHandler(new ConnectHandler() {
+			@Override
+			public void onConnect(int connid) {
+				logger.log("(server): new connection is accepted - " + connid
+						+ "\n");
+			
+			}
+		});
+		server.setDisconnectHandler(new DisconnectHandler() {
 
 			@Override
-			public void work(Object arg) {
-				// TODO Auto-generated method stub
-				server = new AccessManagerServer();
-				ServerConfig conf = new ServerConfig();
-				conf.Timeout = 10000;
-				conf.Port = ServerPort;
-				conf.CheckingPeriod = 2000;
-				conf.serviceName = "TestService";
-				server.setConnectHandler(new ConnectHandler() {
-					@Override
-					public void onConnect(int connid) {
-						logger.log("(server): new connection is accepted - "
-								+ connid + "\n");
-					}
-				});
-				server.setDisconnectHandler(new DisconnectHandler() {
+			public void onDisconnect(int connid) {
+				logger.log("(server): client is disconnected - " + connid
+						+ "\n");
+			}
+		});
+		server.setReceiveHandler(new ServerReceiveHandler() {
+			@Override
+			public void onReceive(Packet pkt, int connid) {
+				logger.log("(server): a packet from client - " + connid + "\n");
+				server.send(pkt, connid);
+			}
+		});
+		server.start(conf);
+		
+//////////////////////////////////
+		
+		startServiceHandler = new Handler() {
 
-					@Override
-					public void onDisconnect(int connid) {
-						logger.log("(server): client is disconnected - "
-								+ connid + "\n");
-					}
-				});
-				server.setReceiveHandler(new ServerReceiveHandler() {
-					@Override
-					public void onReceive(Packet pkt, int connid) {
-						logger.log("(server): a packet from client - " + connid
-								+ "\n");
-						server.send(pkt, connid);
-					}
-				});
-				server.start(conf);
-
+			public void handleMessage(Message msg) {
+				Toast.makeText(context, "서비스 시작..", Toast.LENGTH_SHORT);
 			}
 
-		});
+		};
 
 
     }
