@@ -34,7 +34,7 @@ public class Storage {
 		File sod = new File (sodRootPath);
 		
 		if(!sod.exists())
-			sod.mkdir();
+			sod.mkdirs();
 		
 		sodStoragePath = sodRootPath +mStorageID;
 		
@@ -47,7 +47,7 @@ public class Storage {
 	}
 	
 	protected boolean createDirectory(){
-		return directory.mkdir();
+		return directory.mkdirs();
 	}
 	
 	public String [] getFileList(){
