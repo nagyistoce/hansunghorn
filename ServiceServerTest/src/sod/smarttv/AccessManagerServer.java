@@ -16,9 +16,6 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 
-import android.util.Log;
-
-
 
 
 import sod.common.ActionEx;
@@ -31,6 +28,7 @@ import sod.common.Serializer;
 import sod.common.ThreadEx;
 import sod.common.Transceiver;
 import sod.common.Tuple;
+import sod.smarttv.ServiceProvider;
 
 /**
  * 
@@ -75,7 +73,9 @@ public class AccessManagerServer {
 		beginListeningMulti();
 		beginCheckingConnection();
 		
-		serviceProvider = new ServiceProvider(conf.serviceName);
+		//하드코딩////////////////////////////////////////////////////////////////////////////
+//		serviceProvider = new ServiceProvider(conf.serviceName);
+		serviceProvider = new ServiceProvider("ana");
 	}
 
 	/**
@@ -205,11 +205,11 @@ public class AccessManagerServer {
 						cb_conn.onConnect(sender.hashCode());
 						
 						//
-						/*
+						
 						p2.clear();
-						p2.signiture= Packet.REQUEST_SERVICE_DATA;
+						p2.signiture= Packet.RESPONSE_ACCEPT;
 						t.item1.send(p2);
-						*/
+						
 						break;
 					case Packet.RESPONSE_CLIENT_ALIVE:
 						t = connset.get(sender.hashCode());
@@ -318,8 +318,6 @@ public class AccessManagerServer {
 					String ip = (String)pkt.pop();
 					int port = (Integer)pkt.pop();
 					
-					Constants.logger.log( "신호 들어옴");
-					
 					Transceiver t = new Transceiver(new InetSocketAddress(ip, port));
 					pkt.clear();
 					pkt.signiture = Packet.RESPONSE_PING;
@@ -337,6 +335,5 @@ public class AccessManagerServer {
 		});
 	}
 	
-
 
 }
