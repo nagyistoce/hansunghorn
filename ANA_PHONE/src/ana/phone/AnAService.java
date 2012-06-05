@@ -8,17 +8,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class AnAService extends DroidGap {
-	Button TvSearch, ServiceLocation, InstallService;
+	ImageButton TvSearch, ServiceLocation, InstallService;
 
 	AnAServiceNet net;
 	private ProgressDialog dialog;
 
 	public void Layout_Initalize() {
-		TvSearch = (Button) findViewById(R.id.TvSearch);
-		ServiceLocation = (Button) findViewById(R.id.ServiceLocation);
-		InstallService = (Button) findViewById(R.id.InstallService);
+		TvSearch = (ImageButton) findViewById(R.id.TvSearch);
+		ServiceLocation = (ImageButton) findViewById(R.id.ServiceLocation);
+		InstallService = (ImageButton) findViewById(R.id.InstallService);
 		TvSearch.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -48,11 +49,13 @@ public class AnAService extends DroidGap {
 			//	InitHTML();
 			}
 		}); 
-	}	@Override
+	}	
+	
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		Layout_Initalize();
-
 	}
 }
