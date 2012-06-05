@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>"
+		<meta http-equiv="content-type" content="text/html; charset=euc-kr">
+		<link rel="stylesheet" href="order/css/jquery.mobile-1.0a2.min.css" />
+		<script type="text/javascript" charset="euc-kr" src="order/js/phonegap-1.4.1.js"></script>
+		<script type="text/javascript" charset="euc-kr" src="order/js/myPlugin.js"></script>
+		<script type="text/javascript" charset="euc-kr" src="order/js/jquery.js"></script>
+		<script type="text/javascript" charset="euc-kr" src="order/js/OrderApi.js"></script>
+		<script type="text/javascript" src="order/js/jquery-1.4.4.min.js"></script>
+		<script type="text/javascript" src="order/js/jquery.mobile-1.0a2.min.js"></script>
+		<script type="text/javascript" charset="euc-kr">
+            document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady() {
+                window.plugins.PhoneServicePlugin.receiveCategory(successReceive, errorReceive, "");
+            }
+
+            function successReceive(result) {
+            	var Category_Menu=new Array();
+            	var Category_config=new Array();
+            	var items=new Array();
+            	
+            	alert(result);
+				Category_Menu = result.split("|");
+				
+				for(var i=0;i<Category_Menu.length-1;i++)
+				{
+					if(i==0)
+					{
+						$('header#category').append("<h1>"+Category_Menu[i]+"</h1>");
+					}
+					else
+					{
+						Category_config=Category_Menu[i].split("`");
+						$('div#categoryMenuItem').append("<div id='MenuName' data-role='collapsible'><h3>"+Category_config[0]+"</h3><p>가  격:  (￦)"+Category_config[1]+"원<br><br>평  점:  "+Category_config[2]+"점<br><br>추천수:  "+Category_config[3]+"<br><br><h3>【 "+Category_config[0]+" 】</h3>  <b>*소개*</b><br><br><br>"+Category_config[4]+"<br><br><br><a href='order.html' data-role='button' data-theme='b'>주문하기</a></p></div>")
+					}
+					
+					alert(Category_Menu[i]);
+				}
+				//$('div#categoryMenuItem').find('div[data-role=collapsible]').append("");
+				$('div#categoryMenuItem').find('div[data-role=collapsible]').collapsible({theme:'c',refresh:true}); //
+		
+            }
+
+            function errorReceive(result) {
+			alert("Error "+result);
+			
+            }
+		</script>
+	</head>
+	<body>
+		<div data-role="page">
+			<header data-role="header" id="category">
+			</header>
+			<div data-role="collapsible-set" id="categoryMenuItem">
+			</div>
+			<div data-role="footer" data-theme="d">
+			<center>
+			"광고부분"
+			</center>
+			<br>
+			Order System 이란.
+			<br>
+			보통 식당에서 스크린에서 제공하는 카테고리별
+			<br>
+			메뉴를  Html파일을 다운 받아서
+			<br>
+			여러 핸드폰에서 주문서비스를 돕는것을 말합니다.
+			</div>
+			</div>
+	</body>
+</html>

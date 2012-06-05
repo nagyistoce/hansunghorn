@@ -32,6 +32,12 @@
 /*	left: 960px;*/
 	background: blue;
 }
+.landscape img{
+	width:480px;
+}
+.portrait img{
+	width:320px;
+}
 @media all and max-device-width:420px) and (max-device-height:560)
 {
 	.screen{
@@ -39,4 +45,8 @@
 		width:400px;
 		height:540px;
 	}
+}
+
+@media all and (orientation:portrait){
+	body{background-color:red}
 }

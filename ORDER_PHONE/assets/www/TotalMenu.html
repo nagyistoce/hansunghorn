@@ -1,0 +1,301 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=euc-kr">
+		<link rel="stylesheet" href="order/css/jquery.mobile-1.0a2.min.css" />
+		<script type="text/javascript" charset="euc-kr" src="order/js/phonegap-1.4.1.js"></script>
+		<script type="text/javascript" charset="euc-kr" src="order/js/myPlugin.js"></script>
+		<script type="text/javascript" charset="euc-kr" src="order/js/OrderApi.js"></script>
+		<script type="text/javascript" charset="euc-kr" src="order/js/jquery.js"></script>
+		<script type="text/javascript" src="order/js/jquery-1.4.4.min.js"></script>
+		<script type="text/javascript" src="order/js/jquery.mobile-1.0a2.min.js"></script>
+		<script type="text/javascript" charset="euc-kr">
+            document.addEventListener("deviceready", onDeviceReady, false);
+            var all;
+            var recommandMenu;
+            var popularyMenus;
+            function onDeviceReady() {
+
+                window.plugins.PhoneServicePlugin.receiveData(successReceive, errorReceive, "");
+                //	window.plugins.PhoneServicePlugin.receiveOptionMenuList(successRecommand, errorRecommand, ""+0);
+                //	window.plugins.PhoneServicePlugin.receiveOptionMenuList(successRating, errorRating, ""+1);
+
+                // window.plugins.PhoneServicePlugin.receiveData(successReceive, errorReceive, "");
+     
+            }
+
+            function errorRating(result) {
+                alert("에러 인기메뉴");
+            }
+
+            function successRating(result) {
+                alert("에러 인기메뉴");
+                var category = new Array();
+                var items = new Array();
+                var flag = false;
+                var nameflag = false;
+                category = result.split("|");
+                items = category[0].split("`");
+                popularyMenus = new Arrays("[" + category.length + "][" + items.length + "]");
+                for(var i = 0; i < category.length; i++) {
+                    items = category[i].split("`");
+                    for(var j = 0; j < items.length; j++) {
+                        popularyMenus[i][j] = items[j];
+                    }
+                }
+                for(var i = 0; i < popularyMenus.length; i++) {
+                    for(var j = 0; j < i; j++) {
+
+                        if(popularyMenus[j][0] == popularyMenus[i][0]) {
+
+                            flag = true;
+                            if(popularyMenus[j][1] != popularyMenus[i][1]) {
+                                nameflag = true;
+                            }
+                        }
+                    }
+                    if(flag == false) {
+                        $('ul#popularyMenu').append("<li id='" + popularyMenus[i][0] + "' onclick='Theme(this.id)'><h3>" + popularyMenus[i][0] + "</h3></li>");
+                    }
+                    flag = false;
+
+                }
+                $('ul#popularyMenu').listview('refresh');
+                alert("ㅋㅋㅋㅋㅋ");
+            }
+
+            function successRecommand(result) {
+                alert("에러 추천메뉴");
+                var category = new Array();
+                var items = new Array();
+                var flag = false;
+                var nameflag = false;
+                category = result.split("|");
+                items = category[0].split("`");
+                recommandMenu = new Arrays("[" + category.length + "][" + items.length + "]");
+                for(var i = 0; i < category.length; i++) {
+                    items = category[i].split("`");
+                    for(var j = 0; j < items.length; j++) {
+                        recommandMenu[i][j] = items[j];
+                    }
+                }
+
+                for(var i = 0; i < recommandMenu.length; i++) {
+                    for(var j = 0; j < i; j++) {
+
+                        if(recommandMenu[j][0] == recommandMenu[i][0]) {
+
+                            flag = true;
+                            if(recommandMenu[j][1] != recommandMenu[i][1]) {
+                                nameflag = true;
+                            }
+                        }
+                    }
+                    if(flag == false) {
+                        $('ul#recommandMenu').append("<li id='" + recommandMenu[i][0] + "' onclick='Theme(this.id)'><h3>" + recommandMenu[i][0] + "</h3></li>");
+                    }
+                    flag = false;
+
+                }
+                $('ul#recommandMenu').listview('refresh');
+                alert("ㅋㅋㅋㅋㅋ");
+            }
+
+            function errorRecommand(result) {
+                alert("error 추천메뉴")
+            }
+
+            function errorReceive(err) {
+                alert("Error :" + err);
+            }
+
+            function successReceive(result) {
+                alert(result);
+                processingData(result);
+            }
+
+            function processingData(result) {
+                var category = new Array();
+                var items = new Array();
+                var flag = false;
+                var nameflag = false;
+                category = result.split("|");
+                for(var i = 0; i < category.length; i++) {
+                    for(var j = 0; j < i; j++) {
+                        if(category[i] == category[j]) {
+
+                            flag = true;
+                        }
+                    }
+                    if(flag == false) {
+                        $('ul#homeList').append("<li id='" + category[i] + "' onclick='Theme(this.id)'><h3>" + category[i] + "</h3></li>");
+                    }
+                    flag = false;
+                }
+                $('ul#homeList').listview('refresh');
+                alert("ㅋㅋㅋㅋㅋ");
+            }
+
+            function Theme(result) {
+                alert("첫번째 페이지에" + result);
+                location.href = "CategoryMenu.html";
+                window.plugins.PhoneServicePlugin.categorysaveData("", "", result);
+            }
+
+            function Arrays(strArray)// 이중 배열만 만들 수 있읍니다. 그 이상의 차원은 불가!
+            {
+                var names = strArray.match(/^[A-Za-z_][A-Za-z_0-9]*/g);
+
+                var indexs = strArray.match(/[\d+]/g);
+                var strArr = '';
+
+                for(var i = 0; i < indexs[0]; i++) {
+                    strArr += '[],';
+                }
+
+                strArr = strArr.replace(/,$/, '');
+                return eval('[' + strArr + ']');
+
+            }
+		</script>
+		<title> Category</title>
+
+	</head>
+	<body>
+		<div data-role="page" id="total">
+			<header data-role="header">
+				<h1>Category</h1>
+				<nav data-role="navbar">
+					<a href="#" class="ui-btn-active">세트메뉴</a>
+					<a href="#populary">인기메뉴</a>
+					<a href="#recommand">추천메뉴</a>
+					<a href="#side">사이드&주류</a>
+				</nav>
+			</header>
+			<div data-role="content" class="total1">
+				<ul id="homeList" data-role="listview">
+
+				</ul>
+
+			</div>
+			<div data-role="footer" data-theme="d">
+				<center>
+					"광고부분"
+				</center>
+				<br>
+				Order System 이란.
+				<br>
+				보통 식당에서 스크린에서 제공하는 카테고리별
+				<br>
+				메뉴를  Html파일을 다운 받아서
+				<br>
+				여러 핸드폰에서 주문서비스를 돕는것을 말합니다.
+			</div>
+		</div>
+		<div data-role="page" id="populary">
+			<header data-role="header">
+				<h1>Category</h1>
+				<nav data-role="navbar">
+					<a href="#total" >세트메뉴</a>
+					<a href="#" class="ui-btn-active">인기메뉴</a>
+					<a href="#recommand">추천메뉴</a>
+					<a href="#side">사이드&주류</a>
+				</nav>
+			</header>
+			<div data-role="content" class="populary1">
+				<ul id="popularyMenu" data-role="listview">
+
+				</ul>
+			</div>
+			<div data-role="footer" data-theme="d" data-fullscreen="true" data-position="fixed">
+				<center>
+					"광고부분"
+				</center>
+				<br>
+				Order System 이란.
+				<br>
+				보통 식당에서 스크린에서 제공하는 카테고리별
+				<br>
+				메뉴를  Html파일을 다운 받아서
+				<br>
+				여러 핸드폰에서 주문서비스를 돕는것을 말합니다.
+			</div>
+		</div>
+		<div data-role="page" id="recommand">
+			<header data-role="header">
+				<h1>Category</h1>
+				<nav data-role="navbar">
+					<a href="#total">세트메뉴</a>
+					<a href="#populary">인기메뉴</a>
+					<a href="#"  class="ui-btn-active">추천메뉴</a>
+					<a href="#side">사이드&주류</a>
+				</nav>
+			</header>
+			<div data-role="content" class="recommand1">
+				<ul id="recommandMenu" data-role="listview">
+
+				</ul>
+			</div>
+			<div data-role="footer" data-theme="d" data-fullscreen="true" data-position="fixed">
+				<center>
+					"광고부분"
+				</center>
+				<br>
+				Order System 이란.
+				<br>
+				보통 식당에서 스크린에서 제공하는 카테고리별
+				<br>
+				메뉴를  Html파일을 다운 받아서
+				<br>
+				여러 핸드폰에서 주문서비스를 돕는것을 말합니다.
+			</div>
+		</div>
+		<div data-role="page" id="side">
+			<header data-role="header">
+				<h1>Category</h1>
+				<nav data-role="navbar">
+					<a href="#total">세트메뉴</a>
+					<a href="#populary">인기메뉴</a>
+					<a href="#recommand">추천메뉴</a>
+					<a href="#" class="ui-btn-active">사이드&주류</a>
+				</nav>
+			</header>
+			<div data-role="content"  class="side1">
+				SideMenu update!
+			</div>
+			<div data-role="footer" data-theme="d" data-fullscreen="true"data-position="fixed">
+				<center>
+					"광고부분"
+				</center>
+				<br>
+				Order System 이란.
+				<br>
+				보통 식당에서 스크린에서 제공하는 카테고리별
+				<br>
+				메뉴를  Html파일을 다운 받아서
+				<br>
+				여러 핸드폰에서 주문서비스를 돕는것을 말합니다.
+			</div>
+		</div>
+	</body>
+</html>
+
+<!--
+ar=result.split("|");
+for(var i=0;i<ar.length;i++){
+ry=ar[i].split("`");
+for(var j=0;j<i;j++)
+{
+arr=ar[j].split("`");
+if(arr[0]==ry[0])
+{
+flag=true;
+}
+}
+if(flag=true)
+{
+
+}
+else
+$("<li><a href='#'>"+ry[0]+"</a></li>").appendTo($("#listView"));
+} -->
