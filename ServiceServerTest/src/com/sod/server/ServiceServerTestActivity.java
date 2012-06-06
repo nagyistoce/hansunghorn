@@ -27,6 +27,8 @@ public class ServiceServerTestActivity extends Activity {
 
 	static Logable logger;
 	static AccessManagerServer server;
+	
+	WifiManager.MulticastLock mlock;
 
 	static {
 		logger = new Logable() {			
@@ -47,6 +49,10 @@ public class ServiceServerTestActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		mlock = getWifiManager().createMulticastLock("test_mlock");
+		mlock.setReferenceCounted(true);
+		mlock.acquire();
 
 		NetworkUtils.setLocalIp(getLocalIpAddress());
 		context = this;
@@ -93,15 +99,24 @@ public class ServiceServerTestActivity extends Activity {
 			}
 
 		};
-
-
     }
+	
+	@Override
+	protected void onDestroy() {
+		mlock.release();
+	};
+	
+	WifiManager getWifiManager(){
+		return (WifiManager) getSystemService(Context.WIFI_SERVICE);
+	}
+	
+	
 	
 	public String getLocalIpAddress() {
 		// need to
 		// <uses-permission
 		// android:name="android.permission.ACCESS_WIFI_STATE"/>
-		WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+		WifiManager wifiManager = getWifiManager();
 		WifiInfo wifiInfo = wifiManager.getConnectionInfo();
 		int ipAddress = wifiInfo.getIpAddress();
 

@@ -73,9 +73,9 @@ public class AccessManagerServer {
 		beginListeningMulti();
 		beginCheckingConnection();
 		
-		//하드코딩////////////////////////////////////////////////////////////////////////////
-//		serviceProvider = new ServiceProvider(conf.serviceName);
-		serviceProvider = new ServiceProvider("ana");
+		
+		serviceProvider = new ServiceProvider(conf.serviceName);
+//		serviceProvider = new ServiceProvider("ana");
 	}
 
 	/**
@@ -306,6 +306,7 @@ public class AccessManagerServer {
 						rawp = new DatagramPacket(buf, buf.length);
 						listener_multi.receive(rawp);
 					} catch (Exception ex) {
+						ex.printStackTrace();
 						continue;
 					}
 					
