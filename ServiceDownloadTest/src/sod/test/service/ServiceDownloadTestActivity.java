@@ -51,13 +51,17 @@ public class ServiceDownloadTestActivity extends Activity {
 	static Context context;
 
 	Handler startServiceHandler;
+	
+	static Toast startToast;
+	static int startCnt= 0;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		context = this;;
+		context = this;
+		startToast = Toast.makeText(context, "서비스 시작..", Toast.LENGTH_LONG);
 
 		NetworkUtils.setLocalIp(getLocalIpAddress());
 		// server side
@@ -67,7 +71,7 @@ public class ServiceDownloadTestActivity extends Activity {
 		conf.Timeout = 10000;
 		conf.Port = ServerPort;
 		conf.CheckingPeriod = 2000;
-		conf.serviceName = "TestService";
+		conf.serviceName = "ana";
 		server.setConnectHandler(new ConnectHandler() {
 			@Override
 			public void onConnect(int connid) {
@@ -98,12 +102,18 @@ public class ServiceDownloadTestActivity extends Activity {
 		startServiceHandler = new Handler() {
 
 			public void handleMessage(Message msg) {
-				Toast.makeText(context, "서비스 시작..", Toast.LENGTH_SHORT);
+				startToast.show();
+				startCnt++;
+				Integer cnt = startCnt;
+				String scnt = cnt.toString();
+				logger.log("(debug:client): StartServiceDelegate  HandleMessage");
+				logger.log((scnt));
 			}
 
 		};
 	
-		// /////////////// client side
+		
+		///////////////// client side
 		
 		
 		ThreadEx.invoke(null, new ActionEx(){
@@ -127,42 +137,41 @@ public class ServiceDownloadTestActivity extends Activity {
 							logger.log("found server: "
 									+ info.EndPoint.getAddress().getHostAddress()
 									+ ", " + info.ServiceName + "\n");
+							
+							client = new AccessManager();
+							ServerInfo svinfo = new ServerInfo();
+//							svinfo.EndPoint = new InetSocketAddress(localip, ServerPort);
+							svinfo = info;
+							svinfo.EndPoint = info.EndPoint;
+							
+							client.setReceiveHandler(new ReceiveHandler() {
+								@Override
+								public void onReceive(Packet pkt) {
+									logger.log("(client): a packet from server - "
+											+ (String) pkt.pop() + "\n");
+								}
+							});//end.. setReceiverHandler
+							client.setStartServiceDelegate(new ActionEx() {
+
+								@Override
+								public void work(Object arg) {
+									// TODO Auto-generated method stub
+									// startServiceHandler
+									startServiceHandler.sendMessage(Message.obtain());
+									logger.log("(client): StartServiceDelegate ");
+								}
+
+							});//end.. setStartServiceDelegate
+
+							client.connect(svinfo);
 						}
 						
 					}// end onSearch.....
 				}); // end searchServer......
-				
-				
-				client = new AccessManager();
-				ServerInfo svinfo = new ServerInfo();
-//				svinfo.EndPoint = new InetSocketAddress(localip, ServerPort);
-				svinfo.EndPoint = new InetSocketAddress(ServerIP, ServerPort);
-				client.setReceiveHandler(new ReceiveHandler() {
-					@Override
-					public void onReceive(Packet pkt) {
-						logger.log("(client): a packet from server - "
-								+ (String) pkt.pop() + "\n");
-					}
-				});
-				
 
-				client.setStartServiceDelegate(new ActionEx() {
-
-					@Override
-					public void work(Object arg) {
-						// TODO Auto-generated method stub
-						// startServiceHandler
-						startServiceHandler.sendMessage(Message.obtain());
-
-					}
-
-				});
-
-				client.connect(svinfo);
-
-			}
+			}//end work...
 			
-		});
+		});//end invoke
 
 		
 	}
