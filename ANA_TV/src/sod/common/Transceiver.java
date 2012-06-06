@@ -57,7 +57,6 @@ public class Transceiver implements Disposable {
 		}
 	}
 	
-	@Override
 	public void dispose(){
 		conn.close();
 		conn = null;

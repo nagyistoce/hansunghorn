@@ -12,7 +12,7 @@
         android:id="@+id/map"
         android:layout_width="fill_parent"
         android:layout_height="600px"
-        android:apiKey="006WN4edD7atkTHSRtRQ2M9BJVM5OhF60lBsGkQ"
+        android:apiKey="0HRKYjKYJe_UUDHrj5zwquEE2GRJExdnMS1RRKA"
         android:clickable="true"
         android:enabled="true" />
 

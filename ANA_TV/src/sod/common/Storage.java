@@ -34,7 +34,7 @@ public class Storage {
 		File sod = new File (sodRootPath);
 		
 		if(!sod.exists())
-			sod.mkdir();
+			sod.mkdirs();
 		
 		sodStoragePath = sodRootPath +mStorageID;
 		
@@ -47,10 +47,10 @@ public class Storage {
 	}
 	
 	protected boolean createDirectory(){
-		return directory.mkdir();
+		return directory.mkdirs();
 	}
 	
-	protected String [] getFileList(){
+	public String [] getFileList(){
 		return directory.list();
 	}
 	
@@ -331,7 +331,7 @@ public class Storage {
 		
 		StorageFile returnStorageFile = null;
 		
-		returnStorageFile = StorageFile.getStorageFile(file, mode);
+		returnStorageFile = StorageFile.getStorageFile(file, mode, filePath);
 		
 	
 		return returnStorageFile;
@@ -357,7 +357,7 @@ public class Storage {
 		if( file.exists() )
 			throw new IOException();
 		
-		StorageFile returnStorageFile = StorageFile.createStorageFile(file);
+		StorageFile returnStorageFile = StorageFile.createStorageFile(file, filePath);
 	
 		return returnStorageFile;
 	}

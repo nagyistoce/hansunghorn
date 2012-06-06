@@ -9,6 +9,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+
 
 enum SeekOrigin
 {
@@ -25,6 +28,7 @@ enum SeekOrigin
  */
 public  class StorageFile {
 	File file;
+	String filePath;
 	
 	FileInputStream fileInputStream;
 	BufferedInputStream in;
@@ -56,11 +60,12 @@ public  class StorageFile {
 	 * @throws NullPointerException
 	 * 인자로 넘어온 값이 Null이면 NullPointerException을 던진다.
 	 */
-	 static public StorageFile createStorageFile(File mFile)throws IOException, NullPointerException{
+	 static public StorageFile createStorageFile(File mFile, String filePath)throws IOException, NullPointerException{
 	 
 		StorageFile storageFile = new StorageFile();
 	 
 		storageFile.file = mFile;	
+		storageFile.filePath = filePath;
 		storageFile.fileOutputStream = new FileOutputStream(storageFile.file);
 		
 		storageFile.out = new BufferedOutputStream(storageFile.fileOutputStream);
@@ -78,11 +83,12 @@ public  class StorageFile {
 	 * @throws NullPointerException
 	 * 인자로 넘어온 값이 Null이면 NullPointerException을 던진다.
 	 */
-	static public StorageFile getStorageFile(File mFile, int mode)throws IOException, NullPointerException{
+	static public StorageFile getStorageFile(File mFile, int mode, String filePath)throws IOException, NullPointerException{
 		StorageFile storageFile = new StorageFile();
 		
 		storageFile.file = mFile;	
-		 
+		storageFile.filePath = filePath;
+		
 		switch(mode){
 		case READ:
 			storageFile.fileInputStream = new FileInputStream(storageFile.file);
@@ -209,6 +215,35 @@ public  class StorageFile {
 		out.write(buf, index, length);
 
 	}
+	
+	/**
+	 * 저장소에 있는 파일에 이미지를 쓸때 사용한다.
+	 * 지원하는 확장자는 jpg, png이다.
+	 * @param img
+	 * 이미지 정보가 들어있는 객체
+	 * @throws IOException
+	 *  이미 close가 실행됐거나 파일에 쓰기를 실패하면  IOException을 던진다.
+	 *  파일 확장자가 jpg, png가 아니여도
+	 * @throws NullPointerException
+	 * mode가 READ인데 write를 호출하면  NullPointerException을 던진다.
+	 */
+	public void writeImage(Bitmap img) throws IOException{
+		
+		if(mode == READ)
+			DebugUtils.throwException();
+		
+		String fileName = file.getName();
+		String [] splitStr = fileName.split(".");
+		
+		if( splitStr[splitStr.length - 1].equals("jpg") )
+			img.compress(CompressFormat.JPEG, 100, out);
+		else if( splitStr[splitStr.length - 1].equals("png")){
+			img.compress(CompressFormat.PNG, 100, out);
+		}
+		else
+			DebugUtils.throwException();
+	//	out.write(buf);
+	}
 
 	/**
 	 * 파일내에 파일 포인터가 가르치는 곳을 offset만큼 이동한다.
@@ -264,6 +299,10 @@ public  class StorageFile {
 		}
 	}
 	
+	public String getName(){
+		return file.getName();
+	}
+	
 	/**
 	 * 파일을 닫고 저장한다.
 	 * @throws IOException 
@@ -284,6 +323,17 @@ public  class StorageFile {
 		}
 	}
 	
+	public String getRelativeFilePath(){
+		return filePath;
+	}
+	
+	public String getAbsoluteFilePath(){
+		return file.getAbsolutePath();
+	}
+	
+	public File getFileObject(){
+		return file;
+	}
 	
 	
 }

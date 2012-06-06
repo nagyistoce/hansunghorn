@@ -10,6 +10,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
+import sod.common.NetworkUtils;
 import sod.common.Packet;
 import sod.common.Storage;
 import sod.common.StorageFile;
@@ -22,8 +23,11 @@ import sod.smarttv.ServerReceiveHandler;
 import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -54,6 +58,8 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 	private Storage storage;
 	private StorageFile storageFile;
 	int count = 0;
+	
+	WifiManager.MulticastLock mlock;
 
 	// final String[]
 	private static String getLocalAddress() throws IOException { // 내 디바이스 IP
@@ -76,6 +82,11 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 	}
 
 	public void TVServerIni() {
+		/////////////엄씨가 넣은것///////////////////////////////////////////
+		NetworkUtils.setLocalIp(getLocalIpAddress());
+		//////////////엄씨가 넣은것////////////////////////////////
+		
+		
 		ConnectionBean.server = new AccessManagerServer();
 		ConnectionBean.ServerConfig = new ServerConfig();
 		ConnectionBean.ServerConfig.Timeout = 30000;
@@ -352,6 +363,10 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 				}
 				if (LayoutComponentBean.ScreenCount == 0) {
 					TVServerIni();
+					mlock = getWifiManager().createMulticastLock("test_mlock");
+					mlock.setReferenceCounted(true);
+					mlock.acquire();
+					
 					ConnectionBean.server.start(ConnectionBean.ServerConfig);
 					LayoutComponentBean.ScreenCount++;
 				}
@@ -389,7 +404,11 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 				R.layout.textstyle, list);
 		LayoutComponentBean.listview.setAdapter(adapter);
 	}
-
+	//////////////////////////////엄씨가 추가/////////
+	WifiManager getWifiManager(){
+		return (WifiManager) getSystemService(Context.WIFI_SERVICE);
+	}
+///////////////////////////////////////////////////////
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -398,5 +417,37 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 		ButtonEvent();
 
 	}
+	////////////////////엄씨가 추가.///////////////////////////
+	public String getLocalIpAddress() {
+		// need to
+		// <uses-permission
+		// android:name="android.permission.ACCESS_WIFI_STATE"/>
+		WifiManager wifiManager = getWifiManager();
+		WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+		int ipAddress = wifiInfo.getIpAddress();
+
+		byte[] bytes = int2byte(ipAddress);
+		int[] values = new int[4];
+
+		for (int i = 0; i < 4; i++)
+			values[i] = bytes[i] & 0xFF;
+
+		String ipStr = String.format("%d.%d.%d.%d", values[3], values[2],
+				values[1], values[0]);
+
+		return ipStr;
+
+	}
+
+	final byte[] int2byte(int i) {
+		byte[] dest = new byte[4];
+		dest[3] = (byte) (i & 0xff);
+		dest[2] = (byte) (i >> 8 & 0xff);
+		dest[1] = (byte) (i >> 16 & 0xff);
+		dest[0] = (byte) (i >> 24 & 0xff);
+
+		return dest;
+	}
+	/////////////////////////////엄씨가 추가/////////////////////////////
 
 }
