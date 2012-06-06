@@ -73,9 +73,9 @@ public class AccessManagerServer {
 		beginListeningMulti();
 		beginCheckingConnection();
 		
-		//하드코딩////////////////////////////////////////////////////////////////////////////
-//		serviceProvider = new ServiceProvider(conf.serviceName);
-		serviceProvider = new ServiceProvider("ana");
+		//하드코딩////////////////////////하드코딩////////////하드코딩////////하드코딩////////////////////
+		serviceProvider = new ServiceProvider(conf.serviceName);
+//		serviceProvider = new ServiceProvider("ana");
 	}
 
 	/**
