@@ -227,9 +227,9 @@ public class AccessManager implements Disposable {
 	}
 	
 	protected boolean isExistService(){
-//		return serviceManager.isExistService(svinfo.ServiceName);
+		return serviceManager.isExistService(svinfo.ServiceName);
 		/////////////////////////하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///
-		return serviceManager.isExistService("ana");
+		//return serviceManager.isExistService("ana");
 	}
 	
 	protected void startService(){
