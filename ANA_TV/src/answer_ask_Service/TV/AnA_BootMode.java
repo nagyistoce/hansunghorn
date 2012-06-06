@@ -6,20 +6,31 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import answer_ask_BeanTV.DataSturct;
 import answer_ask_BeanTV.LayoutComponentBean;
 
 public class AnA_BootMode extends Activity {
-
 	void LayoutInitial() {
 
-		LayoutComponentBean.statisticsGraph_btn = (Button)findViewById(R.id.statisticsGraph);
-		LayoutComponentBean.QuestionnaireInitial_btn = (Button) findViewById(R.id.QuestionnaireInitialSettinig);
-		LayoutComponentBean.QuestionnaireImfo_btn = (Button) findViewById(R.id.QuestionnaireSettingImfomation);
+		LayoutComponentBean.statisticsGraph_btn = (ImageButton) findViewById(R.id.statisticsGraph);
+		LayoutComponentBean.QuestionnaireInitial_btn = (ImageButton) findViewById(R.id.QuestionnaireInitialSettinig);
+		LayoutComponentBean.QuestionnaireImfo_btn = (ImageButton) findViewById(R.id.QuestionnaireSettingImfomation);
 		if (LayoutComponentBean.ScreenCount == 0) {
 			LayoutComponentBean.statisticsGraph_btn.setEnabled(false);
 			LayoutComponentBean.QuestionnaireImfo_btn.setEnabled(false);
 		}
+
+		// /////////////Ãß°¡/////////////
+		if (LayoutComponentBean.resetFlag) {
+			LayoutComponentBean.QuestionnaireInitial_btn
+					.setBackgroundResource(R.drawable.ana_bootmode_re_setting);
+		} else {
+			LayoutComponentBean.QuestionnaireInitial_btn
+					.setBackgroundResource(R.drawable.ana_bootmode_setting);
+		}
+
+		// ///////////////////////////////
 
 	}
 

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/background" >
     
     <!-- android:apiKey="0HRKYjKYJe_W4T_Os9HT9y5V_QSunrqwHfcgW0Q"  JaeYeong Com.. -->
     <!-- android:apiKey="0HRKYjKYJe_UUDHrj5zwquEE2GRJExdnMS1RRKA"  Kook do Com.. -->
@@ -20,17 +21,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <Button
+        <ImageButton
             android:id="@+id/sendGeoPointButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="위치 전송하기" />
+            android:text="위치 전송하기"
+            android:background="@drawable/tvlocation_send" />
 
-        <Button
+        <ImageButton
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="뒤로" />
+            android:layout_marginLeft="50dp"
+            android:text="뒤로"
+            android:background="@drawable/tvlocation_back" />
     </LinearLayout>
 
 </LinearLayout>

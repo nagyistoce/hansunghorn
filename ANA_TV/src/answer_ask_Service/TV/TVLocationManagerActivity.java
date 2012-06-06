@@ -21,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class TVLocationManagerActivity extends MapActivity {
@@ -28,7 +29,7 @@ public class TVLocationManagerActivity extends MapActivity {
 	List<Overlay> listOfOverlays;
 	PinOverlay pinOverlay;
 	
-	Button sendGeoPointButton;
+	ImageButton sendGeoPointButton;
 	MapView map;
 	
 	TVLocationManager tvLocationManager;
@@ -141,7 +142,7 @@ public class TVLocationManagerActivity extends MapActivity {
         
         //////   sendGeoPointButton Setting...//////////////////////////////////////////////////////////
         
-        Button sendGeoPointButton = (Button)findViewById(R.id.sendGeoPointButton);
+        ImageButton sendGeoPointButton = (ImageButton)findViewById(R.id.sendGeoPointButton);
         
         sendGeoPointButton.setOnClickListener(sendGeoPointButtonListener);
         

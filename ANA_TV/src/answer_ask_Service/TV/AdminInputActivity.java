@@ -9,9 +9,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 public class AdminInputActivity extends Activity {
 	EditText TvName,PhoneNumber,ServiceName,e_Mail;
-	Button admininputButton;
+	ImageButton admininputButton;
  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +20,7 @@ public class AdminInputActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.admin_input);
 		
-		admininputButton =(Button)findViewById(R.id.sendAdminInfo);
+		admininputButton =(ImageButton)findViewById(R.id.sendAdminInfo);
 		 TvName=(EditText)findViewById(R.id.tvNameEditText);
 		 e_Mail=(EditText)findViewById(R.id.eMailEditText);
 		 PhoneNumber=(EditText)findViewById(R.id.phoneNumberEditText);

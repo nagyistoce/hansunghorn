@@ -30,6 +30,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.MultiAutoCompleteTextView.Tokenizer;
 import android.widget.RadioGroup;
 import android.widget.EditText;
@@ -41,6 +42,8 @@ import answer_ask_BeanTV.DataBean;
 import answer_ask_BeanTV.DataSturct;
 import answer_ask_BeanTV.FileBean;
 import answer_ask_BeanTV.LayoutComponentBean;
+
+import answer_ask_Service.TV.R;
 
 public class QuestionnairesSettingSecond extends Activity implements DataSturct {
 	private ArrayList<String> list;
@@ -355,8 +358,9 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 
 				LayoutComponentBean.statisticsGraph_btn.setEnabled(true);
 				LayoutComponentBean.QuestionnaireImfo_btn.setEnabled(true);
-				LayoutComponentBean.QuestionnaireInitial_btn
-						.setText("설문지 재 설정");
+//				LayoutComponentBean.QuestionnaireInitial_btn
+//						.setText("설문지 재 설정");
+				LayoutComponentBean.resetFlag=true;
 				Intent intent = new Intent(QuestionnairesSettingSecond.this,
 						AnA_BootMode.class);
 				startActivity(intent);
@@ -370,9 +374,9 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 		LayoutComponentBean.radiogroup = (RadioGroup) findViewById(R.id.radioGroup1);
 		LayoutComponentBean.topic = (EditText) findViewById(R.id.topic);
 		LayoutComponentBean.question = (EditText) findViewById(R.id.answer);
-		LayoutComponentBean.Fileadd = (Button) findViewById(R.id.fileadd);
-		LayoutComponentBean.questionAdd = (Button) findViewById(R.id.addAnswer);
-		LayoutComponentBean.complete = (Button) findViewById(R.id.complete);
+		LayoutComponentBean.Fileadd = (ImageButton) findViewById(R.id.fileadd);
+		LayoutComponentBean.questionAdd = (ImageButton) findViewById(R.id.addAnswer);
+		LayoutComponentBean.complete = (ImageButton) findViewById(R.id.complete);
 		LayoutComponentBean.long_answer = (RadioButton) findViewById(R.id.first);
 		LayoutComponentBean.short_answer = (RadioButton) findViewById(R.id.second);
 		LayoutComponentBean.listview = (ListView) findViewById(R.id.listview);

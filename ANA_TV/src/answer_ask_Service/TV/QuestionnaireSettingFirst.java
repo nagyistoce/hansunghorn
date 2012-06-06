@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import answer_ask_BeanTV.DataSturct;
 import answer_ask_BeanTV.LayoutComponentBean;
 
@@ -22,9 +23,9 @@ public class QuestionnaireSettingFirst extends Activity implements DataSturct {
 		UserFlag = false;
 		LayoutComponentBean.Company = (EditText) findViewById(R.id.CompanyNameEditText);
 		LayoutComponentBean.During = (EditText) findViewById(R.id.DuringEditText);
-		LayoutComponentBean.FileAdd = (Button) findViewById(R.id.FileAddButton);
+		LayoutComponentBean.FileAdd = (ImageButton) findViewById(R.id.FileAddButton);
 		LayoutComponentBean.UserImfo = (CheckBox) findViewById(R.id.UserInfoCheckBox);
-		LayoutComponentBean.Next = (Button) findViewById(R.id.NextButton);
+		LayoutComponentBean.Next = (ImageButton) findViewById(R.id.NextButton);
 		
 		// 이부분 데모 때문에 넣은 부분/////////////////////////////
 		LayoutComponentBean.Company.setText("Hansung University");
