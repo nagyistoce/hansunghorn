@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class AnAService extends DroidGap {
-	ImageButton TvSearch, ServiceLocation, InstallService;
+	ImageButton TvSearch, ServiceLocation, ServiceList;
 
 	AnAServiceNet net;
 	private ProgressDialog dialog;
@@ -19,7 +19,7 @@ public class AnAService extends DroidGap {
 	public void Layout_Initalize() {
 		TvSearch = (ImageButton) findViewById(R.id.TvSearch);
 		ServiceLocation = (ImageButton) findViewById(R.id.ServiceLocation);
-		InstallService = (ImageButton) findViewById(R.id.InstallService);
+		ServiceList = (ImageButton) findViewById(R.id.InstallService);
 		TvSearch.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -39,14 +39,12 @@ public class AnAService extends DroidGap {
 				startActivity(intent);
 			}
 		});
-		InstallService.setOnClickListener(new OnClickListener() {
+		ServiceList.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				// 促款肺靛 何盒积帆
-				// TV 立加UI 积帆
-			//	Client_Initalize();
-			//	InitHTML();
+				Intent intent = new Intent(AnAService.this, TVServiceListActivity.class);
+				startActivity(intent);
 			}
 		}); 
 	}	

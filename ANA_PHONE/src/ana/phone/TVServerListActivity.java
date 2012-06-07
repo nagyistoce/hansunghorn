@@ -109,36 +109,7 @@ public class TVServerListActivity extends ListActivity {
 		adapter.notifyDataSetChanged();
 		///////////////////////////////////////////////////////////
 		
-		/*
-		Button searchButton = (Button)findViewById(R.id.searchButton);
-		searchButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				String localip = NetworkUtils.getLocalIP();
-				Toast.makeText(v.getContext(), localip, Toast.LENGTH_LONG);
-				AccessManager.searchServer(localip, new SearchCallBack() {
-					
-					@Override
-					public void onSearch(ServerInfo info) {
-						// TODO Auto-generated method stub
-						if(info == null){
-							
-						}else{
-							//핸들러 이용해서 보내야함
-							Log.i("jaeyeong", "jaeyeong"+"OnSearch");
-							
-							list.add(info.EndPoint.getAddress().getHostAddress() +","+ info.ServiceName);
-							adapter.notifyDataSetChanged();
-							
-						}
-					}
-				});
-				
-			}
-		});
-		*/
+		
 		
 	}
 	

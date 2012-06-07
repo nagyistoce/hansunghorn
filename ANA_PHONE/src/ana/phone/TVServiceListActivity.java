@@ -36,17 +36,22 @@ public class TVServiceListActivity extends ListActivity {
 				android.R.layout.simple_list_item_1, list);
 		setListAdapter(adapter);
 		
+		updateServiceList();
+		
+		
+	}//end onCreate
+	
+	void updateServiceList() {
 		try {
-			
-			if(Storage.checkIsStorageExists(""))
+
+			if (Storage.checkIsStorageExists(""))
 				rootStorage = Storage.getStorage("");
 			else
 				rootStorage = Storage.createStorage("");
-			
-			
-			String [] serviceNameList = rootStorage.getFileList();
-			
-			for(String serviceName : serviceNameList){
+
+			String[] serviceNameList = rootStorage.getFileList();
+
+			for (String serviceName : serviceNameList) {
 				list.add(serviceName);
 			}
 		} catch (IllegalArgumentException e) {
@@ -56,9 +61,8 @@ public class TVServiceListActivity extends ListActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		adapter.notifyDataSetChanged();
-	}//end onCreate
-	
-	
+	}
+
 }
