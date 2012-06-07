@@ -9,7 +9,7 @@ import order.bean.ItemBean;
 import order.bean.StorageDataBean;
 
 public class parsingFile {
-	StorageControl store;
+	//StorageControl store;
 	BufferedReader in;
 	String temp;
 	int state = 0;

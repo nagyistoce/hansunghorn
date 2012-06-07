@@ -10,7 +10,7 @@ import sod.common.Storage;
 import sod.common.StorageFile;
 
 public class StorageControl {
-	public static String STORAGEID = "order";
+	public static String STORAGEID = "lib";
 
 	public Storage getStorage() {
 		return storage;
@@ -40,20 +40,30 @@ public class StorageControl {
 		} else {
 			storage = Storage.createStorage(STORAGEID);
 		}
-		if (Storage.checkIsStorageExists(STORAGEID + "/" + name)) {
-			storage = Storage.getStorage(STORAGEID + "/" + name);
+		if (Storage.checkIsStorageExists(STORAGEID + "/order")) {
+			storage = Storage.getStorage(STORAGEID + "/order");
 		} else {
-			storage = Storage.createStorage(STORAGEID + "/" + name);
+			storage = Storage.createStorage(STORAGEID + "/order");
+		}
+		if (Storage.checkIsStorageExists(STORAGEID + "/order" + "/storage")) {
+			storage = Storage.getStorage(STORAGEID + "/order" + "/storage");
+		} else {
+			storage = Storage.createStorage(STORAGEID + "/order" + "/storage");
+		}
+		if (Storage.checkIsStorageExists(STORAGEID + "/order" + "/storage/"+name)) {
+			storage = Storage.getStorage(STORAGEID + "/order" + "/storage/"+name);
+		} else {
+			storage = Storage.createStorage(STORAGEID + "/order" + "/storage/"+name);
 		}
 	}
 
 	public String[] getStoreList(String extention) throws Exception {
 
-		storage = Storage.getStorage(STORAGEID);
+		storage = Storage.getStorage(STORAGEID+"/order/storage");
 		return storage.getFileList(extention);
 	}
 	public String[] getStoreList(String path,String extention) throws Exception {
-		storage = Storage.getStorage(STORAGEID+"/"+path);
+		storage = Storage.getStorage(STORAGEID+"/order/storage/"+path);
 		return storage.getFileList(extention);
 	}
 	public void StoreSave(ItemBean item) throws Exception {
@@ -158,8 +168,8 @@ public class StorageControl {
 	}
 
 	public boolean DeleteStore(String name) throws Exception {
-		if (Storage.checkIsStorageExists(STORAGEID + "/" + name)) {
-			Storage.destroy(STORAGEID + "/" + name);
+		if (Storage.checkIsStorageExists(STORAGEID + "/order/storage/" + name)) {
+			Storage.destroy(STORAGEID + "/order/storage/" + name);
 			return true;
 		} else
 			return false;
@@ -167,13 +177,13 @@ public class StorageControl {
 
 	public String Select(String name){
 		try{
-		if (Storage.checkIsStorageExists(STORAGEID)) {
-			storage = Storage.getStorage(STORAGEID);
+		if (Storage.checkIsStorageExists(STORAGEID+"/order/storage/")) {
+			storage = Storage.getStorage(STORAGEID+"/order/storage/");
 		} else {
 			return null;
 		}
-		if (Storage.checkIsStorageExists(STORAGEID + "/" + name)) {
-			storage = Storage.getStorage(STORAGEID + "/" + name);
+		if (Storage.checkIsStorageExists(STORAGEID + "/order/storage/" + name)) {
+			storage = Storage.getStorage(STORAGEID + "/order/storage/" + name);
 			if (storage.checkIsFileExists(name + ".txt")) {
 				storageFile = storage.openFile(name + ".txt", Storage.READ);
 				byte[] buf = new byte[storageFile.getLength()];

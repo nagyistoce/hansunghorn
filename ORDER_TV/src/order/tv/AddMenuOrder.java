@@ -90,7 +90,7 @@ public class AddMenuOrder extends Activity{
 						
 						public void onClick(DialogInterface dialog, int which) {
 							// TODO Auto-generated method stub
-							LayoutComponentBean.imgEditText.setText("/sod/order/이미지/"+imgItem[which]);
+							LayoutComponentBean.imgEditText.setText("/sod/lib/order/storage/이미지/"+imgItem[which]);
 						}
 					}).show();
 				}catch(Exception e){}
