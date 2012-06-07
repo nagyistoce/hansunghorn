@@ -25,8 +25,10 @@ public class StorageEXActivity extends Activity {
         String [] list = null;
         String str = new String();
         try {
-        	storage = Storage.createStorage("ana/a/b");
+        	Storage.destroy("testService");
         	/*
+        	storage = Storage.createStorage("ana/a/b");
+        	
 			storage = Storage.getStorage("ana");
 			editText2.setText(storage.getSODStoragePath());
 			

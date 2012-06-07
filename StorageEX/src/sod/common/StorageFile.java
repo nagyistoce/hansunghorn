@@ -218,10 +218,12 @@ public  class StorageFile {
 	
 	/**
 	 * 저장소에 있는 파일에 이미지를 쓸때 사용한다.
-	 * @param buf
-	 * 파일에서 읽은 내용을 담기위한 버퍼
+	 * 지원하는 확장자는 jpg, png이다.
+	 * @param img
+	 * 이미지 정보가 들어있는 객체
 	 * @throws IOException
 	 *  이미 close가 실행됐거나 파일에 쓰기를 실패하면  IOException을 던진다.
+	 *  파일 확장자가 jpg, png가 아니여도
 	 * @throws NullPointerException
 	 * mode가 READ인데 write를 호출하면  NullPointerException을 던진다.
 	 */
@@ -230,8 +232,16 @@ public  class StorageFile {
 		if(mode == READ)
 			DebugUtils.throwException();
 		
-		img.compress(CompressFormat.PNG, 100, out);
+		String fileName = file.getName();
+		String [] splitStr = fileName.split(".");
 		
+		if( splitStr[splitStr.length - 1].equals("jpg") )
+			img.compress(CompressFormat.JPEG, 100, out);
+		else if( splitStr[splitStr.length - 1].equals("png")){
+			img.compress(CompressFormat.PNG, 100, out);
+		}
+		else
+			DebugUtils.throwException();
 	//	out.write(buf);
 	}
 
