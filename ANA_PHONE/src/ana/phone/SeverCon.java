@@ -19,7 +19,7 @@ import android.os.StrictMode;
 
 public class SeverCon extends DroidGap{
 	
-	Handler startHandler;
+	Handler startHandler;;
 	
 	public void Client_Initalize() {
 		ConnectionBean.client = new AccessManager();
