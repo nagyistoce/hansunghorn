@@ -57,8 +57,8 @@ public class TVLocationViewerActivity extends MapActivity {
 		MapController mapController = mapViewer.getController();
 		
 		//현재 있는 위치로 이동한다.
-		mapController.animateTo(new GeoPoint((int)(location.getLatitude()*1E6), (int)(location.getLongitude()*1E6) ));
-				
+//		mapController.animateTo(new GeoPoint((int)(location.getLatitude()*1E6), (int)(location.getLongitude()*1E6) ));
+//		mapController.animateTo(new GeoPoint(37566535, 126977969));
 //		mapController.animateTo(new GeoPoint(37566535, 126977969));
 		mapController.setZoom(20);
 		

@@ -1,5 +1,6 @@
 package sod.common;
 
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.EOFException;
@@ -7,6 +8,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 
 
 enum SeekOrigin
@@ -16,25 +20,37 @@ enum SeekOrigin
     End,
 }
 
+
 /**
  * 
  * @author MB
  *
  */
-public class StorageFile {
+public  class StorageFile {
 	File file;
+	String filePath;
 	
 	FileInputStream fileInputStream;
-	FileOutputStream fileOutputStream;
-	
 	BufferedInputStream in;
-	BufferedOutputStream out;
 	
+	FileOutputStream fileOutputStream;
+	BufferedOutputStream out;
+	StringBuilder mBuf;
+	
+	final static int READ = 0;
+	final static int WRITE = 1;
+	public final static int WRITE_PLUS = 2;
+	
+	int mode = 0;
+	
+	int position;
 	
 	StorageFile() {
 		
 		
 	}
+	
+
 	
 	/**
 	 * 
@@ -44,23 +60,19 @@ public class StorageFile {
 	 * @throws NullPointerException
 	 * 인자로 넘어온 값이 Null이면 NullPointerException을 던진다.
 	 */
-	static protected StorageFile createStorageFile(File mFile)throws IOException, NullPointerException{
-		if(mFile == null)
-			throw new NullPointerException();
-		
+	 static public StorageFile createStorageFile(File mFile, String filePath)throws IOException, NullPointerException{
+	 
 		StorageFile storageFile = new StorageFile();
-		
+	 
 		storageFile.file = mFile;	
-		storageFile.file.createNewFile();//
-		
-		storageFile.fileInputStream = new FileInputStream(storageFile.file);
+		storageFile.filePath = filePath;
 		storageFile.fileOutputStream = new FileOutputStream(storageFile.file);
 		
-		storageFile.in = new BufferedInputStream(storageFile.fileInputStream);
 		storageFile.out = new BufferedOutputStream(storageFile.fileOutputStream);
+		storageFile.mode = WRITE;
 		
 		return storageFile;
-	}
+	 }
 	
 	/**
 	 * 
@@ -71,48 +83,65 @@ public class StorageFile {
 	 * @throws NullPointerException
 	 * 인자로 넘어온 값이 Null이면 NullPointerException을 던진다.
 	 */
-	static protected StorageFile getStorageFile(File mFile)throws IOException, NullPointerException{
-		if(mFile == null)
-			throw new NullPointerException();
-		
+	static public StorageFile getStorageFile(File mFile, int mode, String filePath)throws IOException, NullPointerException{
 		StorageFile storageFile = new StorageFile();
 		
-		storageFile.file = mFile;
+		storageFile.file = mFile;	
+		storageFile.filePath = filePath;
 		
-		storageFile.fileInputStream = new FileInputStream(storageFile.file);
-		storageFile.fileOutputStream = new FileOutputStream(storageFile.file);
-		
-		storageFile.in = new BufferedInputStream(storageFile.fileInputStream);
-		storageFile.out = new BufferedOutputStream(storageFile.fileOutputStream);
-		
+		switch(mode){
+		case READ:
+			storageFile.fileInputStream = new FileInputStream(storageFile.file);
+			
+			storageFile.in = new BufferedInputStream(storageFile.fileInputStream);
+			storageFile.mode = READ;
+			break;
+		case WRITE:
+			storageFile.fileOutputStream = new FileOutputStream(storageFile.file);
+			
+			storageFile.out = new BufferedOutputStream(storageFile.fileOutputStream);
+			storageFile.mode = WRITE;
+			break;
+		case WRITE_PLUS:
+			storageFile.fileInputStream = new FileInputStream(storageFile.file);
+			storageFile.in = new BufferedInputStream(storageFile.fileInputStream);
+			storageFile.mode = WRITE_PLUS;
+			
+			byte [] buf = new byte[storageFile.getLength()];
+			while(storageFile.in.read(buf) != -1) {;}
+			String sBuf = new String(buf);
+			storageFile.in.close();
+			storageFile.fileInputStream.close();
+			
+			storageFile.fileOutputStream = new FileOutputStream(storageFile.file);
+			storageFile.out = new BufferedOutputStream(storageFile.fileOutputStream);
+			storageFile.write(sBuf.getBytes());
+			storageFile.flush();
+			
+			break;
+		}
 		return storageFile;
 	}
-	
-	public void write(byte [] buf) throws IOException{
-		out.write(buf);
-	}
+
 	/**
-	 * 해당 파일에 데이터를 쓴다.
+	 * byte배열에 파일에 있는 모든 데이터를 담아온다.
+	 * 
 	 * @param buf
-	 * 파일에 쓰고자하는 내용을 바이트 배열로 직렬화한 것
-	 * @param index
-	 * 버퍼에서의 쓰고자하는 부분의 시작위치
-	 * @param length
-	 * 쓰고자하는 바이트 배열의 index부터의 길이
-	 * @throws  IOException
-	 * 파일에 쓰기를 실패하면  IOException을 던진다.
+	 * 파일에서 읽은 내용을 담기위한 버퍼
+	 * @throws IOException
+	 * 이미 close가 실행됐거나 파일에 읽기를 실패하면  IOException을 던진다.
+	 * @throws EOFException
+	 * 파일을 읽다가 파일의 끝에 도달하면 EOFException을 던진다
+	 * @throws NullPointerException
+	 * mode가 WRITE인데 read를 호출하면  NullPointerException을 던진다.
 	 */
-	public void write(byte[] buf, int index, int length) throws IOException{
-		
-		out.write(buf, index, length);
-	}
-	
 	public void read(byte[] buf) throws IOException,  EOFException{
-		int returnInt;
-		returnInt = in.read(buf);
 		
-		if(returnInt == -1)
-			throw new EOFException();
+		if(mode != READ)
+			DebugUtils.throwException();
+		
+		while(in.read(buf) != -1) {;}
+		
 	}
 	
 	/**
@@ -127,17 +156,98 @@ public class StorageFile {
 	 * 이미 close가 실행됐거나 파일에 읽기를 실패하면  IOException을 던진다.
 	 * @throws EOFException
 	 * 파일을 읽다가 파일의 끝에 도달하면 EOFException을 던진다.
+	 * @throws NullPointerException
+	 * mode가 WRITE인데 read를 호출하면  NullPointerException을 던진다.
 	 */
 	public void read(byte[] buf, int index, int length) throws IOException, EOFException{
-		int returnInt;
-		returnInt = in.read(buf, index, length);
+		
+		if(mode != READ)
+			DebugUtils.throwException();
+		
+		for(int i = 0 ; i<index ; i++){
+			if (in.read() == -1)
+				break;
+		}
+		
+		int returnInt;	
+		returnInt = in.read(buf, 0, length);
+		
 		
 		if(returnInt == -1)
 			throw new EOFException();
 	}
 	
 	/**
+	 * 
+	 * @param buf
+	 * 파일에서 읽은 내용을 담기위한 버퍼
+	 * @throws IOException
+	 *  이미 close가 실행됐거나 파일에 쓰기를 실패하면  IOException을 던진다.
+	 * @throws NullPointerException
+	 * mode가 READ인데 write를 호출하면  NullPointerException을 던진다.
+	 */
+	public void write(byte [] buf) throws IOException{
+		
+		if(mode == READ)
+			DebugUtils.throwException();
+		
+		out.write(buf);
+	}
+	
+	/**
+	 * 해당 파일에 데이터를 쓴다.
+	 * @param buf
+	 * 파일에 쓰고자하는 내용을 바이트 배열로 직렬화한 것
+	 * @param index
+	 * 버퍼에서의 쓰고자하는 부분의 시작위치
+	 * @param length
+	 * 쓰고자하는 바이트 배열의 index부터의 길이
+	 * @throws  IOException
+	 * 파일에 쓰기를 실패하면  IOException을 던진다.
+	 * @throws NullPointerException
+	 * mode가 READ인데 write를 호출하면  NullPointerException을 던진다.
+	 */
+	public void write(byte[] buf, int index, int length) throws IOException{
+		
+		if(mode != WRITE)
+			DebugUtils.throwException();
+		
+		out.write(buf, index, length);
+
+	}
+	
+	/**
+	 * 저장소에 있는 파일에 이미지를 쓸때 사용한다.
+	 * 지원하는 확장자는 jpg, png이다.
+	 * @param img
+	 * 이미지 정보가 들어있는 객체
+	 * @throws IOException
+	 *  이미 close가 실행됐거나 파일에 쓰기를 실패하면  IOException을 던진다.
+	 *  파일 확장자가 jpg, png가 아니여도
+	 * @throws NullPointerException
+	 * mode가 READ인데 write를 호출하면  NullPointerException을 던진다.
+	 */
+	public void writeImage(Bitmap img) throws IOException{
+		
+		if(mode == READ)
+			DebugUtils.throwException();
+		
+		String fileName = file.getName();
+		String [] splitStr = fileName.split(".");
+		
+		if( splitStr[splitStr.length - 1].equals("jpg") )
+			img.compress(CompressFormat.JPEG, 100, out);
+		else if( splitStr[splitStr.length - 1].equals("png")){
+			img.compress(CompressFormat.PNG, 100, out);
+		}
+		else
+			DebugUtils.throwException();
+	//	out.write(buf);
+	}
+
+	/**
 	 * 파일내에 파일 포인터가 가르치는 곳을 offset만큼 이동한다.
+	 * (아직 미구현)
 	 * @param offset
 	 * 파일포인터를 이동하고자 하는 위치
 	 * @param seekorigin
@@ -151,6 +261,7 @@ public class StorageFile {
 	
 	/**
 	 * 현재의 파일포인터의 위치를 얻는다.
+	 * (아직 미구현)
 	 */
 	public void getPosition(){
 		
@@ -162,38 +273,67 @@ public class StorageFile {
 	 */
 	public int getLength(){
 		return (int) file.length();
+		
+		
 	}
 	
 	/**
 	 * 파일의 내용을 저장소 상에 기록한다.
+	 * (삭제예정)
 	 * @throws IOException 
 	 * 이미 닫혀있으면 IOException 을 던진다.
+	 * @throws NullPointerException
+	 * mode가 READ인 상태에서 flush를 호출하면 NullPointerException을 던진다.
 	 */
 	public void flush() throws IOException{
-		in.close();
-		out.close();
-		
-		fileInputStream.close();
-		fileOutputStream.close();
-		
-		fileInputStream = new FileInputStream(file);
-		fileOutputStream = new FileOutputStream(file);
-		
-		in = new BufferedInputStream(fileInputStream);
-		out = new BufferedOutputStream(fileOutputStream);
+		switch(mode){
+		case READ:
+			DebugUtils.throwException();
+			break;
+			
+		case WRITE:
+		case WRITE_PLUS:
+			out.flush();
+			fileOutputStream.flush();
+			break;
+		}
+	}
+	
+	public String getName(){
+		return file.getName();
 	}
 	
 	/**
-	 * 파일을 닫는다.
+	 * 파일을 닫고 저장한다.
 	 * @throws IOException 
 	 * 이미 닫혀있으면 IOException 을 던진다.
 	 */
 	public void close() throws IOException{
-		in.close();
-		out.close();
-		
-		fileInputStream.close();
-		fileOutputStream.close();
-		
+		switch(mode){
+		case READ:
+			in.close();
+			fileInputStream.close();
+			break;
+			
+		case WRITE:
+		case WRITE_PLUS:
+			out.close();
+			fileOutputStream.close();
+			break;
+		}
 	}
+	
+	public String getRelativeFilePath(){
+		return filePath;
+	}
+	
+	public String getAbsoluteFilePath(){
+		return file.getAbsolutePath();
+	}
+	
+	public File getFileObject(){
+		return file;
+	}
+	
+	
 }

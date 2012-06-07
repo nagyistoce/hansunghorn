@@ -1,23 +1,34 @@
 package sod.smarttv;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.net.DatagramPacket;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
+import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 
+
+
 import sod.common.ActionEx;
+import sod.common.ConsoleLogger;
 import sod.common.Constants;
 import sod.common.NetworkUtils;
 import sod.common.Packet;
+import sod.common.ReceiveHandler;
 import sod.common.Serializer;
 import sod.common.ThreadEx;
 import sod.common.Transceiver;
 import sod.common.Tuple;
+import sod.smarttv.ServiceProvider;
 
 /**
  * 
@@ -34,6 +45,8 @@ public class AccessManagerServer {
 	protected ServerConfig config;
 	protected boolean isRunning = false;
 	protected Map<Integer, Tuple<Transceiver, Long>> connset;
+	
+	protected ServiceProvider serviceProvider;
 	
 	public AccessManagerServer(){
 		connset = new ConcurrentHashMap<Integer, Tuple<Transceiver,Long>>();
@@ -59,6 +72,10 @@ public class AccessManagerServer {
 		beginListening();
 		beginListeningMulti();
 		beginCheckingConnection();
+		
+		//하드코딩////////////////////////하드코딩////////////하드코딩////////하드코딩////////////////////
+		serviceProvider = new ServiceProvider(conf.serviceName);
+//		serviceProvider = new ServiceProvider("ana");
 	}
 
 	/**
@@ -185,23 +202,35 @@ public class AccessManagerServer {
 						t.item1 = new Transceiver(sender);
 						t.item2 = ThreadEx.getCurrentTime();
 						connset.put(sender.hashCode(), t);
-						sendServiceName(config.serviceName, sender.hashCode());
 						cb_conn.onConnect(sender.hashCode());
+						
+						//
+						
+						p2.clear();
+						p2.signiture= Packet.RESPONSE_ACCEPT;
+						t.item1.send(p2);
+						
 						break;
 					case Packet.RESPONSE_CLIENT_ALIVE:
 						t = connset.get(sender.hashCode());
 						t.item2 = ThreadEx.getCurrentTime();
 						break;
-					case Packet.REQUEST_PING:
-						sender_t = new Transceiver(sender);
-						p2.clear();
-						p2.signiture = Packet.RESPONSE_PING;
-						p2.push(config.serviceName);
-						sender_t.send(p2);
-						sender_t.dispose();
-						break;
 					case Packet.REQUEST_SERVICE_DATA:
 						//need to implement
+						//2.서비스 데이터를 보내준다.
+						sender_t = new Transceiver(sender);
+						ArrayList<Packet> servicePackets ;
+						servicePackets = serviceProvider.getServicePacket();
+						
+						for(Packet pac : servicePackets){
+							sender_t.send(pac);
+						}
+						p2.clear();
+						p2.signiture = Packet.RESPONSE_SERVICE_DATA_END;
+						sender_t.send(p2);
+						
+						break;
+					case Packet.REQUEST_PING:
 						break;
 					default:
 						cb_recv.onReceive(p, sender.hashCode());
@@ -291,38 +320,20 @@ public class AccessManagerServer {
 					
 					Transceiver t = new Transceiver(new InetSocketAddress(ip, port));
 					pkt.clear();
+					pkt.signiture = Packet.RESPONSE_PING;
 					pkt.push(NetworkUtils.getLocalIP());
 					pkt.push(config.Port);
 					pkt.push(config.serviceName);
 					t.send(pkt);
 					t.dispose();
+					
+					if(Constants.isDebug)
+						Constants.logger.log("(debug:server) ping responsed to " + ip + " : " + port + ".\n");
 				}	
 				
 			}
 		});
 	}
 	
-	/**
-	 * 특정 Transceiver에게 이 서비스의 이름을 전송한다.
-	 * @param name
-	 * 서비스의 이름
-	 * @param connid
-	 * Transceiver 객체를 가르키는 id
-	 * @throws IllegalArgumentException
-	 * String NULL이거나 ,connid가 유효하지 않은 경우 발생
-	 */
-	protected void sendServiceName(String name, int connid) throws IllegalArgumentException{
-		if(name == null) 
-			throw new IllegalArgumentException("argument name should not be null.");
-		if(!connset.containsKey(connid))
-			throw new IllegalArgumentException("connid is not valid.");
-		
-		Packet p = new Packet();
-		p.signiture = Packet.RESPONSE_SERVICE_NAME;
-		p.push(name);
-		
-		Tuple<Transceiver, Long> t = connset.get(connid);
-		t.item1.send(p);
-	}
 
 }

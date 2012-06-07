@@ -3,6 +3,7 @@ package ana.phone;
 import java.util.ArrayList;
 
 import sod.common.ActionEx;
+import sod.common.NetworkUtils;
 import sod.common.ThreadEx;
 import sod.smartphone.AccessManager;
 import sod.smartphone.SearchCallBack;
@@ -37,13 +38,14 @@ public class TVServerListActivity extends ListActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tvserverlist);
+		NetworkUtils.setLocalIp(getLocalIpAddress());
 		
 		list = new ArrayList<String>();
 		
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
 		setListAdapter(adapter);
 		
-		Log.i("jaeyeong","jaeyeong start");
+//		Log.i("jaeyeong","jaeyeong start");
 	
 		
 		handler = new Handler(){
@@ -55,6 +57,9 @@ public class TVServerListActivity extends ListActivity {
 				list.add(info.EndPoint.getAddress().getHostAddress() +","+ info.ServiceName);
 				adapter.notifyDataSetChanged();
 				
+				///////¾ö¾¾°¡ Ãß°¡//////////
+				ConnectionBean.ServerInfomation = info;
+				///////¾ö¾¾°¡ Ãß°¡//////////
 			}
 			
 		};
