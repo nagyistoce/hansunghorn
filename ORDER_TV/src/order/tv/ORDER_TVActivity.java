@@ -12,6 +12,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import ana.tv.R;
 import android.view.View.OnClickListener;
 
@@ -22,9 +23,9 @@ public class ORDER_TVActivity extends Activity {
 	//////////엄씨가 넣은것
 
 	public void LayoutComponent() {
-		LayoutComponentBean.Total_Menu = (Button) findViewById(R.id.Total_Menu);
-		LayoutComponentBean.AddMenuItem = (Button) findViewById(R.id.AddMenuItem);
-		LayoutComponentBean.updateMenuItem = (Button) findViewById(R.id.updateMenuItem);
+		LayoutComponentBean.Total_Menu = (ImageButton) findViewById(R.id.Total_Menu);
+		LayoutComponentBean.AddMenuItem = (ImageButton) findViewById(R.id.AddMenuItem);
+		LayoutComponentBean.updateMenuItem = (ImageButton) findViewById(R.id.updateMenuItem);
 		LayoutComponentBean.Total_Menu
 				.setOnClickListener(new OnClickListener() {
 
