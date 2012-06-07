@@ -1,24 +1,29 @@
 package order.tv;
 
+import java.io.File;
 import java.util.ArrayList;
 
+import order.bean.ConnectionBean;
+import order.bean.ItemBean;
 import order.control.StorageControl;
-
+import order.control.parsingFile;
 import ana.tv.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class ModiFyMenuOrder extends Activity {
 	private ListView mList;
@@ -28,7 +33,8 @@ public class ModiFyMenuOrder extends Activity {
 	private StorageControl storagecontrol = new StorageControl();
 	public static String[] items = null;
 	public static int p = 0;
-
+	public parsingFile psfile;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,7 +64,7 @@ public class ModiFyMenuOrder extends Activity {
 
 										StorageControl a = new StorageControl();
 										try {
-											a.DeleteStore(ModiFyMenuOrder.items[ModiFyMenuOrder.p]);
+											a.DeleteStore(ModiFyMenuOrder.items[ModiFyMenuOrder.p+1]);
 											Intent intent = new Intent(
 													ModiFyMenuOrder.this,
 													ModiFyMenuOrder.class);
@@ -87,30 +93,50 @@ public class ModiFyMenuOrder extends Activity {
 
 		});
 	}
+	public Bitmap setupListImg(String item,ItemBean bean,parsingFile psfile){
+		String temp = item;
+		if (temp.equals("이미지")) {
+			return null;
+		} 
+		else {
+			temp = storagecontrol.Select(temp);
 
-	private void setupListItem() {
-		try {
+			try {
+				bean = psfile.Parsing(temp);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+BitmapFactory.Options options = new BitmapFactory.Options();
+options.inSampleSize = 4;
+Bitmap orgImage = BitmapFactory.decodeFile("mnt/sdcard/"+bean.getUrl(), options);
+Bitmap resize = Bitmap.createScaledBitmap(orgImage, 300, 400, true);
+		
+return orgImage;
+		}
+		
+	}
+	private void setupListItem()throws Exception {
+			try{
 			ModiFyMenuOrder.items = storagecontrol.getStoreList("*");
-			int[] icons = { android.R.drawable.ic_menu_add,
+			Bitmap [] icons=new Bitmap[ModiFyMenuOrder.items.length];
+			ItemBean bean = new ItemBean();
+			psfile=new parsingFile();
+			for(int i=0;i<ModiFyMenuOrder.items.length;i++)
+			{
+				
+				icons[i]=setupListImg(ModiFyMenuOrder.items[i],bean,psfile);
 
-			android.R.drawable.ic_menu_agenda,
-					android.R.drawable.ic_menu_camera,
-					android.R.drawable.ic_menu_edit,
-					android.R.drawable.ic_menu_add,
-					android.R.drawable.ic_menu_day,
-					android.R.drawable.ic_menu_compass,
-					android.R.drawable.ic_menu_manage };
-
+			}
+				
+			
+			
 			mAdapter.clear();
 
 			for (int i = 0; i < items.length; i++) {
 				final Iconinfo info = new Iconinfo();
-				info.icon = icons[items.length%(i+1)];
-				if (items[i] == null) {
-					info.text = items[i - 1];
-				} else {
-					info.text = items[i];
-				}
+				info.icon = icons[i];
+				info.text = items[i];
 				if (info.text.equals("이미지")) {
 				} else {
 					mAdapter.add(info);
@@ -161,13 +187,13 @@ public class ModiFyMenuOrder extends Activity {
 			textview = (TextView) convertView.findViewById(R.id.text1);
 			textview.setText(info.text);
 			imageview = (ImageView) convertView.findViewById(R.id.icon);
-			imageview.setImageResource(info.icon);
+			imageview.setImageBitmap(info.icon);
 			return convertView;
 		}
 	}
 
 	public class Iconinfo {
-		private int icon;
+		private Bitmap icon;
 		private String text;
 	}
 }

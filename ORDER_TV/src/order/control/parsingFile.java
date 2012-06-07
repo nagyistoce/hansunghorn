@@ -12,7 +12,7 @@ public class parsingFile {
 	//StorageControl store;
 	BufferedReader in;
 	String temp;
-	int state = 0;
+	boolean recommend=false;
     int startIndex;
     int endIndex;
     
@@ -22,7 +22,7 @@ public class parsingFile {
 			return null;
 	in =  new BufferedReader(new FileReader(file));
 	ItemBean bean=new ItemBean();
-	
+	int state = 0;
 	    while((temp = in.readLine()) != null) {
 	    	System.out.println(temp);
 	    	switch(state)
@@ -73,15 +73,28 @@ public class parsingFile {
 	    		}
 	    		break;
 	    	case 5:
+	    		if(temp.contains(StorageDataBean.BEFORE_RECOMMAND))
+	    		{
+	    			startIndex=temp.indexOf(">");
+	    			endIndex=temp.indexOf(StorageDataBean.AFTER_RECOMMAND);
+	    			if(temp.substring(startIndex+1,endIndex).equals("true"));
+	    			{
+	    				 recommend=true;
+	    			}
+	    			bean.setRecommandFlag(recommend);
+	    			state=6;
+	    		}
+	    		break;
+	    	case 6:
 	    		if(temp.contains(StorageDataBean.BEFORE_REVIEW))
 	    		{
 	    			startIndex=temp.indexOf(">");
 	    			endIndex=temp.indexOf(StorageDataBean.AFTER_REVIEW);
 	    			bean.setRating(temp.substring(startIndex+1,endIndex));
-	    			state=6;
+	    			state=7;
 	    		}
 	    		break;
-	    	case 6:
+	    	case 7:
 	    		if(temp.contains(StorageDataBean.BEFORE_BITMAP))
 	    		{
 	    			startIndex=temp.indexOf(">");

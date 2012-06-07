@@ -54,7 +54,7 @@ public class ToTalMenuOrder extends Activity {
 					p = pos;
 					psfile = new parsingFile();
 					ItemBean bean = new ItemBean();
-					String file = a.Select(ToTalMenuOrder.items[ToTalMenuOrder.p]);
+					String file = a.Select(ToTalMenuOrder.items[ToTalMenuOrder.p+1]);
 					bean = psfile.Parsing(file);
 					ItemBean.obj = bean;
 					Toast.makeText(ToTalMenuOrder.this, "클릭해쓰요 : " + pos,

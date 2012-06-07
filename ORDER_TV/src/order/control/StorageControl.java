@@ -159,6 +159,10 @@ public class StorageControl {
 		item.setDescription(description);
 		item.setPrice(price);
 		item.setCategory(category);
+		if(recommand)
+		{
+			boolean a=recommand;
+		}
 		item.setRecommandFlag(recommand);
 		item.setUrl(imgUrl);
 		//item.setUrl(imgUrl);
@@ -177,8 +181,8 @@ public class StorageControl {
 
 	public String Select(String name){
 		try{
-		if (Storage.checkIsStorageExists(STORAGEID+"/order/storage/")) {
-			storage = Storage.getStorage(STORAGEID+"/order/storage/");
+		if (Storage.checkIsStorageExists(STORAGEID+"/order/storage")) {
+			storage = Storage.getStorage(STORAGEID+"/order/storage");
 		} else {
 			return null;
 		}
