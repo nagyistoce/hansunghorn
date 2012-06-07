@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="100dp" >
+            android:layout_marginTop="80dp" >
 
             <TextView
                 android:id="@+id/textView1"
@@ -26,12 +26,12 @@
                 android:gravity="left"
                 android:text="설문주제 "
                 android:textColor="#000000"
-                android:textSize="30dp" />
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/topic"
                 android:layout_width="400dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="250dp"
@@ -39,7 +39,7 @@
                 android:ems="10"
                 android:gravity="left"
                 android:textColor="#000000"
-                android:textSize="30dp" />
+                android:textSize="20dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -57,12 +57,12 @@
                 android:gravity="left"
                 android:text="문항"
                 android:textColor="#000000"
-                android:textSize="30dp" />
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/answer"
                 android:layout_width="400dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="250dp"
@@ -71,7 +71,7 @@
                 android:gravity="left"
                 android:singleLine="true"
                 android:textColor="#000000"
-                android:textSize="30dp" />
+                android:textSize="20dp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -102,8 +102,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="첨부"
-                android:textSize="30dp"
-                android:layout_marginLeft="150dp"
+                android:textSize="20dp"
+                android:layout_marginLeft="100dp"
                 android:background="@drawable/questionnaire_setting_fileadd" />
 
             <RadioGroup
@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginLeft="90dp" >
+                android:layout_marginLeft="30dp" >
 
                 <RadioButton
                     android:id="@+id/first"
@@ -120,7 +120,7 @@
                     android:checked="true"
                     android:text="주관식"
                     android:textColor="#000000"
-                    android:textSize="30dp" />
+                    android:textSize="20dp" />
 
                 <RadioButton
                     android:id="@+id/second"
@@ -128,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:text="객관식"
                     android:textColor="#000000"
-                    android:textSize="30dp" />
+                    android:textSize="20dp" />
             </RadioGroup>
 
             <ImageButton
@@ -137,9 +137,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="130dp"
+                android:layout_marginLeft="50dp"
                 android:text="문항 추가"
-                android:textSize="30dp"
+                android:textSize="20dp"
                 android:background="@drawable/questionnaire_setting_moonadd" />
 
             <ImageButton
@@ -148,9 +148,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="20dp"
                 android:text="설문지 작성완료" 
-                android:textSize="30dp"
+                android:textSize="20dp"
                 android:background="@drawable/questionnaire_setting_complete"/>
         </LinearLayout>
     </LinearLayout>
