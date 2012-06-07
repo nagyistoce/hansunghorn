@@ -92,6 +92,20 @@
             android:maxLength="40" >
 
         </EditText>
+
+        <CheckBox
+            android:id="@+id/RecommandCheckBox"
+            android:layout_width="47dp"
+            android:layout_height="wrap_content"
+            android:text="추천" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="48dp"
+            android:layout_height="34dp"
+            android:text="추천"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -123,9 +137,9 @@
 
     <Button
         android:id="@+id/sendItemInfo"
-        android:layout_marginLeft="180dip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="180dip"
         android:text="보내기" />
 
 </LinearLayout>

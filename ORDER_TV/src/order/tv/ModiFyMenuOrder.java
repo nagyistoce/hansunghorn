@@ -26,8 +26,9 @@ public class ModiFyMenuOrder extends Activity {
 	private TextView textview;
 	private ImageView imageview;
 	private StorageControl storagecontrol = new StorageControl();
-	public static String[] items=null;
-	public static int p=0;
+	public static String[] items = null;
+	public static int p = 0;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,33 +45,44 @@ public class ModiFyMenuOrder extends Activity {
 
 			public void onItemClick(AdapterView<?> adater, View view, int pos,
 					long arg3) {
-				p=pos;
-				new AlertDialog.Builder(ModiFyMenuOrder.this).setTitle("확인창").setMessage("해당 메뉴를 삭제 하기겠습니까?")
-				.setPositiveButton("예",new DialogInterface.OnClickListener() {
-					
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						
-						StorageControl a=new StorageControl();
-						try {
-							a.DeleteStore(ModiFyMenuOrder.items[ModiFyMenuOrder.p]);
-							Intent intent=new Intent(ModiFyMenuOrder.this,ModiFyMenuOrder.class);
-							startActivity(intent);
-							finish();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}).setNegativeButton("아니오",new DialogInterface.OnClickListener(){
+				p = pos;
+				new AlertDialog.Builder(ModiFyMenuOrder.this)
+						.setTitle("확인창")
+						.setMessage("해당 메뉴를 삭제 하기겠습니까?")
+						.setPositiveButton("예",
+								new DialogInterface.OnClickListener() {
 
-					public void onClick(DialogInterface dialog, int which) {
+									public void onClick(DialogInterface dialog,
+											int which) {
+										// TODO Auto-generated method stub
 
-						Intent intent=new Intent(ModiFyMenuOrder.this,ModiFyMenuOrder.class);
-						startActivity(intent);
-						finish();
-					}
-				}).show();
+										StorageControl a = new StorageControl();
+										try {
+											a.DeleteStore(ModiFyMenuOrder.items[ModiFyMenuOrder.p]);
+											Intent intent = new Intent(
+													ModiFyMenuOrder.this,
+													ModiFyMenuOrder.class);
+											startActivity(intent);
+											finish();
+										} catch (Exception e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+									}
+								})
+						.setNegativeButton("아니오",
+								new DialogInterface.OnClickListener() {
+
+									public void onClick(DialogInterface dialog,
+											int which) {
+
+										Intent intent = new Intent(
+												ModiFyMenuOrder.this,
+												ModiFyMenuOrder.class);
+										startActivity(intent);
+										finish();
+									}
+								}).show();
 			}
 
 		});
@@ -78,13 +90,14 @@ public class ModiFyMenuOrder extends Activity {
 
 	private void setupListItem() {
 		try {
-			this.items = storagecontrol.getStoreList("*");
+			ModiFyMenuOrder.items = storagecontrol.getStoreList("*");
 			int[] icons = { android.R.drawable.ic_menu_add,
 
 			android.R.drawable.ic_menu_agenda,
 					android.R.drawable.ic_menu_camera,
 					android.R.drawable.ic_menu_edit,
 					android.R.drawable.ic_menu_add,
+					android.R.drawable.ic_menu_day,
 					android.R.drawable.ic_menu_compass,
 					android.R.drawable.ic_menu_manage };
 
@@ -92,13 +105,16 @@ public class ModiFyMenuOrder extends Activity {
 
 			for (int i = 0; i < items.length; i++) {
 				final Iconinfo info = new Iconinfo();
-				info.icon = icons[i];
+				info.icon = icons[items.length%(i+1)];
 				if (items[i] == null) {
 					info.text = items[i - 1];
 				} else {
 					info.text = items[i];
 				}
-				mAdapter.add(info);
+				if (info.text.equals("이미지")) {
+				} else {
+					mAdapter.add(info);
+				}
 			}
 
 			mAdapter.notifyDataSetChanged();

@@ -3,12 +3,10 @@ package order.control;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.StringTokenizer;
+import java.io.StringReader;
 
 import order.bean.ItemBean;
 import order.bean.StorageDataBean;
-
-import android.widget.MultiAutoCompleteTextView.Tokenizer;
 
 public class parsingFile {
 	StorageControl store;
@@ -18,13 +16,15 @@ public class parsingFile {
     int startIndex;
     int endIndex;
     
-	public ItemBean Parsing(File file)throws Exception
+	public ItemBean Parsing(String file)throws Exception
 	{
 		if(file==null)
 			return null;
 	in =  new BufferedReader(new FileReader(file));
 	ItemBean bean=new ItemBean();
+	
 	    while((temp = in.readLine()) != null) {
+	    	System.out.println(temp);
 	    	switch(state)
 	    	{
 	    	case 0:
@@ -60,11 +60,38 @@ public class parsingFile {
 	    			startIndex=temp.indexOf(">");
 	    			endIndex=temp.indexOf(StorageDataBean.AFTER_DESCRIPTION);
 	    			bean.setDescription(temp.substring(startIndex+1,endIndex));
+	    			state=4;
+	    		}
+	    		break;
+	    	case 4:
+	    		if(temp.contains(StorageDataBean.BEFORE_RATING))
+	    		{
+	    			startIndex=temp.indexOf(">");
+	    			endIndex=temp.indexOf(StorageDataBean.AFTER_RATING);
+	    			bean.setRating(temp.substring(startIndex+1,endIndex));
+	    			state=5;
+	    		}
+	    		break;
+	    	case 5:
+	    		if(temp.contains(StorageDataBean.BEFORE_REVIEW))
+	    		{
+	    			startIndex=temp.indexOf(">");
+	    			endIndex=temp.indexOf(StorageDataBean.AFTER_REVIEW);
+	    			bean.setRating(temp.substring(startIndex+1,endIndex));
+	    			state=6;
+	    		}
+	    		break;
+	    	case 6:
+	    		if(temp.contains(StorageDataBean.BEFORE_BITMAP))
+	    		{
+	    			startIndex=temp.indexOf(">");
+	    			endIndex=temp.indexOf(StorageDataBean.AFTER_BITMAP);
+	    			bean.setUrl(temp.substring(startIndex+1,endIndex));
 	    			state=0;
 	    		}
 	    		break;
 	    	default:
-	    			break;
+	    		break;
 	    	}
 	    }
 	    in.close();

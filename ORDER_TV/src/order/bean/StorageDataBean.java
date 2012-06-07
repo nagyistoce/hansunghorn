@@ -10,5 +10,13 @@ public class StorageDataBean {
 	public static String AFTER_PRICE="</price>";
 	public static String BEFORE_DESCRIPTION="<description>";
 	public static String AFTER_DESCRIPTION="</description>";
-	
+	public static String BEFORE_RATING="<rating>";
+	public static String AFTER_RATING="</rating>";
+	public static String BEFORE_REVIEW="<review>";
+	public static String AFTER_REVIEW="</review>";
+	public static String BEFORE_BITMAP="<bitmap>";
+	public static String AFTER_BITMAP="</bitmap>";
+	public static String BEFORE_RECOMMAND="<recommand>";
+	public static String AFTER_RECOMMAND="</recommand>";
+
 }

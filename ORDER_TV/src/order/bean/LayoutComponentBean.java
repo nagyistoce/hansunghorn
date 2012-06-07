@@ -1,6 +1,7 @@
 package order.bean;
 
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -12,4 +13,5 @@ public class LayoutComponentBean {
 	public static Spinner categorySpinner;
 	public static TextView Menutitle,introduceMenu;
 	public static ImageView MenuImg;
+	public static CheckBox checkbox;
 }

@@ -3,15 +3,15 @@ package order.tv;
 import java.io.File;
 import java.util.ArrayList;
 
+import order.bean.ConnectionBean;
 import order.bean.ItemBean;
 import order.control.StorageControl;
 import order.control.parsingFile;
-import order.tv.ModiFyMenuOrder.Iconinfo;
 import ana.tv.R;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +32,7 @@ public class ToTalMenuOrder extends Activity {
 	public static String[] items = null;
 	public static int p = 0;
 	public parsingFile psfile;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,17 +51,18 @@ public class ToTalMenuOrder extends Activity {
 					long arg3) {
 				StorageControl a = new StorageControl();
 				try {
-					p=pos;
+					p = pos;
 					psfile = new parsingFile();
-					ItemBean bean=new ItemBean();
-					File file=a.Select(ToTalMenuOrder.items[ToTalMenuOrder.p]);
-					bean=psfile.Parsing(file);
-					ItemBean.obj=bean;		
-					Toast.makeText(ToTalMenuOrder.this, "클릭해쓰요 : "+pos, Toast.LENGTH_LONG).show();
+					ItemBean bean = new ItemBean();
+					String file = a.Select(ToTalMenuOrder.items[ToTalMenuOrder.p]);
+					bean = psfile.Parsing(file);
+					ItemBean.obj = bean;
+					Toast.makeText(ToTalMenuOrder.this, "클릭해쓰요 : " + pos,
+							Toast.LENGTH_LONG).show();
 					Intent intent = new Intent(ToTalMenuOrder.this,
 							ConfigurationMenu.class);
 					intent.putExtra("Item", bean);
-					
+
 					startActivity(intent);
 				} catch (Exception e) {
 				}
@@ -69,30 +70,54 @@ public class ToTalMenuOrder extends Activity {
 
 		});
 	}
+	public Bitmap setupListImg(String item,ItemBean bean,parsingFile psfile){
+		String temp = item;
+		if (temp.equals("이미지")) {
+			return null;
+		} 
+		else {
+			temp = storagecontrol.Select(temp);
 
-	private void setupListItem() {
-		try {
-			this.items = storagecontrol.getStoreList("*");
-			int[] icons = { android.R.drawable.ic_menu_add,
+			try {
+				bean = psfile.Parsing(temp);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+BitmapFactory.Options options = new BitmapFactory.Options();
+options.inSampleSize = 4;
+Bitmap orgImage = BitmapFactory.decodeFile("mnt/sdcard/"+bean.getUrl(), options);
+Bitmap resize = Bitmap.createScaledBitmap(orgImage, 300, 400, true);
+		
+return orgImage;
+		}
+		
+	}
+	private void setupListItem()throws Exception {
+			try{
+			ToTalMenuOrder.items = storagecontrol.getStoreList("*");
+			Bitmap [] icons=new Bitmap[ToTalMenuOrder.items.length];
+			ItemBean bean = new ItemBean();
+			psfile=new parsingFile();
+			for(int i=0;i<ToTalMenuOrder.items.length;i++)
+			{
+				
+				icons[i]=setupListImg(ToTalMenuOrder.items[i],bean,psfile);
 
-			android.R.drawable.ic_menu_agenda,
-					android.R.drawable.ic_menu_camera,
-					android.R.drawable.ic_menu_edit,
-					android.R.drawable.ic_menu_add,
-					android.R.drawable.ic_menu_compass,
-					android.R.drawable.ic_menu_manage };
-
+			}
+				
+			
+			
 			mAdapter.clear();
 
 			for (int i = 0; i < items.length; i++) {
 				final Iconinfo info = new Iconinfo();
 				info.icon = icons[i];
-				if (items[i] == null) {
-					info.text = items[i - 1];
+				info.text = items[i];
+				if (info.text.equals("이미지")) {
 				} else {
-					info.text = items[i];
+					mAdapter.add(info);
 				}
-				mAdapter.add(info);
 			}
 
 			mAdapter.notifyDataSetChanged();
@@ -139,13 +164,13 @@ public class ToTalMenuOrder extends Activity {
 			textview = (TextView) convertView.findViewById(R.id.text1);
 			textview.setText(info.text);
 			imageview = (ImageView) convertView.findViewById(R.id.icon);
-			imageview.setImageResource(info.icon);
+			imageview.setImageBitmap(info.icon);
 			return convertView;
 		}
 	}
 
 	public class Iconinfo {
-		private int icon;
+		private Bitmap icon;
 		private String text;
 	}
 }

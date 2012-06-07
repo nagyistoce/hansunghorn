@@ -19,14 +19,14 @@ public class Storage {
 	public final static int WRITE = 1;
 	public final static int WRITE_PLUS = 2;
 	
-	String sdPath; 
+	String sdPath;
 	String sodRootPath;
 	String sodStoragePath;
 	
 	String storageID;
 	
 	File directory;
-
+	
 	Storage(String mSdPath, String mStorageID){
 		sdPath = mSdPath;
 		sodRootPath = sdPath + SOD;

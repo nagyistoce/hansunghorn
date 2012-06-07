@@ -9,15 +9,22 @@ public class ItemBean implements Parcelable
 
 	private String name;				// 요리 이름
 	private String description;		// 요리 설명
-	private int recommandFlag=0;	// 추천 플래그
+	private boolean recommandFlag;	// 추천 플래그
 	
 	private String price;		// 가격
 	private String category;	// 음식 카테고리
-	private int rating=0; //평점
+	private String rating="0"; //평점
 	private String[] review; // 음식 리뷰
 	private Bitmap img;				// 요리 그림
 	public static ItemBean obj;
-	public int getRecommandFlag() {
+	private String url;
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public boolean getRecommandFlag() {
 		return recommandFlag;
 	}
 	public Bitmap getImg() {
@@ -38,10 +45,10 @@ public class ItemBean implements Parcelable
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int isRecommandFlag() {
+	public boolean isRecommandFlag() {
 		return recommandFlag;
 	}
-	public void setRecommandFlag(int recommandFlag) {
+	public void setRecommandFlag(Boolean recommandFlag) {
 		this.recommandFlag = recommandFlag;
 	}
 	public String getPrice() {
@@ -56,10 +63,10 @@ public class ItemBean implements Parcelable
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public int getRating() {
+	public String getRating() {
 		return rating;
 	}
-	public void setRating(int rating) {
+	public void setRating(String rating) {
 		this.rating = rating;
 	}
 	public String[] getReview() {

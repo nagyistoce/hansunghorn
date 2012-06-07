@@ -12,6 +12,22 @@ import sod.common.StorageFile;
 public class StorageControl {
 	public static String STORAGEID = "order";
 
+	public Storage getStorage() {
+		return storage;
+	}
+
+	public void setStorage(Storage storage) {
+		this.storage = storage;
+	}
+
+	public StorageFile getStorageFile() {
+		return storageFile;
+	}
+
+	public void setStorageFile(StorageFile storageFile) {
+		this.storageFile = storageFile;
+	}
+
 	private Storage storage;
 	private StorageFile storageFile;
 	private String[] list;
@@ -71,16 +87,59 @@ public class StorageControl {
 		storageFile.write(StorageDataBean.AFTER_DESCRIPTION.getBytes());
 		storageFile.write("\n".getBytes());
 
+		String rating=""+item.getRating();
+		storageFile.write("        ".getBytes());
+		storageFile.write(StorageDataBean.BEFORE_RATING.getBytes());
+		storageFile.write(rating.getBytes());
+		storageFile.write(StorageDataBean.AFTER_RATING.getBytes());
+		storageFile.write("\n".getBytes());
+		
+		String recommand=""+item.getRecommandFlag();
+		storageFile.write("          ".getBytes());
+		storageFile.write(StorageDataBean.BEFORE_RECOMMAND.getBytes());
+		storageFile.write(recommand.getBytes());
+		storageFile.write(StorageDataBean.AFTER_RECOMMAND.getBytes());
+		storageFile.write("\n".getBytes());
+
+		String temp="";
+		if(item.getReview()==null)
+		{
+			temp="";
+		}
+		else{
+			for(int i=0;i<item.getReview().length;i++)
+			{
+				temp+=item.getReview()[i];
+				temp+="\n";
+			}
+		}
+		storageFile.write("          ".getBytes());
+		storageFile.write(StorageDataBean.BEFORE_REVIEW.getBytes());
+		storageFile.write(temp.getBytes());
+		storageFile.write(StorageDataBean.AFTER_REVIEW.getBytes());
+		storageFile.write("\n".getBytes());
+
+		
+		if(item.getUrl()==null)
+		{
+			temp="";
+		}
+		else
+		{
+			temp=item.getUrl();
+		}
+		storageFile.write("            ".getBytes());
+		storageFile.write(StorageDataBean.BEFORE_BITMAP.getBytes());
+		storageFile.write(temp.getBytes());
+		storageFile.write(StorageDataBean.AFTER_BITMAP.getBytes());
+		storageFile.write("\n".getBytes());
+
 		storageFile.close();
 	}
 
-	public void StoreSave(Bitmap img) // 저장소에 이미지 저장
-	{
-
-	}
 
 	public ItemBean StoreFileInitConfig(String name, String description,
-			String price, String category) {
+			String price, String category, String imgUrl, boolean recommand) {
 		ItemBean item = new ItemBean();
 		if (name == null || description == null || price == null
 				|| category == null) {
@@ -90,6 +149,9 @@ public class StorageControl {
 		item.setDescription(description);
 		item.setPrice(price);
 		item.setCategory(category);
+		item.setRecommandFlag(recommand);
+		item.setUrl(imgUrl);
+		//item.setUrl(imgUrl);
 		// if(!(img==null)){item.setImg(img);}
 		this.item = item;
 		return item;
@@ -103,7 +165,7 @@ public class StorageControl {
 			return false;
 	}
 
-	public File Select(String name){
+	public String Select(String name){
 		try{
 		if (Storage.checkIsStorageExists(STORAGEID)) {
 			storage = Storage.getStorage(STORAGEID);
@@ -115,7 +177,7 @@ public class StorageControl {
 			if (storage.checkIsFileExists(name + ".txt")) {
 				storageFile = storage.openFile(name + ".txt", Storage.READ);
 				byte[] buf = new byte[storageFile.getLength()];
-				return storageFile.getFileObject();
+				return storageFile.getFileObject().toString();
 			}
 			else {
 				return null;

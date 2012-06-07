@@ -4,10 +4,11 @@ import order.bean.ItemBean;
 import order.bean.LayoutComponentBean;
 import ana.tv.R;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ConfigurationMenu extends Activity {
 	private ItemBean bean;
@@ -27,8 +28,8 @@ public class ConfigurationMenu extends Activity {
 		LayoutComponentBean.MenuImg = (ImageView) findViewById(R.id.MenuImg);
 		LayoutComponentBean.introduceMenu = (TextView) findViewById(R.id.introduceMenu);
 		LayoutComponentBean.Menutitle.setText(bean.getName());
-		if (bean.getRating() == -1)
-			bean.setRating(0);
+		if (bean.getRating().equals("0"))
+			bean.setRating("0");
 		if(!bean.getDescription().equals(null)){
 		for (int i = 0; i < bean.getDescription().length(); i++) {
 			temp += "" + bean.getDescription().charAt(i);
@@ -37,13 +38,19 @@ public class ConfigurationMenu extends Activity {
 			}
 		}
 		}
+BitmapFactory.Options options = new BitmapFactory.Options();
+options.inSampleSize = 4;
+Bitmap orgImage = BitmapFactory.decodeFile("mnt/sdcard/"+bean.getUrl());
+Bitmap resize = Bitmap.createScaledBitmap(orgImage, 300, 400, true);
+LayoutComponentBean.MenuImg.setImageBitmap(orgImage);
 		LayoutComponentBean.introduceMenu.setText(Form_category
 				+ bean.getCategory() + "\n" + Form_price + bean.getPrice()
 				+ "¿ø\n" + Form_rating + bean.getRating() + "Á¡\n"
-				+ Form_recommandFlag + bean.getRecommandFlag() + "°³\n"
+				+ Form_recommandFlag + bean.getRecommandFlag() + "\n"
 				+ Form_description + bean.getDescription() + "\n");
 	}
 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.configuration_item);

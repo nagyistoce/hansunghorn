@@ -74,7 +74,7 @@ public class AccessManager implements Disposable {
 			t = new Transceiver(null, Constants.Multicast_Port_Response);
 			
 			ThreadEx.invoke(new Object[]{cb, t}, new ActionEx() {				
-				
+		
 				public void work(Object arg) {
 					Object[] args = (Object[])arg;
 					SearchCallBack _cb = (SearchCallBack)args[0];
@@ -115,6 +115,7 @@ public class AccessManager implements Disposable {
 	 * 수신하는 작업 스레드를 종료하고 할당된 모든 리소스를 반환한다. (접속은 자동으로 종료됨)
 	 * terminate listening thread and release resources.
 	 */
+
 	public void dispose(){
 		isRunning = false;
 		conn.dispose();
@@ -148,7 +149,7 @@ public class AccessManager implements Disposable {
 	 */
 	protected void beginListening(){
 		ThreadEx.invoke(null, new ActionEx() {		
-			
+		
 			public void work(Object arg) {
 				InetSocketAddress sender = null;
 				Packet p = new Packet();

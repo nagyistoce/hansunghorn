@@ -56,7 +56,6 @@ public class Transceiver implements Disposable {
 			e.printStackTrace();
 		}
 	}
-	
 	public void dispose(){
 		conn.close();
 		conn = null;

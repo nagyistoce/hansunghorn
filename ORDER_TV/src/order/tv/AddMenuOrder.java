@@ -4,6 +4,7 @@ package order.tv;
 import order.bean.LayoutComponentBean;
 import order.control.StorageControl;
 import ana.tv.R;
+import android.R.bool;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,17 +16,19 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 public class AddMenuOrder extends Activity{
 	static final CharSequence[] categorys=new String[]{
-		"세트메뉴","덮밥류","면  류","사이드&주류"
+		"세트메뉴","덮밥류","면  류","사이드_주류"
 	};
 	public static CharSequence[] imgItem;
 	ArrayAdapter<CharSequence> adapter;
-	String category_str="",name="",description="",price="", imgFolder="이미지";
+	String category_str="",name="",description="",price="", imgFolder="이미지" ,imgUrl="";
+	boolean recommandCheck=false;
 	public void LayoutComponent()
     {
     	LayoutComponentBean.nameEdit=(EditText)findViewById(R.id.nameEditText);
@@ -35,6 +38,7 @@ public class AddMenuOrder extends Activity{
     	LayoutComponentBean.uploadBitmap=(Button)findViewById(R.id.upLoadImgbtn);
     	LayoutComponentBean.categorySpinner=(Spinner)findViewById(R.id.categorySpinner);
     	LayoutComponentBean.imgEditText=(EditText)findViewById(R.id.imgEditText);
+    	LayoutComponentBean.checkbox=(CheckBox)findViewById(R.id.RecommandCheckBox);
     	adapter=new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_dropdown_item, categorys);
     	LayoutComponentBean.categorySpinner.setAdapter(adapter);
     	LayoutComponentBean.categorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -57,7 +61,9 @@ public class AddMenuOrder extends Activity{
 					name=""+LayoutComponentBean.nameEdit.getText();
 					description=""+LayoutComponentBean.descriptionEdit.getText();
 					price=""+LayoutComponentBean.priceEdit.getText();
-					storagecontrol.StoreSave(storagecontrol.StoreFileInitConfig(name, description, price, category_str));
+					imgUrl=""+LayoutComponentBean.imgEditText.getText();
+					recommandCheck=LayoutComponentBean.checkbox.isChecked();
+					storagecontrol.StoreSave(storagecontrol.StoreFileInitConfig(name, description, price, category_str,imgUrl,recommandCheck));
 					Intent intent = new Intent(AddMenuOrder.this,ORDER_TVActivity.class);
 				    startActivity(intent);
 				    finish();
@@ -74,7 +80,7 @@ public class AddMenuOrder extends Activity{
 				StorageControl storagecontrol=new StorageControl();
 				try{
 					storagecontrol.Store(imgFolder);
-					imgItem=storagecontrol.getStoreList(imgFolder,"jpg");
+					imgItem=storagecontrol.getStoreList(imgFolder,"bmp");
 					if(imgItem.equals(null))
 					{
 						Toast.makeText(AddMenuOrder.this, "이미지가 없습니다.", Toast.LENGTH_LONG).show();
@@ -84,7 +90,7 @@ public class AddMenuOrder extends Activity{
 						
 						public void onClick(DialogInterface dialog, int which) {
 							// TODO Auto-generated method stub
-							LayoutComponentBean.imgEditText.setText("/sod/order/imgFolder/"+imgItem[which]);
+							LayoutComponentBean.imgEditText.setText("/sod/order/이미지/"+imgItem[which]);
 						}
 					}).show();
 				}catch(Exception e){}

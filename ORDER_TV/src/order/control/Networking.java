@@ -40,34 +40,25 @@ public class Networking {
 			public void onReceive(Packet pkt, int connid) {
 				ConnectionBean.ClientId = connid;
 				Packet packet;
-
+				StorageControl storecon=new StorageControl();
 				if (pkt != null) {
 					while (pkt.getElementCount() > 0) {
 						ConnectionBean.Message = pkt.pop().toString();
 						if (ConnectionBean.Message.equals("download")) {
 							packet = new Packet();
-//							for (int i = 0; i < DataSturct.vector.size(); i++) {
-//								packet.push(DataSturct.vector.elementAt(i));
-//
-//							}
+							try {
+								
+					//			ConnectionBean.server.send(pkt, connid)
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							ConnectionBean.server.send(packet,
 									ConnectionBean.ClientId);
 						}
-						// else if(ConnectionBean.Message.equals("answerData"))
-						// {
 						else if (ConnectionBean.Message.equals("Questionnaire")) {
 							ConnectionBean.Message = pkt.pop().toString();
-//							DataBean.Message += ConnectionBean.Message;
-//							try {
-//								DataBean.Message=DataBean.Message.substring(2);
-//								ReArrange();
-//
-//							} catch (Exception e) {
-//							}
-
 						}
-						// }
-
 					}
 				}
 
