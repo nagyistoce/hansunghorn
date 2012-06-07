@@ -1,0 +1,376 @@
+<!DOC5TYPE>
+
+<html lang="ko">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+            <script type="text/javascript" charset="utf-8" src="cordova-1.5.0.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/myPlugin.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/xui.js"></script>
+            <script type="text/javascript" charset="utf-8" src="js/loader.js" ></script>
+            <script type="text/javascript" charset="utf-8">
+                var getline = new Array();
+                var message = "";
+                var separator = "|";
+                var answerCount = 0;
+                var usercheck = false;
+                var temp = 0;
+                
+                
+                function onBodyLoad() {
+                    document.addEventListener("deviceready", onDeviceReady, false);
+                }
+                
+                function errorReceive(err) {
+                    //alert("Error :" + err);
+                }
+                
+                function errorSend(err) {
+                    //alert("Error :" + err);
+                }
+                
+                function successReceive(result) {
+                    //alert("설문지 올라왔음 재구성 시작");
+                    Control(result);
+                    //alert("설문지 올라왔음 재구성 완료");
+                }
+                
+                function successSend(result) {
+                    //alert("메세지를 보냅니다 :" + result);
+                }
+                
+                function onDeviceReady() {
+                    vocTempContents();
+                }
+                
+                function vocTempContents() {
+                    receiver.receiveData(successReceive, errorReceive, "");
+                }
+                
+                function send() {
+                    //alert(message);
+                    sender.sendData(successSend, errorSend, message);
+                }
+                
+                function Control(result) {
+                    //alert(result);
+                    
+                    var $check = $("#downHTML");
+                    $check.css("display", "none");
+                    
+                    var temp = "";
+                    var i = 0;
+                    
+                    var TopicCount = 0;
+                    
+                    getline = result.split("|");
+                    for(; i < getline.length; i++) {
+                        
+                        if(getline[i] == "Company") {
+                            var $company = $("#pollpop");
+                            var $h1 = $("<h1><center><b> 주관 : <span>" + getline[i + 1] + "</span><b></center></h1><br>");
+                            $h1.insertBefore($company);
+                        } else if(getline[i] == "During") {
+                            var $during = $("#during");
+                            var $h2 = $("<h2>설문조사 기간 : <span>" + getline[i + 1] + "</span></h2>");
+                            $h2.insertBefore($during);
+                        } else if(getline[i] == "Topic") {
+                            if(TopicCount == 0) {
+                                var $please = $("#during");
+                                var $h3 = $("<h3>주  제: <span>" + getline[i + 1] + "</span><h3>");
+                                $h3.insertAfter($please);
+                                TopicCount++;
+                            }
+                        } else if(getline[i] == "UserImfo") {
+                            if(getline[i + 1] == "false") {
+                                $(".fieldset").remove();
+                            } else {
+                                
+                            }
+                        } else if(getline[i] == "Answer") {
+                            var $no = $("#num");
+                            var $li_i = $("<li><p><strong>" + getline[i + 1] + "</strong></li>");
+                            $li_i.attr("id", "no_" + answerCount);
+                            
+                            if(getline[i + 3] == "-1") {
+                                var $textField = $("<input type=\"text\" size=\"40\" placeholder=\"" + getline[i + 1] + "해당 답을 입력해주세요.\" id=\"answer_" + answerCount + "\" name=\"text_" + answerCount + "\"></input>");
+                                
+                                $no.append($li_i);
+                                $no.append($textField);
+                                temp += "" + answerCount;
+                            } else if(getline[i + 3] == "0") {
+                                var $radiobtn1 = $("<input type=\"radio\" value=\"Yes\" id=\"answer_" + answerCount + "\" name=\"radio_" + answerCount + "\"></input>");
+                                var $radiobtn2 = $("<input type=\"radio\" value=\"No\" id=\"answer_" + answerCount + "\" name=\"radio_" + answerCount + "\"></input>");
+                                var $value1 = $("<b>Yes</b>");
+                                var $value2 = $("<b>No</b>");
+                                $no.append($li_i);
+                                $no.append($radiobtn1);
+                                $no.append($value1);
+                                $no.append($radiobtn2);
+                                $no.append($value2);
+                                temp += "" + answerCount;
+                            } else if(getline[i + 3] == "1") {
+                                var $radiobtn1 = $("<input type=\"radio\" value=\"good\" id=\"answer_" + answerCount + "\" name=\"radio_" + answerCount + "\"></input>");
+                                var $radiobtn2 = $("<input type=\"radio\" value=\"nomal\" id=\"answer_" + answerCount + "\" name=\"radio_" + answerCount + "\"></input>");
+                                var $radiobtn3 = $("<input type=\"radio\" value=\"bad\" id=\"answer_" + answerCount + "\" name=\"radio_" + answerCount + "\"></input>");
+                                
+                                var $value1 = $("<b>좋아요</b>");
+                                var $value2 = $("<b>보  통</b>");
+                                var $value3 = $("<b>나빠요</b>");
+                                
+                                $no.append($li_i);
+                                $no.append($radiobtn1);
+                                $no.append($value1);
+                                $no.append($radiobtn2);
+                                $no.append($value2);
+                                $no.append($radiobtn3);
+                                $no.append($value3);
+                                temp += "" + answerCount;
+                            } else if(getline[i + 3] == "2") {
+                                var $radiobtn1 = $("<input type=\"radio\" value=\"very good\" id=\"answer_" + answerCount + "\" name=\"radio_" + answerCount + "\"></input>");
+                                var $radiobtn2 = $("<input type=\"radio\" value=\"good\" id=\"answer_" + answerCount + "\" name=\"radio_" + answerCount + "\"></input>");
+                                var $radiobtn3 = $("<input type=\"radio\" value=\"bad\" id=\"answer_" + answerCount + "\" name=\"radio_" + answerCount + "\"></input>");
+                                var $radiobtn4 = $("<input type=\"radio\" value=\"very bad\" id=\"answer_" + answerCount + "\" name=\"radio_" + answerCount + "\"></input>");
+                                
+                                var $value1 = $("<b>아주좋아요</b>");
+                                var $value2 = $("<b>좋아요</b>");
+                                var $value3 = $("<b>나빠요</b>");
+                                var $value4 = $("<b>아주나빠요</b>");
+                                
+                                $no.append($li_i);
+                                $no.append($radiobtn1);
+                                $no.append($value1);
+                                $no.append($radiobtn2);
+                                $no.append($value2);
+                                $no.append($radiobtn3);
+                                $no.append($value3);
+                                $no.append($radiobtn4);
+                                $no.append($value4);
+                                temp += "" + answerCount;
+                            } else if(getline[i + 3] == "3") {
+                                var $radiobtn1 = $("<input type=\"radio\" value=\"very good\" id=\"answer_" + answerCount + "\" name=\"radio_" + answerCount + "\"></input>");
+                                var $radiobtn2 = $("<input type=\"radio\" value=\"good\" id=\"answer_" + answerCount + "\" name=\"radio_" + answerCount + "\"></input>");
+                                var $radiobtn3 = $("<input type=\"radio\" value=\"nomal\" id=\"answer_" + answerCount + "\" name=\"radio_" + answerCount + "\"></input>");
+                                var $radiobtn4 = $("<input type=\"radio\" value=\"bad\" id=\"answer_" + answerCount + "\" name=\"radio_" + answerCount + "\"></input>");
+                                var $radiobtn5 = $("<input type=\"radio\" value=\"very bad\" id=\"answer_" + answerCount + "\" name=\"radio_" + answerCount + "\"></input>");
+                                
+                                var $value1 = $("<b>아주좋아요</b>");
+                                var $value2 = $("<b>좋아요</b>");
+                                var $value3 = $("<b>보통</b>");
+                                var $value4 = $("<b>나빠요</b>");
+                                var $value5 = $("<b>아주나빠요</b>");
+                                
+                                $no.append($li_i);
+                                $no.append($radiobtn1);
+                                $no.append($value1);
+                                $no.append($radiobtn2);
+                                $no.append($value2);
+                                $no.append($radiobtn3);
+                                $no.append($value3);
+                                $no.append($radiobtn4);
+                                $no.append($value4);
+                                $no.append($radiobtn5);
+                                $no.append($value5);
+                                temp += "" + answerCount;
+                            }
+                            
+                            answerCount++;
+                        }
+                    }
+                    var $fieldset = $(".fieldset");
+                    var $crrb = $(".crrb");
+                    var $board = $(".board");
+                    $crrb.css("color", "#f30");
+                    $fieldset.css("clear", "both");
+                    $fieldset.css("width", "auto");
+                    $fieldset.css("margin", "1 1 6px 1px");
+                    $fieldset.css("padding", "5px");
+                    $fieldset.css("border-top", "3px solid #348AE1");
+                    $fieldset.css("border-bottom", "1px solid #c8c8c8");
+                    $fieldset.css("text-align", "left");
+                    $board.css("border-bottom", "1px solid #c8c8c8");
+                    
+                    $check.css("display", "");
+                    
+                }
+                
+                function doSbumit_this() {
+                    //alert(" input? ");
+                    for(var i = 0; i < answerCount; i++) 
+                    { 	
+                        if(document.getElementsByName("text_"+i)==null)
+                        {  
+                            var indu = document.getElementsByName("radio_" + i);
+                            for(var j = 0; j < indu.length; j++) 
+                            {
+                                if(indu[j].checked) {
+                                    message += indu[j].value + separator;
+                                }
+                                else
+                                {
+                                    message="";
+                                    //alert("체크안한부분이 있습니다. 다시 확인 해주세요");
+                                    return;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            var indu = document.getElementsByName("text_" + i);
+                            for(var j = 0; j < indu.length; j++) 
+                            {
+                                if(indu[j].value!=null) 
+                                {
+                                    message += indu[j].value + separator;
+                                }
+                                else
+                                {
+                                    message="";
+                                    //alert("입력이 빈곳이 있네요. 다시 작성해주세요.");
+                                    return;
+                                }
+                            }//선택.
+                        }
+                    }
+                    send();
+                }
+                
+                function fieldCheck(field, altertext, rexp) {
+                    if(!field)
+                    return true;
+                    if(!rexp.test(field.value)) {
+                        //alert(altertext);
+                        if(field.type.toUpperCase() != "HIDDEN")
+                        field.focus();
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+                
+                //-->
+                
+                </script>
+            <title></title>
+            <link rel="stylesheet" type="text/css" href="css/all.css">
+                <link rel="stylesheet" type="text/css" href="css/sub.css">
+                    <link rel="stylesheet" type="text/css" href="css/board.css">
+                        <style type="text/css">
+                            img {
+                                border: 0;
+                                vertical-align: middle;
+                            }
+                            #body_content {
+                                width: auto;
+                                height: auto;
+                                min-width: auto;
+                                min-height: auto;
+                                margin: 0 auto;
+                                padding: 0;
+                                border: 0;
+                            }
+                            html {
+                                overflow-x: hidden
+                            }
+                            </style>
+                        </head>
+    
+	<body onload="onBodyLoad()" border="1">
+        
+		<!-- #body_content -->
+		<div id="downHTML">
+			<div id="body_content" >
+                
+				<div id="pollpop">
+                    
+					<div class="pop_view">
+						<div id="topic"></div>
+					</div>
+					<div class="pop_view_box">
+						<div id="during"></div>
+						<div class="box">
+							<p class="crrb">
+                            ※ 이 설문 내용 및 개인정보는 설문 조사 이외의
+                            <br>다른 어떤 용도로도 사용되지 않습니다.
+							</p>
+							<!-- board -->
+							<div class="board" >
+								<!-- 쓰기 -->
+								<div class="write">
+									<div class="wrap">
+										<!-- infomenu -->
+										<div class="infomenu">
+											<div class="left">
+												<span class="required">*</span> 로 표시된 항목은 필수 항목입니다. <!-- //infomenu -->
+												<!-- 쓰기폼 -->
+                                                
+												<form action="file:///android_asset/www/EndPage.html" method="post" name="frm" id="frm" onSubmit="return doSbumit_this(); ">
+                                                    
+													<input type="hidden" name="amode" value="insert" >
+                                                        
+                                                        <!-- // -->
+                                                        
+                                                        <input type="hidden" name="close" value="true">
+                                                            
+                                                            <!-- // -->
+                                                            
+                                                            <input type="hidden" name="survey_no" value="00027">
+                                                                
+                                                                <input type="hidden" name="site_gubun" value="EGMARKET">
+                                                                    
+                                                                    <div class="fieldset">
+                                                                        <div class="item first">
+                                                                            
+                                                                            <label class="head" for="name">작성자 <span class="required" title="필수항목">*</span></label>
+                                                                            
+                                                                            <input type="text" name="name" id="name" value="" class="text" />
+                                                                            
+                                                                        </div>
+                                                                        <div class="item">
+                                                                            
+                                                                            <label class="head" for="phone">연락처 <span class="required" title="필수항목">*</span></label>
+                                                                            
+                                                                            <input type="text" name="phone" id="phone" value="" class="text w40" />
+                                                                            
+                                                                            <span class="explain"><font color="red">※ 055-0000-0000</font></span>
+                                                                            
+                                                                        </div>
+                                                                        <div class="item" >
+                                                                            
+                                                                            <label class="head" for="address">주  소  </label>
+                                                                            
+                                                                            <input type="text" name="address_detail" id="address_detail" value="" class="text w100" />
+                                                                            
+                                                                        </div>
+                                                                        <!-- 여기는 사용자 정보가 들어올 공간 -->
+                                                                    </div>
+                                                                    <ol id="num"></ol>
+                                                                    <!-- //쓰기폼 -->
+                                                                    <br>
+                                                                    <br>
+                                                                    <div class="center" align=center>
+                                                                        <input type="image" align="center" src="image/btn_confirm.gif" width="45" height="21" alt="확인" />
+                                                                        <input type="image" align="center" src="image/btn_cancel.gif" width="45" height="21" alt="취소" />
+                                                                    </div>
+                                                                    </form>
+                                                
+											</div>
+                                            
+										</div>
+                                        
+										<!-- //쓰기 -->
+                                        
+									</div>
+                                    
+									<!--//board -->
+                                    
+								</div>
+								<p></p>
+								<div class="foot">
+									Copyright(C) Hansung University S.O.D Team reserved.
+								</div>
+							</div>
+						</div>
+                        </body>
+    
+</html>

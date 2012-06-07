@@ -1,0 +1,800 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6415E183157E1D0A008AC40D /* SharedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6415E182157E1D0A008AC40D /* SharedObject.m */; };
+		6415E188157F0880008AC40D /* ana_service_map_view.png in Resources */ = {isa = PBXBuildFile; fileRef = 6415E185157F0880008AC40D /* ana_service_map_view.png */; };
+		6415E189157F0880008AC40D /* ana_service_search_server_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 6415E186157F0880008AC40D /* ana_service_search_server_up.png */; };
+		6415E18A157F0880008AC40D /* ana_service_view_service_list.png in Resources */ = {isa = PBXBuildFile; fileRef = 6415E187157F0880008AC40D /* ana_service_view_service_list.png */; };
+		6415E18C157F0887008AC40D /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6415E18B157F0887008AC40D /* background.png */; };
+		6415E18E157F088F008AC40D /* tvinformation_background_activity.png in Resources */ = {isa = PBXBuildFile; fileRef = 6415E18D157F088F008AC40D /* tvinformation_background_activity.png */; };
+		64225468157C45AC00FB16EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64225467157C45AC00FB16EF /* Foundation.framework */; };
+		6422546A157C45AC00FB16EF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64225469157C45AC00FB16EF /* UIKit.framework */; };
+		6422546C157C45AC00FB16EF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6422546B157C45AC00FB16EF /* CoreGraphics.framework */; };
+		6422546E157C45AC00FB16EF /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6422546D157C45AC00FB16EF /* AddressBook.framework */; };
+		64225470157C45AC00FB16EF /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6422546F157C45AC00FB16EF /* AddressBookUI.framework */; };
+		64225472157C45AC00FB16EF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64225471157C45AC00FB16EF /* AudioToolbox.framework */; };
+		64225474157C45AC00FB16EF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64225473157C45AC00FB16EF /* AVFoundation.framework */; };
+		64225476157C45AC00FB16EF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64225475157C45AC00FB16EF /* CoreLocation.framework */; };
+		64225478157C45AC00FB16EF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64225477157C45AC00FB16EF /* MediaPlayer.framework */; };
+		6422547A157C45AC00FB16EF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64225479157C45AC00FB16EF /* QuartzCore.framework */; };
+		6422547C157C45AC00FB16EF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6422547B157C45AC00FB16EF /* SystemConfiguration.framework */; };
+		6422547E157C45AC00FB16EF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6422547D157C45AC00FB16EF /* MobileCoreServices.framework */; };
+		64225480157C45AC00FB16EF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6422547F157C45AC00FB16EF /* CoreMedia.framework */; };
+		64225486157C45AD00FB16EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64225484157C45AD00FB16EF /* InfoPlist.strings */; };
+		64225488157C45AD00FB16EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 64225487157C45AD00FB16EF /* main.m */; };
+		6422548B157C45AD00FB16EF /* Cordova.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6422548A157C45AD00FB16EF /* Cordova.framework */; };
+		64225490157C45AD00FB16EF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6422548E157C45AD00FB16EF /* Localizable.strings */; };
+		64225494157C45AD00FB16EF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64225492157C45AD00FB16EF /* Localizable.strings */; };
+		64225498157C45AD00FB16EF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64225496157C45AD00FB16EF /* Localizable.strings */; };
+		6422549C157C45AD00FB16EF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6422549A157C45AD00FB16EF /* Localizable.strings */; };
+		6422549F157C45AD00FB16EF /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6422549E157C45AD00FB16EF /* icon.png */; };
+		642254A1157C45AD00FB16EF /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 642254A0157C45AD00FB16EF /* icon@2x.png */; };
+		642254A3157C45AD00FB16EF /* icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 642254A2157C45AD00FB16EF /* icon-72.png */; };
+		642254A6157C45AD00FB16EF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 642254A5157C45AD00FB16EF /* Default.png */; };
+		642254A8157C45AD00FB16EF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 642254A7157C45AD00FB16EF /* Default@2x.png */; };
+		642254AA157C45AD00FB16EF /* Capture.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 642254A9157C45AD00FB16EF /* Capture.bundle */; };
+		642254AC157C45AD00FB16EF /* Cordova.plist in Resources */ = {isa = PBXBuildFile; fileRef = 642254AB157C45AD00FB16EF /* Cordova.plist */; };
+		642254B0157C45AD00FB16EF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254AF157C45AD00FB16EF /* AppDelegate.m */; };
+		642254B3157C45AD00FB16EF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254B2157C45AD00FB16EF /* MainViewController.m */; };
+		642254B5157C45AD00FB16EF /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642254B4157C45AD00FB16EF /* MainViewController.xib */; };
+		642254B9157C45AD00FB16EF /* verify.sh in Resources */ = {isa = PBXBuildFile; fileRef = 642254B8157C45AD00FB16EF /* verify.sh */; };
+		642254E4157C461800FB16EF /* SODAccessManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254C1157C461800FB16EF /* SODAccessManager.m */; };
+		642254E5157C461800FB16EF /* SODConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254C3157C461800FB16EF /* SODConstants.m */; };
+		642254E6157C461800FB16EF /* SODMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642254C4157C461800FB16EF /* SODMainView.xib */; };
+		642254E7157C461800FB16EF /* SODMapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254C6157C461800FB16EF /* SODMapPin.m */; };
+		642254E8157C461800FB16EF /* SODMapPinView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642254C7157C461800FB16EF /* SODMapPinView.xib */; };
+		642254E9157C461800FB16EF /* SODMapPinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254C9157C461800FB16EF /* SODMapPinViewController.m */; };
+		642254EA157C461800FB16EF /* SODMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642254CA157C461800FB16EF /* SODMapView.xib */; };
+		642254EB157C461800FB16EF /* SODPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254CC157C461800FB16EF /* SODPacket.m */; };
+		642254EC157C461800FB16EF /* SODPacketToXmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254CE157C461800FB16EF /* SODPacketToXmlParser.m */; };
+		642254ED157C461800FB16EF /* SODSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254D0157C461800FB16EF /* SODSerializer.m */; };
+		642254EE157C461800FB16EF /* SODServerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254D2157C461800FB16EF /* SODServerInfo.m */; };
+		642254EF157C461800FB16EF /* SODServiceListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642254D3157C461800FB16EF /* SODServiceListView.xib */; };
+		642254F0157C461800FB16EF /* SODServiceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254D5157C461800FB16EF /* SODServiceListViewController.m */; };
+		642254F1157C461800FB16EF /* SODTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254D7157C461800FB16EF /* SODTestViewController.m */; };
+		642254F2157C461800FB16EF /* SODTransceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254D9157C461800FB16EF /* SODTransceiver.m */; };
+		642254F3157C461800FB16EF /* SODTVList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642254DA157C461800FB16EF /* SODTVList.xib */; };
+		642254F4157C461800FB16EF /* SODTVListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254DC157C461800FB16EF /* SODTVListViewController.m */; };
+		642254F5157C461800FB16EF /* SODTVLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254DE157C461800FB16EF /* SODTVLocationViewController.m */; };
+		642254F6157C461800FB16EF /* SODViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254E0157C461800FB16EF /* SODViewController.m */; };
+		642254F7157C461800FB16EF /* SODXmlToPacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254E2157C461800FB16EF /* SODXmlToPacketParser.m */; };
+		642254F8157C461800FB16EF /* TestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642254E3157C461800FB16EF /* TestView.xib */; };
+		642254FB157C464C00FB16EF /* MyClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 642254FA157C464C00FB16EF /* MyClass.m */; };
+		642254FD157C465700FB16EF /* www in Resources */ = {isa = PBXBuildFile; fileRef = 642254FC157C465700FB16EF /* www */; };
+		642254FF157C469900FB16EF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 642254FE157C469900FB16EF /* MapKit.framework */; };
+		64225501157C912C00FB16EF /* SOD.png in Resources */ = {isa = PBXBuildFile; fileRef = 64225500157C912B00FB16EF /* SOD.png */; };
+		64225503157C91CC00FB16EF /* SOD_non.png in Resources */ = {isa = PBXBuildFile; fileRef = 64225502157C91CC00FB16EF /* SOD_non.png */; };
+		64225505157C91E500FB16EF /* SOD_PAD.png in Resources */ = {isa = PBXBuildFile; fileRef = 64225504157C91E500FB16EF /* SOD_PAD.png */; };
+		64225507157C91FD00FB16EF /* SOD_PAD_non.png in Resources */ = {isa = PBXBuildFile; fileRef = 64225506157C91FD00FB16EF /* SOD_PAD_non.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6415E181157E1D0A008AC40D /* SharedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedObject.h; sourceTree = "<group>"; };
+		6415E182157E1D0A008AC40D /* SharedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedObject.m; sourceTree = "<group>"; };
+		6415E185157F0880008AC40D /* ana_service_map_view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ana_service_map_view.png; sourceTree = "<group>"; };
+		6415E186157F0880008AC40D /* ana_service_search_server_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ana_service_search_server_up.png; sourceTree = "<group>"; };
+		6415E187157F0880008AC40D /* ana_service_view_service_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ana_service_view_service_list.png; sourceTree = "<group>"; };
+		6415E18B157F0887008AC40D /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		6415E18D157F088F008AC40D /* tvinformation_background_activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tvinformation_background_activity.png; sourceTree = "<group>"; };
+		64225463157C45AC00FB16EF /* RealSOD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealSOD.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		64225467157C45AC00FB16EF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		64225469157C45AC00FB16EF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6422546B157C45AC00FB16EF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6422546D157C45AC00FB16EF /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		6422546F157C45AC00FB16EF /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		64225471157C45AC00FB16EF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		64225473157C45AC00FB16EF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		64225475157C45AC00FB16EF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		64225477157C45AC00FB16EF /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		64225479157C45AC00FB16EF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6422547B157C45AC00FB16EF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6422547D157C45AC00FB16EF /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		6422547F157C45AC00FB16EF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		64225483157C45AD00FB16EF /* RealSOD-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RealSOD-Info.plist"; sourceTree = "<group>"; };
+		64225485157C45AD00FB16EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		64225487157C45AD00FB16EF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		64225489157C45AD00FB16EF /* RealSOD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RealSOD-Prefix.pch"; sourceTree = "<group>"; };
+		6422548A157C45AD00FB16EF /* Cordova.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cordova.framework; path = /Users/Shared/Cordova/Frameworks/Cordova.framework; sourceTree = "<absolute>"; };
+		6422548F157C45AD00FB16EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Resources/en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		64225493157C45AD00FB16EF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Resources/es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		64225497157C45AD00FB16EF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Resources/de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6422549B157C45AD00FB16EF /* se */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = se; path = Resources/se.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6422549E157C45AD00FB16EF /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Resources/icons/icon.png; sourceTree = "<group>"; };
+		642254A0157C45AD00FB16EF /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "Resources/icons/icon@2x.png"; sourceTree = "<group>"; };
+		642254A2157C45AD00FB16EF /* icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-72.png"; path = "Resources/icons/icon-72.png"; sourceTree = "<group>"; };
+		642254A5157C45AD00FB16EF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/splash/Default.png; sourceTree = "<group>"; };
+		642254A7157C45AD00FB16EF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/splash/Default@2x.png"; sourceTree = "<group>"; };
+		642254A9157C45AD00FB16EF /* Capture.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Capture.bundle; path = Resources/Capture.bundle; sourceTree = "<group>"; };
+		642254AB157C45AD00FB16EF /* Cordova.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Cordova.plist; sourceTree = "<group>"; };
+		642254AE157C45AD00FB16EF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
+		642254AF157C45AD00FB16EF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
+		642254B1157C45AD00FB16EF /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Classes/MainViewController.h; sourceTree = "<group>"; };
+		642254B2157C45AD00FB16EF /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Classes/MainViewController.m; sourceTree = "<group>"; };
+		642254B4157C45AD00FB16EF /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainViewController.xib; path = Classes/MainViewController.xib; sourceTree = "<group>"; };
+		642254B7157C45AD00FB16EF /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = Plugins/README; sourceTree = "<group>"; };
+		642254B8157C45AD00FB16EF /* verify.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = verify.sh; sourceTree = "<group>"; };
+		642254C0157C461800FB16EF /* SODAccessManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODAccessManager.h; sourceTree = "<group>"; };
+		642254C1157C461800FB16EF /* SODAccessManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODAccessManager.m; sourceTree = "<group>"; };
+		642254C2157C461800FB16EF /* SODConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODConstants.h; sourceTree = "<group>"; };
+		642254C3157C461800FB16EF /* SODConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODConstants.m; sourceTree = "<group>"; };
+		642254C4157C461800FB16EF /* SODMainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SODMainView.xib; sourceTree = "<group>"; };
+		642254C5157C461800FB16EF /* SODMapPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODMapPin.h; sourceTree = "<group>"; };
+		642254C6157C461800FB16EF /* SODMapPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODMapPin.m; sourceTree = "<group>"; };
+		642254C7157C461800FB16EF /* SODMapPinView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SODMapPinView.xib; sourceTree = "<group>"; };
+		642254C8157C461800FB16EF /* SODMapPinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODMapPinViewController.h; sourceTree = "<group>"; };
+		642254C9157C461800FB16EF /* SODMapPinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODMapPinViewController.m; sourceTree = "<group>"; };
+		642254CA157C461800FB16EF /* SODMapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SODMapView.xib; sourceTree = "<group>"; };
+		642254CB157C461800FB16EF /* SODPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODPacket.h; sourceTree = "<group>"; };
+		642254CC157C461800FB16EF /* SODPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODPacket.m; sourceTree = "<group>"; };
+		642254CD157C461800FB16EF /* SODPacketToXmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODPacketToXmlParser.h; sourceTree = "<group>"; };
+		642254CE157C461800FB16EF /* SODPacketToXmlParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODPacketToXmlParser.m; sourceTree = "<group>"; };
+		642254CF157C461800FB16EF /* SODSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODSerializer.h; sourceTree = "<group>"; };
+		642254D0157C461800FB16EF /* SODSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODSerializer.m; sourceTree = "<group>"; };
+		642254D1157C461800FB16EF /* SODServerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODServerInfo.h; sourceTree = "<group>"; };
+		642254D2157C461800FB16EF /* SODServerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODServerInfo.m; sourceTree = "<group>"; };
+		642254D3157C461800FB16EF /* SODServiceListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SODServiceListView.xib; sourceTree = "<group>"; };
+		642254D4157C461800FB16EF /* SODServiceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODServiceListViewController.h; sourceTree = "<group>"; };
+		642254D5157C461800FB16EF /* SODServiceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODServiceListViewController.m; sourceTree = "<group>"; };
+		642254D6157C461800FB16EF /* SODTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODTestViewController.h; sourceTree = "<group>"; };
+		642254D7157C461800FB16EF /* SODTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODTestViewController.m; sourceTree = "<group>"; };
+		642254D8157C461800FB16EF /* SODTransceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODTransceiver.h; sourceTree = "<group>"; };
+		642254D9157C461800FB16EF /* SODTransceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODTransceiver.m; sourceTree = "<group>"; };
+		642254DA157C461800FB16EF /* SODTVList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SODTVList.xib; sourceTree = "<group>"; };
+		642254DB157C461800FB16EF /* SODTVListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODTVListViewController.h; sourceTree = "<group>"; };
+		642254DC157C461800FB16EF /* SODTVListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODTVListViewController.m; sourceTree = "<group>"; };
+		642254DD157C461800FB16EF /* SODTVLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODTVLocationViewController.h; sourceTree = "<group>"; };
+		642254DE157C461800FB16EF /* SODTVLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODTVLocationViewController.m; sourceTree = "<group>"; };
+		642254DF157C461800FB16EF /* SODViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODViewController.h; sourceTree = "<group>"; };
+		642254E0157C461800FB16EF /* SODViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODViewController.m; sourceTree = "<group>"; };
+		642254E1157C461800FB16EF /* SODXmlToPacketParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SODXmlToPacketParser.h; sourceTree = "<group>"; };
+		642254E2157C461800FB16EF /* SODXmlToPacketParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SODXmlToPacketParser.m; sourceTree = "<group>"; };
+		642254E3157C461800FB16EF /* TestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestView.xib; sourceTree = "<group>"; };
+		642254F9157C464C00FB16EF /* MyClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyClass.h; path = Plugins/MyClass.h; sourceTree = "<group>"; };
+		642254FA157C464C00FB16EF /* MyClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyClass.m; path = Plugins/MyClass.m; sourceTree = "<group>"; };
+		642254FC157C465700FB16EF /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = SOURCE_ROOT; };
+		642254FE157C469900FB16EF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		64225500157C912B00FB16EF /* SOD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SOD.png; path = ../SOD.png; sourceTree = "<group>"; };
+		64225502157C91CC00FB16EF /* SOD_non.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SOD_non.png; path = ../SOD_non.png; sourceTree = "<group>"; };
+		64225504157C91E500FB16EF /* SOD_PAD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SOD_PAD.png; path = ../SOD_PAD.png; sourceTree = "<group>"; };
+		64225506157C91FD00FB16EF /* SOD_PAD_non.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SOD_PAD_non.png; path = ../SOD_PAD_non.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6422545D157C45AC00FB16EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				642254FF157C469900FB16EF /* MapKit.framework in Frameworks */,
+				64225468157C45AC00FB16EF /* Foundation.framework in Frameworks */,
+				6422546A157C45AC00FB16EF /* UIKit.framework in Frameworks */,
+				6422546C157C45AC00FB16EF /* CoreGraphics.framework in Frameworks */,
+				6422546E157C45AC00FB16EF /* AddressBook.framework in Frameworks */,
+				64225470157C45AC00FB16EF /* AddressBookUI.framework in Frameworks */,
+				64225472157C45AC00FB16EF /* AudioToolbox.framework in Frameworks */,
+				64225474157C45AC00FB16EF /* AVFoundation.framework in Frameworks */,
+				64225476157C45AC00FB16EF /* CoreLocation.framework in Frameworks */,
+				64225478157C45AC00FB16EF /* MediaPlayer.framework in Frameworks */,
+				6422547A157C45AC00FB16EF /* QuartzCore.framework in Frameworks */,
+				6422547C157C45AC00FB16EF /* SystemConfiguration.framework in Frameworks */,
+				6422547E157C45AC00FB16EF /* MobileCoreServices.framework in Frameworks */,
+				64225480157C45AC00FB16EF /* CoreMedia.framework in Frameworks */,
+				6422548B157C45AD00FB16EF /* Cordova.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64225460157C45AC00FB16EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6415E184157F0871008AC40D /* IMAGE */ = {
+			isa = PBXGroup;
+			children = (
+				6415E18D157F088F008AC40D /* tvinformation_background_activity.png */,
+				6415E18B157F0887008AC40D /* background.png */,
+				6415E185157F0880008AC40D /* ana_service_map_view.png */,
+				6415E186157F0880008AC40D /* ana_service_search_server_up.png */,
+				6415E187157F0880008AC40D /* ana_service_view_service_list.png */,
+			);
+			name = IMAGE;
+			sourceTree = "<group>";
+		};
+		6415E18F157F27B8008AC40D /* VIEWCONTROLLER */ = {
+			isa = PBXGroup;
+			children = (
+				642254C8157C461800FB16EF /* SODMapPinViewController.h */,
+				642254C9157C461800FB16EF /* SODMapPinViewController.m */,
+				642254D4157C461800FB16EF /* SODServiceListViewController.h */,
+				642254D5157C461800FB16EF /* SODServiceListViewController.m */,
+				642254D6157C461800FB16EF /* SODTestViewController.h */,
+				642254D7157C461800FB16EF /* SODTestViewController.m */,
+				642254DB157C461800FB16EF /* SODTVListViewController.h */,
+				642254DC157C461800FB16EF /* SODTVListViewController.m */,
+				642254DD157C461800FB16EF /* SODTVLocationViewController.h */,
+				642254DE157C461800FB16EF /* SODTVLocationViewController.m */,
+				642254DF157C461800FB16EF /* SODViewController.h */,
+				642254E0157C461800FB16EF /* SODViewController.m */,
+			);
+			name = VIEWCONTROLLER;
+			sourceTree = "<group>";
+		};
+		64225455157C45AC00FB16EF = {
+			isa = PBXGroup;
+			children = (
+				64225481157C45AC00FB16EF /* RealSOD */,
+				64225466157C45AC00FB16EF /* Frameworks */,
+				64225464157C45AC00FB16EF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		64225464157C45AC00FB16EF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				64225463157C45AC00FB16EF /* RealSOD.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		64225466157C45AC00FB16EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				642254FE157C469900FB16EF /* MapKit.framework */,
+				64225467157C45AC00FB16EF /* Foundation.framework */,
+				64225469157C45AC00FB16EF /* UIKit.framework */,
+				6422546B157C45AC00FB16EF /* CoreGraphics.framework */,
+				6422546D157C45AC00FB16EF /* AddressBook.framework */,
+				6422546F157C45AC00FB16EF /* AddressBookUI.framework */,
+				64225471157C45AC00FB16EF /* AudioToolbox.framework */,
+				64225473157C45AC00FB16EF /* AVFoundation.framework */,
+				64225475157C45AC00FB16EF /* CoreLocation.framework */,
+				64225477157C45AC00FB16EF /* MediaPlayer.framework */,
+				64225479157C45AC00FB16EF /* QuartzCore.framework */,
+				6422547B157C45AC00FB16EF /* SystemConfiguration.framework */,
+				6422547D157C45AC00FB16EF /* MobileCoreServices.framework */,
+				6422547F157C45AC00FB16EF /* CoreMedia.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		64225481157C45AC00FB16EF /* RealSOD */ = {
+			isa = PBXGroup;
+			children = (
+				642254FC157C465700FB16EF /* www */,
+				6422548A157C45AD00FB16EF /* Cordova.framework */,
+				6422548C157C45AD00FB16EF /* Resources */,
+				642254AD157C45AD00FB16EF /* Classes */,
+				642254B6157C45AD00FB16EF /* Plugins */,
+				64225482157C45AD00FB16EF /* Supporting Files */,
+			);
+			path = RealSOD;
+			sourceTree = "<group>";
+		};
+		64225482157C45AD00FB16EF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				64225483157C45AD00FB16EF /* RealSOD-Info.plist */,
+				64225484157C45AD00FB16EF /* InfoPlist.strings */,
+				64225487157C45AD00FB16EF /* main.m */,
+				64225489157C45AD00FB16EF /* RealSOD-Prefix.pch */,
+				642254AB157C45AD00FB16EF /* Cordova.plist */,
+				642254B4157C45AD00FB16EF /* MainViewController.xib */,
+				642254B8157C45AD00FB16EF /* verify.sh */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6422548C157C45AD00FB16EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6415E184157F0871008AC40D /* IMAGE */,
+				642254A9157C45AD00FB16EF /* Capture.bundle */,
+				6422548D157C45AD00FB16EF /* en.lproj */,
+				64225491157C45AD00FB16EF /* es.lproj */,
+				64225495157C45AD00FB16EF /* de.lproj */,
+				64225499157C45AD00FB16EF /* se.lproj */,
+				6422549D157C45AD00FB16EF /* icons */,
+				642254A4157C45AD00FB16EF /* splash */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		6422548D157C45AD00FB16EF /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				6422548E157C45AD00FB16EF /* Localizable.strings */,
+			);
+			name = en.lproj;
+			sourceTree = "<group>";
+		};
+		64225491157C45AD00FB16EF /* es.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				64225492157C45AD00FB16EF /* Localizable.strings */,
+			);
+			name = es.lproj;
+			sourceTree = "<group>";
+		};
+		64225495157C45AD00FB16EF /* de.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				64225496157C45AD00FB16EF /* Localizable.strings */,
+			);
+			name = de.lproj;
+			sourceTree = "<group>";
+		};
+		64225499157C45AD00FB16EF /* se.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				6422549A157C45AD00FB16EF /* Localizable.strings */,
+			);
+			name = se.lproj;
+			sourceTree = "<group>";
+		};
+		6422549D157C45AD00FB16EF /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				64225506157C91FD00FB16EF /* SOD_PAD_non.png */,
+				64225504157C91E500FB16EF /* SOD_PAD.png */,
+				64225502157C91CC00FB16EF /* SOD_non.png */,
+				64225500157C912B00FB16EF /* SOD.png */,
+				6422549E157C45AD00FB16EF /* icon.png */,
+				642254A0157C45AD00FB16EF /* icon@2x.png */,
+				642254A2157C45AD00FB16EF /* icon-72.png */,
+			);
+			name = icons;
+			sourceTree = "<group>";
+		};
+		642254A4157C45AD00FB16EF /* splash */ = {
+			isa = PBXGroup;
+			children = (
+				642254A5157C45AD00FB16EF /* Default.png */,
+				642254A7157C45AD00FB16EF /* Default@2x.png */,
+			);
+			name = splash;
+			sourceTree = "<group>";
+		};
+		642254AD157C45AD00FB16EF /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				642254BF157C460E00FB16EF /* SOD */,
+				642254AE157C45AD00FB16EF /* AppDelegate.h */,
+				642254AF157C45AD00FB16EF /* AppDelegate.m */,
+				642254B1157C45AD00FB16EF /* MainViewController.h */,
+				642254B2157C45AD00FB16EF /* MainViewController.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		642254B6157C45AD00FB16EF /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				642254F9157C464C00FB16EF /* MyClass.h */,
+				642254FA157C464C00FB16EF /* MyClass.m */,
+				642254B7157C45AD00FB16EF /* README */,
+			);
+			name = Plugins;
+			sourceTree = "<group>";
+		};
+		642254BF157C460E00FB16EF /* SOD */ = {
+			isa = PBXGroup;
+			children = (
+				6415E18F157F27B8008AC40D /* VIEWCONTROLLER */,
+				6422550E157E0FC100FB16EF /* PHONE */,
+				6422550D157E0FB500FB16EF /* COMMON */,
+				6422550C157E0FA400FB16EF /* VIEW */,
+			);
+			name = SOD;
+			sourceTree = "<group>";
+		};
+		6422550C157E0FA400FB16EF /* VIEW */ = {
+			isa = PBXGroup;
+			children = (
+				642254C4157C461800FB16EF /* SODMainView.xib */,
+				642254C7157C461800FB16EF /* SODMapPinView.xib */,
+				642254CA157C461800FB16EF /* SODMapView.xib */,
+				642254D3157C461800FB16EF /* SODServiceListView.xib */,
+				642254DA157C461800FB16EF /* SODTVList.xib */,
+				642254E3157C461800FB16EF /* TestView.xib */,
+			);
+			name = VIEW;
+			sourceTree = "<group>";
+		};
+		6422550D157E0FB500FB16EF /* COMMON */ = {
+			isa = PBXGroup;
+			children = (
+				64225512157E0FE500FB16EF /* MODEL */,
+				64225511157E0FDD00FB16EF /* CONTROLLER */,
+			);
+			name = COMMON;
+			sourceTree = "<group>";
+		};
+		6422550E157E0FC100FB16EF /* PHONE */ = {
+			isa = PBXGroup;
+			children = (
+				64225510157E0FD300FB16EF /* MODEL */,
+				6422550F157E0FCB00FB16EF /* CONTROLLER */,
+			);
+			name = PHONE;
+			sourceTree = "<group>";
+		};
+		6422550F157E0FCB00FB16EF /* CONTROLLER */ = {
+			isa = PBXGroup;
+			children = (
+				642254C0157C461800FB16EF /* SODAccessManager.h */,
+				642254C1157C461800FB16EF /* SODAccessManager.m */,
+			);
+			name = CONTROLLER;
+			sourceTree = "<group>";
+		};
+		64225510157E0FD300FB16EF /* MODEL */ = {
+			isa = PBXGroup;
+			children = (
+				642254C5157C461800FB16EF /* SODMapPin.h */,
+				642254C6157C461800FB16EF /* SODMapPin.m */,
+				6415E181157E1D0A008AC40D /* SharedObject.h */,
+				6415E182157E1D0A008AC40D /* SharedObject.m */,
+			);
+			name = MODEL;
+			sourceTree = "<group>";
+		};
+		64225511157E0FDD00FB16EF /* CONTROLLER */ = {
+			isa = PBXGroup;
+			children = (
+				642254D8157C461800FB16EF /* SODTransceiver.h */,
+				642254D9157C461800FB16EF /* SODTransceiver.m */,
+				642254CD157C461800FB16EF /* SODPacketToXmlParser.h */,
+				642254CE157C461800FB16EF /* SODPacketToXmlParser.m */,
+				642254CF157C461800FB16EF /* SODSerializer.h */,
+				642254D0157C461800FB16EF /* SODSerializer.m */,
+				642254E1157C461800FB16EF /* SODXmlToPacketParser.h */,
+				642254E2157C461800FB16EF /* SODXmlToPacketParser.m */,
+			);
+			name = CONTROLLER;
+			sourceTree = "<group>";
+		};
+		64225512157E0FE500FB16EF /* MODEL */ = {
+			isa = PBXGroup;
+			children = (
+				642254C2157C461800FB16EF /* SODConstants.h */,
+				642254C3157C461800FB16EF /* SODConstants.m */,
+				642254CB157C461800FB16EF /* SODPacket.h */,
+				642254CC157C461800FB16EF /* SODPacket.m */,
+				642254D1157C461800FB16EF /* SODServerInfo.h */,
+				642254D2157C461800FB16EF /* SODServerInfo.m */,
+			);
+			name = MODEL;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		64225462157C45AC00FB16EF /* RealSOD */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 642254BC157C45AD00FB16EF /* Build configuration list for PBXNativeTarget "RealSOD" */;
+			buildPhases = (
+				6422545C157C45AC00FB16EF /* Sources */,
+				6422545D157C45AC00FB16EF /* Frameworks */,
+				6422545E157C45AC00FB16EF /* Resources */,
+				6422545F157C45AC00FB16EF /* Sources */,
+				64225460157C45AC00FB16EF /* Frameworks */,
+				64225461157C45AC00FB16EF /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RealSOD;
+			productName = RealSOD;
+			productReference = 64225463157C45AC00FB16EF /* RealSOD.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		64225457157C45AC00FB16EF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 6422545A157C45AC00FB16EF /* Build configuration list for PBXProject "RealSOD" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				es,
+				de,
+				se,
+			);
+			mainGroup = 64225455157C45AC00FB16EF;
+			productRefGroup = 64225464157C45AC00FB16EF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				64225462157C45AC00FB16EF /* RealSOD */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6422545E157C45AC00FB16EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64225486157C45AD00FB16EF /* InfoPlist.strings in Resources */,
+				64225490157C45AD00FB16EF /* Localizable.strings in Resources */,
+				64225494157C45AD00FB16EF /* Localizable.strings in Resources */,
+				64225498157C45AD00FB16EF /* Localizable.strings in Resources */,
+				6422549C157C45AD00FB16EF /* Localizable.strings in Resources */,
+				6422549F157C45AD00FB16EF /* icon.png in Resources */,
+				642254A1157C45AD00FB16EF /* icon@2x.png in Resources */,
+				642254A3157C45AD00FB16EF /* icon-72.png in Resources */,
+				642254A6157C45AD00FB16EF /* Default.png in Resources */,
+				642254A8157C45AD00FB16EF /* Default@2x.png in Resources */,
+				642254AA157C45AD00FB16EF /* Capture.bundle in Resources */,
+				642254AC157C45AD00FB16EF /* Cordova.plist in Resources */,
+				642254B5157C45AD00FB16EF /* MainViewController.xib in Resources */,
+				642254B9157C45AD00FB16EF /* verify.sh in Resources */,
+				642254E6157C461800FB16EF /* SODMainView.xib in Resources */,
+				642254E8157C461800FB16EF /* SODMapPinView.xib in Resources */,
+				642254EA157C461800FB16EF /* SODMapView.xib in Resources */,
+				642254EF157C461800FB16EF /* SODServiceListView.xib in Resources */,
+				642254F3157C461800FB16EF /* SODTVList.xib in Resources */,
+				642254F8157C461800FB16EF /* TestView.xib in Resources */,
+				642254FD157C465700FB16EF /* www in Resources */,
+				64225501157C912C00FB16EF /* SOD.png in Resources */,
+				64225503157C91CC00FB16EF /* SOD_non.png in Resources */,
+				64225505157C91E500FB16EF /* SOD_PAD.png in Resources */,
+				64225507157C91FD00FB16EF /* SOD_PAD_non.png in Resources */,
+				6415E188157F0880008AC40D /* ana_service_map_view.png in Resources */,
+				6415E189157F0880008AC40D /* ana_service_search_server_up.png in Resources */,
+				6415E18A157F0880008AC40D /* ana_service_view_service_list.png in Resources */,
+				6415E18C157F0887008AC40D /* background.png in Resources */,
+				6415E18E157F088F008AC40D /* tvinformation_background_activity.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		64225461157C45AC00FB16EF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "\n\t\t\t\t\t\t\t\tchmod 755 $PROJECT_DIR/$PROJECT_NAME/verify.sh\n\t\t\t\t\t\t\t\t$PROJECT_DIR/$PROJECT_NAME/verify.sh\n\t\t\t\t\t";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6422545C157C45AC00FB16EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64225488157C45AD00FB16EF /* main.m in Sources */,
+				642254B0157C45AD00FB16EF /* AppDelegate.m in Sources */,
+				642254B3157C45AD00FB16EF /* MainViewController.m in Sources */,
+				642254E4157C461800FB16EF /* SODAccessManager.m in Sources */,
+				642254E5157C461800FB16EF /* SODConstants.m in Sources */,
+				642254E7157C461800FB16EF /* SODMapPin.m in Sources */,
+				642254E9157C461800FB16EF /* SODMapPinViewController.m in Sources */,
+				642254EB157C461800FB16EF /* SODPacket.m in Sources */,
+				642254EC157C461800FB16EF /* SODPacketToXmlParser.m in Sources */,
+				642254ED157C461800FB16EF /* SODSerializer.m in Sources */,
+				642254EE157C461800FB16EF /* SODServerInfo.m in Sources */,
+				642254F0157C461800FB16EF /* SODServiceListViewController.m in Sources */,
+				642254F1157C461800FB16EF /* SODTestViewController.m in Sources */,
+				642254F2157C461800FB16EF /* SODTransceiver.m in Sources */,
+				642254F4157C461800FB16EF /* SODTVListViewController.m in Sources */,
+				642254F5157C461800FB16EF /* SODTVLocationViewController.m in Sources */,
+				642254F6157C461800FB16EF /* SODViewController.m in Sources */,
+				642254F7157C461800FB16EF /* SODXmlToPacketParser.m in Sources */,
+				642254FB157C464C00FB16EF /* MyClass.m in Sources */,
+				6415E183157E1D0A008AC40D /* SharedObject.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6422545F157C45AC00FB16EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		64225484157C45AD00FB16EF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64225485157C45AD00FB16EF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6422548E157C45AD00FB16EF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6422548F157C45AD00FB16EF /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		64225492157C45AD00FB16EF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64225493157C45AD00FB16EF /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		64225496157C45AD00FB16EF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64225497157C45AD00FB16EF /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6422549A157C45AD00FB16EF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6422549B157C45AD00FB16EF /* se */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		642254BA157C45AD00FB16EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		642254BB157C45AD00FB16EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		642254BD157C45AD00FB16EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = /Users/Shared/Cordova/Frameworks;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RealSOD/RealSOD-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1,",
+					"CORDOVA_FRAMEWORK=1",
+				);
+				INFOPLIST_FILE = "RealSOD/RealSOD-Info.plist";
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					UIKit,
+					"-weak_framework",
+					AVFoundation,
+					"-weak_framework",
+					CoreMedia,
+					"-weak_library",
+					/usr/lib/libSystem.B.dylib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		642254BE157C45AD00FB16EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = /Users/Shared/Cordova/Frameworks;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RealSOD/RealSOD-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG=1,",
+					"CORDOVA_FRAMEWORK=1",
+				);
+				INFOPLIST_FILE = "RealSOD/RealSOD-Info.plist";
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					UIKit,
+					"-weak_framework",
+					AVFoundation,
+					"-weak_framework",
+					CoreMedia,
+					"-weak_library",
+					/usr/lib/libSystem.B.dylib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6422545A157C45AC00FB16EF /* Build configuration list for PBXProject "RealSOD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				642254BA157C45AD00FB16EF /* Debug */,
+				642254BB157C45AD00FB16EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		642254BC157C45AD00FB16EF /* Build configuration list for PBXNativeTarget "RealSOD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				642254BD157C45AD00FB16EF /* Debug */,
+				642254BE157C45AD00FB16EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 64225457157C45AC00FB16EF /* Project object */;
+}
