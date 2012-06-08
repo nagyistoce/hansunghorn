@@ -2,8 +2,8 @@ package order.phone;
 
 import java.io.IOException;
 
-import order.phoneBean.ConnectionBean;
-import order.phoneBean.DownLoad;
+import order.bean.ConnectionBean;
+import order.bean.DownLoad;
 import sod.common.Packet;
 
 import com.phonegap.api.Plugin;

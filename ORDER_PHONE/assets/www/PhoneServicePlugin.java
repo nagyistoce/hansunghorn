@@ -4,14 +4,12 @@ import order.bean.ConnectionBean;
 import order.bean.ItemBean;
 import order.bean.StorageDataBean;
 import order.control.StorageControl;
+import order.phoneBean.DownLoad;
 
-import org.apache.http.TokenIterator;
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import sod.common.Packet;
-
-import android.widget.MultiAutoCompleteTextView.Tokenizer;
 
 import com.phonegap.api.PluginResult;
 
@@ -84,22 +82,10 @@ public class PhoneServicePlugin extends PhoneServiceNet {
 				String orderadd = "";
 				try {
 					orderadd = data.getString(0);
-					String temp1=null,temp2=null;
-					String[]ab=orderadd.split("|");
-					for(int i=0;i<ab.length;i++)
-					{
-						if(i==3)
-						{
-							temp2+=ab[i];
-						}
-						else
-						temp1+=ab[i];
-							
-					}
-//					ItemBean bean = receiving.FindItem(orderadd);
+					ItemBean bean = receiving.FindItem(orderadd);
 					packet = new Packet();
-					packet.push("download");
-					packet.push(temp1+" "+temp2);		
+]
+					packet.push(data);		
 					ConnectionBean.client.send(packet);
 					//StorageDataBean.ORDERITEM.add(bean);
 				} catch (JSONException e) {

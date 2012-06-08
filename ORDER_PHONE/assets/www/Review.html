@@ -13,15 +13,20 @@
 		<script type="text/javascript" charset="euc-kr">
             document.addEventListener("deviceready", onDeviceReady, false);
             function onDeviceReady() {
+       //     	alert("야이노마");
                 window.plugins.PhoneServicePlugin.Review(successReceive, errorReceive, "");
             }
-
+			function errorReceive(result)
+			{
+				alert(result);
+			}
             function successReceive(result) {
+           // 	alert("왜이노마");
             	var Category_Menu=new Array();
             	var Category_config=new Array();
             	var items=new Array();
             	
-            	alert(result);
+            	//alert(result);
 				Category_Menu = result.split("|");
 				
 				for(var i=0;i<Category_Menu.length-1;i++)
@@ -36,18 +41,12 @@
 						$('div#categoryMenuItem').append("<div id='MenuName' data-role='collapsible'><h3>"+Category_config[0]+"</h3><p>가  격:  (￦)"+Category_config[1]+"원<br><br>평  점:  "+Category_config[2]+"점<br><br>추천수:  "+Category_config[3]+"<br><br><h3>【 "+Category_config[0]+" 】</h3>  <b>*소개*</b><br><br><br>"+Category_config[4]+"<br><br><br><a href='order.html' data-role='button' data-theme='b'>주문하기</a></p></div>")
 					}
 					
-					alert(Category_Menu[i]);
+			//		alert(Category_Menu[i]);
 				}
 				//$('div#categoryMenuItem').find('div[data-role=collapsible]').append("");
 				$('div#categoryMenuItem').find('div[data-role=collapsible]').collapsible({theme:'c',refresh:true}); //
 		
             }
-
-            function errorReceive(result) {
-			alert("Error "+result);
-			
-            }
-
 		</script>
 	</head>
 	<body>

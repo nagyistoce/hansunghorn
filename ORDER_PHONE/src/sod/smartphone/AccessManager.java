@@ -1,9 +1,16 @@
 package sod.smartphone;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream.GetField;
 import java.net.DatagramPacket;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
+
 import sod.common.ActionEx;
 import sod.common.Constants;
 import sod.common.Disposable;
@@ -25,12 +32,19 @@ public class AccessManager implements Disposable {
 	Transceiver conn;
 	ReceiveHandler cb;
 	
+	ServiceManager serviceManager;
+	
+	ActionEx startServiceDelegate;
+	
 	//listening loop 제어용
 	boolean isRunning = false;
 	
 	//서버로부터 인증을 받았는지 여부
 	boolean isConnected = false;
 	
+	public AccessManager(){
+		serviceManager = new ServiceManager();
+	}
 	/**
 	 * 서버와 연결을 시도한다.
 	 * @param info
@@ -42,9 +56,10 @@ public class AccessManager implements Disposable {
 		
 		Packet p = new Packet();
 		p.signiture = Packet.REQUEST_ACCEPT;
-		conn.send(p);
+ 		conn.send(p);
 		isRunning = true;
 		beginListening();
+		
 	}
 	
 	/**
@@ -61,7 +76,7 @@ public class AccessManager implements Disposable {
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			Packet p = new Packet();
 			p.signiture = Packet.REQUEST_PING;
-			p.push(baseIP);
+			p.push(NetworkUtils.getLocalIP());
 			p.push(Constants.Multicast_Port_Response);
 
 			se.serialize(output, p);
@@ -74,7 +89,7 @@ public class AccessManager implements Disposable {
 			t = new Transceiver(null, Constants.Multicast_Port_Response);
 			
 			ThreadEx.invoke(new Object[]{cb, t}, new ActionEx() {				
-	
+				@Override
 				public void work(Object arg) {
 					Object[] args = (Object[])arg;
 					SearchCallBack _cb = (SearchCallBack)args[0];
@@ -128,6 +143,15 @@ public class AccessManager implements Disposable {
 	public void setReceiveHandler(ReceiveHandler handler){
 		cb = handler;
 	}
+	
+	/**
+	 * Packet이 수신됐을때 호출될 콜백함수를 등록
+	 * @param handler
+	 * 콜백함수를 구현한 객체
+	 */
+	public void setStartServiceDelegate(ActionEx startAction){
+		this.startServiceDelegate = startAction;
+	}
 
 	/**
 	 * 패킷을 서버로 보낸다.
@@ -149,6 +173,7 @@ public class AccessManager implements Disposable {
 	protected void beginListening(){
 		ThreadEx.invoke(null, new ActionEx() {		
 			
+			@Override
 			public void work(Object arg) {
 				InetSocketAddress sender = null;
 				Packet p = new Packet();
@@ -163,13 +188,33 @@ public class AccessManager implements Disposable {
 					switch(p.signiture){
 					case Packet.RESPONSE_ACCEPT:
 						isConnected = true;
+						
+						Constants.logger.log("(debug:client) RESPONSE_ACCEPT.\n");
+						//1. 서비스가 있는지 없는지 확인한다.
+						if(isExistService()){
+							Constants.logger.log("(debug:client) START SERVICE.\n");
+							startService();   //나중에 주석 없애야함
+						}
+						else{
+							Constants.logger.log("(debug:client) REQUEST_SERVICE_DATA.\n");
+							p_check.signiture= Packet.REQUEST_SERVICE_DATA;
+							conn.send(p_check);
+						}
 						break;
 					case Packet.REQUEST_CLIENT_ALIVE:
 						conn.send(p_check);
 						break;
 					case Packet.RESPONSE_SERVICE_DATA:
-					case Packet.RESPONSE_SERVICE_NAME:
-						//need to implement
+						Constants.logger.log("(debug:client) installService");
+
+				
+						serviceManager.installService(p);
+
+						break;
+
+					case Packet.RESPONSE_SERVICE_DATA_END:
+						Constants.logger.log("(debug:client) Service Install complete");
+						startService();    //나중에 주석 없애야함
 						break;
 					default:
 						cb.onReceive(p);
@@ -179,6 +224,16 @@ public class AccessManager implements Disposable {
 			}
 			
 		});		
+	}
+	
+	protected boolean isExistService(){
+		return serviceManager.isExistService(svinfo.ServiceName);
+		/////////////////////////하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///
+		//return serviceManager.isExistService("ana");
+	}
+	
+	protected void startService(){
+		startServiceDelegate.work(svinfo.ServiceName);
 	}
 
 }

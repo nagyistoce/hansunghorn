@@ -1,4 +1,4 @@
-package order.phoneBean;
+package order.bean;
 
 import java.util.concurrent.Semaphore;
 

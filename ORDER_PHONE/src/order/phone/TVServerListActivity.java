@@ -2,9 +2,10 @@ package order.phone;
 
 import java.util.ArrayList;
 
-import order.phoneBean.ConnectionBean;
+import order.bean.ConnectionBean;
 
 import sod.common.ActionEx;
+import sod.common.NetworkUtils;
 import sod.common.ThreadEx;
 import sod.smartphone.AccessManager;
 import sod.smartphone.SearchCallBack;
@@ -36,13 +37,14 @@ public class TVServerListActivity extends ListActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tvserverlist);
+		NetworkUtils.setLocalIp(getLocalIpAddress());
 		
 		list = new ArrayList<String>();
 		
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
 		setListAdapter(adapter);
 		
-		Log.i("jaeyeong","jaeyeong start");
+//		Log.i("jaeyeong","jaeyeong start");
 	
 		
 		handler = new Handler(){
@@ -52,17 +54,19 @@ public class TVServerListActivity extends ListActivity {
 				// TODO Auto-generated method stub
 				ServerInfo info = (ServerInfo) msg.obj;
 				list.add(info.EndPoint.getAddress().getHostAddress() +","+ info.ServiceName);
-				list.add("192.168.0.75"+","+info.ServiceName);
-				list.add("192.168.0.3"+","+info.ServiceName);
 				adapter.notifyDataSetChanged();
 				
+				///////엄씨가 추가//////////
+				ConnectionBean.ServerInfomation = info;
+				///////엄씨가 추가//////////
 			}
 			
 		};
 		
 		
 		ThreadEx.invoke(null, new ActionEx() {
-
+			
+			@Override
 			public void work(Object arg) {
 				// TODO Auto-generated method stub
 //				String localip = NetworkUtils.getLocalIP();
@@ -70,7 +74,7 @@ public class TVServerListActivity extends ListActivity {
 				Log.i("jaeyeong", localip);
 				AccessManager.searchServer(localip, new SearchCallBack() {
 						
-				
+					@Override
 					public void onSearch(ServerInfo info) {
 						// TODO Auto-generated method stub
 						if(info == null){
@@ -97,40 +101,14 @@ public class TVServerListActivity extends ListActivity {
 		
 
 		//stub code..../////////////////////////////////
-//		list.add("192.168.0.5,A&A");
+		list.add("192.168.0.5,A&A");
+		list.add("192.168.0.7,ORDER");
+		list.add("192.168.0.11,GCC");
+	
 		adapter.notifyDataSetChanged();
 		///////////////////////////////////////////////////////////
 		
-		/*
-		Button searchButton = (Button)findViewById(R.id.searchButton);
-		searchButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				String localip = NetworkUtils.getLocalIP();
-				Toast.makeText(v.getContext(), localip, Toast.LENGTH_LONG);
-				AccessManager.searchServer(localip, new SearchCallBack() {
-					
-					@Override
-					public void onSearch(ServerInfo info) {
-						// TODO Auto-generated method stub
-						if(info == null){
-							
-						}else{
-							//핸들러 이용해서 보내야함
-							Log.i("jaeyeong", "jaeyeong"+"OnSearch");
-							
-							list.add(info.EndPoint.getAddress().getHostAddress() +","+ info.ServiceName);
-							adapter.notifyDataSetChanged();
-							
-						}
-					}
-				});
-				
-			}
-		});
-		*/
+		
 		
 	}
 	

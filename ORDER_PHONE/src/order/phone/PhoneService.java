@@ -1,7 +1,5 @@
 package order.phone;
 
-import sod.smarttv.ServerConfig;
-
 import com.phonegap.*;
 
 import android.app.ProgressDialog;
@@ -10,22 +8,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class PhoneService extends DroidGap {
-	Button TvSearch, ServiceLocation, InstallService;
+	ImageButton TvSearch, ServiceLocation, ServiceList;
 
 	PhoneServiceNet net;
 	private ProgressDialog dialog;
 
 	public void Layout_Initalize() {
-		TvSearch = (Button) findViewById(R.id.TvSearch);
-		ServiceLocation = (Button) findViewById(R.id.ServiceLocation);
-		InstallService = (Button) findViewById(R.id.InstallService);
+		TvSearch = (ImageButton) findViewById(R.id.TvSearch);
+		ServiceLocation = (ImageButton) findViewById(R.id.ServiceLocation);
+		ServiceList = (ImageButton) findViewById(R.id.InstallService);
 		TvSearch.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
 				// new AccessManager().searchServer(); // TV 서버 찾기
-				Intent intent = new Intent(PhoneService.this, SeverCon.class);
+				Intent intent = new Intent(PhoneService.this, TVServerListActivity.class);
 				startActivity(intent);
 
 				}
@@ -38,13 +37,15 @@ public class PhoneService extends DroidGap {
 				startActivity(intent);
 			}
 		});
-		InstallService.setOnClickListener(new OnClickListener() {
+		ServiceList.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
 				// 다운로드 부분생략
 				// TV 접속UI 생략
 			//	Client_Initalize();
 			//	InitHTML();
+				Intent intent = new Intent(PhoneService.this, TVServiceListActivity.class);
+				startActivity(intent);
 			}
 		}); 
 	}	@Override

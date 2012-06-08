@@ -23,7 +23,7 @@
                 var items = new Array();
 
                 Category_Menu = result.split("|");
-				//alert(Category_Menu.length);
+			//	alert(Category_Menu.length);
                 for(var i = 0; i < Category_Menu.length - 1; i++) {
                     if(i == 0) {
                         $('header#category').append("<h1>" + Category_Menu[i] + "</h1>");
@@ -49,7 +49,7 @@
 			function Thema(result)
 			{
 				ItemName=result;
-				//alert("제발"+result);
+		//		alert("제발"+result);
 			}
             function checksum(result) {
             	if(ItemName=="")
@@ -62,7 +62,7 @@
                     return;
                 }
                 if(confirm("정말 주문하시겠습니까?") != 0) {
-                window.plugins.PhoneServicePlugin.OrderAdd(successRecommand, errorReceive, result+"|"+ItemName);        
+                	 window.plugins.PhoneServicePlugin.OrderAdd(successRecommand, errorReceive, result+"|"+ItemName);        
                 }
             }
 		</script>

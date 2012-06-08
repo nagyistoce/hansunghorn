@@ -8,7 +8,8 @@ import sod.common.Storage;
 import sod.common.StorageFile;
 
 public class StorageControl {
-	public static String STORAGEID = "order";
+	public static String STORAGEID = "/order/service/order/storage";
+	//public static String STORAGEID = "order";
 
 	public Storage getStorage() {
 		return storage;

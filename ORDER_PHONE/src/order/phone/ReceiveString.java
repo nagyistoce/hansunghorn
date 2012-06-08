@@ -38,63 +38,28 @@ public class ReceiveString {
 		}
 	}
 
-	public void optiondata(int Sign) {
+	public void optiondata(String category) {
 		try {
-			String item[] = storagecontrol.getStoreList("*");
-			bean = new ItemBean();
-			if(Sign==0){
-			for (int i = 0; i < item.length; i++) {
-				String temp = item[i];
-				if (temp.equals("이미지")) {
-				} else {
-					temp = storagecontrol.Select(temp);
-
-					bean = ps.Parsing(temp);
-					if(bean.getRecommandFlag()==1)
-					{
-						ConnectionBean.TemporaryData2 += bean.getCategory() + "`"
-								+ bean.getName() + "`" + bean.getPrice() + "`"
-								+ bean.getRating() + "`" + bean.getRecommandFlag()
-								+ "`" + bean.getDescription() + "`" + bean.getUrl()
-								+ "|";
-					}
-				
-					
+		String item[] = storagecontrol.getStoreList("*");
+		bean = new ItemBean();
+		for (int i = 0; i < item.length; i++) {
+			String temp = item[i];
+			if (temp.equals("이미지")) {
+			} else {
+				temp = storagecontrol.Select(temp);
+				bean = ps.Parsing(temp);
+				if (category.equals(bean.getCategory()) && bean.getRecommandFlag()== true) {
+					ConnectionBean.Message += bean.getName() + "`"
+							+ bean.getPrice() + "`" + bean.getRating()
+							+ "`" + bean.getRecommandFlag() + "`"
+							+ bean.getDescription() + "`" + bean.getUrl()
+							+ "|";
 				}
-
 			}
-			return;
-			}	
-			if(Sign==1){
-				for (int i = 0; i < item.length; i++) {
-					String temp = item[i];
-					if (temp.equals("이미지")) {
-					} else {
-						temp = storagecontrol.Select(temp);
-
-						bean = ps.Parsing(temp);
-						if(Integer.parseInt(bean.getRating()) > 8 ) 
-						{
-							ConnectionBean.TemporaryData2 += bean.getCategory() + "`"
-									+ bean.getName() + "`" + bean.getPrice() + "`"
-									+ bean.getRating() + "`" + bean.getRecommandFlag()
-									+ "`" + bean.getDescription() + "`" + bean.getUrl()
-									+ "|";
-						}
-					
-						
-					}
-
-				}
-				return;
-				}
-		
-			System.out.println(ConnectionBean.Message);
-			System.out.println(ConnectionBean.Message);
-		} catch (Exception e) {
-
-			e.printStackTrace();
 		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
 	}
 
 	public void categorydata(String category) {
