@@ -16,7 +16,7 @@ import java.net.SocketException;
  */
 public class Transceiver implements Disposable {
 	
-	public final static int TransferUnit = 0x10000;//64kb
+	public final static int TransferUnit = 0x10000*2;//128kb
 	
 	byte[] recvbuf;
 	Serializer serializer;

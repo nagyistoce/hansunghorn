@@ -1,6 +1,7 @@
 package order.control;
 
 import order.bean.ConnectionBean;
+import order.tv.ORDER_TVActivity;
 import sod.common.Packet;
 import sod.smarttv.AccessManagerServer;
 import sod.smarttv.ConnectHandler;
@@ -15,7 +16,7 @@ public class Networking {
 		ConnectionBean.ServerConfig.Timeout = 30000;
 		ConnectionBean.ServerConfig.Port = ConnectionBean.SERVERPORT;
 		ConnectionBean.ServerConfig.CheckingPeriod = 4000;
-		ConnectionBean.ServerConfig.serviceName = "A&A_Service";
+		ConnectionBean.ServerConfig.serviceName = "order";
 
 		ConnectionBean.server.setConnectHandler(new ConnectHandler() {
 
@@ -41,6 +42,7 @@ public class Networking {
 				ConnectionBean.ClientId = connid;
 				Packet packet;
 				StorageControl storecon=new StorageControl();
+				//ORDER_TVActivity orderactivity=new ORDER_TVActivity();
 				if (pkt != null) {
 					while (pkt.getElementCount() > 0) {
 						ConnectionBean.Message = pkt.pop().toString();
@@ -48,7 +50,7 @@ public class Networking {
 							packet = new Packet();
 							try {
 								
-					//			ConnectionBean.server.send(pkt, connid)
+							//	orderactivity.Message(pkt.pop().toString());
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

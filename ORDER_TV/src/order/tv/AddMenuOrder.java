@@ -80,7 +80,7 @@ public class AddMenuOrder extends Activity{
 				StorageControl storagecontrol=new StorageControl();
 				try{
 					storagecontrol.Store(imgFolder);
-					imgItem=storagecontrol.getStoreList(imgFolder,"bmp");
+					imgItem=storagecontrol.getStoreList(imgFolder,"png");
 					if(imgItem.equals(null))
 					{
 						Toast.makeText(AddMenuOrder.this, "이미지가 없습니다.", Toast.LENGTH_LONG).show();

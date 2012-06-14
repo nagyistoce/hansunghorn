@@ -36,7 +36,7 @@ public class ToTalMenuOrder extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.modify_item);
+		setContentView(R.layout.total_item);
 
 		mAdapter = new IconAdapter();
 		mList = (ListView) findViewById(android.R.id.list);
@@ -99,7 +99,7 @@ return orgImage;
 			Bitmap [] icons=new Bitmap[ToTalMenuOrder.items.length];
 			ItemBean bean = new ItemBean();
 			psfile=new parsingFile();
-			for(int i=0;i<ToTalMenuOrder.items.length;i++)
+			for(int i=1;i<ToTalMenuOrder.items.length;i++)
 			{
 				
 				icons[i]=setupListImg(ToTalMenuOrder.items[i],bean,psfile);

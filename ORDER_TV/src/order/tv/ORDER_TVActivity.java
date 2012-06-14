@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import ana.tv.R;
 import android.view.View.OnClickListener;
 
@@ -59,6 +60,11 @@ public class ORDER_TVActivity extends Activity {
 	
 					}
 				});
+	}
+	public void Message(String abc)
+	{
+		
+		Toast.makeText(ORDER_TVActivity.this,"테이블 :"+abc.substring(0, 2)+"에서" + abc.substring(2,abc.length())+" 주문하셧습니다" , Toast.LENGTH_LONG);
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
