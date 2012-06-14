@@ -8,7 +8,7 @@
 		<script type="text/javascript" charset="euc-kr" src="ana/js/jquery.js"></script>
 		<script type="text/javascript" charset="euc-kr" src="ana/js/xui.js"></script>
 		<script src="ana/js/loader.js" type="text/javascript"></script>
-		<script type="text/javascript" charset="euc-kr">
+		<script type="text/javascript" charset="utf-8">
             document.addEventListener("deviceready", onDeviceReady, false);
             var getline = new Array();
             var message = "";
@@ -45,7 +45,7 @@
             }
 
             function send() {
-                alert(message);
+       //         alert(message);
                 window.plugins.AnAServicePlugin.sendData(successSend, errorSend, message);
             }
 
@@ -216,7 +216,7 @@
                 if(!field)
                     return true;
                 if(!rexp.test(field.value)) {
-                    alert(altertext);
+       //             alert(altertext);
                     if(field.type.toUpperCase() != "HIDDEN")
                         field.focus();
                     return false;
