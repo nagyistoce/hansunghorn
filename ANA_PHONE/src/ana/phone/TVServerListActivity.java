@@ -102,8 +102,9 @@ public class TVServerListActivity extends ListActivity {
 		
 
 		//stub code..../////////////////////////////////
-		list.add("192.168.0.5,A&A");
-		list.add("192.168.0.7,ORDER");
+//		list.add("192.168.0.5,A&A");
+//		list.add("192.168.0.7,ORDER");
+//
 		list.add("192.168.0.11,GCC");
 	
 		adapter.notifyDataSetChanged();
