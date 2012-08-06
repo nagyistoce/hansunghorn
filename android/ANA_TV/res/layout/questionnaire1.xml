@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/admininputactivity_background"
+        android:orientation="vertical"  >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/questionnaires"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="60dp"
+                android:gravity="center_horizontal"
+                android:text="설문지 설정"
+                android:textColor="#000000"
+                android:textSize="60dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="18dp"
+            >
+
+            <TextView
+                android:id="@+id/CompanyNameTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="200dp"
+                android:layout_marginTop="18dp"
+                android:gravity="left"
+                android:text="주관회사명 "
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/CompanyNameEditText"
+                android:layout_width="400dp"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="200dp"
+                android:background="@drawable/editstyle"
+                android:ems="10"
+                android:gravity="left"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <requestFocus />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="18dp"
+             >
+
+            <TextView
+                android:id="@+id/DuringTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="200dp"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:text="조사 기간"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/DuringEditText"
+                android:layout_width="400dp"
+                android:layout_height="40dp"
+                android:layout_alignBaseline="@+id/DuringBaseLine"
+                android:layout_alignBottom="@+id/DuringBottom"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="200dp"
+                android:background="@drawable/editstyle"
+                android:ems="10"
+                android:gravity="left"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="18dp" >
+            </EditText>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="18dp"
+             >
+
+            <TextView
+                android:id="@+id/FileAddTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="left"
+                android:layout_marginLeft="200dp"
+                android:text="첨부파일이 있는경우 오른쪽 버튼을 눌러주세요."
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <ImageButton
+                android:id="@+id/FileAddButton"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/TextView01"
+                android:layout_alignBottom="@+id/TextView01"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="200dp"
+                android:textSize="18dp"
+                android:text="첨부"
+                android:background="@drawable/questionnaire_setting_fileadd" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="18dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                >
+
+                <TextView
+                    android:id="@+id/UserInfoTextView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="left"
+                    android:layout_marginLeft="200dp"
+                    android:text="사용자의 정보를 입력받을지 체크해주세요."
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
+
+                <CheckBox
+                    android:id="@+id/UserInfoCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="200dp"
+                    android:gravity="right"
+                    android:text="Yes"
+                    android:textSize="18dp"
+                    android:textColor="#000000" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="70dp"
+             >
+
+            <ImageButton
+                android:id="@+id/NextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="150dp"
+                android:text="다음"
+                android:background="@drawable/questionnaire_setting_next" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            >
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

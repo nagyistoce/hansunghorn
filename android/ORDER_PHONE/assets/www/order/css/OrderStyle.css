@@ -1,0 +1,52 @@
+.OrderContextMenu {
+	width: 96%;
+	height: 98%;
+	float: left;
+	color: white;
+	position: absolute;
+	font-size: 50px;
+	text-align: center;
+	top: 0px;
+	margin-top: 10px;
+	-webkit-transition-duration: 600ms;
+	-webkit-transition-property: translate;
+	-webkit-transform: translate(-320px,0px);
+	-webkit-border-radius: 8px;
+}
+.OrderContextMenu#all {
+	
+	-webkit-transform: translate(0px,0px);
+/*	left: 0px;*/
+	display:block;
+	background: black;
+}
+.OrderContextMenu#popular {
+/*	left: 320px;*/
+	background: red;
+}
+.OrderContextMenu#recommandation {
+/*	left: 640px;*/
+	background: green;
+}
+.OrderContextMenu#setting {
+/*	left: 960px;*/
+	background: blue;
+}
+.landscape img{
+	width:480px;
+}
+.portrait img{
+	width:320px;
+}
+@media all and max-device-width:420px) and (max-device-height:560)
+{
+	.screen{
+		margin : 10px;
+		width:400px;
+		height:540px;
+	}
+}
+
+@media all and (orientation:portrait){
+	body{background-color:red}
+}

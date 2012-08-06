@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/admininputactivity_background"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="80dp" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="200dp"
+                android:gravity="left"
+                android:text="설문주제 "
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/topic"
+                android:layout_width="400dp"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="250dp"
+                android:background="@drawable/editstyle"
+                android:ems="10"
+                android:gravity="left"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="200dp"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:text="문항"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/answer"
+                android:layout_width="400dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="250dp"
+                android:background="@drawable/editstyle"
+                android:ems="10"
+                android:gravity="left"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="380dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.04" >
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="fill_parent"
+                android:layout_height="400dp"
+                android:layout_marginLeft="200dp"
+                android:layout_marginRight="200dp"
+                android:scrollingCache="true" >
+
+            </ListView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
+            android:layout_marginTop="12dp" >
+
+            <ImageButton
+                android:id="@+id/fileadd"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="첨부"
+                android:textSize="20dp"
+                android:layout_marginLeft="100dp"
+                android:background="@drawable/questionnaire_setting_fileadd" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp" >
+
+                <RadioButton
+                    android:id="@+id/first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="주관식"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <RadioButton
+                    android:id="@+id/second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="객관식"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+            </RadioGroup>
+
+            <ImageButton
+                android:id="@+id/addAnswer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="50dp"
+                android:text="문항 추가"
+                android:textSize="20dp"
+                android:background="@drawable/questionnaire_setting_moonadd" />
+
+            <ImageButton
+                android:id="@+id/complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="20dp"
+                android:text="설문지 작성완료" 
+                android:textSize="20dp"
+                android:background="@drawable/questionnaire_setting_complete"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
