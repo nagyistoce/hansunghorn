@@ -23,6 +23,8 @@ public abstract class AnAServiceNet extends Plugin {
 		packet.push(DownLoad.QUSTION);
 		packet.push(data);		
 		ConnectionBean.client.send(packet);
+		
+		ConnectionBean.client.dispose();
 	}
 
 }
