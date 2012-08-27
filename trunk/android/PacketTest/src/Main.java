@@ -17,6 +17,9 @@ public class Main {
 		System.out.println(pk.pick("제목"));
 		System.out.println(pk.pick("이름"));
 		System.out.println(pk.pick("음식"));
+		//1. 같은 타입에 대한 카운터
+		//2. 
+		//3. 
 
 	}
 
