@@ -3,6 +3,7 @@ package ana.phone;
 import java.net.InetSocketAddress;
 
 import sod.common.ActionEx;
+import sod.common.Constants;
 import sod.common.Packet;
 import sod.common.ReceiveHandler;
 import sod.smartphone.AccessManager;
@@ -88,4 +89,29 @@ public class SeverCon extends DroidGap{
 		
 		//InitHTML(); //나중에 주석처리 해야함
 	}
+	
+	
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		
+		//Constants.logger.log("(debug:client) ServerCon onStop() and disconnect");
+		//ConnectionBean.client.dispose();
+		
+	}
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		
+		Constants.logger.log("(debug:client) ServerCon onDestroy() and disconnect");
+		ConnectionBean.client.dispose();
+		
+		
+		//debug
+		
+	}
+	
+	
 }
