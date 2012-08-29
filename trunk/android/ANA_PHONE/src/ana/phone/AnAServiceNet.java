@@ -1,6 +1,8 @@
 package ana.phone;
 
 import java.io.IOException;
+
+import sod.common.Constants;
 import sod.common.Packet;
 import ana.phoneBean.ConnectionBean;
 import ana.phoneBean.DownLoad;
@@ -24,6 +26,7 @@ public abstract class AnAServiceNet extends Plugin {
 		packet.push(data);		
 		ConnectionBean.client.send(packet);
 		
+		Constants.logger.log("(debug:client) Succeed and disconnet");
 		ConnectionBean.client.dispose();
 	}
 

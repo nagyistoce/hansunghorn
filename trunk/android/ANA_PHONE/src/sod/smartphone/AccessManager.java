@@ -36,6 +36,9 @@ public class AccessManager implements Disposable {
 	
 	ActionEx startServiceDelegate;
 	
+	//debug
+	int downloadCnt = 0;
+	
 	//listening loop Á¦¾î¿ë
 	boolean isRunning = false;
 	
@@ -197,17 +200,15 @@ public class AccessManager implements Disposable {
 						}
 						else{
 							Constants.logger.log("(debug:client) REQUEST_SERVICE_DATA.\n");
-							p_check.signiture= Packet.REQUEST_SERVICE_DATA;
-							conn.send(p_check);
+							p.signiture= Packet.REQUEST_SERVICE_DATA;
+							conn.send(p);
 						}
 						break;
 					case Packet.REQUEST_CLIENT_ALIVE:
 						conn.send(p_check);
 						break;
 					case Packet.RESPONSE_SERVICE_DATA:
-						Constants.logger.log("(debug:client) installService");
-
-				
+//						Constants.logger.log("(debug:client) installService");
 						serviceManager.installService(p);
 
 						break;
