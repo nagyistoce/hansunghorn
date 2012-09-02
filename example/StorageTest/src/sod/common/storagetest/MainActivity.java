@@ -19,21 +19,27 @@ public class MainActivity extends Activity {
         EditText editText3  = (EditText)findViewById(R.id.editText3);
         
         try {
+        	
+        	
+        	
         	Storage storage;
         	if(Storage.checkIsStorageExists("test"))
         		storage = Storage.getStorage("test");
         	else
         		storage = Storage.createStorage("test");
         	
+        	storage.setImageStorage("asas");
         	
         	editText1.setText(storage.getImageStorageId());
         	
+        	
+        	
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
-			editText2.setText("IllegalArgumentException");
+			//editText2.setText("IllegalArgumentException");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			editText2.setText("IOException");
+			//editText2.setText("IOException");
 		} 
     }
 
