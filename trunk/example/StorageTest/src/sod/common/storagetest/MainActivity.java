@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
         	
         	editText1.setText(storage.getImageStorageId());
         	
-        	
+        	//
         	
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
