@@ -146,7 +146,7 @@ public class Storage {
         
         if(storage.checkIsFileExists(IMAGE_STORAGE_INFORMATION)){
         	StorageFile imageInfo = storage.openFile(IMAGE_STORAGE_INFORMATION, READ);
-        	byte [] buf = new byte[imageInfo.getLength()+1];
+        	byte [] buf = new byte[imageInfo.getLength()];
         	
         	imageInfo.read(buf);
         	String imageStorageName = new String(buf);
@@ -484,7 +484,7 @@ public class Storage {
 		
 		//이전 imageStorage를 지운후 새로운 imageStorage를 생성한다.
 		try {
-			destroy( storageID + "/" + imageStorageId);
+			Storage.destroy(storageID + "/" + imageStorageId);
 			
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
