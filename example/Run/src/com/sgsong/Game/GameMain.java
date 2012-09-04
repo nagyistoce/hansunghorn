@@ -507,15 +507,15 @@ public class GameMain
 		//	test();
 		//	NetworkUtils.setLocalIp(new Run().getLocalIpAddress());
 
-			if(ConnectionBean.server.getConnectionCount()==1)
-			{
+//			if(ConnectionBean.server.getConnectionCount()==1)
+//			{
 			game_start();
 			m_btnStart.setVisible( false );
-			}
-			else
-			{
-				onTouchedElement(700);
-			}
+//			}
+//			else
+//			{
+//				onTouchedElement(700);
+//			}
 		}
 		if( nID == Element.id_select_card1 || nID == Element.id_select_card2 )
 		{

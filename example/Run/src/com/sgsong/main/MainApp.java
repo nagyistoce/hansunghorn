@@ -87,11 +87,14 @@ public class MainApp implements Renderer
 		loadImage( Def.loading_bg );
 		loadImage( Def.loading_bar );		
 		m_nCurTex = 3;		
-		if(connection_count==0){
-		new Networking().TVServerIni();
-		ConnectionBean.server.start(ConnectionBean.ServerConfig);
-		connection_count++;
-		}
+/**     이곳 컨넥션 부분 	
+		
+	//	if(connection_count==0){
+	//	//new Networking().TVServerIni();
+	//	ConnectionBean.server.start(ConnectionBean.ServerConfig);
+	//	connection_count++;
+	//	}
+	 **/
 		m_gMain.registLoading();		
 		
 	//	Log.i( "[SGSG]", "m_gMain.registElements();" );
