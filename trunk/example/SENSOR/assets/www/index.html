@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<title></title>
+		<meta http-equiv="content-type" content="text/html" charset="ko">
+		<script type="text/javascript" charset="ko" src="gcc/js/phonegap-1.4.1.js"></script>
+		<script type="text/javascript" charset="ko" src="gcc/js/loader.js"></script>
+		<script type="text/javascript" charset="ko" src="gcc/js/myPlugin.js"></script>
+		<script charset="ko">
+		var watchID = null;
+		var count =0;
+		var Acc=[];
+		var Def=[];
+		document.addEventListener("deviceready", onDeviceReady, false);
+	
+
+		function successSend(a){
+			alert(a);
+		}
+		function errorSend(err){
+			alert('err : '+err);
+		}
+			
+    // The watch id references the current `watchAcceleration`
+    var watchID = null;
+
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+        startWatch();
+    }
+
+    // Start watching the acceleration
+    //
+    function startWatch() {
+
+        // Update acceleration every 3 seconds
+        var options = { frequency: 0.0001 };
+
+        watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+    }
+    // Stop watching the acceleration
+    //
+    function stopWatch() {
+        if (watchID) {
+            navigator.accelerometer.clearWatch(watchID);
+            watchID = null;
+        }
+    }
+
+    // onSuccess: Get a snapshot of the current acceleration
+    //
+    
+    function onSuccess(acceleration) {
+    	if(count == 0)
+    	{
+    		Acc.push(acceleration.x);
+    		Acc.push(acceleration.y);
+    		Acc.push(acceleration.z);
+    		count++;
+    	}
+    	else
+    	{
+    			Def.push(Math.abs(Number(Acc[0])-Math.abs(Number(acceleration.x))));
+    			Def.push(Math.abs(Number(Acc[1])-Math.abs(Number(acceleration.y))));
+    			Def.push(Math.abs(Number(Acc[2])-Math.abs(Number(acceleration.z))));
+    			Acc[0]=acceleration.x;
+    			Acc[1]=acceleration.y;
+    			Acc[2]=acceleration.z;
+    		for(var i=0;i<3;i++)
+    		{
+    			//alert("Def_Size : "+Def.length + "Def"+i+" : "+Def[i]);
+    			console.log("Def_Size : "+Def.length + "Def"+i+" : "+Def[i]);
+    			
+    			//alert("Def_Size : "+Def.length +" 꺼낸거 : " +Def.pop());
+    		}
+    		if(Def[1]>20)
+    		{
+    			windows.plugins.myPlugin.sendData(function(complete){
+    				alert("성공입니다");
+    			},function(err){
+    				alert('err : '+ err);
+    			},"");
+    		}
+    		Def=[];
+    	}
+    	
+   	}
+    function onError() {
+        alert('onError!');
+    }
+
+		</script>
+		</head>
+		<body>
+		<p>알림창 확인!</p>
+		</body>
+		</html>
