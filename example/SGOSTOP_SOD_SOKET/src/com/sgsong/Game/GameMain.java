@@ -505,16 +505,19 @@ public class GameMain
 		if( nID == Element.id_btn_start )
 		{
 			//test();
-			NetworkUtils.setLocalIp(new Run().getLocalIpAddress());
-
-			if(ConnectionBean.server.getConnectionCount()==1)
+			// NetworkUtils.setLocalIp(new Run().getLocalIpAddress());
+			int aklgjlaskjd=ConnectionBean.server.getConnectionCount();
+			System.out.println(aklgjlaskjd);
+			if(ConnectionBean.server.getConnectionCount()>0)
 			{
 			game_start();
 			m_btnStart.setVisible( false );
 			}
 			else
 			{
-				onTouchedElement(700);
+				System.out.println("sdflajlfjsalkf");
+				return;
+				//onTouchedElement(700);
 			}
 		}
 		if( nID == Element.id_select_card1 || nID == Element.id_select_card2 )
