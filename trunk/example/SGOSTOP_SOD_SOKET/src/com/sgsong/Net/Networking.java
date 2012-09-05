@@ -19,6 +19,7 @@ public class Networking {
 		ConnectionBean.server.setConnectHandler(new ConnectHandler() {
 
 			public void onConnect(int connid) {
+				System.out.println(connid);
 				// Connection handler
 			}
 		});
@@ -31,6 +32,7 @@ public class Networking {
 		ConnectionBean.server.setReceiveHandler(new ServerReceiveHandler() {
 
 			public void onReceive(Packet pkt, int connid) {
+				System.out.println("dflajsdfjasl");
 //				ConnectionBean.ClientId = connid;
 //				Packet packet;
 //				if (pkt != null) {
