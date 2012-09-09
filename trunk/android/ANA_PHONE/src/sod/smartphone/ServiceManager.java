@@ -24,7 +24,24 @@ public class ServiceManager {
 	
 	static final int TEXT_TYPE = 0;
 	static final int IMAGE_TYPE = 1;
+	static final int FILE_NEXT = 2;
+	static final int FILE_END = 3;
 	
+	
+	byte serviceBuf[];
+	boolean isFirst;
+	int sBufIndex;
+	
+	int debugPoint;
+	
+	
+	ServiceManager(){
+		serviceBuf = new byte[10000];
+		isFirst = true;
+		sBufIndex = 0;
+		
+		debugPoint = 0;
+	}
 
 	/**
 	 * 서비스가 설치되어 있는지 확인
@@ -120,12 +137,15 @@ public class ServiceManager {
 		mHandler = handler;
 	}
 	
+	
+	
 	public void installService(Packet packet){
 		String serviceName = (String)packet.pop(); // 1. 패킷에서 첫번째로 나오는 것은 serviceName (String)
 		String serviceFilePath = serviceName + "/service";
 		
 		String relativePath = (String) packet.pop();// 2. 두번째로 나오는 것은 상대 path
 													// (String)
+		debugPoint++;
 
 		try {
 
@@ -149,32 +169,76 @@ public class ServiceManager {
 			}
 
 			String fileName = (String)packet.pop();//3. 세번째로 나오는 것은 fileName
-			Integer fileType = (Integer)packet.pop();//4. 네번째로 나오는 것은 파일타입
+			Integer fileSize = (Integer)packet.pop();// 4. 네번째로 나온는 것은 총 fileSize
+			
+			if(isFirst){
+				serviceBuf = new byte[fileSize];
+				isFirst = false;
+			}
+			
+			Integer fileType = (Integer)packet.pop();//5. 다섯번째로 나오는 것은 파일타입
 			Constants.logger.log(fileName);
 			
 			if(fileType == ServiceManager.TEXT_TYPE){
-				StorageFile serviceFile = serviceStorage.createFile(fileName); // 파일 생성
-				byte [] buf = (byte [])packet.pop(); //5. 다섯번째로 나오는 것은 데이터
-				serviceFile.write(buf);
-				serviceFile.close();
+				
+				byte [] buf = (byte [])packet.pop(); //6. 여섯번째로 나오는 것은 데이터
+				//////////
+				Integer nextAend = (Integer)packet.pop(); //7. 끝이인지 다음에도 있는지
+				if(nextAend == ServiceManager.FILE_END){ //FileEnd
+					isFirst = true;
+					
+					for(int i = 0 ;  i < buf.length; i++ ){
+						serviceBuf[sBufIndex] = buf[i];
+						sBufIndex++;
+					}
+					sBufIndex = 0; //sBufIndex init...
+					///////////
+					StorageFile serviceFile = serviceStorage.createFile(fileName); // 파일 생성
+					serviceFile.write(serviceBuf);
+					serviceFile.close();
+				}
+				else{//Next
+					for(int i = 0 ;  i < buf.length; i++ ){
+						serviceBuf[sBufIndex] = buf[i];
+						sBufIndex++;
+					}
+				}// end Next else...
+				
 			}
-			else{//4.1 이미지 일 때
+			else{//5.1 이미지 일 때
 				//to Do
-				Integer width = (Integer)packet.pop(); //4.1 가로 길이 가져오고
-				Integer height = (Integer)packet.pop(); //4.2 세로 길이 가져오고
+				Integer width = (Integer)packet.pop(); //6.1 가로 길이 가져오고
+				Integer height = (Integer)packet.pop(); //6.2 세로 길이 가져오고
 				
-				byte [] buf = (byte [])packet.pop(); //5. 다섯번째로 나오는 것은 데이터
-				Bitmap img = BitmapFactory.decodeByteArray(buf, 0, buf.length);
-				Bitmap serviceImg = Bitmap.createBitmap(img, 0, 0, width, height);
+				byte [] buf = (byte [])packet.pop(); //7. 일곱번째로 나오는 것은 데이터
+				//////////
+				Integer nextAend = (Integer)packet.pop(); //7. 끝이인지 다음에도 있는지
+				///////////
+				if(nextAend == ServiceManager.FILE_END){ //FileEnd
+					isFirst = true;
+					
+					for(int i = 0 ;  i < buf.length; i++ ){
+						serviceBuf[sBufIndex] = buf[i];
+						sBufIndex++;
+					}
+					sBufIndex = 0; //sBufIndex init...
+					///////////
+					
+					Bitmap img = BitmapFactory.decodeByteArray(serviceBuf, 0, serviceBuf.length);
+					Bitmap serviceImg = Bitmap.createBitmap(img, 0, 0, width, height);
 				
-				StorageFile serviceFile = serviceStorage.createFile(fileName);
-				serviceFile.writeImage(serviceImg);
-				serviceFile.close();
-			}
-			
-			
-			
-				
+					StorageFile serviceFile = serviceStorage.createFile(fileName);
+					serviceFile.writeImage(serviceImg);
+					serviceFile.close();
+				}
+				else{//Next
+					for(int i = 0 ;  i < buf.length; i++ ){
+						serviceBuf[sBufIndex] = buf[i];
+						sBufIndex++;
+					}//end for
+				}//end else...
+
+			}//end else 5.1 이미지일때
 		} catch (IllegalArgumentException e1) {
 			// TODO Auto-generated catch block
 //			Constants.logger.log("IllegalArgumentException - installService");

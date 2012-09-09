@@ -209,6 +209,7 @@ public class AccessManager implements Disposable {
 						break;
 					case Packet.RESPONSE_SERVICE_DATA:
 //						Constants.logger.log("(debug:client) installService");
+						
 						serviceManager.installService(p);
 
 						break;
@@ -229,8 +230,7 @@ public class AccessManager implements Disposable {
 	
 	protected boolean isExistService(){
 		return serviceManager.isExistService(svinfo.ServiceName);
-		/////////////////////////하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///
-		//return serviceManager.isExistService("ana");
+		
 	}
 	
 	protected void startService(){
