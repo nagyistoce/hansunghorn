@@ -3,6 +3,7 @@ package com.sgsong.Game;
 import javax.microedition.khronos.opengles.GL10;
 
 import sod.common.NetworkUtils;
+import sod.common.Packet;
 
 import com.sgsong.Net.ConnectionBean;
 import com.sgsong.Net.Networking;
@@ -31,6 +32,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
+import java.io.Console;
 import java.util.*;
 
 // portrait landscape
@@ -56,16 +58,14 @@ public class GameMain
 	public static final int max_player = 2;
 	public static final int player_com = 0;
 	public static final int player_me = 1;	
-	
 // public:
 	public GameSound m_sound = new GameSound();
 	public GameCommand m_cmd = new GameCommand();
-
+	public Packet pkt=new Packet();
 // private:
 	private SG_COLOR clrFPS = new SG_COLOR();
 	private SG_RECT rtFPS[] = new SG_RECT[4];	
-	
-	private MainApp m_pApp = null;
+private MainApp m_pApp = null;
 	
 	private SG m_sg = null;
 	
@@ -111,7 +111,8 @@ public class GameMain
 	Element			m_sunMark = new Element();
 	Element			m_turnMark = new Element();
 
-
+	private Networking net= new Networking();
+	
 	private GamePlayer	m_player[] = new GamePlayer[max_player];
 
 	private Vector<Integer>	m_curEatCard = new Vector<Integer>();
@@ -938,7 +939,7 @@ public class GameMain
 	{		
 	}
 
-	public void sendFirstCardToCom()	// 컴퓨터에게 패 5장 주기
+	public void sendFirstCardToCom()	// 컴퓨터에게 패 5장 주기 인덱스
 	{
 		for( int i=0; i<5; i++ )
 		{
@@ -977,16 +978,25 @@ public class GameMain
 
 		m_sound.playSound( GameSound.card_send );
 	}
-
+	public Packet SendNetCard(Integer CardId)
+	{
+		Packet pak=new Packet();
+		pak.push("card");
+		pak.push(CardId);
+		return pak;
+	}
+	
+	
 	public void sendFirstCardToMe()		// 나에게 첫번째 패 5장 주기
 	{
+		pkt.push("sendCard");
 		for( int i=0; i<5; i++ )
 		{
 			int nIndex = (int) m_gameCard.size() - 1;
 			Card findCard = m_gameCard.get(nIndex);
 
 			m_player[player_me].setPlayCard( i, findCard.getID() );
-
+			pkt.push(""+(i),findCard.getID());
 			m_eliList.setTopOrder( findCard.getID() );
 			findCard.setMoveAni( Animation.id_send_first_card_to_me + i, EasingCurve.Linear,
 				findCard.getPosX(), findCard.getPosY(), m_ptMyCard[i].nX, m_ptMyCard[i].nY, 0.5f );
@@ -1005,14 +1015,14 @@ public class GameMain
 			Card findCard = m_gameCard.get(nIndex);;
 
 			m_player[player_me].setPlayCard( i+5, findCard.getID() );
-			
+			pkt.push(""+(i+5),findCard.getID());
 			m_eliList.setTopOrder( findCard.getID() );
 			findCard.setMoveAni( Animation.id_send_second_card_to_me + i, EasingCurve.Linear,
 				findCard.getPosX(), findCard.getPosY(), m_ptMyCard[i+5].nX, m_ptMyCard[i+5].nY, 0.5f );
 
 			m_gameCard.remove( nIndex );
 		}	
-
+		ConnectionBean.server.send(pkt, ConnectionBean.ClientId);
 		m_sound.playSound( GameSound.card_send );
 
 		setTouchMyCard( false );

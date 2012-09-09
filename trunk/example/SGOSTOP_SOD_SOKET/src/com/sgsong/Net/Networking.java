@@ -8,6 +8,7 @@ import sod.smarttv.ServerConfig;
 import sod.smarttv.ServerReceiveHandler;
 
 public class Networking {
+	
 	public void TVServerIni() { // Tv initalize
 		ConnectionBean.server = new AccessManagerServer();
 		ConnectionBean.ServerConfig = new ServerConfig();
@@ -19,8 +20,7 @@ public class Networking {
 		ConnectionBean.server.setConnectHandler(new ConnectHandler() {
 
 			public void onConnect(int connid) {
-				System.out.println(connid);
-				// Connection handler
+				ConnectionBean.ClientId=connid;
 			}
 		});
 		ConnectionBean.server.setDisconnectHandler(new DisconnectHandler() {
@@ -29,34 +29,42 @@ public class Networking {
 				// Disconnection handler
 			}
 		});
+		
 		ConnectionBean.server.setReceiveHandler(new ServerReceiveHandler() {
 
 			public void onReceive(Packet pkt, int connid) {
-				System.out.println("dflajsdfjasl");
-//				ConnectionBean.ClientId = connid;
-//				Packet packet;
-//				if (pkt != null) {
-//					while (pkt.getElementCount() > 0) {
-//						ConnectionBean.Message = pkt.pop().toString();
-//						if (ConnectionBean.Message.equals("download")) {
-//							packet = new Packet();
-//							try {
-//
-//							} catch (Exception e) {
-//								// TODO Auto-generated catch block
-//								e.printStackTrace();
-//							}
-//							ConnectionBean.server.send(packet,
-//									ConnectionBean.ClientId);
-//						} else if (ConnectionBean.Message
-//								.equals("Questionnaire")) {
-//							ConnectionBean.Message = pkt.pop().toString();
-//						}
+			
+				ConnectionBean.ClientId = connid;
+			
+				if (pkt != null && SignCase(pkt.pop()).equals(("getCard"))) {
+//					for(int i=0;i<GCCBean.MAX_COUNT_CARD;i++)
+//					{
+//						//GCCBean.card_index+=SignCase(pkt.pop())+"|";
 //					}
-//				}
-
+				}
+				else{
+					while (pkt.getElementCount() > 0) {
+						ConnectionBean.Message = pkt.pop().toString();
+						if (ConnectionBean.Message.equals("download")) {
+							try {
+									
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						} else if (ConnectionBean.Message
+								.equals("Questionnaire")) {
+							ConnectionBean.Message = pkt.pop().toString();
+						}
+					}
+				}
 			}
+			
 		});
 
+	}
+	public String SignCase(Object sign)
+	{
+		return sign.toString();
 	}
 }
