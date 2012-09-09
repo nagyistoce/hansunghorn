@@ -1,5 +1,7 @@
 package sod.common;
 
+
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -12,7 +14,7 @@ import java.util.Queue;
 public class Packet {
 	
 	public static final String DataType_Int = "int";
-//	public static final String DataType_Long = "long";
+	public static final String DataType_Long = "long";
 	public static final String DataType_Float = "float";
 	public static final String DataType_Double = "double";
 	public static final String DataType_String = "string";
@@ -65,8 +67,9 @@ public class Packet {
 	public static final int RESPONSE_SERVICE_DATA_END = 0xFF000005;
 
 	
-
-	protected Queue<Object> dataset;	
+	protected LinkedList<String> typeset;
+	protected LinkedList<Object> dataset;
+	
 	
 	/**
 	 * 개발자가 지정한 시그니쳐로 구분하여 패킷의 용도가 결정된다. 0xff000000~0xff000004는 시스템에서 할당한
@@ -75,6 +78,7 @@ public class Packet {
 	public int signiture = 0;
 	
 	public Packet(){
+		typeset = new LinkedList<String>();
 		dataset = new LinkedList<Object>();
 	}
 
@@ -90,9 +94,12 @@ public class Packet {
 	public String getTopElementType(){
 		if(dataset.size() == 0)
 			return null;
-		Object o = dataset.peek();
 		
-		if(o instanceof Integer)
+		return typeset.peek();
+		
+	
+		/*
+		 * if(o instanceof Integer)
 			return DataType_Int;
 //		if(o instanceof Long)
 //			return DataType_Long;
@@ -106,6 +113,7 @@ public class Packet {
 			return DataType_ByteArray;
 		else
 			return null;
+			*/
 	}
 
 	/**
@@ -130,6 +138,20 @@ public class Packet {
 			return false;
 		return true;
 	}
+	
+	/**
+	 * 패킷을 만들때, 패킷에 객체를 집어넣을 때 사용하는 메소드이다. 객체는 무한대로 들어간다
+	 * @param type 객체의 타입
+	 * @param obj 사용자가 패킷에 집어넣고자 하는 객체
+	 * @return
+	 */
+	public boolean push(String type, Object obj){
+		
+		typeset.offer(type);
+		dataset.offer(obj);
+		
+		return true;
+	}
 
 	/**
 	 * 패킷에서 객체를 꺼낼때 사용하는 메소드이다. getElementCount()를 이용하여 개수를 파악하고 pop()을 이용하면 더욱
@@ -142,7 +164,27 @@ public class Packet {
 	public Object pop() {
 		if(dataset.size() == 0)
 			return null;
+		
+		typeset.poll();
 		return dataset.poll();
+	}
+	
+	/**
+	 * 패킷에서 객체를 꺼낼때 사용하는 메소드이다.
+	 * type에 대응되는 Object를 반환한다.
+	 * @param type
+	 * @return type에 대응되는 Object, 없으면 -1 반환
+	 */
+	public Object pick(String type){
+		
+		int index = typeset.indexOf(type);
+		if( index == -1)
+			return null;
+		else{
+			typeset.remove(index);
+			return dataset.remove(index);
+		}
+		
 	}
 
 	/**
@@ -150,9 +192,16 @@ public class Packet {
 	 */
 	public void clear(){
 		signiture = 0;
+		
+		while(typeset.size() > 0)
+			typeset.poll();
+		
 		while(dataset.size() > 0)
 			dataset.poll();
+	
 	}
 }
+
+
 
 
