@@ -1,11 +1,13 @@
 package ana.phone;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import sod.common.ActionEx;
 import sod.common.Constants;
 import sod.common.Packet;
 import sod.common.ReceiveHandler;
+import sod.common.Storage;
 import sod.smartphone.AccessManager;
 import sod.smartphone.ServerInfo;
 
@@ -64,6 +66,21 @@ public class SeverCon extends DroidGap{
 	public void InitHTML()
 	{
 		super.loadUrl("file:///android_asset/www/AnA.html");
+		
+		/*String servicePath = null;
+		try {
+			Storage downloadedService = Storage.getStorage("A&A_Service/service");// "A&A_Service/service"
+			servicePath = downloadedService.getSODStoragePath();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String loadUrlPath ="file:///"+ servicePath + "/AnA.html";
+		super.loadUrl(loadUrlPath);
+		*/
 	}
 
 	
