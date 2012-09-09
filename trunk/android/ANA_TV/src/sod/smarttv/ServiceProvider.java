@@ -24,6 +24,10 @@ public class ServiceProvider {
 	
 	static final int TEXT_TYPE = 0;
 	static final int IMAGE_TYPE = 1;
+	static final int FILE_NEXT = 2;
+	static final int FILE_END = 3;
+	
+	static final int MTU = 10000;//0x3765;//0x000007530
 	
 	
 	public ServiceProvider(String serviceName){
@@ -72,7 +76,13 @@ public class ServiceProvider {
 					
 					StorageFile openServiceFile = storage.openFile(fileList[i], Storage.READ);
 					
-					serviceFilePackets.add( createServicePacket(openServiceFile, "/"));
+					
+					//파일의 정보를 가진 패킷을 가져온다. 30kB이상이면 나눠서 가져온다.
+					ArrayList<Packet> subServiceFilePackets = createServicePacketList(openServiceFile, "/");
+					//넣는다.
+					for(int j = 0 ; j < subServiceFilePackets.size() ; j++)
+						serviceFilePackets.add(subServiceFilePackets.get(j));
+					
 				}
 				
 			}
@@ -108,7 +118,13 @@ public class ServiceProvider {
 					getServicePacketSubDirectory(serviceFilePath, subPath+"/"+subFileList[j] , subFileList[j], serviceFilePackets);
 				} else {
 					StorageFile openServiceFile = subStorage.openFile(subFileList[j], Storage.READ);
-					serviceFilePackets.add(createServicePacket(openServiceFile, subPath));
+					//파일의 정보를 가진 패킷을 가져온다. 30kB이상이면 나눠서 가져온다.
+					ArrayList<Packet> subServiceFilePackets = createServicePacketList(openServiceFile, subPath);
+					
+					//넣는다 
+					for(int k =0 ; k < subServiceFilePackets.size() ; k++){
+						serviceFilePackets.add(subServiceFilePackets.get(k));
+					}
 				}
 			}
 
@@ -131,34 +147,13 @@ public class ServiceProvider {
 	 * @throws IllegalStateException
 	 * 내부에 지정된 경로가 없거나 잘못되었을 경우 발생
 	 */
-	protected Packet createServicePacket(StorageFile openServiceFile, String path) throws IllegalStateException{
+	protected ArrayList<Packet> createServicePacketList(StorageFile openServiceFile, String path) throws IllegalStateException{
 	//	Packet packet = new packet
-		Packet servicePacket = new Packet();
+		ArrayList<Packet> subServicePackets = new ArrayList<Packet>();
 		
-		servicePacket.signiture = Packet.RESPONSE_SERVICE_DATA; // 0. 시그니쳐 설정
-		
-		servicePacket.push(serviceName);//1. 서비스명 넣고 (String)
-		servicePacket.push(path);//2.서비스 파일의 상대경로 (  /서비스명/service   의 상대경로 ) (String)
-		servicePacket.push(openServiceFile.getName()); //3. 파일 이름을 넣는다. (String)
-		
-		if( isText(openServiceFile.getName())){ // 4.서비스파일의 타입을 넣는다 (int)
-			//4. 텍스트라면
-			servicePacket.push((Integer)ServiceProvider.TEXT_TYPE);
-		}
-		else{//4. 이미지라면
-			servicePacket.push((Integer)ServiceProvider.IMAGE_TYPE);
-			
-			String absoluteFilePath = openServiceFile.getAbsoluteFilePath();
-			Bitmap img= BitmapFactory.decodeFile(absoluteFilePath);
-			
-			servicePacket.push((Integer)img.getWidth() );//4.1 가로길이 넣고
-			servicePacket.push((Integer)img.getHeight() );//4.2 세로길이 넣고
-		}
-		
-		byte [] buf = new byte[openServiceFile.getLength()];;//5. 데이터 내용을 넣는다.
+		byte [] buf = new byte[openServiceFile.getLength()];//
 		try {
 			openServiceFile.read(buf);
-			openServiceFile.close();
 		} catch (EOFException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -166,12 +161,82 @@ public class ServiceProvider {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		servicePacket.push(buf);//5. data를 넣는다.
-//		servicePacket.push(buf.toString());//5. data를 넣는다.
 		
+		//
+		int fileSize = openServiceFile.getLength();
+		int packetCnt = fileSize / MTU + 1;////////////////////////////////////////////////
+		int lastPacketDataSize = fileSize % MTU;
 		
+		for(int i = 0 ; i < packetCnt ; i++){
+			Packet servicePacket = createServicePacket(openServiceFile, path); //1~4 과정을 거침
+			
+			byte [] subBuf;
+			int byteSize;
+			
+			if (i == packetCnt - 1) { // 해당 파일의 마지막 패킷일때
+				subBuf = new byte[lastPacketDataSize];
+				byteSize = lastPacketDataSize;
+			} else {
+				subBuf = new byte[MTU];
+				byteSize = MTU;
+			}
+			
+			int k = 0;
+			for(int j = i*MTU; j < (i*MTU + (byteSize)); j++){
 
+				subBuf[k] = buf[j];
+				k++;
+			}//end for....
+			//여기는 짤라서 넣어야하고
+			servicePacket.push(subBuf);//7. data를 넣는다. (이미지는 7)
+			
+			
+			//6. 파일의 마지막인지, 계속 이어지는지 여부를 표시한다.
+			if (i == packetCnt - 1){
+				servicePacket.push((Integer)ServiceProvider.FILE_END);
+			}
+			else{
+				servicePacket.push((Integer)ServiceProvider.FILE_NEXT);
+			}
+			
+			subServicePackets.add(servicePacket);
+		}//end for....
+		
+		try {
+			openServiceFile.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
+		return subServicePackets;
+	}
+	
+	protected Packet createServicePacket(StorageFile openServiceFile, String path) 
+			throws IllegalStateException{
+		
+		Packet servicePacket = new Packet();
+		
+		servicePacket.signiture = Packet.RESPONSE_SERVICE_DATA; // 0. 시그니쳐 설정
+		
+		servicePacket.push(serviceName);//1. 서비스명 넣고 (String)
+		servicePacket.push(path);//2.서비스 파일의 상대경로 (  /서비스명/service   의 상대경로 ) (String)
+		servicePacket.push(openServiceFile.getName()); //3. 파일 이름을 넣는다. (String)
+		servicePacket.push((Integer)openServiceFile.getLength());//4. 파일의 총 사이즈
+		if( isText(openServiceFile.getName())){ // 5.서비스파일의 타입을 넣는다 (int)
+			// 텍스트라면
+			servicePacket.push((Integer)ServiceProvider.TEXT_TYPE);
+		}
+		else{//이미지라면
+			servicePacket.push((Integer)ServiceProvider.IMAGE_TYPE);
+			
+			String absoluteFilePath = openServiceFile.getAbsoluteFilePath();
+			Bitmap img= BitmapFactory.decodeFile(absoluteFilePath);
+			
+			servicePacket.push((Integer)img.getWidth() );//6.1 가로길이 넣고
+			servicePacket.push((Integer)img.getHeight() );//6.2 세로길이 넣고
+		}
+		
 		return servicePacket;
 	}
 	

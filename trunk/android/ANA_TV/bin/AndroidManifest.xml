@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="answer_ask_Service.TV"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="10" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+ 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+ 	<uses-permission android:name="android.permission.WAKE_LOCK" />
+ 	<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".TVManagerLoGo"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TVLocationManagerActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".AdminInputActivity"
+             android:label="@string/app_name"
+  			 >
+        </activity>
+        <activity
+            android:name=".QuestionnaireSettingFirst"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:label="@string/app_name"
+            >
+        </activity>
+        <activity
+            android:name=".QuestionnairesSettingSecond"
+            android:theme="@android:style/Theme.NoTitleBar"
+             >
+        </activity>
+        <activity
+            android:name=".AnA_BootMode"
+            android:theme="@android:style/Theme.NoTitleBar"
+             >
+        </activity>
+        <activity
+            android:name=".PieChartBuild"
+            >
+        </activity>
+        <uses-library android:name="com.google.android.maps" />
+    </application>
+
+</manifest>
