@@ -208,7 +208,7 @@ public class AccessManager implements Disposable {
 						conn.send(p_check);
 						break;
 					case Packet.RESPONSE_SERVICE_DATA:
-//						Constants.logger.log("(debug:client) installService");
+						Constants.logger.log("(debug:client) installService");
 						
 						serviceManager.installService(p);
 
