@@ -81,6 +81,7 @@ public class SeverCon extends DroidGap{
 		String loadUrlPath ="file:///"+ servicePath + "/AnA.html";
 		super.loadUrl(loadUrlPath);
 		
+		
 	}
 
 	
