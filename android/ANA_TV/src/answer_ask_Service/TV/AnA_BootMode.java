@@ -74,7 +74,8 @@ public class AnA_BootMode extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.bootting);
+		//setContentView(R.layout.bootting);
+		setContentView(R.layout.bootting_optimus);
 		LayoutInitial();
 		ButtonEvent();
 	}
