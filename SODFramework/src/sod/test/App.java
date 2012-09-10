@@ -12,7 +12,8 @@ public class App {
 		//Test.testSerializer();
 		//Test.testTransceiver();	
 		//Test.testAccessManager();
-		Test.testServerSearch();
+		//Test.testServerSearch();
+		Test.testServer();
 	}
 
 }
