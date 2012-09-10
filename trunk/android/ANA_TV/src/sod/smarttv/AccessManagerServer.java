@@ -225,7 +225,7 @@ public class AccessManagerServer {
 						for(Packet pac : servicePackets){
 							sender_t.send(pac);
 							try {
-								Thread.sleep(500);//////////////////////////////////////////////////
+								Thread.sleep(300);//////200 fail... 
 							} catch (InterruptedException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
