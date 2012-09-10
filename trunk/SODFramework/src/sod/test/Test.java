@@ -75,6 +75,73 @@ public class Test {
 		server.shutdown();
 	}
 	
+	public static void testServer(){
+		
+		//server side
+		server = new AccessManagerServer();
+		ServerConfig conf = new ServerConfig();
+		conf.Timeout = 10000;
+		conf.Port = ServerPort;
+		conf.CheckingPeriod = 2000;
+		conf.serviceName = "TestService";
+		server.setConnectHandler(new ConnectHandler() {			
+			@Override
+			public void onConnect(int connid) {
+				logger.log("(server): new connection is accepted - " + connid + "\n");				
+			}
+		});
+		server.setDisconnectHandler(new DisconnectHandler() {
+			
+			@Override
+			public void onDisconnect(int connid) {
+				logger.log("(server): client is disconnected - " + connid + "\n");				
+			}
+		});
+		server.setReceiveHandler(new ServerReceiveHandler() {			
+			@Override
+			public void onReceive(Packet pkt, int connid) {
+				logger.log("(server): a packet from client - " + connid + "\n");
+				server.send(pkt, connid);
+			}
+		});
+		server.start(conf);
+		
+		//end of test		
+		ThreadEx.sleep(1000);
+		logger.log("press enter to terminate client.\n");
+		waitfor();
+		
+		//wait until server drop client.
+		logger.log("waiting until server drop client.\n");
+		ThreadEx.sleep(11000);
+		server.shutdown();
+		
+		logger.log("finishing test...\n");
+	}
+	
+	public static void testClient(){
+
+		//client side
+		client = new AccessManager();
+		ServerInfo svinfo = new ServerInfo();
+		svinfo.EndPoint = new InetSocketAddress(ServerIP, ServerPort);
+		client.setReceiveHandler(new ReceiveHandler() {			
+			@Override
+			public void onReceive(Packet pkt) {
+				logger.log("(client): a packet from server - " + (String)pkt.pop() + "\n");
+			}
+		});
+
+		client.connect(svinfo);
+		
+		Packet pkt = new Packet();
+		pkt.signiture = 1;
+		pkt.push("a string on packet");
+		client.send(pkt);
+		
+		client.dispose();
+	}
+	
 	public static void testAccessManager(){
 		
 		//server side
