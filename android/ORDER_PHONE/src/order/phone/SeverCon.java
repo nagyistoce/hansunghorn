@@ -1,5 +1,6 @@
 package order.phone;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import order.bean.ConnectionBean;
@@ -8,6 +9,7 @@ import order.bean.DownLoad;
 import sod.common.ActionEx;
 import sod.common.Packet;
 import sod.common.ReceiveHandler;
+import sod.common.Storage;
 import sod.smartphone.AccessManager;
 import sod.smartphone.ServerInfo;
 
@@ -65,8 +67,8 @@ public class SeverCon extends DroidGap{
 		//super.loadUrl("file:///android_asset/www/order.html");
 		
 		String servicePath = null;
-		try {
-			Storage downloadedService = Storage.getStorage("Order/service");// "A&A_Service/service"
+		try {                                              //이것도 상수화 시켜야한다.  ini 방식을 이용
+			Storage downloadedService = Storage.getStorage("order/service");// "A&A_Service/service"
 			servicePath = downloadedService.getSODStoragePath();
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
@@ -74,8 +76,8 @@ public class SeverCon extends DroidGap{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		String loadUrlPath ="file:///"+ servicePath + "/AnA.html";
+		}                                             //이거 상수화 시켜버려 ㅇㅇ
+		String loadUrlPath ="file:///"+ servicePath + "/order.html";
 		super.loadUrl(loadUrlPath);
 	}
 
