@@ -36,6 +36,9 @@ public class AccessManager implements Disposable {
 	
 	ActionEx startServiceDelegate;
 	
+	//debug
+	int downloadCnt = 0;
+	
 	//listening loop 제어용
 	boolean isRunning = false;
 	
@@ -197,8 +200,8 @@ public class AccessManager implements Disposable {
 						}
 						else{
 							Constants.logger.log("(debug:client) REQUEST_SERVICE_DATA.\n");
-							p_check.signiture= Packet.REQUEST_SERVICE_DATA;
-							conn.send(p_check);
+							p.signiture= Packet.REQUEST_SERVICE_DATA;
+							conn.send(p);
 						}
 						break;
 					case Packet.REQUEST_CLIENT_ALIVE:
@@ -206,8 +209,7 @@ public class AccessManager implements Disposable {
 						break;
 					case Packet.RESPONSE_SERVICE_DATA:
 						Constants.logger.log("(debug:client) installService");
-
-				
+						
 						serviceManager.installService(p);
 
 						break;
@@ -228,8 +230,7 @@ public class AccessManager implements Disposable {
 	
 	protected boolean isExistService(){
 		return serviceManager.isExistService(svinfo.ServiceName);
-		/////////////////////////하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///하드코딩///
-		//return serviceManager.isExistService("ana");
+		
 	}
 	
 	protected void startService(){

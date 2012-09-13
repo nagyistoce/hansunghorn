@@ -62,7 +62,21 @@ public class SeverCon extends DroidGap{
 	}
 	public void InitHTML()
 	{
-		super.loadUrl("file:///android_asset/www/order.html");
+		//super.loadUrl("file:///android_asset/www/order.html");
+		
+		String servicePath = null;
+		try {
+			Storage downloadedService = Storage.getStorage("Order/service");// "A&A_Service/service"
+			servicePath = downloadedService.getSODStoragePath();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String loadUrlPath ="file:///"+ servicePath + "/AnA.html";
+		super.loadUrl(loadUrlPath);
 	}
 
 	

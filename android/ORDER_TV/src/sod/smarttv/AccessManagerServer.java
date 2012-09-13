@@ -50,6 +50,7 @@ public class AccessManagerServer {
 	
 	public AccessManagerServer(){
 		connset = new ConcurrentHashMap<Integer, Tuple<Transceiver,Long>>();
+		
 	}
 	
 	/**
@@ -204,7 +205,6 @@ public class AccessManagerServer {
 						connset.put(sender.hashCode(), t);
 						cb_conn.onConnect(sender.hashCode());
 						
-						//
 						
 						p2.clear();
 						p2.signiture= Packet.RESPONSE_ACCEPT;
@@ -224,6 +224,12 @@ public class AccessManagerServer {
 						
 						for(Packet pac : servicePackets){
 							sender_t.send(pac);
+							try {
+								Thread.sleep(300);//////200 fail... 
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
 						p2.clear();
 						p2.signiture = Packet.RESPONSE_SERVICE_DATA_END;
