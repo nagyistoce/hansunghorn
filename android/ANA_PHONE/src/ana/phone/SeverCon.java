@@ -77,7 +77,7 @@ public class SeverCon extends DroidGap{
 			
 			Storage downloadedService = Storage.getStorage( serviceName +"/service");// "A&A_Service/service"
 			servicePath = downloadedService.getSODStoragePath();
-			StorageFile indexHtmlPathStorageFile = downloadedService.openFile("indexHtmlPath.txt", StorageFile.READ);
+			StorageFile indexHtmlPathStorageFile = downloadedService.openFile("indexHtmlPath.ini", StorageFile.READ);
 			
 			byte [] buf = new byte[indexHtmlPathStorageFile.getLength()];
 			indexHtmlPathStorageFile.read(buf);
