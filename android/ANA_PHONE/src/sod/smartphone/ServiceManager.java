@@ -178,7 +178,6 @@ public class ServiceManager {
 			}
 			
 			Integer fileType = (Integer)packet.pop();//5. 다섯번째로 나오는 것은 파일타입
-			Constants.logger.log(fileName);
 			
 			//text type이냐, image타입에 따라서 다르게 실행된다.
 			if(fileType == ServiceManager.TEXT_TYPE){
