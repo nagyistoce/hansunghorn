@@ -169,7 +169,7 @@ public class ServiceManager {
 			}
 
 			String fileName = (String)packet.pop();//3. 세번째로 나오는 것은 fileName
-			Constants.logger.log(fileName);/////////////////////////////////debug
+			Constants.logger.log(fileName);////////////////////////////////////////////////////////debug
 			Integer fileSize = (Integer)packet.pop();// 4. 네번째로 나온는 것은 총 fileSize
 			
 			if(isFirst){
@@ -180,11 +180,13 @@ public class ServiceManager {
 			Integer fileType = (Integer)packet.pop();//5. 다섯번째로 나오는 것은 파일타입
 			Constants.logger.log(fileName);
 			
+			//text type이냐, image타입에 따라서 다르게 실행된다.
 			if(fileType == ServiceManager.TEXT_TYPE){
 				
 				byte [] buf = (byte [])packet.pop(); //6. 여섯번째로 나오는 것은 데이터
 				//////////
 				Integer nextAend = (Integer)packet.pop(); //7. 끝이인지 다음에도 있는지
+				//파일의 끝이면 작성을 시작한다.
 				if(nextAend == ServiceManager.FILE_END){ //FileEnd
 					isFirst = true;
 					

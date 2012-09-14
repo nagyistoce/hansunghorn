@@ -152,8 +152,10 @@ public class TVServerListActivity extends ListActivity {
 		
 		String []strs = adapter.getItem(position).split(",");
 		String ip = strs[0];
+		String serviceName = strs[1];
 		ConnectionBean.SERVERIP = ip;
 		Intent intent = new Intent(TVServerListActivity.this, SeverCon.class);
+		intent.putExtra("serviceName", serviceName);
 		startActivity(intent);
 		//여기서 인텐트를 이용해서 서비스를 실행시키면 됩니다.
 	}

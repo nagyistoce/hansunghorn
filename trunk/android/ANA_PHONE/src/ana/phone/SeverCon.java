@@ -8,6 +8,7 @@ import sod.common.Constants;
 import sod.common.Packet;
 import sod.common.ReceiveHandler;
 import sod.common.Storage;
+import sod.common.StorageFile;
 import sod.smartphone.AccessManager;
 import sod.smartphone.ServerInfo;
 
@@ -67,10 +68,20 @@ public class SeverCon extends DroidGap{
 	{
 		//super.loadUrl("file:///android_asset/www/AnA.html");
 		
+		Bundle temp = getIntent().getExtras();
+		String serviceName = temp.getString("serviceName");
 		String servicePath = null;
+		String indexHtmlPath = null;
 		try {
-			Storage downloadedService = Storage.getStorage("A&A_Service/service");// "A&A_Service/service"
+		
+			
+			Storage downloadedService = Storage.getStorage( serviceName +"/service");// "A&A_Service/service"
 			servicePath = downloadedService.getSODStoragePath();
+			StorageFile indexHtmlPathStorageFile = downloadedService.openFile("indexHtmlPath.txt", StorageFile.READ);
+			
+			byte [] buf = new byte[indexHtmlPathStorageFile.getLength()];
+			indexHtmlPathStorageFile.read(buf);
+			indexHtmlPath = new String(buf);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,7 +89,8 @@ public class SeverCon extends DroidGap{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String loadUrlPath ="file:///"+ servicePath + "/AnA.html";
+		//String loadUrlPath ="file:///"+ servicePath + "/AnA.html";
+		String loadUrlPath ="file:///"+ servicePath + indexHtmlPath;
 		super.loadUrl(loadUrlPath);
 		
 		
