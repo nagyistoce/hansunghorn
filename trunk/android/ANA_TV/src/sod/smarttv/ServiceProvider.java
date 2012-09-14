@@ -118,7 +118,7 @@ public class ServiceProvider {
 					getServicePacketSubDirectory(serviceFilePath, subPath+"/"+subFileList[j] , subFileList[j], serviceFilePackets);
 				} else {
 					StorageFile openServiceFile = subStorage.openFile(subFileList[j], Storage.READ);
-					//파일의 정보를 가진 패킷을 가져온다. 30kB이상이면 나눠서 가져온다.
+					//파일의 정보를 가진 패킷을 가져온다. 
 					ArrayList<Packet> subServiceFilePackets = createServicePacketList(openServiceFile, subPath);
 					
 					//넣는다 
