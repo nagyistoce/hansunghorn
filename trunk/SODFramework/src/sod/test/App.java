@@ -11,9 +11,10 @@ public class App {
 	public static void main(String[] args) {
 		//Test.testSerializer();
 		//Test.testTransceiver();	
-		//Test.testAccessManager();
+		Test.testAccessManager();
 		//Test.testServerSearch();
-		Test.testServer();
+		//Test.testServer();
+		//Test.testClient();
 	}
 
 }
