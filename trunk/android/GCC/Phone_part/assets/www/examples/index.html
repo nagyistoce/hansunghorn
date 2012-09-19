@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html charset="ko">
+	<head>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.css" />
+		<script src="http://code.jquery.com/jquery-1.5.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.js"></script>
+				<script type="text/javascript" charset="ko" src="gcc/js/phonegap-1.4.1.js"></script>
+		<script type="text/javascript" charset="ko" src="gcc/js/loader.js"></script>
+		<script type="text/javascript" charset="ko" src="gcc/js/myPlugin.js"></script>
+		<script>
+		var watchID = null;
+		var count =0;
+		var Acc=[];
+		var Def=[];
+		
+		function successSend(a){
+			alert(a);
+		}
+		function errorSend(err){
+			alert('err : '+err);
+		}
+			
+    // The watch id references the current `watchAcceleration`
+    var watchID = null;
+
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+        startWatch();
+    }
+
+    // Start watching the acceleration
+    //
+    function startWatch() {
+
+        // Update acceleration every 3 seconds
+        var options = { frequency: 0.0001 };
+
+        watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+    }
+    // Stop watching the acceleration
+    //
+    function stopWatch() {
+        if (watchID) {
+            navigator.accelerometer.clearWatch(watchID);
+            watchID = null;
+        }
+    }
+
+    // onSuccess: Get a snapshot of the current acceleration
+    //
+    
+    function onSuccess(acceleration) {
+    	if(count == 0)
+    	{
+    		Acc.push(acceleration.x);
+    		Acc.push(acceleration.y);
+    		Acc.push(acceleration.z);
+    		count++;
+    	}
+    	else
+    	{
+    			Def.push(Math.abs(Number(Acc[0])-Math.abs(Number(acceleration.x))));
+    			Def.push(Math.abs(Number(Acc[1])-Math.abs(Number(acceleration.y))));
+    			Def.push(Math.abs(Number(Acc[2])-Math.abs(Number(acceleration.z))));
+    			Acc[0]=acceleration.x;
+    			Acc[1]=acceleration.y;
+    			Acc[2]=acceleration.z;
+    		for(var i=0;i<3;i++)
+    		{
+    			//alert("Def_Size : "+Def.length + "Def"+i+" : "+Def[i]);
+    			console.log("Def_Size : "+Def.length + "Def"+i+" : "+Def[i]);
+    			
+    			//alert("Def_Size : "+Def.length +" ²¨³½°Å : " +Def.pop());
+    		}
+    		if(Def[1]>20)
+    		{
+    			
+    			window.plugins.myPlugin.sendData(SuccessSend,ErrorSend,"");
+    		}
+    		Def=[];
+    	}
+    	
+   	}
+   	
+   	function SuccessSend(result) {
+        alert("¼º°ø!");
+    }
+    function ErrorSend() {
+        alert("onError!");
+    }
+    function onError() {
+        alert('onError!');
+    }
+
+		
+		    $(function() {
+                function gonext() {
+                    var current = $('a.selectedimg');
+                    if(current.hasClass('last')) {
+                        var next = $('a.first')
+                    } else {
+                        var next = current.next();
+                    }
+                    var src = next.find('img').attr("src");
+                    var alt = next.find('img').attr("alt");
+                    next.addClass('selectedimg');
+                    current.removeClass('selectedimg');
+                    $('#dialogcontent').empty().append('<a href="#gallerypage"><img src="' + src + '" style="width:100%; height:76%;"/></a>');
+                    $('#dialoghead').empty().append('<center><h2>' + alt + '</h2></center>');
+                }
+
+                function goprev() {
+                    var current = $('a.selectedimg');
+                    if(current.hasClass('first')) {
+                        var prev = $('a.last')
+                    } else {
+                        var prev = current.prev();
+                    }
+                    var src = prev.find('img').attr("src");
+                    var alt = prev.find('img').attr("alt");
+                    prev.addClass('selectedimg');
+                    current.removeClass('selectedimg');
+                    $('#dialogcontent').empty().append('<a href="#gallerypage"><img src="' + src + '" style="width:100%; height:76%;"/></a>');
+                    $('#dialoghead').empty().append('<center><h2>' + alt + '</h2></center>');
+                }
+
+
+                $('.gallerycontent img').bind('tap', function(event, ui) {
+                    var src = $(this).attr("src");
+                    var alt = $(this).attr("alt");
+                    $('#dialogcontent').empty().append('<a href="#gallerypage"><img src="' + src + '" style="width:100%; height:76%;"/></a>');
+                    $('#dialoghead').empty().append('<center><h2>' + alt + '</h2></center>');
+                    $(this).parent().addClass('selectedimg');
+                });
+                $('#nextbtn').bind('tap', function(event, ui) {
+                    gonext();
+                });
+                $('#imgshow').bind('swipeleft', function(event, ui) {
+                    gonext();
+                });
+                $('#prevbtn').bind('tap', function(event, ui) {
+                    goprev();
+                });
+                $('#imgshow').bind('swiperight', function(event, ui) {
+                    goprev();
+                });
+            });
+		</script>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>jQuery Mobile Dialog-Based Gallery</title>
+		<style type="text/css">
+			#pagecontent {
+				text-align: center;
+			}
+			.gallerycontent a img {
+				height: 80px;
+				width: 80px;
+				padding: 3px;
+				background-color: #222;
+			}
+			#prevbtn, #nextbtn {
+				margin: 10px 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<div data-role="page" id="gallerypage" data-theme="a">
+			<div data-role="header">
+				<h1 class="headtitle">Gallery</h1>
+			</div>
+			<!--header-->
+			<div data-role="content" id="pagecontent">
+				<div class="gallerycontent">
+					<a href="#imgshow" data-transition="pop" data-rel="dialog" class="first"><img src="images/gostop/cardimage01.png"/></a>
+					<a href="#imgshow" data-transition="pop" data-rel="dialog"><img src="images/gostop/cardimage01.png"/></a>
+					<a href="#imgshow" data-transition="pop" data-rel="dialog"><img src="images/gostop/cardimage02.png"/></a>
+					<a href="#imgshow" data-transition="pop" data-rel="dialog"><img src="images/gostop/cardimage05.png"/></a>
+					<a href="#imgshow" data-transition="pop" data-rel="dialog"><img src="images/gostop/cardimage06.png"/></a>
+					<
+				</div>
+			</div>
+			<!--/content-->
+			<div data-role="footer" style="height:40px;line-height:40px;">
+				<center>
+					jQuery Mobile Galeery
+				</center>
+			</div>
+			<!--/footer-->
+		</div>
+		<!--/page-->
+		<div data-role="dialog" id="imgshow" data-theme="a">
+			<div data-role="header" data-theme="a">
+				<div id="dialoghead"></div>
+			</div><!-- /header -->
+			<div data-role="content" data-theme="a">
+				<center>
+					<div id="dialogcontent"></div>
+				</center>
+			</div>
+			<div data-role="footer">
+				<center>
+					<a href="#" id="prevbtn" data-role="button" data-iconpos="notext" data-icon="arrow-l">Previous</a><a href="#" id="nextbtn" data-role="button" data-iconpos="notext" data-icon="arrow-r">Next</a>
+				</center>
+			</div>
+		</div>
