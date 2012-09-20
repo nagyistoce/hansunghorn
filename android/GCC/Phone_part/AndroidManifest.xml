@@ -41,19 +41,70 @@
 
     <application android:debuggable="true" android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
-        <activity android:configChanges="orientation|keyboardHidden" android:name=".GCC_PHONEActivity"
-            android:label="@string/app_name" >
+        
+		
+        
+		<activity
+            android:name=".GCCService"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		<activity android:name="com.phonegap.DroidGap" android:label="@string/app_name" 
+        <activity android:name="com.phonegap.DroidGap" android:label="@string/app_name" 
             	  android:configChanges="orientation|keyboardHidden">
         	<intent-filter>
         	</intent-filter>
         </activity>
+        <activity
+            android:name=".TVLocationViewerActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" ><!--  -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TVinformationActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TVServerListActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TVServiceListActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="orientation|keyboardHidden" android:name=".GCC_PHONEActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+        
     </application>
 
 </manifest>
