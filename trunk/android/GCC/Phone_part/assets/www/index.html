@@ -9,8 +9,8 @@
 		<script type="text/javascript" charset="ko" src="gcc/js/myPlugin.js"></script>
 		<script type="text/javascript" charset="ko" src="gcc/js/knockout-latest.js"></script>
 		<script>
-          document.addEventListener("deviceready", onDeviceReady, false);
-           
+            document.addEventListener("deviceready", onDeviceReady, false);
+
             var watchID = null;
             var cardNumber = new Array();
             var count = 0;
@@ -18,39 +18,37 @@
             var Def = [];
             var val = null;
             var alt = null;
-   // Wait for Cordova to load
-    //
-   // Cordova is ready
-    //
-      		function onDeviceReady() {
-      			$('#imgshow').hide();
-      			$('#gallerypage').show();
-      			
-                 window.plugins.myPlugin.sendData(SuccessCard, ErrorCard, "getCard");
-                       
+            // Wait for Cordova to load
+            //
+            // Cordova is ready
+            //
+            function onDeviceReady() {
+                $('#imgshow').hide();
+                $('#gallerypage').show();
+                window.plugins.myPlugin.sendData(SuccessCard, ErrorCard, "getCard");
             }
-            function ErrorCard(a){
-            	alert(a);
+
+            function ErrorCard(a) {
+                alert(a);
             }
-            
-  
+
             function SuccessCard(result) {
-            	alert(result);
-            	cardNumber= result.split(",");
-            	var i=0;
-            	for( ; i < cardNumber.length-1; i++) 
-            	{
-            		
-            	$('.gallerycontent').append('<img src="./examples/images/gostop/' + cardNumber[i] + '.png" id="'+ cardNumber[i]+'" alt='+cardNumber[i]+' style="width:20%; height:46%;"/>');
-            	}
-            	//alert(result);
-            	
+                alert(result);
+                cardNumber = result.split(",");
+                var i = 0;
+                for(; i < cardNumber.length - 1; i++) {
+
+                    $('.gallerycontent').append('<img src="./examples/images/gostop/' + cardNumber[i] + '.png" id="' + cardNumber[i] + '" alt=' + cardNumber[i] + ' style="width:20%; height:46%;"/>');
+
+                }
+
             }
-  	        function successSend(a) {
-  	        	        $('.gallerycontent').remove('#'+alt);
-                        $('#imgshow').hide();
-      					$('#gallerypage').show();
-  	              alert(a);
+
+            function successSend(a) {
+                $('.gallerycontent').remove('#' + alt);
+                $('#imgshow').hide();
+                $('#gallerypage').show();
+                alert(a);
             }
 
             function errorSend(err) {
@@ -58,20 +56,18 @@
             }
 
             // The watch id references the current `watchAcceleration`
-            
-            
+
             // Wait for Cordova to load
             //
             // Cordova is ready
             //
-     
 
             // Start watching the acceleration
             //
             function startWatch() {
-				
+
                 // Update acceleration every 3 seconds
-              }
+            }
 
             // Stop watching the acceleration
             //
@@ -100,20 +96,20 @@
                     Acc[2] = acceleration.z;
                     for(var i = 0; i < 3; i++) {
                         console.log("Def_Size : " + Def.length + "Def" + i + " : " + Def[i]);
-						}
+                    }
                     if(Def[1] > 20) {
-						stopWatch();
-                     
-                        
-            		}
+                        stopWatch();
+
+                    }
                     Def = [];
                 }
 
             }
 
             function SuccessSend(result) {
-             
+
             }
+
             function ErrorSend() {
                 alert("onError!");
             }
@@ -123,24 +119,30 @@
             }
 
             $(function() {
-            
-               
-                $('.gallerycontent').delegate('img','click',function(){
-   
-                alt = $(this).attr("alt");
-                $('#dialogcontent').children().remove();
-                $('#dialogcontent').parent().remove();
-                
-                $('#dialogcontent').append('<img src="./examples/images/gostop/' + alt + '.png" alt='+alt+' style="width:100%; height:94%;"/>');
-           		$('#imgshow').show();
-      			$('#gallerypage').hide();
-      			var options={frequency: 3000};
-      			   window.plugins.myPlugin.sendData(SuccessSend, ErrorCard, ""+alt);
-      			//watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+
+                $('.gallerycontent').delegate('img', 'click', function() {
+
+                    alt = $(this).attr("alt");
+                    $('#dialogcontent').children().remove();
+                    $('#dialogcontent').parent().remove();
+
+                    $('#dialogcontent').append('<img src="./examples/images/gostop/' + alt + '.png" alt=' + alt + ' style="width:100%; height:94%;"/>');
+
+                    $('#imgshow').show();
+                    $('#gallerypage').hide();
+                    var options = {
+                        frequency : 3000
+                    };
+                    window.plugins.myPlugin.sendData(SuccessSend, ErrorCard, "" + alt);
+                    //watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
                 });
-               
-               	
-            });
+                $('#dialogcontent').delegate('img', 'click', function() {
+                    $('#dialogcontent').children().remove();
+                     stopWatch();
+                    $('#imgshow').hide();
+                    $('#gallerypage').show();
+                });
+            });
 		</script>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<title>jQuery Mobile Dialog-Based Gallery</title>
@@ -161,32 +163,31 @@
 	</head>
 	<body>
 		<div data-role="page">
-		
-		<div id="gallerypage" data-theme="a">
-			<div data-role="header">
-				<h1 class="headtitle">Gallery</h1>
+
+			<div id="gallerypage" data-theme="a">
+				<div data-role="header">
+					<h1 class="headtitle">Gallery</h1>
+				</div>
+				<!--header-->
+				<div data-role="content" id="pagecontent" >
+					<div class="gallerycontent"></div>
+				</div>
+				<!--/content-->
+				<div data-role="footer" style="height:40px;line-height:40px;">
+					<center>
+						jQuery Mobile Galeery
+					</center>
+				</div>
+				<!--/footer-->
 			</div>
-			<!--header-->
-			<div data-role="content" id="pagecontent" >
-				<div class="gallerycontent">
+			<!--/page-->
+			<div id="imgshow" data-theme="a">
+				<div data-role="content" data-theme="a">
+					<center>
+						<div id="dialogcontent"></div>
+					</center>
 				</div>
 			</div>
-			<!--/content-->
-			<div data-role="footer" style="height:40px;line-height:40px;">
-				<center>
-					jQuery Mobile Galeery
-				</center>
-			</div>
-			<!--/footer-->
-		</div>
-		<!--/page-->
-		<div id="imgshow" data-theme="a">
-			<div data-role="content" data-theme="a">
-				<center>
-					<div id="dialogcontent"></div>
-				</center>
-			</div>
-		</div>
 		</div>
 	</body>
 </html>
