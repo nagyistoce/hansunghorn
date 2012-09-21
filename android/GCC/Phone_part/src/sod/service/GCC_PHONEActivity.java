@@ -78,6 +78,7 @@ public class GCC_PHONEActivity extends DroidGap {
 		String loadUrlPath ="file:///"+ servicePath + indexHtmlPath;
 		super.loadUrl(loadUrlPath);
 		
+		
     }
     public void Client_Initalize() {
   		ConnectionBean.client = new AccessManager();

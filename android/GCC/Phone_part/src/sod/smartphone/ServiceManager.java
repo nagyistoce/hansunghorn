@@ -201,8 +201,14 @@ public class ServiceManager {
 				}
 				else{//Next
 					for(int i = 0 ;  i < buf.length; i++ ){
+						
+						if(fileSize < sBufIndex){ //debug code...
+							Constants.logger.log("ffsdffsdfdsfsdfsdsfsfdsfsrgferferferferf");
+						}
+						else{
 						serviceBuf[sBufIndex] = buf[i];
 						sBufIndex++;
+						}
 					}
 				}// end Next else...
 				
