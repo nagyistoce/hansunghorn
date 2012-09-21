@@ -182,6 +182,7 @@ public class AccessManagerServer {
 	protected void beginListening(){
 		ThreadEx.invoke(null, new ActionEx() {		
 			
+			@Override
 			public void work(Object arg) {
 				Packet p = new Packet();
 				Packet p2 = new Packet();
@@ -255,6 +256,7 @@ public class AccessManagerServer {
 		
 		ThreadEx.invoke(null, new ActionEx() {
 			
+			@Override
 			public void work(Object arg) {
 				Queue<Integer> expired = new LinkedList<Integer>();
 				Packet p = new Packet();
@@ -295,10 +297,10 @@ public class AccessManagerServer {
 	protected void beginListeningMulti(){
 		final int bufsize = 0x1000;
 
-		listener_multi = NetworkUtils.createMutlicastSocket(Constants.Multicast_IP, Constants.Multicast_Port);
+		listener_multi = NetworkUtils.createMutlicastSocket(Constants.Multicast_IP, Constants.Multicast_Port_Send);
 		
 		ThreadEx.invoke(null, new ActionEx() {			
-	
+			@Override
 			public void work(Object arg) {	
 				byte[] buf = new byte[bufsize];
 				Serializer se = new Serializer();				

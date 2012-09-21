@@ -25,6 +25,7 @@ public class NetworkUtils {
 			base = baseIP.substring(0, baseIP.lastIndexOf('.') + 1);
 		}
 
+		@Override
 		public boolean hasNext() {
 			if(idx < Max)
 				return true;
@@ -32,12 +33,14 @@ public class NetworkUtils {
 				return false;
 		}
 
+		@Override
 		public String next() {
 			String rv = base + idx;
 			++idx;
 			return rv;
 		}
 
+		@Override
 		public void remove() {
 			//do nothing.
 		}
