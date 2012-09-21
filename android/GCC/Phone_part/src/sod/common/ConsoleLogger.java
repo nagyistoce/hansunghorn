@@ -14,6 +14,7 @@ public class ConsoleLogger implements Logable {
 		return instance;
 	}
 
+	@Override
 	public void log(Object arg) {
 		// TODO Auto-generated method stub
 		System.out.print(arg.toString());

@@ -72,7 +72,7 @@ public class AccessManager implements Disposable {
 	public static void searchServer(String baseIP, SearchCallBack cb){		
 		final int TurnAroundWaitTime = 4000;
 		
-		MulticastSocket s = NetworkUtils.createMutlicastSocket(Constants.Multicast_IP, Constants.Multicast_Port);
+		MulticastSocket s = NetworkUtils.createMutlicastSocket(Constants.Multicast_IP, Constants.Multicast_Port_Send);
 		Transceiver t = null;
 		try {
 			Serializer se = new Serializer();
@@ -86,13 +86,13 @@ public class AccessManager implements Disposable {
 			byte[] buf = output.toByteArray();
 			DatagramPacket rawp = new DatagramPacket(buf, buf.length,
 					NetworkUtils.getMulticastAddr(),
-					Constants.Multicast_Port);
+					Constants.Multicast_Port_Send);
 			s.send(rawp);
 			s.close();
 			t = new Transceiver(null, Constants.Multicast_Port_Response);
 			
 			ThreadEx.invoke(new Object[]{cb, t}, new ActionEx() {				
-		
+				@Override
 				public void work(Object arg) {
 					Object[] args = (Object[])arg;
 					SearchCallBack _cb = (SearchCallBack)args[0];
@@ -176,6 +176,7 @@ public class AccessManager implements Disposable {
 	protected void beginListening(){
 		ThreadEx.invoke(null, new ActionEx() {		
 			
+			@Override
 			public void work(Object arg) {
 				InetSocketAddress sender = null;
 				Packet p = new Packet();
@@ -193,15 +194,15 @@ public class AccessManager implements Disposable {
 						
 						Constants.logger.log("(debug:client) RESPONSE_ACCEPT.\n");
 						//1. 서비스가 있는지 없는지 확인한다.
-//						if(isExistService()){
-//							Constants.logger.log("(debug:client) START SERVICE.\n");
-//							startService();   //나중에 주석 없애야함
-//						}
-//						else{
-//							Constants.logger.log("(debug:client) REQUEST_SERVICE_DATA.\n");
-//							p.signiture= Packet.REQUEST_SERVICE_DATA;
-//							conn.send(p);
-//						}
+						if(isExistService()){
+							Constants.logger.log("(debug:client) START SERVICE.\n");
+							startService();   //나중에 주석 없애야함
+						}
+						else{
+							Constants.logger.log("(debug:client) REQUEST_SERVICE_DATA.\n");
+							p.signiture= Packet.REQUEST_SERVICE_DATA;
+							conn.send(p);
+						}
 						break;
 					case Packet.REQUEST_CLIENT_ALIVE:
 						conn.send(p_check);
@@ -229,7 +230,7 @@ public class AccessManager implements Disposable {
 	
 	protected boolean isExistService(){
 		return serviceManager.isExistService(svinfo.ServiceName);
-//		return true;
+		
 	}
 	
 	protected void startService(){
