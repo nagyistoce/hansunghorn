@@ -13,15 +13,19 @@ import com.sgsong.Game.GameMain;
 import com.sgsong.Infomation.FPS;
 import com.sgsong.Net.ConnectionBean;
 import com.sgsong.Net.Networking;
+import com.sgsong.Net.WifiSubService;
 import com.sgsong.Struct.Def;
 import com.sgsong.Struct.ImageInfo;
 import com.sgsong.Sound.GameSound;
 import com.sgsong.GameCommand.GameCommand;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 //
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.opengl.GLUtils;
 import android.opengl.GLSurfaceView.Renderer;
 import android.util.Log;
@@ -29,7 +33,7 @@ import android.util.Log;
 import android.media.SoundPool;
 import android.media.AudioManager;
 
-public class MainApp implements Renderer
+public class MainApp extends Activity implements Renderer
 {	
 	private GL10 mGL;
 	
@@ -44,6 +48,7 @@ public class MainApp implements Renderer
 	private int[] m_nTexHeight = new int[Def.MAX_TEX_SIZE];
 	
 	private ImageInfo[] m_imgInfo = new ImageInfo[Def.MAX_TEX_SIZE];
+	
 	
 	/** The Activity Context ( NEW ) */
 	private Context context;	 
@@ -90,6 +95,8 @@ public class MainApp implements Renderer
 		
 		if(connection_count==0){
 		new Networking().TVServerIni();
+		WifiSubService.unLockMulticast();
+		
 		ConnectionBean.server.start(ConnectionBean.ServerConfig);
 		connection_count++;
 		}
@@ -100,8 +107,11 @@ public class MainApp implements Renderer
 
 		gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f); 	//Black Background
 		
-	//	forceError();
-	}	
+		// forceError();
+	}
+
+	
+	
 	
 	public void loadSounds()
 	{
