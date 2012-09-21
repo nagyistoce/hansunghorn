@@ -37,8 +37,8 @@ public  class StorageFile {
 	BufferedOutputStream out;
 	StringBuilder mBuf;
 	
-	public final static int READ = 0;
-	public final static int WRITE = 1;
+	final static int READ = 0;
+	final static int WRITE = 1;
 	public final static int WRITE_PLUS = 2;
 	
 	int mode = 0;

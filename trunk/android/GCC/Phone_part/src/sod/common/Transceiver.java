@@ -79,7 +79,7 @@ public class Transceiver implements Disposable {
 	public boolean send(Packet p) throws IllegalArgumentException{
 		if (p == null)
 			throw new IllegalArgumentException();
-		
+
 		ByteArrayOutputStream buf = new ByteArrayOutputStream();
 		serializer.serialize(buf, p);
 		byte[] data = buf.toByteArray();

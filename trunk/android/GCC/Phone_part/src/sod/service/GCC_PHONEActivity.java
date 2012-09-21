@@ -15,6 +15,7 @@ import sod.smartphone.ServerInfo;
 
 import com.phonegap.*;
 
+import sod.service.R;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -26,9 +27,24 @@ import android.util.Log;
 public class GCC_PHONEActivity extends DroidGap {
     /** Called when the activity is first created. */
 	
+	Handler startHandler;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.servicedownload);
+        
+        startHandler = new Handler(){
+
+			@Override
+			public void handleMessage(Message msg) {
+				// TODO Auto-generated method stub
+				super.handleMessage(msg);
+				InitHTML();
+			}
+			
+		};
+		
         Client_Initalize();
         
     }
@@ -40,7 +56,6 @@ public class GCC_PHONEActivity extends DroidGap {
   		ConnectionBean.client = new AccessManager();
   		//이 부분은 TVServerLisrtActivity 에서 서버검색 후 하기 때문에
   		 	//주석처리	
-  		ConnectionBean.ServerInfomation = new ServerInfo();
   		ConnectionBean.ServerInfomation.EndPoint = new InetSocketAddress(
   				ConnectionBean.SERVERIP, ConnectionBean.SERVERPORT);
   		ConnectionBean.client.setReceiveHandler(new ReceiveHandler() {		// client ReceiveHandler// 클라이언트 리시브 핸들러
@@ -75,15 +90,14 @@ public class GCC_PHONEActivity extends DroidGap {
   		StrictMode.enableDefaults();			// stack default // 스택영역 디폴트 초기화
   		
   		
-//  		ConnectionBean.client.setStartServiceDelegate(new ActionEx() {	// 서비스 시작핸들러
-//  			
-//  			public void work(Object arg) {
-////  				// TODO Auto-generated method stub
-////  				//핸들러로 보내기
-////  				startHandler.sendMessage(Message.obtain());
-//  			}
-//  		});
-//  		
+		ConnectionBean.client.setStartServiceDelegate(new ActionEx() { // 서비스
+																		// 시작핸들러
+					public void work(Object arg) {
+						// TODO Auto-generated method stub
+						// 핸들러로 보내기
+						startHandler.sendMessage(Message.obtain());
+					}
+				});
 
   		ConnectionBean.client.connect(ConnectionBean.ServerInfomation);	// 접속할 서버에 연결// connection Server
   		
