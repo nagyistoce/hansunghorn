@@ -3,6 +3,8 @@ package com.sgsong.main;
 import com.sgsong.Net.WifiSubService;
 
 import sod.common.NetworkUtils;
+import sod.smarttv.AccessManagerServer;
+import sod.smarttv.ServerConfig;
 import android.app.Activity;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
@@ -17,6 +19,7 @@ import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 
 import android.opengl.GLSurfaceView;
+import com.sgsong.Net.ConnectionBean;
 
 /**
  * The initial Android Activity, setting and initiating
@@ -49,8 +52,17 @@ public class Run extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
+		
+		ConnectionBean.server = new AccessManagerServer();
+		ConnectionBean.ServerConfig = new ServerConfig();
+		ConnectionBean.ServerConfig.Timeout = 30000;
+		ConnectionBean.ServerConfig.Port = ConnectionBean.SERVERPORT;
+		ConnectionBean.ServerConfig.CheckingPeriod = 4000;
+		ConnectionBean.ServerConfig.serviceName = "gcc";
+		
+		///////¾ö¾¾°¡ Ãß°¡////////
 		WifiSubService.setContext(this.getApplicationContext());
+		///////////////////////////
 		
 		//Create an Instance with this Activity		
 		glSurface = new GLSurfaceView(this);
