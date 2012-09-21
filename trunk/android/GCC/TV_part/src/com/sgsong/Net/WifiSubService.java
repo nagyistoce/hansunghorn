@@ -1,6 +1,5 @@
 package com.sgsong.Net;
 
-import android.app.Application;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -15,7 +14,7 @@ public class WifiSubService {
 		context = in;
 	}
 	
-	static WifiManager getWifiManager() {
+	static protected WifiManager getWifiManager() {
 
 		return (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
 		
