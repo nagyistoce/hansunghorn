@@ -8,28 +8,10 @@ import com.phonegap.api.PluginResult;
 
 public class AnAServicePlugin extends AnAServiceNet {
 	public String AnswerData="";
-	// private static String getLocalAddress() throws IOException { // 내 디바이스 IP
-	// // 받아오기
-	// try {
-	// for (Enumeration<NetworkInterface> en = NetworkInterface
-	// .getNetworkInterfaces(); en.hasMoreElements();) {
-	// NetworkInterface intf = en.nextElement();
-	// for (Enumeration<InetAddress> enumIpAddr = intf
-	// .getInetAddresses(); enumIpAddr.hasMoreElements();) {
-	// InetAddress inetAddress = enumIpAddr.nextElement();
-	// if (!inetAddress.isLoopbackAddress()) {
-	// return inetAddress.getHostAddress().toString();
-	// }
-	// }
-	// }
-	// } catch (SocketException ex) {
-	// }
-	// return "";
-	// }
-
+	
 	@Override
 	public PluginResult execute(String action, JSONArray data, String callbackId) {
-	
+			
 			while (true) {
 				if (action.equals("receiveData")) {
 					try{
