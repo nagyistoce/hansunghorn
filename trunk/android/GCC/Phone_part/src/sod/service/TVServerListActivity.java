@@ -42,7 +42,7 @@ public class TVServerListActivity extends ListActivity {
 		
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
 		setListAdapter(adapter);
-		
+		 
 //		Log.i("jaeyeong","jaeyeong start");
 	
 		
@@ -150,9 +150,9 @@ public class TVServerListActivity extends ListActivity {
 		
 		String []strs = adapter.getItem(position).split(",");
 		String ip = strs[0];
-//		String serviceName = strs[1]; //임시로 주석달아음
-		String serviceName = "gcc"; // 임시로 넣은 코드 나중에 지워야함
-//		ConnectionBean.SERVERIP = ip; //임시로주석달았음
+		String serviceName = strs[1]; //
+//		String serviceName = "gcc"; // 임시로 넣은 코드 나중에 지워야함
+		ConnectionBean.SERVERIP = ip; //
 		Intent intent = new Intent(TVServerListActivity.this, GCC_PHONEActivity.class);
 		intent.putExtra("serviceName", serviceName);
 		startActivity(intent);
