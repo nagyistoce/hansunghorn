@@ -1,5 +1,7 @@
 package com.sgsong.main;
 
+import com.sgsong.Net.WifiSubService;
+
 import sod.common.NetworkUtils;
 import android.app.Activity;
 import android.content.Context;
@@ -41,11 +43,15 @@ public class Run extends Activity
 	 * Initiate the OpenGL View and set our own
 	 * Renderer (@see Lesson06.java)
 	 */
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 
+		WifiSubService.setContext(this.getApplicationContext());
+		
 		//Create an Instance with this Activity		
 		glSurface = new GLSurfaceView(this);
 		
@@ -61,6 +67,8 @@ public class Run extends Activity
 		//Set the GLSurface as View to this Activity
 		setContentView(glSurface);
 	}
+	
+	/*
 	WifiManager getWifiManager() {
 		return (WifiManager)getSystemService(Context.WIFI_SERVICE);
 	}
@@ -94,6 +102,8 @@ public class Run extends Activity
 
 		return dest;
 	}
+	*/
+	
 	/**
 	 * Remember to resume the glSurface
 	 */

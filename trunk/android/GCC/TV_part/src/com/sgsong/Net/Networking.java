@@ -1,7 +1,12 @@
 package com.sgsong.Net;
 
+import android.app.Activity;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+
 import com.sgsong.Game.GameMain;
 
+import sod.common.NetworkUtils;
 import sod.common.Packet;
 import sod.smarttv.AccessManagerServer;
 import sod.smarttv.ConnectHandler;
@@ -28,6 +33,10 @@ public class Networking {
 		Networking.packet = packet;
 	}
 	public void TVServerIni() { // Tv initalize
+		////엄씨가 넣은것/////////////////
+		NetworkUtils.setLocalIp(WifiSubService.getLocalIpAddress());
+		//////////////////////////////
+		
 		ConnectionBean.server = new AccessManagerServer();
 		ConnectionBean.ServerConfig = new ServerConfig();
 		ConnectionBean.ServerConfig.Timeout = 100000;
@@ -85,12 +94,12 @@ public class Networking {
 					}
 				}
 			}
-			
+
 		});
 
 	}
-	public String SignCase(Object sign)
-	{
+
+	public String SignCase(Object sign) {
 		return sign.toString();
 	}
 }
