@@ -54,7 +54,7 @@ public class GCC_PHONEActivity extends DroidGap {
     public void InitHTML()
     {
     //	super.loadUrl("file:///android_asset/www/index.html");
-    	/*
+    	
     	String serviceName = ConnectionBean.ServerInfomation.ServiceName;
 		String servicePath = null;
 		String indexHtmlPath = null;
@@ -77,7 +77,7 @@ public class GCC_PHONEActivity extends DroidGap {
 		//String loadUrlPath ="file:///"+ servicePath + "/AnA.html";
 		String loadUrlPath ="file:///"+ servicePath + indexHtmlPath;
 		super.loadUrl(loadUrlPath);
-		*/
+		
     }
     public void Client_Initalize() {
   		ConnectionBean.client = new AccessManager();
