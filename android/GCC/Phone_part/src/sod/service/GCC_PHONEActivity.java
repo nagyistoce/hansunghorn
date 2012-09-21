@@ -1,5 +1,6 @@
 package sod.service;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.NetworkInterface;
@@ -10,6 +11,8 @@ import java.util.concurrent.Semaphore;
 import sod.common.ActionEx;
 import sod.common.Packet;
 import sod.common.ReceiveHandler;
+import sod.common.Storage;
+import sod.common.StorageFile;
 import sod.smartphone.AccessManager;
 import sod.smartphone.ServerInfo;
 
@@ -50,7 +53,31 @@ public class GCC_PHONEActivity extends DroidGap {
     }
     public void InitHTML()
     {
-    	super.loadUrl("file:///android_asset/www/index.html");
+    //	super.loadUrl("file:///android_asset/www/index.html");
+    	/*
+    	String serviceName = ConnectionBean.ServerInfomation.ServiceName;
+		String servicePath = null;
+		String indexHtmlPath = null;
+		try {
+		
+			Storage downloadedService = Storage.getStorage( serviceName +"/service");// "A&A_Service/service"
+			servicePath = downloadedService.getSODStoragePath();
+			StorageFile indexHtmlPathStorageFile = downloadedService.openFile("indexHtmlPath.ini", StorageFile.READ);
+			
+			byte [] buf = new byte[indexHtmlPathStorageFile.getLength()];
+			indexHtmlPathStorageFile.read(buf);
+			indexHtmlPath = new String(buf);
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//String loadUrlPath ="file:///"+ servicePath + "/AnA.html";
+		String loadUrlPath ="file:///"+ servicePath + indexHtmlPath;
+		super.loadUrl(loadUrlPath);
+		*/
     }
     public void Client_Initalize() {
   		ConnectionBean.client = new AccessManager();
