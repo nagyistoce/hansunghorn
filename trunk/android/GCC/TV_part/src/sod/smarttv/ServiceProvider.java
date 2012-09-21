@@ -222,6 +222,7 @@ public class ServiceProvider {
 		servicePacket.push(serviceName);//1. 서비스명 넣고 (String)
 		servicePacket.push(path);//2.서비스 파일의 상대경로 (  /서비스명/service   의 상대경로 ) (String)
 		servicePacket.push(openServiceFile.getName()); //3. 파일 이름을 넣는다. (String)
+		Constants.logger.log("send : "+openServiceFile.getName());
 		servicePacket.push((Integer)openServiceFile.getLength());//4. 파일의 총 사이즈
 		if( isText(openServiceFile.getName())){ // 5.서비스파일의 타입을 넣는다 (int)
 			// 텍스트라면
