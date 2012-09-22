@@ -1,8 +1,8 @@
 var myPlugin = function(){
 	
-//	this.receiveData = function(onSuccess,onError,data){
-//		PhoneGap.exec(onSuccess,onError,"sod.SERVICE.MyPlugin","receiveData",[data]);
-//	};
+	this.receiveData = function(onSuccess,onError,data){
+		PhoneGap.exec(onSuccess,onError,"sod.service.myPlugin","receiveData",[data]);
+	};
 	this.sendData = function(onSuccess,onError,data){
 		
 		PhoneGap.exec(onSuccess,onError,"sod.service.myPlugin","sendData",[data]);
