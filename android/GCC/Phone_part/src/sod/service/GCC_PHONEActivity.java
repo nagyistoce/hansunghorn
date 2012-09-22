@@ -8,6 +8,7 @@ import java.net.SocketException;
 import java.util.Enumeration;
 import java.util.concurrent.Semaphore;
 
+import sod.bean.AnA_Bean;
 import sod.common.ActionEx;
 import sod.common.Packet;
 import sod.common.ReceiveHandler;
@@ -28,43 +29,37 @@ import android.os.StrictMode;
 import android.util.Log;
 
 public class GCC_PHONEActivity extends DroidGap {
-    /** Called when the activity is first created. */
-	
+	/** Called when the activity is first created. */
 	Handler startHandler;
-	
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.servicedownload);
-        
-        startHandler = new Handler(){
-
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.servicedownload);
+		startHandler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				// TODO Auto-generated method stub
 				super.handleMessage(msg);
 				InitHTML();
 			}
-			
 		};
+		Client_Initalize();
+	}
+	public void InitHTML() {
+		// super.loadUrl("file:///android_asset/www/index.html");
 		
-        Client_Initalize();
-        
-    }
-    public void InitHTML()
-    {
-    //	super.loadUrl("file:///android_asset/www/index.html");
-    	
-    	String serviceName = ConnectionBean.ServerInfomation.ServiceName;
+		 
+		String serviceName = ConnectionBean.ServerInfomation.ServiceName;
 		String servicePath = null;
 		String indexHtmlPath = null;
 		try {
-		
-			Storage downloadedService = Storage.getStorage( serviceName +"/service");// "A&A_Service/service"
+			Storage downloadedService = Storage.getStorage(serviceName
+					+ "/service");// "A&A_Service/service"
 			servicePath = downloadedService.getSODStoragePath();
-			StorageFile indexHtmlPathStorageFile = downloadedService.openFile("indexHtmlPath.ini", StorageFile.READ);
-			
-			byte [] buf = new byte[indexHtmlPathStorageFile.getLength()];
+			StorageFile indexHtmlPathStorageFile = downloadedService.openFile(
+					"indexHtmlPath.ini", StorageFile.READ);
+
+			byte[] buf = new byte[indexHtmlPathStorageFile.getLength()];
 			indexHtmlPathStorageFile.read(buf);
 			indexHtmlPath = new String(buf);
 		} catch (IllegalArgumentException e) {
@@ -74,50 +69,63 @@ public class GCC_PHONEActivity extends DroidGap {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//String loadUrlPath ="file:///"+ servicePath + "/AnA.html";
-		String loadUrlPath ="file:///"+ servicePath + indexHtmlPath;
+		// String loadUrlPath ="file:///"+ servicePath + "/AnA.html";
+		String loadUrlPath = "file:///" + servicePath + indexHtmlPath;
 		super.loadUrl(loadUrlPath);
 		
-		
-    }
-    public void Client_Initalize() {
-  		ConnectionBean.client = new AccessManager();
-  		//이 부분은 TVServerLisrtActivity 에서 서버검색 후 하기 때문에
-  		 	//주석처리	
-  		ConnectionBean.ServerInfomation.EndPoint = new InetSocketAddress(
-  				ConnectionBean.SERVERIP, ConnectionBean.SERVERPORT);
-  		ConnectionBean.client.setReceiveHandler(new ReceiveHandler() {		// client ReceiveHandler// 클라이언트 리시브 핸들러
+	}
+	public void Client_Initalize() {
+		ConnectionBean.client = new AccessManager();
+		// 이 부분은 TVServerLisrtActivity 에서 서버검색 후 하기 때문에
+		// 주석처리
+		ConnectionBean.ServerInfomation.EndPoint = new InetSocketAddress(
+				ConnectionBean.SERVERIP, ConnectionBean.SERVERPORT);
+		ConnectionBean.client.setReceiveHandler(new ReceiveHandler() { // client
+																		// ReceiveHandler//
+																		// 클라이언트
+																		// 리시브
+																		// 핸들러
 
-  			public void onReceive(Packet pkt) {
-  				String temp=pkt.pop().toString();
-  				if(pkt != null && temp.equals("down")){
-  					Packet pt=new Packet();
-  					pt.push("getCard");
-  					ConnectionBean.client.send(pt);
-  					StrictMode.enableDefaults();
-  				}
-  			else if (pkt != null && temp.equals("sendCard"))
-  				{
-  					for(int i=0;i<10;i++)
-  					{
-  						myPlugin.mMessage+=pkt.pop().toString()+",";
-  					}
-  					StrictMode.enableDefaults();
-  			        InitHTML();
-  				}
-  				else{
-  					while(pkt.getElementCount() > 0)			//packet element count // 패킷 엘리먼트갯수
-  					{
-  						myPlugin.DataSign+=pkt.pop().toString();
-  					}
-  					StrictMode.enableDefaults();
-  					myPlugin.waithandle.release();
-  				}
-  			}
-  		});
-  		StrictMode.enableDefaults();			// stack default // 스택영역 디폴트 초기화
-  		
-  		
+					public void onReceive(Packet pkt) {
+						if (ConnectionBean.ServerInfomation.ServiceName
+								.equals("gcc")) {
+							String temp = pkt.pop().toString();
+							if (pkt != null && temp.equals("down")) {
+								Packet pt = new Packet();
+								pt.push("getCard");
+								ConnectionBean.client.send(pt);
+								StrictMode.enableDefaults();
+							} else if (pkt != null && temp.equals("sendCard")) {
+								for (int i = 0; i < 10; i++) {
+									myPlugin.mMessage += pkt.pop().toString()
+											+ ",";
+								}
+								StrictMode.enableDefaults();
+								InitHTML();
+							} else {
+								while (pkt.getElementCount() > 0) // packet
+																	// element
+																	// count //
+																	// 패킷 엘리먼트갯수
+								{
+									myPlugin.DataSign += pkt.pop().toString();
+								}
+								StrictMode.enableDefaults();
+								myPlugin.waithandle.release();
+							}
+						}
+						else
+						{
+							while(pkt.getElementCount() > 0)
+							{
+								Object item = pkt.pop();
+								AnA_Bean.Message += item.toString();
+							}
+							AnA_Bean.waithandle.release();
+						}
+					}
+				});
+		StrictMode.enableDefaults(); // stack default // 스택영역 디폴트 초기화
 		ConnectionBean.client.setStartServiceDelegate(new ActionEx() { // 서비스
 																		// 시작핸들러
 					public void work(Object arg) {
@@ -126,9 +134,11 @@ public class GCC_PHONEActivity extends DroidGap {
 						startHandler.sendMessage(Message.obtain());
 					}
 				});
+		ConnectionBean.client.connect(ConnectionBean.ServerInfomation); // 접속할
+																		// 서버에
+																		// 연결//
+																		// connection
+																		// Server
 
-  		ConnectionBean.client.connect(ConnectionBean.ServerInfomation);	// 접속할 서버에 연결// connection Server
-  		
-  		
-  	}
+	}
 }

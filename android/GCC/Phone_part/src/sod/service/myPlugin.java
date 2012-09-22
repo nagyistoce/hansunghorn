@@ -6,6 +6,8 @@ import java.util.concurrent.Semaphore;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import sod.bean.AnA_Bean;
+import sod.bean.GCC_Bean;
 import sod.common.ActionEx;
 import sod.common.Packet;
 import sod.common.ReceiveHandler;
@@ -37,19 +39,23 @@ public class myPlugin extends Plugin{
 			e.printStackTrace();
 		}
 	}
-	
-	public String getDataSign(JSONArray arg1)throws Exception
-	{
-		this.DataSign=arg1.getString(0);
-		return DataSign;
-	}
-	public PluginResult execute(String arg0, JSONArray arg1, String arg2) {
+
+	public PluginResult execute(String action, JSONArray data, String callbackId) {
 		// TODO Auto-generated method stub
+		if (ConnectionBean.ServerInfomation.ServiceName
+				.equals("gcc")) {
+			GCC_Bean service_gcc = new GCC_Bean();
 			pk=new Packet();
 			boolean a;
-			if(arg0.equals("sendData")){
+			if(action.equals("sendData")){
 				try {
-					if(getDataSign(arg1).equals("getCard"))
+					if(service_gcc.getDataSign(data).equals("Open"))
+					{
+						Packet pkt =new Packet();
+						pkt.push("Open");
+						ConnectionBean.client.send(pkt);
+					}
+					else if(service_gcc.getDataSign(data).equals("getCard"))
 					{
 						String temp=mMessage;
 						mMessage="";
@@ -57,10 +63,8 @@ public class myPlugin extends Plugin{
 					}
 					else
 					{
-						 pk.push("SendCard");
-						 pk.push(getDataSign(arg1));
-						 ConnectionBean.client.send(pk);
-						 return new PluginResult(PluginResult.Status.OK, "success");
+						service_gcc.SendData(pk, data);
+						return new PluginResult(PluginResult.Status.OK, "success");
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -70,7 +74,35 @@ public class myPlugin extends Plugin{
 			}
 			else
 				return new PluginResult(PluginResult.Status.ERROR, "Fail");
-		
+		}
+		else
+		{
+			AnA_Bean service_ana=new AnA_Bean();
+			while (true) {
+				if (action.equals("receiveData")) {
+					try{
+						service_ana.ReceiveData();
+					AnA_Bean.waithandle.acquire();
+					}catch(Exception e)
+					{
+					return new PluginResult(PluginResult.Status.OK,""+e);
+					}
+					service_ana.TempMessage=service_ana.Message;
+					service_ana.Message="";
+					return new PluginResult(PluginResult.Status.OK,service_ana.TempMessage);
+				} else if (action.equals("sendData")) {
+					try{
+						
+						service_ana.SendData(data.toString());
+				}catch(Exception e)
+				{
+				}
+					return new PluginResult(PluginResult.Status.OK,
+						"滴馬馬馬馬");
+				} else
+					return new PluginResult(PluginResult.Status.JSON_EXCEPTION);
+			}
+		}
 		
 		
 	//	return null;
