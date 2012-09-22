@@ -77,7 +77,11 @@ public class SG
 
 		m_gl.glMatrixMode(GL10.GL_PROJECTION);
 		m_gl.glLoadIdentity();
-
+/* resolution : 1440X900 Àº 
+		m_gl.glOrthox( Def.FixedFromInt(-m_def.MobileWidth/2), Def.FixedFromInt(m_def.MobileWidth/8), 
+				Def.FixedFromInt(-m_def.MobileHeight/6), Def.FixedFromInt(m_def.MobileHeight/2),
+				Def.FixedFromInt(-1) , Def.FixedFromInt(1));
+		*/
 		m_gl.glOrthox( Def.FixedFromInt(-m_def.MobileWidth/2), Def.FixedFromInt(m_def.MobileWidth/8), 
 				Def.FixedFromInt(-m_def.MobileHeight/6), Def.FixedFromInt(m_def.MobileHeight/2),
 				Def.FixedFromInt(-1) , Def.FixedFromInt(1));
