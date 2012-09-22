@@ -506,7 +506,7 @@ private MainApp m_pApp = null;
 		System.out.println(nID);
 		if( nID == Element.id_btn_start )
 		{
-		if(ConnectionBean.server.getConnectionCount()>0)
+		if(ConnectionBean.OpenSigniture)
 			{
 			game_start();
 			m_btnStart.setVisible( false );

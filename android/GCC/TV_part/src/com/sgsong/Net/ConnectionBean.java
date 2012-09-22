@@ -10,4 +10,5 @@ public class ConnectionBean {
 	public static AccessManagerServer server; // server 
 	public static ServerConfig ServerConfig; // Server imfomation// 서버정보
 	public static int ClientId;			// client identify Id // 클라이언트 식별아이디
+	public static boolean OpenSigniture=false;
 }

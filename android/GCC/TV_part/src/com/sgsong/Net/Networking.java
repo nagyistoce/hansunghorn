@@ -77,6 +77,10 @@ public class Networking {
 					PushCard=Integer.parseInt(pkt.pop().toString());
 					GM.onTouchedElement(PushCard);
 				}
+				else if(temp.equals("Open"))
+				{
+					ConnectionBean.OpenSigniture=true;
+				}
 				else{
 					while (pkt.getElementCount() > 0) {
 						ConnectionBean.Message = pkt.pop().toString();
