@@ -362,10 +362,12 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 						+ LayoutComponentBean.SEPARATOR);
 				}
 				if (LayoutComponentBean.ScreenCount == 0) {
+					////////¾ö¾¾°¡ Ãß°¡/////////
 					TVServerIni();
 					mlock = getWifiManager().createMulticastLock("test_mlock");
 					mlock.setReferenceCounted(true);
 					mlock.acquire();
+					///¾ö¾¾°¡ Ãß°¡/////////
 					
 					ConnectionBean.server.start(ConnectionBean.ServerConfig);
 					LayoutComponentBean.ScreenCount++;
