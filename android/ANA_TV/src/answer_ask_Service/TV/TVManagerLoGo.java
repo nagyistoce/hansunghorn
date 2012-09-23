@@ -23,7 +23,8 @@ public class TVManagerLoGo extends Activity {
 	class splashhandler implements Runnable {
 		@Override
 		public void run() {
-			Intent intent = new Intent(TVManagerLoGo.this, TVLocationManagerActivity.class);
+			Intent intent = new Intent(TVManagerLoGo.this,
+					TVLocationManagerActivity.class);
 			startActivity(intent);
 			finish();
 		}

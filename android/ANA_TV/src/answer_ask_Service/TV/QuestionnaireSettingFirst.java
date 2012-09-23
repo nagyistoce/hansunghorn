@@ -26,12 +26,12 @@ public class QuestionnaireSettingFirst extends Activity implements DataSturct {
 		LayoutComponentBean.FileAdd = (ImageButton) findViewById(R.id.FileAddButton);
 		LayoutComponentBean.UserImfo = (CheckBox) findViewById(R.id.UserInfoCheckBox);
 		LayoutComponentBean.Next = (ImageButton) findViewById(R.id.NextButton);
-		
+
 		// 이부분 데모 때문에 넣은 부분/////////////////////////////
 		LayoutComponentBean.Company.setText("Hansung University");
 		LayoutComponentBean.During.setText("2012.01.01~2012.05.23");
 		LayoutComponentBean.UserImfo.setChecked(true);
-		/////////////////////////////////////////////////////////
+		// ///////////////////////////////////////////////////////
 	}
 
 	public void ButtonEvent() {
@@ -65,8 +65,8 @@ public class QuestionnaireSettingFirst extends Activity implements DataSturct {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		setContentView(R.layout.questionnaire1);
-		setContentView(R.layout.questionnaire1_optimus);
+		// setContentView(R.layout.questionnaire1);
+		setContentView(R.layout.questionnaire1);
 		Interfaceinital();
 		ButtonEvent();
 	}
