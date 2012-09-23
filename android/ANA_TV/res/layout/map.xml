@@ -5,14 +5,14 @@
     android:orientation="vertical"
     android:background="@drawable/background" >
     
-    <!-- android:apiKey="0HRKYjKYJe_W4T_Os9HT9y5V_QSunrqwHfcgW0Q"  JaeYeong Com.. -->
+    <!-- android:apiKey="0HRKYjKYJe_XFpxmWzkaeESFSmDnfqdsdtMH0Ug"  JaeYeong Com.. -->
     <!-- android:apiKey="0HRKYjKYJe_UUDHrj5zwquEE2GRJExdnMS1RRKA"  Kook do Com.. -->
     <!-- android:apiKey="006WN4edD7atkTHSRtRQ2M9BJVM5OhF60lBsGkQ"  JungMin Com -->
     <com.google.android.maps.MapView
         android:id="@+id/map"
         android:layout_width="fill_parent"
         android:layout_height="600px"
-        android:apiKey="0HRKYjKYJe_UUDHrj5zwquEE2GRJExdnMS1RRKA"
+        android:apiKey="0HRKYjKYJe_XFpxmWzkaeESFSmDnfqdsdtMH0Ug"
         android:clickable="true"
         android:enabled="true" />
 
