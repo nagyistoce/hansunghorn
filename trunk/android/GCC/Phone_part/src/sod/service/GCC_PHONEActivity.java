@@ -31,6 +31,7 @@ import android.util.Log;
 public class GCC_PHONEActivity extends DroidGap {
 	/** Called when the activity is first created. */
 	Handler startHandler;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,10 +46,10 @@ public class GCC_PHONEActivity extends DroidGap {
 		};
 		Client_Initalize();
 	}
+
 	public void InitHTML() {
 		// super.loadUrl("file:///android_asset/www/index.html");
-		
-		 
+
 		String serviceName = ConnectionBean.ServerInfomation.ServiceName;
 		String servicePath = null;
 		String indexHtmlPath = null;
@@ -72,9 +73,10 @@ public class GCC_PHONEActivity extends DroidGap {
 		// String loadUrlPath ="file:///"+ servicePath + "/AnA.html";
 		String loadUrlPath = "file:///" + servicePath + indexHtmlPath;
 		super.loadUrl(loadUrlPath);
-		
+
 	}
-	public void Client_Initalize() {
+
+	public void Client_Initalize() { // 클라이언트 연결 및 초기화 그리고 네트워크 각 핸들러
 		ConnectionBean.client = new AccessManager();
 		// 이 부분은 TVServerLisrtActivity 에서 서버검색 후 하기 때문에
 		// 주석처리
@@ -113,11 +115,8 @@ public class GCC_PHONEActivity extends DroidGap {
 								StrictMode.enableDefaults();
 								myPlugin.waithandle.release();
 							}
-						}
-						else
-						{
-							while(pkt.getElementCount() > 0)
-							{
+						} else {
+							while (pkt.getElementCount() > 0) {
 								Object item = pkt.pop();
 								AnA_Bean.Message += item.toString();
 							}

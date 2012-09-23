@@ -7,9 +7,9 @@ import org.json.JSONArray;
 
 import sod.common.Packet;
 
-public interface ServiceBeanImpl {
+public interface ServiceBeanImpl {			// 서비스별 제공을 위한 인터페이스
 	
-	public final static String DOWNLOADHTML="download";		//  Receive Questionnaire message data // 설문지 정보 가져오기
+	public final static String DOWNLOADHTML="download";		//  Receive  message data // 
 	public void ReceiveData() throws IOException;
 	public void SendData(String data) throws IOException;
 	public void SendData(Packet pkt,JSONArray data) throws Exception;

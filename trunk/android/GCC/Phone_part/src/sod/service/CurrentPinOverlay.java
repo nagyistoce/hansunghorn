@@ -5,8 +5,8 @@ import android.widget.Toast;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 
-public class CurrentPinOverlay extends 	MyLocationOverlay{
-	
+public class CurrentPinOverlay extends MyLocationOverlay {
+
 	Context mContext;
 
 	public CurrentPinOverlay(Context arg0, MapView arg1) {
@@ -18,9 +18,8 @@ public class CurrentPinOverlay extends 	MyLocationOverlay{
 	@Override
 	protected boolean dispatchTap() {
 		// TODO Auto-generated method stub
-		Toast.makeText(mContext, "여기가 현재위치입니다.",  Toast.LENGTH_SHORT).show();
+		Toast.makeText(mContext, "여기가 현재위치입니다.", Toast.LENGTH_SHORT).show();
 		return false;
 	}
-	
 
 }

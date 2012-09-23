@@ -11,27 +11,27 @@ import android.widget.ImageButton;
 public class GCCService extends DroidGap {
 	ImageButton TvSearch, ServiceLocation, ServiceList;
 
-
 	public void Layout_Initalize() {
 		TvSearch = (ImageButton) findViewById(R.id.TvSearch);
 		ServiceLocation = (ImageButton) findViewById(R.id.ServiceLocation);
 		ServiceList = (ImageButton) findViewById(R.id.InstallService);
-		
+
 		TvSearch.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(GCCService.this, TVServerListActivity.class);
+				Intent intent = new Intent(GCCService.this,
+						TVServerListActivity.class);
 				startActivity(intent);
 
-				}
 			}
-		);
+		});
 		ServiceLocation.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(GCCService.this, TVLocationViewerActivity.class);
+				Intent intent = new Intent(GCCService.this,
+						TVLocationViewerActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -39,12 +39,12 @@ public class GCCService extends DroidGap {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(GCCService.this, TVServiceListActivity.class);
+				Intent intent = new Intent(GCCService.this,
+						TVServiceListActivity.class);
 				startActivity(intent);
 			}
-		}); 
-	}	
-	
+		});
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
