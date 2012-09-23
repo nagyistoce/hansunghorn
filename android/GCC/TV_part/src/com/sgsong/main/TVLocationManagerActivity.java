@@ -69,10 +69,6 @@ public class TVLocationManagerActivity extends MapActivity {
         
         ///////// TVLocationManager init.../////////////////////////////////////////////////////////
         tvLocationManager = new TVLocationManager();
-        
-        
-        
-        
         //////// end TVLcationManager Setting/////////////////////////////////////////////////////
         
         
@@ -95,28 +91,14 @@ public class TVLocationManagerActivity extends MapActivity {
         Drawable drawable = getResources().getDrawable(R.drawable.pin);
         pinOverlay = new PinOverlay(drawable, this);
         
-        //pin.. init.. 한성대학교로 고쳐야함
-        /*
-        OverlayItem overlayItem=
-        		new OverlayItem(new GeoPoint(37582694, 127010823),
-        				"한성대학교", "한성대학교입니다.");
-        pinOverlay.addOverlay(overlayItem);
-        */
         
-        /*
-        MapOverlay mapOverlay = new MapOverlay();
-        
-        listOfOverlays.add(mapOverlay);
-        map.postInvalidate();
-        listOfOverlays.add(pinOverlay);
-        */
         LocationManager locationManager = 
         		(LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location location =
         		locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         
         double latitude,longitude;
-        
+        //현재 위치를 할당한다.
         if(location != null){
         	latitude = location.getLatitude();
         	longitude = location.getLongitude();

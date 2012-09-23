@@ -93,14 +93,18 @@ public class MainApp extends Activity implements Renderer
 		loadImage( Def.loading_bar );		
 		m_nCurTex = 3;		
 		
-		if(connection_count==0){
-		new Networking().TVServerIni();
-		WifiSubService.unLockMulticast();
-		
-		ConnectionBean.server.start(ConnectionBean.ServerConfig);
-		connection_count++;
+		if (connection_count == 0) {
+			// 0. Run.java 에서 액티비티의 context 정보를 미리 셋팅했다. ( Run.java  64 Line)
+			// 1. 자기 자신의 Ip를 알아와서 셋팅한다./////////////////
+			NetworkUtils.setLocalIp(WifiSubService.getLocalIpAddress());
+			new Networking().TVServerIni();
+			// 2.멀티캐스트 락을 해제한다. (검색기능을 위해)
+			WifiSubService.unLockMulticast();
+			// 3. 서버 시작
+			ConnectionBean.server.start(ConnectionBean.ServerConfig);
+			connection_count++;
 		}
-	 
+
 		m_gMain.registLoading();		
 		
 	//	Log.i( "[SGSG]", "m_gMain.registElements();" );
