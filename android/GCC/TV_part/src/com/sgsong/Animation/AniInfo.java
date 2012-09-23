@@ -16,7 +16,7 @@ public class AniInfo
 	public int nStartY;
 	public int nEndX;
 	public int nEndY;
-
+  
 	public float fStartValue;
 	public float fEndValue;
 
