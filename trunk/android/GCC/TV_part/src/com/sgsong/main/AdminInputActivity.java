@@ -28,10 +28,10 @@ public class AdminInputActivity extends Activity {
 		 e_Mail=(EditText)findViewById(R.id.eMailEditText);
 		 PhoneNumber=(EditText)findViewById(R.id.phoneNumberEditText);
 		 ServiceName=(EditText)findViewById(R.id.serviceNameEditText);
-		TvName.setText("HansungTV");
+		TvName.setText("HansungTV for gcc");
 		e_Mail.setText("karima@hansung.ac.kr");
 		PhoneNumber.setText("010-4282-3753");
-		ServiceName.setText("AnA");
+		ServiceName.setText("GCC");
 		admininputButton.setOnClickListener(new OnClickListener() {
 			
 			@Override

@@ -57,7 +57,6 @@ public class WifiSubService {
 		return dest;
 	}
 
-
 }
 
 
