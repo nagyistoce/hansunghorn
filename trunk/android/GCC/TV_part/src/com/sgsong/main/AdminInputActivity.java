@@ -21,7 +21,7 @@ public class AdminInputActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 	//	setContentView(R.layout.admin_input);
-		setContentView(R.layout.admin_input_optimus);
+		setContentView(R.layout.admin_input);
 		
 		admininputButton =(ImageButton)findViewById(R.id.sendAdminInfo);
 		 TvName=(EditText)findViewById(R.id.tvNameEditText);
