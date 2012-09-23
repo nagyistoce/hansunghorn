@@ -60,9 +60,9 @@ public class Run extends Activity
 		ConnectionBean.ServerConfig.CheckingPeriod = 4000;
 		ConnectionBean.ServerConfig.serviceName = "gcc";
 		
-		///////엄씨가 추가////////
+		//현재 액티비티의 Context 정보를 넘겨준다. 그래야 해당 클래스의 기능이 정상동작한다.
 		WifiSubService.setContext(this.getApplicationContext());
-		///////////////////////////
+		
 		
 		//Create an Instance with this Activity		
 		glSurface = new GLSurfaceView(this);
@@ -79,42 +79,6 @@ public class Run extends Activity
 		//Set the GLSurface as View to this Activity
 		setContentView(glSurface);
 	}
-	
-	/*
-	WifiManager getWifiManager() {
-		return (WifiManager)getSystemService(Context.WIFI_SERVICE);
-	}
-
-	public String getLocalIpAddress() {
-		// need to
-		// <uses-permission
-		// android:name="android.permission.ACCESS_WIFI_STATE"/>
-		WifiManager wifiManager = getWifiManager();
-		WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-		int ipAddress = wifiInfo.getIpAddress();
-
-		byte[] bytes = int2byte(ipAddress);
-		int[] values = new int[4];
-
-		for (int i = 0; i < 4; i++)
-			values[i] = bytes[i] & 0xFF;
-
-		String ipStr = String.format("%d.%d.%d.%d", values[3], values[2],
-				values[1], values[0]);
-
-		return ipStr;
-
-	}
-	final byte[] int2byte(int i) {
-		byte[] dest = new byte[4];
-		dest[3] = (byte) (i & 0xff);
-		dest[2] = (byte) (i >> 8 & 0xff);
-		dest[1] = (byte) (i >> 16 & 0xff);
-		dest[0] = (byte) (i >> 24 & 0xff);
-
-		return dest;
-	}
-	*/
 	
 	/**
 	 * Remember to resume the glSurface
