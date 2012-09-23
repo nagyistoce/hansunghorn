@@ -91,7 +91,7 @@ public class PieChartBuild extends Activity {
 	public void SortingHashmap() {
 
 		boolean flag = false;
-		
+
 		keylist1 = FileBean.hashmap.keySet();
 		int i = 0;
 		for (Iterator iterator1 = keylist1.iterator(); iterator1.hasNext(); i++) {
@@ -126,7 +126,7 @@ public class PieChartBuild extends Activity {
 
 			}
 			// FileBean.hashmap.clear();
-			
+
 		}
 	}
 
@@ -155,10 +155,10 @@ public class PieChartBuild extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.statics_graph);
-		DataBean.MaxPage =FileBean.hashmap.size()-1;
+		DataBean.MaxPage = FileBean.hashmap.size() - 1;
 		if (DataBean.ChartPage == DataBean.MaxPage) {
 			DataBean.ChartPage = 0;
-		} else{
+		} else {
 			++DataBean.ChartPage;
 		}
 		mRenderer.setApplyBackgroundColor(true);
@@ -202,7 +202,7 @@ public class PieChartBuild extends Activity {
 				} else {
 					title = vec.get(i).getAnswer();
 				}
-				mRenderer.setChartTitle(""+DataBean.ChartPage+". " + title);
+				mRenderer.setChartTitle("" + DataBean.ChartPage + ". " + title);
 				mRenderer.setChartTitleTextSize(30);
 				mRenderer.addSeriesRenderer(renderer);
 				// mX.setText("");
@@ -229,7 +229,7 @@ public class PieChartBuild extends Activity {
 		@Override
 		public void run() {
 			Intent intent = new Intent(PieChartBuild.this, PieChartBuild.class);
-			
+
 			startActivity(intent);
 			finish();
 			// startActivityForResult(intent, GET_CODE);

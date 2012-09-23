@@ -58,7 +58,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 	private Storage storage;
 	private StorageFile storageFile;
 	int count = 0;
-	
+
 	WifiManager.MulticastLock mlock;
 
 	// final String[]
@@ -82,11 +82,10 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 	}
 
 	public void TVServerIni() {
-		/////////////엄씨가 넣은것///////////////////////////////////////////
+		// ///////////엄씨가 넣은것///////////////////////////////////////////
 		NetworkUtils.setLocalIp(getLocalIpAddress());
-		//////////////엄씨가 넣은것////////////////////////////////
-		
-		
+		// ////////////엄씨가 넣은것////////////////////////////////
+
 		ConnectionBean.server = new AccessManagerServer();
 		ConnectionBean.ServerConfig = new ServerConfig();
 		ConnectionBean.ServerConfig.Timeout = 30000;
@@ -139,7 +138,8 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 							ConnectionBean.Message = pkt.pop().toString();
 							DataBean.Message += ConnectionBean.Message;
 							try {
-								DataBean.Message=DataBean.Message.substring(2);
+								DataBean.Message = DataBean.Message
+										.substring(2);
 								ReArrange();
 
 							} catch (Exception e) {
@@ -165,7 +165,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 	}
 
 	public void ReArrange() throws Exception {
-		String key="",value="";
+		String key = "", value = "";
 		Store();
 		if (!storage.checkIsFileExists("data.txt")) {
 			storageFile = storage.createFile("data.txt");
@@ -180,26 +180,24 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 				LayoutComponentBean.SEPARATOR);
 		StringTokenizer tokenizer2 = new StringTokenizer(DataBean.Message,
 				LayoutComponentBean.SEPARATOR);
-		
-		
+
 		storageFile.write("<Topic>".getBytes());
 		storageFile.write(FileBean.Topic.getBytes());
 		storageFile.write("</Topic>".getBytes());
 		storageFile.write("\n".getBytes());
 		while (tokenizer1.hasMoreElements()) {
-			if(tokenizer1.nextToken().equals("Answer"))
-			{
+			if (tokenizer1.nextToken().equals("Answer")) {
 				DataBean.AnswerCount++;
-				storageFile.write("  ".getBytes());	
+				storageFile.write("  ".getBytes());
 				storageFile.write("<Answer>".getBytes());
-				key=tokenizer1.nextToken();
+				key = tokenizer1.nextToken();
 				storageFile.write(key.getBytes());
 				storageFile.write("</Answer>".getBytes());
 				storageFile.write("\n".getBytes());
-				storageFile.write("    ".getBytes());			
+				storageFile.write("    ".getBytes());
 				storageFile.write("<".getBytes());
-				value=tokenizer2.nextToken();
-				String count=(ValueCount(key,value));
+				value = tokenizer2.nextToken();
+				String count = (ValueCount(key, value));
 				storageFile.write(value.getBytes());
 				storageFile.write(">".getBytes());
 				storageFile.write(count.getBytes());
@@ -209,32 +207,31 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 				storageFile.write("\n".getBytes());
 			}
 		}
-		DataBean.Message="";
+		DataBean.Message = "";
 		storageFile.close();
 	}
-	
-	public String ValueCount(String key,String value) throws Exception
-	{
-		int  In_value=0;
-		HashMap<String, Integer> hash=new HashMap<String, Integer>();
-		DataBean.data_index=0;
-		if(FileBean.hashmap.isEmpty() || !((FileBean.hashmap.containsKey(key)&&(FileBean.hashmap.get(key).containsKey(value)))))
-		{
-			In_value=1;
-		    hash.put(value,(Integer)In_value); 
-			FileBean.hashmap.put(key,hash);
-		}
-		else 
-		{
-			In_value=FileBean.hashmap.get(key).get(value);
+
+	public String ValueCount(String key, String value) throws Exception {
+		int In_value = 0;
+		HashMap<String, Integer> hash = new HashMap<String, Integer>();
+		DataBean.data_index = 0;
+		if (FileBean.hashmap.isEmpty()
+				|| !((FileBean.hashmap.containsKey(key) && (FileBean.hashmap
+						.get(key).containsKey(value))))) {
+			In_value = 1;
+			hash.put(value, (Integer) In_value);
+			FileBean.hashmap.put(key, hash);
+		} else {
+			In_value = FileBean.hashmap.get(key).get(value);
 			In_value++;
-		    hash.put(value,In_value); 
-			FileBean.hashmap.put(key,hash);
-			
+			hash.put(value, In_value);
+			FileBean.hashmap.put(key, hash);
+
 		}
-		
-		return ""+In_value;
+
+		return "" + In_value;
 	}
+
 	public void ButtonEvent() {
 		LayoutComponentBean.radiogroup
 				.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -281,7 +278,8 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 
 					@Override
 					public void onClick(View v) {
-					///////////////////////////// 데모용 //////////////////////////
+						// /////////////////////////// 데모용
+						// //////////////////////////
 						switch (count) {
 						case 0:
 							LayoutComponentBean.question
@@ -300,14 +298,16 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 									.setText("설계 하는 동안 여자친구를 만들지는 않았습니까?");
 							break;
 						default:
-							try{
-							LayoutComponentBean.question
-									.setText(""+getLocalAddress());
-							
-							}catch(Exception e){}
+							try {
+								LayoutComponentBean.question.setText(""
+										+ getLocalAddress());
+
+							} catch (Exception e) {
+							}
 							break;
 						}
-						///////////////////////////// //////////////////////////
+						// ///////////////////////////
+						// //////////////////////////
 						vector.add(LayoutComponentBean.SEPARATOR + "Topic"
 								+ LayoutComponentBean.SEPARATOR
 								+ LayoutComponentBean.topic.getText()
@@ -347,37 +347,37 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 		LayoutComponentBean.complete.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FileBean.Topic=""+LayoutComponentBean.topic.getText();
-				if(!LayoutComponentBean.question.getText().equals("")){
-				vector.add(LayoutComponentBean.SEPARATOR + "Topic"
-						+ LayoutComponentBean.SEPARATOR
-						+ LayoutComponentBean.topic.getText()
-						+ LayoutComponentBean.SEPARATOR + "Answer"
-						+ LayoutComponentBean.SEPARATOR
-						+ LayoutComponentBean.question.getText()
-						+ LayoutComponentBean.SEPARATOR + "Choice"
-						+ LayoutComponentBean.SEPARATOR
-						+ LayoutComponentBean.choice);
-				vector.add(LayoutComponentBean.SEPARATOR + "xxxxx"
-						+ LayoutComponentBean.SEPARATOR);
+				FileBean.Topic = "" + LayoutComponentBean.topic.getText();
+				if (!LayoutComponentBean.question.getText().equals("")) {
+					vector.add(LayoutComponentBean.SEPARATOR + "Topic"
+							+ LayoutComponentBean.SEPARATOR
+							+ LayoutComponentBean.topic.getText()
+							+ LayoutComponentBean.SEPARATOR + "Answer"
+							+ LayoutComponentBean.SEPARATOR
+							+ LayoutComponentBean.question.getText()
+							+ LayoutComponentBean.SEPARATOR + "Choice"
+							+ LayoutComponentBean.SEPARATOR
+							+ LayoutComponentBean.choice);
+					vector.add(LayoutComponentBean.SEPARATOR + "xxxxx"
+							+ LayoutComponentBean.SEPARATOR);
 				}
 				if (LayoutComponentBean.ScreenCount == 0) {
-					////////엄씨가 추가/////////
+					// //////엄씨가 추가/////////
 					TVServerIni();
 					mlock = getWifiManager().createMulticastLock("test_mlock");
 					mlock.setReferenceCounted(true);
 					mlock.acquire();
-					///엄씨가 추가/////////
-					
+					// /엄씨가 추가/////////
+
 					ConnectionBean.server.start(ConnectionBean.ServerConfig);
 					LayoutComponentBean.ScreenCount++;
 				}
 
 				LayoutComponentBean.statisticsGraph_btn.setEnabled(true);
 				LayoutComponentBean.QuestionnaireImfo_btn.setEnabled(true);
-//				LayoutComponentBean.QuestionnaireInitial_btn
-//						.setText("설문지 재 설정");
-				LayoutComponentBean.resetFlag=true;
+				// LayoutComponentBean.QuestionnaireInitial_btn
+				// .setText("설문지 재 설정");
+				LayoutComponentBean.resetFlag = true;
 				Intent intent = new Intent(QuestionnairesSettingSecond.this,
 						AnA_BootMode.class);
 				startActivity(intent);
@@ -406,21 +406,24 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 				R.layout.textstyle, list);
 		LayoutComponentBean.listview.setAdapter(adapter);
 	}
-	//////////////////////////////엄씨가 추가/////////
-	WifiManager getWifiManager(){
+
+	// ////////////////////////////엄씨가 추가/////////
+	WifiManager getWifiManager() {
 		return (WifiManager) getSystemService(Context.WIFI_SERVICE);
 	}
-///////////////////////////////////////////////////////
+
+	// /////////////////////////////////////////////////////
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	//	setContentView(R.layout.questionnaire2);
-		setContentView(R.layout.questionnaire2_optimus);
+		// setContentView(R.layout.questionnaire2);
+		setContentView(R.layout.questionnaire2);
 		InterfaceInital();
 		ButtonEvent();
 
 	}
-	////////////////////엄씨가 추가.///////////////////////////
+
+	// //////////////////엄씨가 추가.///////////////////////////
 	public String getLocalIpAddress() {
 		// need to
 		// <uses-permission
@@ -451,6 +454,6 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 
 		return dest;
 	}
-	/////////////////////////////엄씨가 추가/////////////////////////////
+	// ///////////////////////////엄씨가 추가/////////////////////////////
 
 }

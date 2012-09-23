@@ -12,7 +12,7 @@ import android.widget.RadioGroup;
 public class LayoutComponentBean {
 	public final static String SEPARATOR = "|";
 	public static ImageButton statisticsGraph_btn;
-	public static ImageButton  QuestionnaireInitial_btn;
+	public static ImageButton QuestionnaireInitial_btn;
 	public static ImageButton QuestionnaireImfo_btn;
 	public static EditText topic, question;
 	public static ImageButton Fileadd, questionAdd, complete;
@@ -22,8 +22,8 @@ public class LayoutComponentBean {
 	public static EditText Company, During;
 	public static CheckBox UserImfo;
 	public static ImageButton FileAdd, Next;
-	public static int ScreenCount=0;
+	public static int ScreenCount = 0;
 	public static RadioGroup radiogroup;
-	public static int choice = -1; 
+	public static int choice = -1;
 	public static boolean resetFlag = false;
 }
