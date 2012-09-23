@@ -189,7 +189,10 @@ public class ElementList
 				}
 			}			
 		}		
-		
+		if(480 < nX && 820 > nX && 340 < nY && 470 > nY)
+		{
+			return 700;
+		}
 		return nID;		
 	}
 }
