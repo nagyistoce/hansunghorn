@@ -99,11 +99,8 @@ public class TVServerListActivity extends ListActivity {
 		});
 		
 
-		//stub code..../////////////////////////////////
-//		list.add("192.168.0.5,A&A");
-//		list.add("192.168.0.7,ORDER");
-//
-		list.add("192.168.0.11,GCC");
+		
+		//list.add("192.168.0.11,GCC"); //test용 코드
 	
 		adapter.notifyDataSetChanged();
 		///////////////////////////////////////////////////////////
@@ -155,7 +152,7 @@ public class TVServerListActivity extends ListActivity {
 		Intent intent = new Intent(TVServerListActivity.this, GCC_PHONEActivity.class);
 		intent.putExtra("serviceName", serviceName);
 		startActivity(intent);
-		//여기서 인텐트를 이용해서 서비스를 실행시키면 됩니다.
+
 	}
 	
 

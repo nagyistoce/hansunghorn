@@ -47,7 +47,7 @@ public class TVLocationViewerActivity extends MapActivity {
 		
 	
 		updateLocation(location);
-		//////////////////////////////////////////////////////////////////
+
 		
 		// 맵뷰 설정////////////////////////////////////////////////
 		final MapView mapViewer = (MapView)findViewById(R.id.mapviewer);
@@ -56,10 +56,7 @@ public class TVLocationViewerActivity extends MapActivity {
 		
 		MapController mapController = mapViewer.getController();
 		
-		//현재 있는 위치로 이동한다.
-//		mapController.animateTo(new GeoPoint((int)(location.getLatitude()*1E6), (int)(location.getLongitude()*1E6) ));
-//		mapController.animateTo(new GeoPoint(37566535, 126977969));
-//		mapController.animateTo(new GeoPoint(37566535, 126977969));
+
 		mapController.setZoom(20);
 		
 		mapOverlays = mapViewer.getOverlays();
@@ -94,10 +91,7 @@ public class TVLocationViewerActivity extends MapActivity {
 		drawable = getResources().getDrawable(R.drawable.ic_launcher);
 		currentPinOverlay = new CurrentPinOverlay(this, mapViewer);
 		
-		//현재장소 표시
-//		GeoPoint currentGP = new GeoPoint((int)(location.getLatitude() * 1E6), (int)(location.getLongitude()*1E6));
-		
-//		currentPinOverlay.addOverlay(new OverlayItem(currentGP  ,"실시간","실시간"));
+		//TV들의 위치들을 추가한다.
 		mapOverlays.add(tvLocationListOverlay);
 		mapOverlays.add(currentPinOverlay);
 		

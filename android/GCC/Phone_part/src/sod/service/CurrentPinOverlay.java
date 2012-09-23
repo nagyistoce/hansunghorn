@@ -1,12 +1,9 @@
 package sod.service;
 
-
-
 import android.content.Context;
 import android.widget.Toast;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
-
 
 public class CurrentPinOverlay extends 	MyLocationOverlay{
 	
