@@ -32,7 +32,7 @@ public class ServiceManager {
 	boolean isFirst;
 	int sBufIndex;
 	
-	int debugPoint;
+
 	
 	
 	ServiceManager(){
@@ -40,7 +40,7 @@ public class ServiceManager {
 		isFirst = true;
 		sBufIndex = 0;
 		
-		debugPoint = 0;
+
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class ServiceManager {
 		
 		String relativePath = (String) packet.pop();// 2. 두번째로 나오는 것은 상대 path
 													// (String)
-		debugPoint++;
+
 
 		try {
 

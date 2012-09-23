@@ -21,7 +21,6 @@ public class GCCService extends DroidGap {
 
 			@Override
 			public void onClick(View v) {
-				// new AccessManager().searchServer(); // TV 서버 찾기
 				Intent intent = new Intent(GCCService.this, TVServerListActivity.class);
 				startActivity(intent);
 
