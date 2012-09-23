@@ -14,10 +14,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-
-
 public class TVServiceListActivity extends ListActivity {
-	
+
 	private ArrayList<String> list;
 	private ArrayAdapter<String> adapter;
 	Storage rootStorage;
@@ -27,41 +25,41 @@ public class TVServiceListActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
-		
+
 		serviceName = adapter.getItem(position);
-		
+
 		new AlertDialog.Builder(TVServiceListActivity.this)
-		.setTitle("서비스 삭제")
-		.setMessage("삭제하시겠습니까?")
-		.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				try {
-					Storage.destroy(serviceName);
-					updateServiceList();
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					Constants.logger.log("(debug:client) Storage Destroy IllegalArgumentException");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					Constants.logger.log("(debug:client) Storage Destroy IOException");
-				}
-				
-			}
-		})
-		.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				//not To do..
-			}
-		})
-		.show();
-		
-		
+				.setTitle("서비스 삭제")
+				.setMessage("삭제하시겠습니까?")
+				.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						try {
+							Storage.destroy(serviceName);
+							updateServiceList();
+						} catch (IllegalArgumentException e) {
+							// TODO Auto-generated catch block
+							Constants.logger
+									.log("(debug:client) Storage Destroy IllegalArgumentException");
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							Constants.logger
+									.log("(debug:client) Storage Destroy IOException");
+						}
+
+					}
+				})
+				.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						// not To do..
+					}
+				}).show();
+
 	}
 
 	@Override
@@ -75,17 +73,16 @@ public class TVServiceListActivity extends ListActivity {
 		adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, list);
 		setListAdapter(adapter);
-		
+
 		updateServiceList();
-		
-		
-	}//end onCreate
-	
+
+	}// end onCreate
+
 	void updateServiceList() {
 		try {
 
-			list.clear();//init
-			
+			list.clear();// init
+
 			if (Storage.checkIsStorageExists(""))
 				rootStorage = Storage.getStorage("");
 			else
@@ -98,10 +95,12 @@ public class TVServiceListActivity extends ListActivity {
 			}
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
-			Constants.logger.log("(debug:client) getStorage, CreateStorage IllegalArgumentException");
+			Constants.logger
+					.log("(debug:client) getStorage, CreateStorage IllegalArgumentException");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			Constants.logger.log("(debug:client) getStorage, CreateStorage IOException");
+			Constants.logger
+					.log("(debug:client) getStorage, CreateStorage IOException");
 		}
 
 		adapter.notifyDataSetChanged();
