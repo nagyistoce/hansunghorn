@@ -1,6 +1,5 @@
 package sod.common;
 
-import sod.smartphone.AdminInformation;
 
 import com.google.android.maps.GeoPoint;
 

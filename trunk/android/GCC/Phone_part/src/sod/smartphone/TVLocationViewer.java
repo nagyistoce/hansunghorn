@@ -2,6 +2,7 @@ package sod.smartphone;
 
 import java.net.SocketException;
 
+import sod.common.AdminInformation;
 import sod.common.TVLocation;
 
 

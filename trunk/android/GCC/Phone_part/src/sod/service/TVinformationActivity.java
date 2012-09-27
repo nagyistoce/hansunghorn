@@ -1,7 +1,7 @@
 package sod.service;
 
+import sod.common.AdminInformation;
 import sod.common.TVLocation;
-import sod.smartphone.AdminInformation;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
