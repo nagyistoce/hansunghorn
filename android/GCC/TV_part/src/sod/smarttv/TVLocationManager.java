@@ -1,5 +1,8 @@
 package sod.smarttv;
 
+import sod.common.AdminInformation;
+import sod.common.TVLocation;
+
 
 /**
  * 
