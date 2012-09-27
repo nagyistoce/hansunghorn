@@ -11,6 +11,7 @@ import com.google.android.maps.OverlayItem;
 import com.sgsong.main.R;
 
 
+import sod.common.TVLocation;
 import sod.smarttv.*;
 import android.content.Context;
 import android.content.Intent;
