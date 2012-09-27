@@ -1,6 +1,6 @@
 package sod.service;
 
-import sod.smartphone.TVLocation;
+import sod.common.TVLocation;
 import android.os.Parcel;
 import android.os.Parcelable;
 

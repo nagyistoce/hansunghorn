@@ -138,7 +138,10 @@ public class ServiceManager {
 	}
 	
 	
-	
+	/**
+	 * 서비스 파일 정보가 있는 패킷으로부터 서비스 파일을 생성하는 함수 
+	 * @param packet 서비스 파일 정보가 담긴 패킷
+	 */
 	public void installService(Packet packet){
 		String serviceName = (String)packet.pop(); // 1. 패킷에서 첫번째로 나오는 것은 serviceName (String)
 		String serviceFilePath = serviceName + "/service";

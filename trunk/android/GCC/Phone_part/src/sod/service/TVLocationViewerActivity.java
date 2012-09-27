@@ -3,7 +3,7 @@ package sod.service;
 import java.net.SocketException;
 import java.util.List;
 
-import sod.smartphone.TVLocation;
+import sod.common.TVLocation;
 import sod.smartphone.TVLocationViewer;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
