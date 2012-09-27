@@ -1,4 +1,4 @@
-package sod.smartphone;
+package sod.common;
 
 /**
  * 
