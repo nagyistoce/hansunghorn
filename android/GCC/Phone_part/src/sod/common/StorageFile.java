@@ -299,6 +299,10 @@ public  class StorageFile {
 		}
 	}
 	
+	/**
+	 * StorageFile의 이름을 반환한다.
+	 * @return StorageFile의 이름
+	 */
 	public String getName(){
 		return file.getName();
 	}

@@ -2,6 +2,8 @@ package sod.smartphone;
 
 import java.net.SocketException;
 
+import sod.common.TVLocation;
+
 
 
 /**
@@ -34,6 +36,9 @@ public class TVLocationViewer {
 		tvLocations[4] = new TVLocation(37.582694, 127.010823, admins[4]);
 	}
 	
+	/**
+	 * stub code
+	 */
 	protected void initAdminList(){
 		admins[0].TVname = "Ã¢ÀÇ°üTV";
 		admins[0].e_mailAddress = "abc@naver.com";

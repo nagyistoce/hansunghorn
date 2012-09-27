@@ -3,7 +3,7 @@ package sod.service;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.OverlayItem;
 
-import sod.smartphone.TVLocation;
+import sod.common.TVLocation;
 
 public class SODOverlayItem extends OverlayItem {
 
