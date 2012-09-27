@@ -1,4 +1,6 @@
-package sod.smarttv;
+package sod.common;
+
+
 
 /**
  * 
@@ -7,6 +9,15 @@ package sod.smarttv;
  */
 public class AdminInformation {
 	
+	public AdminInformation() {
+		// TODO Auto-generated constructor stub
+		
+		TVname = new String();
+		password = new String();
+		e_mailAddress = new String();
+		phoneNumber = new String();
+		serviceName = new String();
+	}
 	/**
 	 * indicates name of smart TV.
 	 */
