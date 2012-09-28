@@ -157,7 +157,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 	}
 
 	public void Store() throws Exception {
-		if (Storage.checkIsStorageExists("ana")) {
+		if (Storage.checkStorageIs("ana")) {
 			storage = Storage.getStorage("ana");
 		} else
 			storage = Storage.createStorage("ana");
@@ -167,7 +167,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 	public void ReArrange() throws Exception {
 		String key = "", value = "";
 		Store();
-		if (!storage.checkIsFileExists("data.txt")) {
+		if (!storage.checkFileIs("data.txt")) {
 			storageFile = storage.createFile("data.txt");
 		} else {
 			storageFile = storage.openFile("data.txt", Storage.WRITE);
