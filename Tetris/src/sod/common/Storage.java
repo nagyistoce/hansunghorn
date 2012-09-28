@@ -300,23 +300,23 @@ public class Storage {
 	 * "*"을 입력하면 모든 파일의 목록을 반환한다.
 	 * ".txt"라고 하면 txt가 확장자인 파일의 목록을 반환한다.
 	 * "ew"라고 하면 ew라는 키워드가 포함된 파일의 목록을 반환한다.
-	 * @param filter
+	 * @param keyword
 	 * 얻기를 원하는 파일의 확장자
 	 * @return
-	 *  넘겨준 filter를 포함한 파일의 리스트 
+	 *  넘겨준 keyword를 포함한 파일의 리스트 
 	 */
-	public String [] getFileList(String filter) throws IllegalArgumentException{
+	public String [] getFileList(String keyword) throws IllegalArgumentException{
 		
 		String [] returnFileList = null;
 		
-		if(filter.equals("*"))
+		if(keyword.equals("*"))
 			returnFileList = directory.list();
 		else{
 			String [] fileList = directory.list();
 			ArrayList<String> filteringFileList = new ArrayList<String>();
 			
 			for(int i = 0 ; i<fileList.length  ; i++){
-				if( fileList[i].indexOf(filter) != -1 )
+				if( fileList[i].indexOf(keyword) != -1 )
 					filteringFileList.add(fileList[i]);
 			}
 			
