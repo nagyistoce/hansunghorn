@@ -54,8 +54,8 @@ public class ServiceManager {
 	 */
 	public boolean findServiceByName(String serviceName) throws IllegalArgumentException{
 		
-		if(Storage.checkIsStorageExists(serviceName)){
-			if(Storage.checkIsStorageExists(serviceName + "/service"))
+		if(Storage.checkStorageIs(serviceName)){
+			if(Storage.checkStorageIs(serviceName + "/service"))
 				return true;
 		}
 		
@@ -85,7 +85,7 @@ public class ServiceManager {
 		Storage storage = null;
 
 		try {
-			if (Storage.checkIsStorageExists(""))
+			if (Storage.checkStorageIs(""))
 				storage = Storage.getStorage("");
 			else
 				storage = Storage.createStorage("");
@@ -112,7 +112,7 @@ public class ServiceManager {
 		Storage storage = null;
 
 		try {
-			if (Storage.checkIsStorageExists(serviceName)){
+			if (Storage.checkStorageIs(serviceName)){
 				Storage.destroy(serviceName);
 			}
 			
@@ -155,7 +155,7 @@ public class ServiceManager {
 			Storage serviceStorage = null;
 			if (relativePath.equals("/")) {
 
-				if (!Storage.checkIsStorageExists(serviceFilePath))
+				if (!Storage.checkStorageIs(serviceFilePath))
 					serviceStorage = Storage.createStorage(serviceFilePath);
 				else
 					serviceStorage = Storage.getStorage(serviceFilePath);
@@ -164,7 +164,7 @@ public class ServiceManager {
 
 				serviceFilePath = serviceFilePath + "/" + relativePath;
 
-				if (!Storage.checkIsStorageExists(serviceFilePath))
+				if (!Storage.checkStorageIs(serviceFilePath))
 					serviceStorage = Storage.createStorage(serviceFilePath);
 				else
 					serviceStorage = Storage.getStorage(serviceFilePath);
@@ -265,7 +265,7 @@ public class ServiceManager {
 	
 	public boolean isExistService(String serviceName){
 		
-		return Storage.checkIsStorageExists(serviceName);
+		return Storage.checkStorageIs(serviceName);
 	}
 	
 	
