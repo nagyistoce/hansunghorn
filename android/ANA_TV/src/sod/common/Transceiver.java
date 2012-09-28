@@ -70,23 +70,23 @@ public class Transceiver implements Disposable {
 	
 	/**
 	 * 넘겨준 패킷 객체를 상대(스마트TV, 스마트폰)에게 보낸다.
-	 * @param p
+	 * @param pkt
 	 * @throws IllegalArgumentException
 	 * 넘어온 패킷 객체가 NULL일 때, IllegalArgumentException을 던진다.
 	 * @throws SocketException
 	 * 전송하는 과정이 실패하면 SocketException을 던진다.
 	 */
-	public boolean send(Packet p) throws IllegalArgumentException{
-		if (p == null)
+	public boolean send(Packet pkt) throws IllegalArgumentException{
+		if (pkt == null)
 			throw new IllegalArgumentException();
 
 		ByteArrayOutputStream buf = new ByteArrayOutputStream();
-		serializer.serialize(buf, p);
+		serializer.serialize(buf, pkt);
 		byte[] data = buf.toByteArray();
-		DatagramPacket pkt = new DatagramPacket(data, data.length);
-		pkt.setSocketAddress(dest);
+		DatagramPacket sendedPkt = new DatagramPacket(data, data.length);
+		sendedPkt.setSocketAddress(dest);
 		try {
-			conn.send(pkt);
+			conn.send(sendedPkt);
 		} catch (IOException e) {
 			return false;
 		}
@@ -95,22 +95,22 @@ public class Transceiver implements Disposable {
 	
 	/**
 	 * 상대방(스마트TV, 스마트폰)으로부터 패킷을 수신하는 메소드이다. (Blocking으로 동작)
-	 * @param p
+	 * @param pkt
 	 * 상대방(스마트TV, 스마트폰)으로부터 받은 패킷
 	 * @throws IllegalArgumentException
 	 * 넘어온 패킷 객체가 NULL일 때, IllegalArgumentException을 던진다.
 	 */
-	public InetSocketAddress receive(Packet p) throws IllegalArgumentException{
-		if (p == null)
+	public InetSocketAddress receive(Packet pkt) throws IllegalArgumentException{
+		if (pkt == null)
 			throw new IllegalArgumentException();
 
 		try {
-			DatagramPacket pkt = new DatagramPacket(recvbuf, recvbuf.length);
-			conn.receive(pkt);
-			int length = pkt.getLength();
+			DatagramPacket receivedPkt = new DatagramPacket(recvbuf, recvbuf.length);
+			conn.receive(receivedPkt);
+			int length = receivedPkt.getLength();
 			ByteArrayInputStream in = new ByteArrayInputStream(recvbuf, 0, length);
-			serializer.deserialize(in, p);
-			return (InetSocketAddress)pkt.getSocketAddress();
+			serializer.deserialize(in, pkt);
+			return (InetSocketAddress)receivedPkt.getSocketAddress();
 		} catch (IOException e) {
 			return null;
 		}
