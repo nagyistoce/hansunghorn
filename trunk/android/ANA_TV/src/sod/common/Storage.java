@@ -149,7 +149,7 @@ public class Storage {
 	 * @throws IllegalArgumentException
 	 * stroageID가 null이면 IllegalArgumentException을 던진다.
 	 */
-	static public boolean checkIsStorageExists(String storageID) throws IllegalArgumentException{
+	static public boolean checkStorageIs(String storageID) throws IllegalArgumentException{
 		
 		if(storageID == null)
 			throw new IllegalArgumentException();
@@ -388,7 +388,7 @@ public class Storage {
 	 * @return 
 	 * 존재를 확인하고자 하는 파일이 있으면 true, 없으면 false를 반환
 	 */
-	public boolean checkIsFileExists(String filePath){
+	public boolean checkFileIs(String filePath){
 		
 		File file = new File(directory, filePath);
 		
@@ -397,18 +397,18 @@ public class Storage {
 	
 	/**
 	 * 이미 존재하는 파일의 이름을 바꾼다.
-	 * @param oldPath
+	 * @param oldName
 	 * 이름을 바꾸기 전, 파일의 경로
-	 * @param newPath
+	 * @param newName
 	 * 이름을 바꾼 후, 파일의 경로
 	 * @throws FileNotFoundException
 	 * 이름을 변경하려는 파일을 찾을 수 없을 때, FileNotFoundException을 던진다.
 	 * @throws NullPointerException
 	 * Path가 null이래서 파일객체 자체 생성에 실패하면 NullPointerException을 던진다.
 	 */
-	public void renameFile(String oldPath, String newPath) throws FileNotFoundException, NullPointerException{
-		File oldFile = new File(directory, oldPath);
-		File newFile = new File(directory, newPath);
+	public void renameFile(String oldName, String newName) throws FileNotFoundException, NullPointerException{
+		File oldFile = new File(directory, oldName);
+		File newFile = new File(directory, newName);
 		
 		if( !oldFile.exists() )
 			new FileNotFoundException();
