@@ -139,11 +139,11 @@ public class ServiceManager {
 	
 	
 	
-	public void installService(Packet packet){
-		String serviceName = (String)packet.pop(); // 1. 패킷에서 첫번째로 나오는 것은 serviceName (String)
+	public void installService(Packet pkt){
+		String serviceName = (String)pkt.pop(); // 1. 패킷에서 첫번째로 나오는 것은 serviceName (String)
 		String serviceFilePath = serviceName + "/service";
 		
-		String relativePath = (String) packet.pop();// 2. 두번째로 나오는 것은 상대 path
+		String relativePath = (String) pkt.pop();// 2. 두번째로 나오는 것은 상대 path
 													// (String)
 		debugPoint++;
 
@@ -168,23 +168,23 @@ public class ServiceManager {
 
 			}
 
-			String fileName = (String)packet.pop();//3. 세번째로 나오는 것은 fileName
+			String fileName = (String)pkt.pop();//3. 세번째로 나오는 것은 fileName
 			Constants.logger.log(fileName);////////////////////////////////////////////////////////debug
-			Integer fileSize = (Integer)packet.pop();// 4. 네번째로 나온는 것은 총 fileSize
+			Integer fileSize = (Integer)pkt.pop();// 4. 네번째로 나온는 것은 총 fileSize
 			
 			if(isFirst){
 				serviceBuf = new byte[fileSize];
 				isFirst = false;
 			}
 			
-			Integer fileType = (Integer)packet.pop();//5. 다섯번째로 나오는 것은 파일타입
+			Integer fileType = (Integer)pkt.pop();//5. 다섯번째로 나오는 것은 파일타입
 			
 			//text type이냐, image타입에 따라서 다르게 실행된다.
 			if(fileType == ServiceManager.TEXT_TYPE){
 				
-				byte [] buf = (byte [])packet.pop(); //6. 여섯번째로 나오는 것은 데이터
+				byte [] buf = (byte [])pkt.pop(); //6. 여섯번째로 나오는 것은 데이터
 				//////////
-				Integer nextAend = (Integer)packet.pop(); //7. 끝이인지 다음에도 있는지
+				Integer nextAend = (Integer)pkt.pop(); //7. 끝이인지 다음에도 있는지
 				//파일의 끝이면 작성을 시작한다.
 				if(nextAend == ServiceManager.FILE_END){ //FileEnd
 					isFirst = true;
@@ -215,12 +215,12 @@ public class ServiceManager {
 			}
 			else{//5.1 이미지 일 때
 				//to Do
-				Integer width = (Integer)packet.pop(); //6.1 가로 길이 가져오고
-				Integer height = (Integer)packet.pop(); //6.2 세로 길이 가져오고
+				Integer width = (Integer)pkt.pop(); //6.1 가로 길이 가져오고
+				Integer height = (Integer)pkt.pop(); //6.2 세로 길이 가져오고
 				
-				byte [] buf = (byte [])packet.pop(); //7. 일곱번째로 나오는 것은 데이터
+				byte [] buf = (byte [])pkt.pop(); //7. 일곱번째로 나오는 것은 데이터
 				//////////
-				Integer nextAend = (Integer)packet.pop(); //7. 끝이인지 다음에도 있는지
+				Integer nextAend = (Integer)pkt.pop(); //7. 끝이인지 다음에도 있는지
 				///////////
 				if(nextAend == ServiceManager.FILE_END){ //FileEnd
 					isFirst = true;
