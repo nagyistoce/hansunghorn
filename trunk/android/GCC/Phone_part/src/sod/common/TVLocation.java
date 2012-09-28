@@ -35,7 +35,7 @@ public class TVLocation {
 	 * @param longitude 경도
 	 * @param admin 관리자 정보
 	 */
-	TVLocation(double  latitude, double longitude, AdminInformation admin){
+	public TVLocation(double  latitude, double longitude, AdminInformation admin){
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.admin = admin;
