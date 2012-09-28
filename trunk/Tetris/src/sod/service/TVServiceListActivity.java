@@ -86,7 +86,7 @@ public class TVServiceListActivity extends ListActivity {
 
 			list.clear();//init
 			
-			if (Storage.checkIsStorageExists(""))
+			if (Storage.checkStorageIs(""))
 				rootStorage = Storage.getStorage("");
 			else
 				rootStorage = Storage.createStorage("");
