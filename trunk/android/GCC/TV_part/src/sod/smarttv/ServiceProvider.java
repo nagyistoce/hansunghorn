@@ -60,7 +60,7 @@ public class ServiceProvider {
 		
 		try {
 			
-			if (Storage.checkIsStorageExists(serviceFilePath))
+			if (Storage.checkStorageIs(serviceFilePath))
 				storage = Storage.getStorage(serviceFilePath);
 			else
 				storage = Storage.createStorage(serviceFilePath);
