@@ -58,6 +58,10 @@ public class Storage {
 		return directory;
 	}
 	
+	/**
+	 * SOD 루트 저장소의 절대경로를 반환한다.
+	 * @return SOD루트 저장소의 절대경로 ex(android) : /mnt/sdcard/sod
+	 */
 	public String getSODStoragePath(){
 		return sodStoragePath;
 	}
