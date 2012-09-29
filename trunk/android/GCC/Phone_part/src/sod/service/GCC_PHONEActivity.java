@@ -56,7 +56,7 @@ public class GCC_PHONEActivity extends DroidGap {
 		try {
 			Storage downloadedService = Storage.getStorage(serviceName
 					+ "/service");// "A&A_Service/service"
-			servicePath = downloadedService.getSODStoragePath();
+			servicePath = downloadedService.getSODrootPath();
 			StorageFile indexHtmlPathStorageFile = downloadedService.openFile(
 					"indexHtmlPath.ini", StorageFile.READ);
 
