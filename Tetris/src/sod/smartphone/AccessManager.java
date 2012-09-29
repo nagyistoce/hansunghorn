@@ -65,10 +65,13 @@ public class AccessManager implements Disposable {
 		
 	}
 	
+	
 	/**
 	 * 같은 와이파이에 있는 서버를 찾아 목록을 반환
 	 * 콜백으로 넘겨주는 인자가 null이면 탐색의 마지막에 도달함을 의미함.
-	 */		
+	 * @param baseIP ip정보
+	 * @param cb  검색 콜백 함수
+	 */
 	public static void searchServer(String baseIP, SearchCallBack cb){		
 		final int TurnAroundWaitTime = 4000;
 		
@@ -166,6 +169,10 @@ public class AccessManager implements Disposable {
 		return conn.send(pkt);
 	}
 	
+	/**
+	 * 클라이언트가 현재 서버에 접속되있는 여부를 알려주는 메소드
+	 * @return 접속된 상태면 true, 아니면 false
+	 */
 	public boolean isConnected(){
 		return isConnected;
 	}
@@ -228,11 +235,18 @@ public class AccessManager implements Disposable {
 		});		
 	}
 	
+	/**
+	 * 다운로드 받은 서비스가 있는지 확인하는 메소드
+	 * @return 다운로드 받은 서비스가 있으면 true, 아니면 false
+	 */
 	protected boolean isExistService(){
 		return serviceManager.checkServiceInstalled(svinfo.ServiceName);
 		
 	}
 	
+	/**
+	 * startServiceDelegate에 등록한 콜백함수를 실행한다.
+	 */
 	protected void startService(){
 		startServiceDelegate.work(svinfo.ServiceName);
 	}
