@@ -149,7 +149,7 @@ public class TVServerListActivity extends ListActivity {
 		super.onListItemClick(l, v, position, id);
 		
 		String []strs = adapter.getItem(position).split(",");
-		String ip = strs[0];
+		String ip = strs[0]; //여기에 스마트TV의 아이피를 따로 입력해야한다.//////////////
 		String serviceName = strs[1]; 
 		ConnectionBean.SERVERIP = ip; 
 		Intent intent = new Intent(TVServerListActivity.this, GCC_PHONEActivity.class);

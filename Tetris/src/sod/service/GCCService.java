@@ -1,5 +1,7 @@
 package sod.service;
 
+import sod.smartphone.AccessManager;
+
 import com.phonegap.*;
 
 import android.app.ProgressDialog;
@@ -15,10 +17,11 @@ public class GCCService extends DroidGap {
 
 //	AnAServiceNet net;
 	private ProgressDialog dialog;
+	/*
 	public void InitHTML() {
 		 super.loadUrl("file:///android_asset/www/Contorller.html");
 	}
-		 
+	*/	 
 	public void Layout_Initalize() {
 		TvSearch = (ImageButton) findViewById(R.id.TvSearch);
 		ServiceLocation = (ImageButton) findViewById(R.id.ServiceLocation);
@@ -27,10 +30,9 @@ public class GCCService extends DroidGap {
 
 			@Override
 			public void onClick(View v) {
-				// new AccessManager().searchServer(); // TV 서버 찾기
-				//Intent intent = new Intent(GCCService.this, TVServerListActivity.class);
-				//startActivity(intent);
-				 InitHTML();
+				Intent intent = new Intent(GCCService.this, TVServerListActivity.class);
+				startActivity(intent);
+				// InitHTML();
 				}
 			}
 		);
