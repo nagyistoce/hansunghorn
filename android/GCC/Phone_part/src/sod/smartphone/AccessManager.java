@@ -148,7 +148,7 @@ public class AccessManager implements Disposable {
 	}
 	
 	/**
-	 * Packet이 수신됐을때 호출될 콜백함수를 등록
+	 * 서비스를 시작할 때 실행할 함수를 등록한다.
 	 * @param handler
 	 * 콜백함수를 구현한 객체
 	 */
