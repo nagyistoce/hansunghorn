@@ -293,7 +293,10 @@ public class AccessManagerServer {
 		
 	}
 	
-	//Ping 응답 서비스 스레드 시작.
+
+	/**
+	 * Ping 응답 서비스 스레드를 시작한다.
+	 */
 	protected void beginListeningMulti(){
 		final int bufsize = 0x1000;
 
