@@ -47,13 +47,13 @@ public class myPlugin extends Plugin {
 						
 					
 						temp= data.getString(0);
-						/*********************************************¿Ã∫Œ∫–***********************************
+						
 						pkt.push(temp);
 						ConnectionBean.client.send(pkt);
 						
 					
 						
-						***************************************************************************************/
+						
 						System.out.println(data.toString());
 					} catch (Exception e) {
 						return new PluginResult(PluginResult.Status.OK,

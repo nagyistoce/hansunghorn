@@ -43,12 +43,14 @@ public class GCC_PHONEActivity extends DroidGap {
 				InitHTML();
 			}
 		};
-		Client_Initalize();
+		
+		//Client_Initalize(); // 나중에 주석 처리 해제 해야함
+		InitHTML();
 	}
 	public void InitHTML() {
-		// super.loadUrl("file:///android_asset/www/Contorller.html");
-		
-		 
+		super.loadUrl("file:///android_asset/www/Contorller.html");
+		//나중에 다운로드 되게 해야함
+		/* 
 		String serviceName = ConnectionBean.ServerInfomation.ServiceName;
 		String servicePath = null;
 		String indexHtmlPath = null;
@@ -72,6 +74,7 @@ public class GCC_PHONEActivity extends DroidGap {
 		// String loadUrlPath ="file:///"+ servicePath + "/AnA.html";
 		String loadUrlPath = "file:///" + servicePath + indexHtmlPath;
 		super.loadUrl(loadUrlPath);
+		*/
 		
 	}
 	public void Client_Initalize() {
