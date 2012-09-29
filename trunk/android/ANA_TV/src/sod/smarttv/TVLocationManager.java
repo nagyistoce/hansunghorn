@@ -1,6 +1,7 @@
 package sod.smarttv;
 
 import sod.common.AdminInformation;
+import sod.common.TVLocation;
 
 
 /**
@@ -33,6 +34,12 @@ public class TVLocationManager {
 		 */
 	}
 	
+	/**
+	 * TV의 위치를 등록한다. 
+	 * @param tvLocation TV위치 정보를 담은 객체
+	 * @throws IllegalArgumentException null를 인자로 받았을 때 발생한다.
+	 * @throws IllegalStateException 위치서버와의 통신에 이상이 생겼을때 발생한다.
+	 */
 	public void setTVLocation(TVLocation tvLocation)
 			throws IllegalArgumentException, IllegalStateException {
 		
