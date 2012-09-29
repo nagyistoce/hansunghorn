@@ -179,7 +179,7 @@ public  class StorageFile {
 	}
 	
 	/**
-	 * 
+	 * 해당파일에 데이터를 쓴다.
 	 * @param buf
 	 * 파일에서 읽은 내용을 담기위한 버퍼
 	 * @throws IOException

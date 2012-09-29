@@ -42,18 +42,34 @@ public class Storage {
 		
 	}
 	
+	/**
+	 * 'directory 파일객체'가 존재하는지 확인하는 메소드
+	 * @return 디렉토리가 존재하면 true, 아니면 false
+	 */
 	protected boolean isExist(){
 		return directory.exists();
 	}
 	
+	/**
+	 * 'directory 파일객체'에 있는 경로대로 새로운 디렉토리를 생성한다.
+	 * @return
+	 */
 	protected boolean createDirectory(){
 		return directory.mkdirs();
 	}
 	
+	/**
+	 * 'directory 파일객체'에 있는 경로에 있는 파일들의 리스트를 반환한다.
+	 * @return
+	 */
 	public String [] getFileList(){
 		return directory.list();
 	}
 	
+	/**
+	 * 'directory 파일객체'를 받아온다.
+	 * @return
+	 */
 	protected File getDirectory(){
 		return directory;
 	}
@@ -221,6 +237,11 @@ public class Storage {
 		*/
 	}
 
+	/**
+	 * 디렉토리를 삭제한다. 
+	 * @param targetFolder
+	 * @return
+	 */
 	static protected boolean deleteFolder(File targetFolder) {
 
 		File[] childFile = targetFolder.listFiles();
