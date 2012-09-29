@@ -263,7 +263,7 @@ public class ServiceManager {
 
 	
 	
-	public boolean isExistService(String serviceName){
+	public boolean checkServiceInstalled(String serviceName){
 		
 		return Storage.checkStorageIs(serviceName);
 	}
