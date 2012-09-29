@@ -117,21 +117,21 @@ public class Packet {
 	/**
 	 * 패킷을 만들때, 패킷에 객체를 집어넣을 때 사용하는 메소드이다. 객체는 무한대로 들어간다.
 	 * 
-	 * @param obj
+	 * @param item
 	 *            사용자가 패킷에 집어넣고자 하는 객체
 	 * @throws UnsupportedDataTypeException
 	 *             패킷에서 push할 때, 지원이 되지않는 객체일 때는 UnsupportedDataTypeException을
 	 *             던진다. 지원되는 객체의 타입은 Int, Double, String, ByteArray 등이다.
 	 */
-	public boolean push(Object obj) {
-		if(obj == null) return false;
-		if(obj instanceof Integer ||
+	public boolean push(Object item) {
+		if(item == null) return false;
+		if(item instanceof Integer ||
 //		   obj instanceof Long ||
-		   obj instanceof Float ||
-		   obj instanceof Double ||
-		   obj instanceof String ||
-		   obj instanceof byte[])
-			dataset.offer(obj);
+		   item instanceof Float ||
+		   item instanceof Double ||
+		   item instanceof String ||
+		   item instanceof byte[])
+			dataset.offer(item);
 		else
 			return false;
 		return true;
@@ -140,13 +140,13 @@ public class Packet {
 	/**
 	 * 패킷을 만들때, 패킷에 객체를 집어넣을 때 사용하는 메소드이다. 객체는 무한대로 들어간다
 	 * @param type 객체의 타입
-	 * @param obj 사용자가 패킷에 집어넣고자 하는 객체
+	 * @param item 사용자가 패킷에 집어넣고자 하는 객체
 	 * @return
 	 */
-	public boolean push(String type, Object obj){
+	public boolean push( Object item, String type){
 		
 		typeset.offer(type);
-		dataset.offer(obj);
+		dataset.offer(item);
 		
 		return true;
 	}
