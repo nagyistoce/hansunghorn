@@ -32,7 +32,7 @@ public class ServiceManager {
 	boolean isFirst;
 	int sBufIndex;
 	
-	int debugPoint;
+
 	
 	
 	ServiceManager(){
@@ -40,7 +40,7 @@ public class ServiceManager {
 		isFirst = true;
 		sBufIndex = 0;
 		
-		debugPoint = 0;
+
 	}
 
 	/**
@@ -138,14 +138,17 @@ public class ServiceManager {
 	}
 	
 	
-	
+	/**
+	 * 서비스 파일 정보가 있는 패킷으로부터 서비스 파일을 생성하는 함수 
+	 * @param pkt 서비스 파일 정보가 담긴 패킷
+	 */
 	public void installService(Packet pkt){
 		String serviceName = (String)pkt.pop(); // 1. 패킷에서 첫번째로 나오는 것은 serviceName (String)
 		String serviceFilePath = serviceName + "/service";
 		
 		String relativePath = (String) pkt.pop();// 2. 두번째로 나오는 것은 상대 path
 													// (String)
-		debugPoint++;
+
 
 		try {
 
@@ -259,13 +262,21 @@ public class ServiceManager {
 	}
 
 	
-	
+	/**
+	 * 해당하는 서비스 파일이 스마트폰에 설치되있는지 확인한다.
+	 * @param serviceName 서비스 이름
+	 * @return 설치되있으면 true, 아니면 false
+	 */
 	public boolean checkServiceInstalled(String serviceName){
 		
 		return Storage.checkStorageIs(serviceName);
 	}
 	
-	
+	/**
+	 * 파일이 text타입인지 확인한다.
+	 * @param fileName
+	 * @return text타입이면 true, 아니면 false
+	 */
 	protected boolean isText(String fileName){
 		if( (fileName.indexOf(".js") != -1 ) && (fileName.indexOf(".html") != -1) && (fileName.indexOf(".css") != -1)   )
 			return false;
