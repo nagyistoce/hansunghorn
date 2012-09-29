@@ -101,6 +101,13 @@ public class ServiceProvider {
 		return serviceFilePackets;
 	}
 
+    /**
+     * 하위디렉토리의 파일로부터 패킷들을 생성한다. 
+     * @param serviceFilePath
+     * @param subPath
+     * @param addPath
+     * @param serviceFilePackets
+     */
 	protected void getServicePacketSubDirectory(String serviceFilePath,
 			String subPath, String addPath, ArrayList<Packet> serviceFilePackets) {
 
@@ -212,6 +219,13 @@ public class ServiceProvider {
 		return subServicePackets;
 	}
 	
+	/**
+	 * 패킷을 생성해서 파일의 정보를 담는다.
+	 * @param openServiceFile
+	 * @param path
+	 * @return
+	 * @throws IllegalStateException
+	 */
 	protected Packet createServicePacket(StorageFile openServiceFile, String path) 
 			throws IllegalStateException{
 		
@@ -222,6 +236,7 @@ public class ServiceProvider {
 		servicePacket.push(serviceName);//1. 서비스명 넣고 (String)
 		servicePacket.push(path);//2.서비스 파일의 상대경로 (  /서비스명/service   의 상대경로 ) (String)
 		servicePacket.push(openServiceFile.getName()); //3. 파일 이름을 넣는다. (String)
+		Constants.logger.log("send : "+openServiceFile.getName());
 		servicePacket.push((Integer)openServiceFile.getLength());//4. 파일의 총 사이즈
 		if( isText(openServiceFile.getName())){ // 5.서비스파일의 타입을 넣는다 (int)
 			// 텍스트라면
@@ -240,6 +255,11 @@ public class ServiceProvider {
 		return servicePacket;
 	}
 	
+	/**
+	 * 해당 파일의 디렉토리여부를 알려준다.
+	 * @param fileName
+	 * @return 디렉토리면 true, 아니면 false
+	 */
 	protected boolean isDirectory(String fileName){
 		if(fileName.indexOf(".") == -1)
 			return true;
@@ -247,6 +267,11 @@ public class ServiceProvider {
 			return false;
 	}
 	
+	/**
+	 * 파일의 text타입 여부를 알려준다.
+	 * @param fileName
+	 * @return text 타입이면 true, 아니면 false
+	 */
 	protected boolean isText(String fileName){
 		if( (fileName.indexOf(".js") != -1 ) && (fileName.indexOf(".html") != -1) && (fileName.indexOf(".css") != -1)   )
 			return false;
