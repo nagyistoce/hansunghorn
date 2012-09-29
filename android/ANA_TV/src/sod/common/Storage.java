@@ -58,9 +58,14 @@ public class Storage {
 		return directory;
 	}
 	
+	/**
+	 * SOD 루트 저장소의 절대경로를 반환한다.
+	 * @return SOD루트 저장소의 절대경로 ex(android) : /mnt/sdcard/sod
+	 */
 	public String getSODStoragePath(){
 		return sodStoragePath;
 	}
+	
 	/**
 	 * 새로운 저장소를 생성할 때 사용하는 메소드이다. 저장소의 ID를 넘겨주면 저장소가 존재하는지를 확인 한 후, 없을 때 해당 저장소를 생성한다.
 	 * storageID 는 serviceName이다.
@@ -193,8 +198,13 @@ public class Storage {
 		if(storageID == null)
 			throw new IllegalArgumentException();
 		
+		if( !Storage.checkStorageIs(storageID) )
+			throw new IOException();
+		
 		Storage storage = getStorage(storageID);
 		
+		deleteFolder(storage.getDirectory());
+		/*
 		String [] fileNames = storage.getFileList();
 		
 		if(fileNames == null)
@@ -208,9 +218,29 @@ public class Storage {
 		
 		//저장소에 대응하는 디렉토리도 삭제한다.
 		storage.getDirectory().delete();
+		*/
+	}
+
+	static protected boolean deleteFolder(File targetFolder) {
+
+		File[] childFile = targetFolder.listFiles();
+		boolean confirm = false;
+		int size = childFile.length;
+
+		if (size > 0) {
+			for (int i = 0; i < size; i++) {
+				if (childFile[i].isFile()) {
+					confirm = childFile[i].delete();
+				} else {
+					deleteFolder(childFile[i]);
+				}
+			}
+		}
+
+		targetFolder.delete();
+		return (!targetFolder.exists());
 
 	}
-	
 	
 	
 	/**
