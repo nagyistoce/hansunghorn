@@ -229,7 +229,7 @@ public class AccessManager implements Disposable {
 	}
 	
 	protected boolean isExistService(){
-		return serviceManager.isExistService(svinfo.ServiceName);
+		return serviceManager.checkServiceInstalled(svinfo.ServiceName);
 		
 	}
 	
