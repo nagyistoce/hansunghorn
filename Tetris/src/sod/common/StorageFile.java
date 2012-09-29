@@ -52,13 +52,14 @@ public  class StorageFile {
 	
 
 	
+	
 	/**
-	 * 
-	 * @param mFile
-	 * @throws IOException
-	 * 파일 생성에 실패하면 IOException을 던진다.
-	 * @throws NullPointerException
-	 * 인자로 넘어온 값이 Null이면 NullPointerException을 던진다.
+	 * 해당경로의 StorageFile을 생성한다.
+	 * @param mFile 
+	 * @param filePath
+	 * @return 해당경로의 StorageFile
+	 * @throws IOException 파일 생성에 실패하면 IOException을 던진다.
+	 * @throws NullPointerException 인자로 넘어온 값이 Null이면 NullPointerException을 던진다.
 	 */
 	 static public StorageFile createStorageFile(File mFile, String filePath)throws IOException, NullPointerException{
 	 
@@ -75,9 +76,9 @@ public  class StorageFile {
 	 }
 	
 	/**
-	 * 
+	 * 해당경로의 StorageFile을 받아온다.
 	 * @param mFile
-	 * @return
+	 * @return 해당경로의 StorageFile
 	 * @throws IOException
 	 * 파일 생성에 실패하면 IOException을 던진다.
 	 * @throws NullPointerException
@@ -299,6 +300,10 @@ public  class StorageFile {
 		}
 	}
 	
+	/**
+	 * StorageFile의 이름을 반환한다.
+	 * @return StorageFile의 이름
+	 */
 	public String getName(){
 		return file.getName();
 	}
@@ -323,16 +328,20 @@ public  class StorageFile {
 		}
 	}
 	
+	/**
+	 * storageFile의 SOD루트 저장소 기준 상대경로를 반환한다.
+	 * @return SOD루트 저장소 기준 상대경로
+	 */
 	public String getRelativeFilePath(){
 		return filePath;
 	}
 	
+	/**
+	 * storageFile의 절대경로를 반환한다.
+	 * @return 절대경로
+	 */
 	public String getAbsoluteFilePath(){
 		return file.getAbsolutePath();
-	}
-	
-	public File getFileObject(){
-		return file;
 	}
 	
 	
