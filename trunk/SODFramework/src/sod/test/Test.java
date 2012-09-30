@@ -20,8 +20,8 @@ import sod.smarttv.ServerReceiveHandler;
 import sod.common.*;
 
 public class Test {
-	final static String ServerIP = "127.0.0.1";
-	final static int ServerPort = 6721;
+	final static String ServerIP = "192.168.0.14";
+	final static int ServerPort = 30331;
 	final static int CheckingPeriod = Constants.Default_CheckingPeriod;
 
 	static Logable logger;
@@ -37,6 +37,71 @@ public class Test {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void initServer() {
+		
+		// server setup
+		server = new AccessManagerServer();
+		ServerConfig conf = new ServerConfig();
+		conf.Port = ServerPort;
+		conf.serviceName = "TestService";
+
+		server.setConnectHandler(new ConnectHandler() {
+			@Override
+			public void onConnect(int connid) {
+				logger.log("(server): new connection is accepted - " + connid
+						+ "\n");
+			}
+		});
+		
+		server.setDisconnectHandler(new DisconnectHandler() {
+
+			@Override
+			public void onDisconnect(int connid) {
+				logger.log("(server): client is disconnected - " + connid
+						+ "\n");
+			}
+		});
+		
+		server.setReceiveHandler(new ServerReceiveHandler() {
+
+			Transceiver trans= new Transceiver(new InetSocketAddress("127.168.0.26", 2013));
+			@Override
+			public void onReceive(Packet pkt, int connid) {
+				logger.log("(server): a packet from client - " + connid + "\n");
+				server.send(pkt, connid);
+				trans.send(pkt);	
+
+			}
+		});
+
+		server.start(conf);
+
+		// now we are looking for server.
+		String localip = NetworkUtils.getLocalIP();
+		logger.log("localip = " + localip + "\n");
+
+		AccessManager.searchServer(localip, new SearchCallBack() {
+			@Override
+			public void onSearch(ServerInfo info) {
+				if (info == null) {
+					// end of search
+					logger.log("end of search.\n");
+				} else {
+					logger.log("found server: "
+							+ info.EndPoint.getAddress().getHostAddress()
+							+ ", " + info.ServiceName + "\n");
+				}
+			}
+		});
+
+		logger.log("press enter to finish.\n");
+		waitfor();
+
+		server.shutdown();
+
+		
 	}
 
 	public static void testServerSearch() {
