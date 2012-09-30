@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.SocketException;
@@ -48,7 +49,8 @@ public class Transceiver implements Disposable {
 	public Transceiver(SocketAddress dest, int recvport){
 		try {
 			this.dest = dest;
-			conn = new DatagramSocket(recvport);			
+			conn = new DatagramSocket(recvport);
+			//conn = new DatagramSocket(new InetSocketAddress(NetworkUtils.getLocalIP(), recvport));
 			serializer = new Serializer();
 			recvbuf = new byte[TransferUnit];
 		} catch (SocketException e) {

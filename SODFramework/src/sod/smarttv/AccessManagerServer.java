@@ -195,8 +195,11 @@ public class AccessManagerServer {
 						t.item1 = new Transceiver(sender);
 						t.item2 = ThreadEx.getCurrentTime();
 						connset.put(sender.hashCode(), t);
-						sendServiceName(config.serviceName, sender.hashCode());
-						cb_conn.onConnect(sender.hashCode());
+						cb_conn.onConnect(sender.hashCode());						
+						
+						p2.clear();
+						p2.signiture= Packet.RESPONSE_ACCEPT;
+						t.item1.send(p2);
 						break;
 					case Packet.RESPONSE_CLIENT_ALIVE:
 						t = connset.get(sender.hashCode());
