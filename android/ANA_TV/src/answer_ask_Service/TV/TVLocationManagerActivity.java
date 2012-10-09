@@ -10,6 +10,7 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
 import sod.smarttv.*;
+import sod.common.TVLocation;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
