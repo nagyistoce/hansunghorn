@@ -152,7 +152,7 @@ public class AccessManager implements Disposable {
 	
 	/**
 	 * 서비스를 시작할 때 실행할 함수를 등록한다.
-	 * @param handler
+	 * @param onSearchHandler
 	 * 콜백함수를 구현한 객체
 	 */
 	public void setStartServiceDelegate(ActionEx startAction){
