@@ -16,26 +16,46 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.SlidingDrawer;
 
 public class TVServerListActivity extends ListActivity {
 
 	final static int port = ConnectionBean.SERVERPORT;
+	final static int TurnAroundWaitTime = 5000;
 
 	private ArrayList<String> list;
 	private ArrayAdapter<String> adapter;
 
-	Handler handler;
+	Handler onSearchHandler;
+	Handler visibleProgressHandler;
+	Handler inVisibleProgressHandler;
+	
+	ServerInfo info;
+		
+	ProgressBar progressBar;
+	ImageButton searchButton;
+	
+	boolean ibFlag = false;
+	final static boolean enable = true;
+	final static boolean disable = false;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tvserverlist);
-		NetworkUtils.setLocalIp(getLocalIpAddress());
+		progressBar = (ProgressBar)findViewById(R.id.inProgress);
+		
+		NetworkUtils.setLocalIp(getLocalIpAddress());// 
 
 		list = new ArrayList<String>();
 
@@ -45,58 +65,48 @@ public class TVServerListActivity extends ListActivity {
 
 		// Log.i("jaeyeong","jaeyeong start");
 
-		handler = new Handler() {
+		onSearchHandler = new Handler() {
 
 			@Override
 			public void handleMessage(Message msg) {
 				// TODO Auto-generated method stub
-				ServerInfo info = (ServerInfo) msg.obj;
+				info = (ServerInfo) msg.obj;
 				list.add(info.EndPoint.getAddress().getHostAddress() + ","
 						+ info.ServiceName);
 				adapter.notifyDataSetChanged();
-
-				// /////엄씨가 추가//////////
-				ConnectionBean.ServerInfomation = info;
-				// /////엄씨가 추가//////////
 			}
-
 		};
-
-		ThreadEx.invoke(null, new ActionEx() {
+		
+		visibleProgressHandler = new Handler(){
+			
+			@Override
+			public void handleMessage(Message msg) {
+				progressBar.setVisibility(ProgressBar.VISIBLE);
+				ibFlag = false;
+			}//end handleMessage....
+		};
+		
+		inVisibleProgressHandler = new Handler(){
+			@Override
+			public void handleMessage(Message msg) {
+				progressBar.setVisibility(ProgressBar.INVISIBLE);
+				ibFlag = true;
+				list.clear();
+				adapter.notifyDataSetChanged();
+			}//end handleMessage....
+		};
+		
+	
+		searchServer();
+				
+		searchButton =(ImageButton)findViewById(R.id.searchButton);
+		searchButton.setOnClickListener(new OnClickListener(){
 
 			@Override
-			public void work(Object arg) {
+			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				// String localip = NetworkUtils.getLocalIP();
-				String localip = getLocalIpAddress();
-				Log.i("jaeyeong", localip);
-				AccessManager.searchServer(localip, new SearchCallBack() {
-
-					@Override
-					public void onSearch(ServerInfo info) {
-						// TODO Auto-generated method stub
-						if (info == null) {
-
-						} else {
-							// 핸들러 이용해서 보내야하나??
-							Log.i("jaeyeong", "jaeyeong" + "OnSearch");
-							Log.i("jaeyeong", info.EndPoint.getAddress()
-									.getHostAddress());
-
-							Message msg = handler.obtainMessage();
-							msg.obj = info;
-							handler.sendMessage(msg);
-
-							/*
-							 * //핸들러 이용해서 보내자
-							 * list.add(info.EndPoint.getAddress()
-							 * .getHostAddress() +","+ info.ServiceName);
-							 * adapter.notifyDataSetChanged();
-							 */
-
-						}
-					}
-				});
+				if(ibFlag)
+					searchServer();
 			}
 		});
 
@@ -104,7 +114,7 @@ public class TVServerListActivity extends ListActivity {
 
 		adapter.notifyDataSetChanged();
 		// /////////////////////////////////////////////////////////
-
+		progressControl();
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////////////
@@ -152,8 +162,65 @@ public class TVServerListActivity extends ListActivity {
 		Intent intent = new Intent(TVServerListActivity.this,
 				GCC_PHONEActivity.class);
 		intent.putExtra("serviceName", serviceName);
+		
+		ConnectionBean.ServerInfomation = info;
 		startActivity(intent);
 
 	}
 
+	protected void searchServer() {
+
+		ThreadEx.invoke(null, new ActionEx() {
+
+			@Override
+			public void work(Object arg) {
+				// TODO Auto-generated method stub
+				// String localip = NetworkUtils.getLocalIP();
+				progressControl();
+				
+				String localip = getLocalIpAddress();
+				Log.i("jaeyeong", localip);
+				AccessManager.searchServer(localip, new SearchCallBack() {
+
+					@Override
+					public void onSearch(ServerInfo info) {
+						// TODO Auto-generated method stub
+						if (info == null) {
+
+						} else {
+							// 핸들러 이용해서 보내야하나??
+							Log.i("jaeyeong", "jaeyeong" + "OnSearch");
+							Log.i("jaeyeong", info.EndPoint.getAddress()
+									.getHostAddress());
+							Message msg = onSearchHandler.obtainMessage();
+							msg.obj = info;
+							onSearchHandler.sendMessage(msg);
+						}
+					}
+				});
+				
+			}
+			
+			
+		});
+	}
+	
+	protected void progressControl(){
+		ThreadEx.invoke(null, new ActionEx() {
+
+			@Override
+			public void work(Object arg) {
+				// TODO Auto-generated method stub
+				visibleProgressHandler.sendMessage(new Message());
+				try {
+					Thread.sleep(TurnAroundWaitTime);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				inVisibleProgressHandler.sendMessage(new Message());
+			}
+			
+		});
+	}
 }
