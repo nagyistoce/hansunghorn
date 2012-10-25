@@ -34,6 +34,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
@@ -54,6 +55,8 @@ public class PieChartBuild extends Activity {
 	Set keylist1 = null;
 	Set keylist2 = null;
 	String title = "";
+	Handler handle;
+	splashhandler splash;
 	Vector<GraphBean> vec;
 	private static int[] COLORS = new int[] { Color.GREEN, Color.BLUE,
 			Color.MAGENTA, Color.CYAN, Color.RED, Color.YELLOW,
@@ -210,10 +213,13 @@ public class PieChartBuild extends Activity {
 				if (mChartView != null) {
 					mChartView.repaint();
 				}
-				if (GET_CODE == 0) {
-					Handler x = new Handler();
-					x.postDelayed(new splashhandler(), 3000);
-				}
+
+			}
+			if (GET_CODE == 0) {
+				handle= new Handler();
+				if(splash==null)
+				splash=new splashhandler();
+				handle.postDelayed(splash, 3000);
 			}
 		}
 		// vec=null;
@@ -224,10 +230,28 @@ public class PieChartBuild extends Activity {
 		// });
 		// mChartView.repaint();
 	}
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) { // 백 버튼
+			handle.removeCallbacks(splash);
+			splash.stop();
+			Intent intent = new Intent(PieChartBuild.this, AnA_BootMode.class);
+			startActivity(intent);
+			finish();
+			
+			Toast.makeText(this, "Back키를 누르셨군요", Toast.LENGTH_SHORT).show();
+		} else if (event.getKeyCode() == KeyEvent.KEYCODE_SEARCH) { // 검색버튼
+			Toast.makeText(this, "검색키를 누르셨군요", Toast.LENGTH_SHORT).show();
+		}
+		return true;
+	}
 
-	class splashhandler implements Runnable {
-		@Override
-		public void run() {
+	  class splashhandler extends Thread{//implements Runnable {
+		  
+		
+		
+		public  void run() {
+			
 			Intent intent = new Intent(PieChartBuild.this, PieChartBuild.class);
 
 			startActivity(intent);
