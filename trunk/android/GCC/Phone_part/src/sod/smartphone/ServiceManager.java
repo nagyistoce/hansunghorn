@@ -178,7 +178,7 @@ public class ServiceManager {
 			}
 
 			String fileName = (String)pkt.pop();//3. 세번째로 나오는 것은 fileName
-			Constants.logger.log(fileName);////////////////////////////////////////////////////////debug
+	//		Constants.logger.log(fileName);////////////////////////////////////////////////////////debug
 			Integer fileSize = (Integer)pkt.pop();// 4. 네번째로 나온는 것은 총 fileSize
 			
 			if(isFirst){

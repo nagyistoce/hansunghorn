@@ -12,6 +12,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import android.util.Log;
+
 import sod.common.ActionEx;
 import sod.common.Constants;
 import sod.common.Disposable;
@@ -19,6 +21,7 @@ import sod.common.NetworkUtils;
 import sod.common.Packet;
 import sod.common.ReceiveHandler;
 import sod.common.Serializer;
+import sod.common.ServicePacketOrder;
 import sod.common.ThreadEx;
 import sod.common.Transceiver;
 
@@ -38,6 +41,8 @@ public class AccessManager implements Disposable {
 	ActionEx startServiceDelegate;
 	
 	ArrayList<Packet> serviceFilePackets;
+	
+	ServicePacketOrder order;
 	
 	//debug
 	int downloadCnt = 0;
@@ -212,6 +217,7 @@ public class AccessManager implements Disposable {
 						}
 						else{
 							Constants.logger.log("(debug:client) REQUEST_SERVICE_DATA.\n");
+							order = new ServicePacketOrder();  // ServicePacketOrder 생성
 							p.signiture = Packet.REQUEST_SERVICE_DATA;
 							conn.send(p);
 						}
@@ -223,18 +229,24 @@ public class AccessManager implements Disposable {
 						Constants.logger.log("(debug:client) installService");
 						//여기서 처리를 해야한다.
 					//	serviceManager.installService(p);			
+						int p_order = Integer.parseInt(p.pop().toString());
+						
 						try {
-
-							serviceFilePackets.add((Packet)p.clone());
+							if(order.isCorrectOrder(p_order)){
+								serviceFilePackets.add((Packet)p.clone());
+								Log.i("down", String.valueOf(p_order) + ". servicePkt receive");
+								order.increaseOrder();
+								
+								p_ark.signiture = Packet.RESPONSE_SERVICE_DATA_ARK;
+								Constants.logger.log("(debug:client) RESPONSE_SERVICE_DATA_ARK");
+								conn.send(p_ark);
+							}
+							
 						} catch (CloneNotSupportedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						
-						p_ark.signiture = Packet.RESPONSE_SERVICE_DATA_ARK;
-						Constants.logger.log("(debug:client) RESPONSE_SERVICE_DATA_ARK");
-						conn.send(p_ark);
-						
+							
 						break;
 
 					case Packet.RESPONSE_SERVICE_DATA_END:

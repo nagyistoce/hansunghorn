@@ -3,31 +3,36 @@ package sod.common;
 public class ServicePacketOrder {
 
 	int order;
+	int flag_order;
 	
-	ServicePacketOrder(){
+	public ServicePacketOrder(){
 		order = 0;
+		flag_order = -1;
 	}
 	
-	void initServicePacketOrder(){
+	public void initServicePacketOrder(){
 		order = 0;
+		flag_order = -1;
 	}
 	
-	void increaseOrder(){
+	public void increaseOrder(){
 		order++;
+		flag_order++;
 	}
 	
-	int getOrder(){
+	public int getOrder(){
 		return order;
 	}
 	
-	boolean isRetransmission(int number){
+	public boolean isCorrectOrder(int number){
 		
 		boolean returnData;
-		if(order == number)
+		if(flag_order == (number-1))
 			returnData = true;
 		else
 			returnData = false;
 		
 		return returnData;
 	}
+	
 }
