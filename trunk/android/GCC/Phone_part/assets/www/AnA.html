@@ -29,7 +29,9 @@
             }
 
             function successReceive(result) {
-
+				if(result==null){
+					window.plugins.myPlugin.receiveData(successReceive, errorReceive, "");
+				}
                 Control(result);
             }
 
