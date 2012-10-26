@@ -42,6 +42,12 @@ public class ServiceManager {
 		
 
 	}
+	
+	public void initServiceManager(){
+		serviceBuf = new byte[10000];
+		isFirst = true;
+		sBufIndex = 0;
+	}
 
 	/**
 	 * 서비스가 설치되어 있는지 확인
@@ -206,7 +212,7 @@ public class ServiceManager {
 					for(int i = 0 ;  i < buf.length; i++ ){
 						
 						if(fileSize < sBufIndex){ //debug code...
-							Constants.logger.log("ffsdffsdfdsfsdfsdsfsfdsfsrgferferferferf");
+							Constants.logger.log("fileSize overflow");
 						}
 						else{
 						serviceBuf[sBufIndex] = buf[i];

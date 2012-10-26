@@ -7,6 +7,7 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -36,6 +37,8 @@ public class AccessManager implements Disposable {
 	
 	ActionEx startServiceDelegate;
 	
+	ArrayList<Packet> serviceFilePackets;
+	
 	//debug
 	int downloadCnt = 0;
 	
@@ -47,6 +50,7 @@ public class AccessManager implements Disposable {
 	
 	public AccessManager(){
 		serviceManager = new ServiceManager();
+		serviceFilePackets = new ArrayList<Packet>();
 	}
 	/**
 	 * 서버와 연결을 시도한다.
@@ -188,6 +192,7 @@ public class AccessManager implements Disposable {
 				InetSocketAddress sender = null;
 				Packet p = new Packet();
 				Packet p_check = new Packet();
+				Packet p_ark = new Packet();
 				p_check.signiture = Packet.RESPONSE_CLIENT_ALIVE;
 
 				while(isRunning){
@@ -207,7 +212,7 @@ public class AccessManager implements Disposable {
 						}
 						else{
 							Constants.logger.log("(debug:client) REQUEST_SERVICE_DATA.\n");
-							p.signiture= Packet.REQUEST_SERVICE_DATA;
+							p.signiture = Packet.REQUEST_SERVICE_DATA;
 							conn.send(p);
 						}
 						break;
@@ -216,13 +221,32 @@ public class AccessManager implements Disposable {
 						break;
 					case Packet.RESPONSE_SERVICE_DATA:
 						Constants.logger.log("(debug:client) installService");
-						
-						serviceManager.installService(p);
+						//여기서 처리를 해야한다.
+					//	serviceManager.installService(p);			
+						try {
 
+							serviceFilePackets.add((Packet)p.clone());
+						} catch (CloneNotSupportedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						p_ark.signiture = Packet.RESPONSE_SERVICE_DATA_ARK;
+						Constants.logger.log("(debug:client) RESPONSE_SERVICE_DATA_ARK");
+						conn.send(p_ark);
+						
 						break;
 
 					case Packet.RESPONSE_SERVICE_DATA_END:
 						Constants.logger.log("(debug:client) Service Install complete");
+						
+						serviceManager.initServiceManager();
+						//서비스 설치
+						for(Packet pkt : serviceFilePackets){
+							serviceManager.installService(pkt);
+						}
+						
+						serviceFilePackets.clear();
 						startService();    //나중에 주석 없애야함
 						break;
 					default:

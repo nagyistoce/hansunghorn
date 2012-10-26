@@ -82,6 +82,7 @@ public class TVServerListActivity extends ListActivity {
 			@Override
 			public void handleMessage(Message msg) {
 				progressBar.setVisibility(ProgressBar.VISIBLE);
+				list.clear();
 				ibFlag = false;
 			}//end handleMessage....
 		};
@@ -91,7 +92,6 @@ public class TVServerListActivity extends ListActivity {
 			public void handleMessage(Message msg) {
 				progressBar.setVisibility(ProgressBar.INVISIBLE);
 				ibFlag = true;
-				list.clear();
 				adapter.notifyDataSetChanged();
 			}//end handleMessage....
 		};
@@ -197,11 +197,8 @@ public class TVServerListActivity extends ListActivity {
 							onSearchHandler.sendMessage(msg);
 						}
 					}
-				});
-				
+				});			
 			}
-			
-			
 		});
 	}
 	

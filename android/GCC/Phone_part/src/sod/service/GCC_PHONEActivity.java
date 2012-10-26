@@ -91,7 +91,10 @@ public class GCC_PHONEActivity extends DroidGap {
 					public void onReceive(Packet pkt) {
 						if (ConnectionBean.ServerInfomation.ServiceName
 								.equals("gcc")) {
-							String temp = pkt.pop().toString();
+							Object obj = pkt.pop();
+							if(obj==null)//
+								return;//
+							String temp = obj.toString();
 							if (pkt != null && temp.equals("down")) {
 								Packet pt = new Packet();
 								pt.push("getCard");

@@ -10,7 +10,7 @@ import java.util.Queue;
  * @author MB a unit of transferring
  */
 
-public class Packet {
+public class Packet implements Cloneable{
 	
 	public static final String DataType_Int = "int";
 //	public static final String DataType_Long = "long";
@@ -65,6 +65,10 @@ public class Packet {
 	 */
 	public static final int RESPONSE_SERVICE_DATA_END = 0xFF000005;
 
+	/**
+	 * 스마트폰이 스마트TV에 서비스 패킷을 잘 받았다는 패킷의 시그니쳐
+	 */
+	public static final int RESPONSE_SERVICE_DATA_ARK = 0xFF000006;
 	
 	protected LinkedList<String> typeset;
 	protected LinkedList<Object> dataset;
@@ -79,6 +83,14 @@ public class Packet {
 	public Packet(){
 		typeset = new LinkedList<String>();
 		dataset = new LinkedList<Object>();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Object clone() throws CloneNotSupportedException {
+		Packet returnPkt = (Packet)super.clone();
+		returnPkt.typeset = (LinkedList<String>) typeset.clone();
+		returnPkt.dataset = (LinkedList<Object>) dataset.clone();
+	    return returnPkt;
 	}
 
 	/**
