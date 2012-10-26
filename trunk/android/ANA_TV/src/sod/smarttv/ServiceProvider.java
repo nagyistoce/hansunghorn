@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 
 import sod.common.Constants;
 import sod.common.Packet;
+import sod.common.ServicePacketOrder;
 import sod.common.Storage;
 import sod.common.StorageFile;
 
@@ -29,6 +30,7 @@ public class ServiceProvider {
 	
 	static final int MTU = 10000;//0x3765;//0x000007530
 	
+	ServicePacketOrder order;
 	
 	public ServiceProvider(String serviceName){
 		this.serviceName = serviceName;
@@ -57,6 +59,7 @@ public class ServiceProvider {
 		Storage storage;
 		StorageFile [] serviceFiles = null;
 		ArrayList<Packet> serviceFilePackets = new ArrayList<Packet>();
+		order = new ServicePacketOrder();
 		
 		try {
 			
@@ -76,15 +79,12 @@ public class ServiceProvider {
 					
 					StorageFile openServiceFile = storage.openFile(fileList[i], Storage.READ);
 					
-					
 					//파일의 정보를 가진 패킷을 가져온다. 30kB이상이면 나눠서 가져온다.
 					ArrayList<Packet> subServiceFilePackets = createServicePacketList(openServiceFile, "/");
 					//넣는다.
 					for(int j = 0 ; j < subServiceFilePackets.size() ; j++)
 						serviceFilePackets.add(subServiceFilePackets.get(j));
-					
 				}
-				
 			}
 			
 		} catch (IllegalArgumentException e) {
@@ -233,6 +233,10 @@ public class ServiceProvider {
 		
 		servicePacket.signiture = Packet.RESPONSE_SERVICE_DATA; // 0. 시그니쳐 설정
 		
+		if(order!=null){
+			servicePacket.push(String.valueOf(order.getOrder())); // 0. 서비스패킷 순서 지정 
+			order.increaseOrder();
+		}
 		servicePacket.push(serviceName);//1. 서비스명 넣고 (String)
 		servicePacket.push(path);//2.서비스 파일의 상대경로 (  /서비스명/service   의 상대경로 ) (String)
 		servicePacket.push(openServiceFile.getName()); //3. 파일 이름을 넣는다. (String)

@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 
+import android.util.Log;
+
 
 
 import sod.common.ActionEx;
@@ -25,6 +27,7 @@ import sod.common.NetworkUtils;
 import sod.common.Packet;
 import sod.common.ReceiveHandler;
 import sod.common.Serializer;
+import sod.common.ServicePacketOrder;
 import sod.common.ThreadEx;
 import sod.common.Transceiver;
 import sod.common.Tuple;
@@ -47,6 +50,15 @@ public class AccessManagerServer {
 	protected Map<Integer, Tuple<Transceiver, Long>> connset;
 	
 	protected ServiceProvider serviceProvider;
+	
+	Transceiver sender_t = null;
+	Packet p3 = new Packet();
+	InetSocketAddress g_sender = null;
+	Object serviceMonitor = new Object();
+	
+	TimeoutThread timeout;
+	final static int TIMEOUT_CNT = 1500;//1.5초
+	ServicePacketOrder order;
 	
 	public AccessManagerServer(){
 		connset = new ConcurrentHashMap<Integer, Tuple<Transceiver,Long>>();
@@ -188,7 +200,7 @@ public class AccessManagerServer {
 				Packet p2 = new Packet();
 				InetSocketAddress sender = null;
 				Tuple<Transceiver, Long> t = null;
-				Transceiver sender_t = null;
+		//		Transceiver sender_t = null;
 				
 				while(isRunning){
 					p.clear();
@@ -218,6 +230,7 @@ public class AccessManagerServer {
 					case Packet.REQUEST_SERVICE_DATA:
 						//need to implement
 						//2.서비스 데이터를 보내준다.
+						/*
 						sender_t = new Transceiver(sender);
 						ArrayList<Packet> servicePackets ;
 						servicePackets = serviceProvider.getServicePacket();
@@ -234,8 +247,73 @@ public class AccessManagerServer {
 						p2.clear();
 						p2.signiture = Packet.RESPONSE_SERVICE_DATA_END;
 						sender_t.send(p2);
+						*/
+						g_sender = sender;
+						ThreadEx.invoke(null, new ActionEx() {
+							
+							@Override
+							public void work(Object arg) {
+								// TODO Auto-generated method stub
+								sender_t = new Transceiver(g_sender);
+								ArrayList<Packet> servicePackets ;
+								servicePackets = serviceProvider.getServicePacket();
+								order = new ServicePacketOrder();
+								
+								while(true){
+									//Packet pac : servicePackets
+									if(order.getOrder() == servicePackets.size()){
+										Log.i("down","end");
+										break;
+									}
+									Packet pac = servicePackets.get(order.getOrder());
+									try {
+										sender_t.send((Packet)pac.clone());
+									} catch (IllegalArgumentException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									} catch (CloneNotSupportedException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									timeout = new TimeoutThread(serviceMonitor, TIMEOUT_CNT);
+									timeout.start();
+									
+									try {
+										synchronized(serviceMonitor){
+											serviceMonitor.wait();
+											Log.i("down","wait()");
+										}
+									} catch (InterruptedException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									
+									
+								}// end for...
+								p3.clear();
+								p3.signiture = Packet.RESPONSE_SERVICE_DATA_END;
+								sender_t.send(p3);
+							}//end work...
+						});//end ThreadEx.invoke....
 						
 						break;
+						
+					case Packet.RESPONSE_SERVICE_DATA_ARK :
+						synchronized(serviceMonitor){
+							if(order!=null)
+								order.increaseOrder();
+							else
+								Log.i("down","order == null (이 로그 나오면 안됨)");
+							
+							serviceMonitor.notify();
+							Log.i("down","ARK notify() order increase");////////
+							if(timeout!=null)
+								timeout.stop();
+							else
+								Log.i("down","time == null (이 로그 나오면 안됨)");
+						}
+						break;
+						
 					case Packet.REQUEST_PING:
 						break;
 					default:
