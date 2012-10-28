@@ -66,7 +66,7 @@ public class QuestionnaireSettingFirst extends Activity implements DataSturct {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.questionnaire1);
-		setContentView(R.layout.questionnaire1);
+		setContentView(R.layout.questionnaire1_optimus);
 		Interfaceinital();
 		ButtonEvent();
 	}
