@@ -417,7 +417,7 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.questionnaire2);
-		setContentView(R.layout.questionnaire2);
+		setContentView(R.layout.questionnaire2_optimus);
 		InterfaceInital();
 		ButtonEvent();
 

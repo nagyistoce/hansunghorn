@@ -57,7 +57,7 @@ public class AccessManagerServer {
 	Object serviceMonitor = new Object();
 	
 	TimeoutThread timeout;
-	final static int TIMEOUT_CNT = 1500;//1.5초
+	final static int TIMEOUT_CNT = 3000;//3초
 	ServicePacketOrder order;
 	
 	public AccessManagerServer(){
@@ -261,27 +261,28 @@ public class AccessManagerServer {
 								
 								while(true){
 									//Packet pac : servicePackets
-									if(order.getOrder() == servicePackets.size()){
-										Log.i("down","end");
-										break;
-									}
-									Packet pac = servicePackets.get(order.getOrder());
-									try {
-										sender_t.send((Packet)pac.clone());
-									} catch (IllegalArgumentException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									} catch (CloneNotSupportedException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-									timeout = new TimeoutThread(serviceMonitor, TIMEOUT_CNT);
-									timeout.start();
 									
 									try {
 										synchronized(serviceMonitor){
-											serviceMonitor.wait();
+											if(order.getOrder() == servicePackets.size()){
+												Log.i("down","end");
+												break;
+											}
+											Packet pac = servicePackets.get(order.getOrder());
+											try {
+												sender_t.send((Packet)pac.clone());
+											} catch (IllegalArgumentException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											} catch (CloneNotSupportedException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+											timeout = new TimeoutThread(serviceMonitor, TIMEOUT_CNT);
+											timeout.start();
+											
 											Log.i("down","wait()");
+											serviceMonitor.wait();
 										}
 									} catch (InterruptedException e) {
 										// TODO Auto-generated catch block
@@ -305,12 +306,13 @@ public class AccessManagerServer {
 							else
 								Log.i("down","order == null (이 로그 나오면 안됨)");
 							
-							serviceMonitor.notify();
 							Log.i("down","ARK notify() order increase");////////
 							if(timeout!=null)
-								timeout.stop();
+								timeout.requestStop();
 							else
 								Log.i("down","time == null (이 로그 나오면 안됨)");
+							
+							serviceMonitor.notify();
 						}
 						break;
 						

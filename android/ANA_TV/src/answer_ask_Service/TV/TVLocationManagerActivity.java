@@ -69,7 +69,7 @@ public class TVLocationManagerActivity extends MapActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.map);
+		setContentView(R.layout.map_nexus);
 
 		// /////// TVLocationManager
 		// init.../////////////////////////////////////////////////////////

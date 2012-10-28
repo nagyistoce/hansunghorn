@@ -101,18 +101,23 @@ public final class R {
     }
     public static final class layout {
         public static final int admin_input=0x7f030000;
-        public static final int admin_input_optimus=0x7f030001;
-        public static final int bootting=0x7f030002;
-        public static final int bootting_optimus=0x7f030003;
-        public static final int logo=0x7f030004;
-        public static final int main=0x7f030005;
-        public static final int map=0x7f030006;
-        public static final int questionnaire1=0x7f030007;
-        public static final int questionnaire1_optimus=0x7f030008;
-        public static final int questionnaire2=0x7f030009;
-        public static final int questionnaire2_optimus=0x7f03000a;
-        public static final int statics_graph=0x7f03000b;
-        public static final int textstyle=0x7f03000c;
+        public static final int admin_input_nexus=0x7f030001;
+        public static final int admin_input_optimus=0x7f030002;
+        public static final int bootting=0x7f030003;
+        public static final int bootting_nexus=0x7f030004;
+        public static final int bootting_optimus=0x7f030005;
+        public static final int logo=0x7f030006;
+        public static final int main=0x7f030007;
+        public static final int map=0x7f030008;
+        public static final int map_nexus=0x7f030009;
+        public static final int questionnaire1=0x7f03000a;
+        public static final int questionnaire1_nexus=0x7f03000b;
+        public static final int questionnaire1_optimus=0x7f03000c;
+        public static final int questionnaire2=0x7f03000d;
+        public static final int questionnaire2_nexus=0x7f03000e;
+        public static final int questionnaire2_optimus=0x7f03000f;
+        public static final int statics_graph=0x7f030010;
+        public static final int textstyle=0x7f030011;
     }
     public static final class string {
         public static final int app_name=0x7f040001;
