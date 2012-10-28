@@ -349,6 +349,10 @@ public class QuestionnairesSettingSecond extends Activity implements DataSturct 
 			public void onClick(View v) {
 				FileBean.Topic = "" + LayoutComponentBean.topic.getText();
 				if (!LayoutComponentBean.question.getText().equals("")) {
+//					
+				}
+				else
+				{
 					vector.add(LayoutComponentBean.SEPARATOR + "Topic"
 							+ LayoutComponentBean.SEPARATOR
 							+ LayoutComponentBean.topic.getText()

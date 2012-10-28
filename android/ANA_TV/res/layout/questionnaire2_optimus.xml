@@ -85,14 +85,17 @@
             android:layout_height="380dp"
             android:layout_gravity="center"
             android:layout_weight="0.04" >
+
             <ListView
                 android:id="@+id/listview"
                 android:layout_width="fill_parent"
-                android:layout_height="400dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="100dp"
                 android:layout_marginRight="100dp"
-                android:textSize="10dp"
-                android:scrollingCache="true" >
+                android:overScrollMode="always"
+                android:scrollingCache="true"
+                android:smoothScrollbar="true"
+                android:textSize="10dp" >
 
             </ListView>
         </LinearLayout>
