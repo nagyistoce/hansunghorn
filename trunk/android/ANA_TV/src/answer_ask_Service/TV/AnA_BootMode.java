@@ -3,10 +3,13 @@ package answer_ask_Service.TV;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.Toast;
 import answer_ask_BeanTV.DataSturct;
 import answer_ask_BeanTV.LayoutComponentBean;
 
@@ -33,7 +36,12 @@ public class AnA_BootMode extends Activity {
 		// ///////////////////////////////
 
 	}
-
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) { // 백 버튼
+			Toast.makeText(this, "Back키를 누르셨군요 시스템이 종료될수 있으니 BackButton은 삼가해주세요", Toast.LENGTH_SHORT).show();
+		}
+		return false;
+	}
 	public void ButtonEvent() {
 		LayoutComponentBean.statisticsGraph_btn
 				.setOnClickListener(new OnClickListener() {

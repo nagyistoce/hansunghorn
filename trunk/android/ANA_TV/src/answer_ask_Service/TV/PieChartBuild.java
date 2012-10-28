@@ -197,15 +197,15 @@ public class PieChartBuild extends Activity {
 
 				renderer.setColor(COLORS[(mSeries.getItemCount() - 1)
 						% COLORS.length]);
-				if (vec.get(i).getAnswer().length() > 15) {
-					title = vec.get(i).getAnswer().substring(0, 15)
+				if (vec.get(i).getAnswer().length() > 25) {
+					title = vec.get(i).getAnswer().substring(0, 25)
 							.concat("...");
 
 					// title+=vec.get(i).getAnswer().substring(12,vec.get(i).getAnswer().length());
 				} else {
 					title = vec.get(i).getAnswer();
 				}
-				mRenderer.setChartTitle("" + DataBean.ChartPage + ". " + title);
+				mRenderer.setChartTitle(title);
 				mRenderer.setChartTitleTextSize(30);
 				mRenderer.addSeriesRenderer(renderer);
 				// mX.setText("");
@@ -233,8 +233,8 @@ public class PieChartBuild extends Activity {
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent event) {
 		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) { // น้ น๖ฦฐ
-			handle.removeCallbacks(splash);
-			splash.stop();
+			if(handle!=null){handle.removeCallbacks(splash);}
+			if(splash!=null){splash.interrupt();}
 			Intent intent = new Intent(PieChartBuild.this, AnA_BootMode.class);
 			startActivity(intent);
 			finish();
@@ -253,7 +253,6 @@ public class PieChartBuild extends Activity {
 		public  void run() {
 			
 			Intent intent = new Intent(PieChartBuild.this, PieChartBuild.class);
-
 			startActivity(intent);
 			finish();
 			// startActivityForResult(intent, GET_CODE);
