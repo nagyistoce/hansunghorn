@@ -185,6 +185,9 @@ public class AccessManagerServer {
 				while(isRunning){
 					p.clear();
 					sender = listener.receive(p);
+					//if(true)
+					//	while(true);
+					
 					if(sender == null) continue;
 					if(Constants.isDebug)
 						Constants.logger.log("(debug:server) received a packet.\n");
